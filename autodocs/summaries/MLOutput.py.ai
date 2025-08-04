@@ -1,7 +1,4 @@
-Warning: Could not setup default provider: Failed to connect to default
-Loaded providers: claude, gpt4
-Failed to load local: Failed to connect to local
-Failed to load tinyllama: Failed to connect to tinyllama
+
 Sending MLOutput.pycomment.json...
 
 Claude: Based on the comments, this appears to be a terminal output viewer application called "MLOutput" with a graphical user interface. Here's what the application does:
