@@ -1,0 +1,143 @@
+Comments for MLWebstrip.py:
+--------------------------------------------------
+L   7: Import module
+       import sys
+
+L   8: Import module
+       import re
+
+L   9: Import module
+       from urllib.request import urlopen
+
+L  10: Import module
+       from html.parser import HTMLParser
+
+L  11: Import module
+       from pathlib import Path
+
+L  13: Class definition
+       class MLStripper(HTMLParser):
+
+L  16: Constructor method
+       def __init__(self):
+
+L  27: Function definition
+       def handle_starttag(self, tag, attrs):
+
+L  35: Add to list
+       self.text.append('\n')
+
+L  37: Add to list
+       self.text.append('\n' + '─' * 40 + '\n')
+
+L  39: Function definition
+       def handle_endtag(self, tag):
+
+L  46: Add to list
+       self.text.append('\n')
+
+L  48: Function definition
+       def handle_data(self, data):
+
+L  49: Negative condition check
+       if not self.skip:
+
+L  50: Remove whitespace
+       text = data.strip()
+
+L  55: Add to list
+       self.text.append(text + ' ')
+
+L  57: Function definition
+       def get_text(self):
+
+L  59: Join strings
+       raw = ''.join(self.text)
+
+L  61: Regex substitution
+       raw = re.sub(r'\n\s*\n', '\n\n', raw)
+
+L  62: Regex substitution
+       raw = re.sub(r' +', ' ', raw)
+
+L  63: Return value
+       return raw.strip()
+
+L  65: Function definition
+       def strip_html(source):
+
+L  67: Error handling block
+       try:
+
+L  69: Path object creation
+       path = Path(source)
+
+L  70: Check existence
+       if path.exists():
+
+L  71: Debug output
+       print(f"Reading file: {source}")
+
+L  72: File operation with auto-close
+       with open(path, 'r', encoding='utf-8') as f:
+
+L  77: Negative condition check
+       if not url.startswith(('http://', 'https://')):
+
+L  79: Debug output
+       print(f"Fetching: {url}")
+
+L  91: Add to list
+       output.append('=' * 60)
+
+L  92: Add to list
+       output.append(f"TITLE: {stripper.title}")
+
+L  93: Add to list
+       output.append(f"SOURCE: {source}")
+
+L  94: Add to list
+       output.append('=' * 60)
+
+L  95: Add to list
+       output.append("")
+
+L  97: Add to list
+       output.append(stripper.get_text())
+
+L  99: Return value
+       return '\n'.join(output)
+
+L 101: Catch specific exception
+       except Exception as e:
+
+L 102: Return value
+       return f"Error processing {source}: {e}"
+
+L 104: Function definition
+       def main():
+
+L 107: Debug output
+       print("MLStrip - Make HTML readable again")
+
+L 108: Debug output
+       print("Usage: mlstrip <file.html or url>")
+
+L 109: Debug output
+       print("\nExamples:")
+
+L 110: Debug output
+       print("  mlstrip index.html")
+
+L 111: Debug output
+       print("  mlstrip https://example.com")
+
+L 112: Debug output
+       print("  mlstrip page.html | unitext")
+
+L 113: Exit program
+       sys.exit(1)
+
+L 117: Debug output
+       print(result)
+

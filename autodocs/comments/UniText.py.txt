@@ -1,0 +1,161 @@
+Comments for UniText.py:
+--------------------------------------------------
+L   7: Import module
+       import tkinter as tk
+
+L   8: Import module
+       from tkinter import scrolledtext, messagebox, font
+
+L   9: Import module
+       import sys
+
+L  10: Import module
+       import os
+
+L  11: Import module
+       import tempfile
+
+L  12: Import module
+       from pathlib import Path
+
+L  15: Error handling block
+       try:
+
+L  16: Import module
+       from PIL import Image, ImageDraw, ImageFont, Im...
+
+L  18: Catch specific exception
+       except ImportError:
+
+L  20: Debug output
+       print("Note: Install Pillow for better font sup...
+
+L  43: Class definition
+       class UniTextViewer:
+
+L  44: Constructor method
+       def __init__(self, root, filepath=None):
+
+L  66: Function definition
+       def _find_best_font(self):
+
+L  69: Iterate over collection
+       for f in FONT_FALLBACKS:
+
+L  71: Return value
+       return f
+
+L  74: Function definition
+       def _create_ui(self):
+
+L  85: Path operation
+       title_text += f" - {os.path.basename(self.filep...
+
+L 150: Function definition
+       def paste_from_clipboard(self):
+
+L 152: Error handling block
+       try:
+
+L 169: Catch specific exception
+       except tk.TclError:
+
+L 172: Catch specific exception
+       except Exception as e:
+
+L 176: Function definition
+       def save_current(self):
+
+L 178: Negative condition check
+       if not self.content:
+
+L 182: Import module
+       from tkinter import filedialog
+
+L 190: Error handling block
+       try:
+
+L 192: File operation with auto-close
+       with open(filepath, 'w', encoding='utf-8') as f:
+
+L 194: Path operation
+       self.status_bar.config(text=f"Saved: {os.path.b...
+
+L 195: Catch specific exception
+       except Exception as e:
+
+L 198: Function definition
+       def load_file(self, filepath):
+
+L 200: Error handling block
+       try:
+
+L 201: File operation with auto-close
+       with open(filepath, 'r', encoding='utf-8') as f:
+
+L 211: Path operation
+       text=f"Loaded: {os.path.basename(filepath)} | "
+
+L 217: Path operation
+       self.root.title(f"UniText - {os.path.basename(f...
+
+L 219: Catch specific exception
+       except Exception as e:
+
+L 222: Function definition
+       def open_file(self):
+
+L 224: Import module
+       from tkinter import filedialog
+
+L 233: Function definition
+       def reload_file(self):
+
+L 238: Function definition
+       def zoom_in(self):
+
+L 244: Function definition
+       def zoom_out(self):
+
+L 250: Function definition
+       def reset_zoom(self):
+
+L 255: Function definition
+       def search_text(self):
+
+L 271: Function definition
+       def do_search(event=None):
+
+L 273: Negative condition check
+       if not term:
+
+L 285: Negative condition check
+       if not pos:
+
+L 305: Function definition
+       def show_help(self):
+
+L 331: Function definition
+       def download_noto_font():
+
+L 333: Debug output
+       print("""
+
+L 346: Function definition
+       def main():
+
+L 355: Exit program
+       sys.exit(0)
+
+L 358: Negative condition check
+       if not os.path.exists(filepath):
+
+L 359: Debug output
+       print(f"Error: File '{filepath}' not found")
+
+L 360: Exit program
+       sys.exit(1)
+
+L 365: Negative condition check
+       if not filepath:
+

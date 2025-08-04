@@ -1,0 +1,236 @@
+Comments for MLTracker.py:
+--------------------------------------------------
+L   8: Import module
+       import tkinter as tk
+
+L   9: Import module
+       import json
+
+L  10: Import module
+       import time
+
+L  11: Import module
+       import subprocess
+
+L  12: Import module
+       import os
+
+L  13: Import module
+       from pathlib import Path
+
+L  14: Import module
+       from datetime import datetime
+
+L  15: Import module
+       import threading
+
+L  16: Import module
+       import sys
+
+L  30: Class definition
+       class MLTracker:
+
+L  31: Constructor method
+       def __init__(self, root, app_name=None, app_pat...
+
+L  39: Create directory
+       self.data_file.parent.mkdir(parents=True, exist...
+
+L  59: Function definition
+       def load_data(self):
+
+L  61: Check existence
+       if self.data_file.exists():
+
+L  62: Error handling block
+       try:
+
+L  63: File operation with auto-close
+       with open(self.data_file, 'r') as f:
+
+L  64: Parse JSON from file
+       return json.load(f)
+
+L  65: Catch all exceptions
+       except:
+
+L  66: Return value
+       return {}
+
+L  67: Return value
+       return {}
+
+L  69: Function definition
+       def save_data(self):
+
+L  71: File operation with auto-close
+       with open(self.data_file, 'w') as f:
+
+L  72: Write JSON to file
+       json.dump(self.data, f, indent=2)
+
+L  74: Function definition
+       def _create_ui(self):
+
+L 112: Negative condition check
+       if not self.app_path:
+
+L 140: Function definition
+       def start_tracking(self):
+
+L 142: Negative condition check
+       if not self.tracking:
+
+L 144: Get current timestamp
+       self.session_start = time.time()
+
+L 149: Error handling block
+       try:
+
+L 152: Catch specific exception
+       except Exception as e:
+
+L 160: Function definition
+       def stop_tracking(self):
+
+L 164: Get current timestamp
+       session_duration = int(time.time() - self.sessi...
+
+L 175: Add to list
+       self.data[self.app_name]["sessions"].append({
+
+L 188: Function definition
+       def toggle_tracking(self):
+
+L 207: Function definition
+       def start_with_name():
+
+L 208: Remove whitespace
+       name = entry.get().strip()
+
+L 220: Function definition
+       def monitor_process(self):
+
+L 222: Infinite loop
+       while True:
+
+L 228: Pause execution
+       time.sleep(1)
+
+L 230: Function definition
+       def process_ended(self):
+
+L 237: Function definition
+       def update_timer(self):
+
+L 240: Get current timestamp
+       elapsed = int(time.time() - self.session_start)
+
+L 248: Function definition
+       def show_stats(self):
+
+L 278: Add to list
+       stats.append(f"{app_name}:")
+
+L 279: Add to list
+       stats.append(f"  Total: {hours}h {minutes}m")
+
+L 280: Add to list
+       stats.append(f"  Sessions: {len(app_data['sessi...
+
+L 286: Add to list
+       stats.append(f"  Last: {last_date}")
+
+L 288: Add to list
+       stats.append("")
+
+L 290: Join strings
+       text.insert('1.0', '\n'.join(stats))
+
+L 293: Function definition
+       def quit(self):
+
+L 299: Function definition
+       def main():
+
+L 311: Debug output
+       print("MLTracker - Application Time Tracker")
+
+L 312: Debug output
+       print("\nUsage:")
+
+L 313: Debug output
+       print("  mltracker                    - Manual ...
+
+L 314: Debug output
+       print("  mltracker <name> <path>      - Track s...
+
+L 315: Debug output
+       print("  mltracker <path>             - Track a...
+
+L 316: Debug output
+       print("  mltracker --stats            - Show GU...
+
+L 317: Debug output
+       print("\nExamples:")
+
+L 318: Debug output
+       print("  mltracker Doom G:/Doom/dsda-doom.exe")
+
+L 319: Debug output
+       print("  mltracker G:/Doom/dsda-doom.exe --stats")
+
+L 320: Exit program
+       sys.exit(0)
+
+L 325: Join strings
+       app_path = ' '.join(sys.argv[2:])
+
+L 329: Path object creation
+       app_name = Path(app_path).stem
+
+L 338: Debug output
+       print(f"Tracking {app_name}...")
+
+L 339: Error handling block
+       try:
+
+L 341: Get current timestamp
+       start_time = time.time()
+
+L 343: Get current timestamp
+       duration = int(time.time() - start_time)
+
+L 347: Create directory
+       data_file.parent.mkdir(parents=True, exist_ok=T...
+
+L 350: Check existence
+       if data_file.exists():
+
+L 351: File operation with auto-close
+       with open(data_file, 'r') as f:
+
+L 352: Parse JSON from file
+       data = json.load(f)
+
+L 361: Add to list
+       data[app_name]["sessions"].append({
+
+L 367: File operation with auto-close
+       with open(data_file, 'w') as f:
+
+L 368: Write JSON to file
+       json.dump(data, f, indent=2)
+
+L 370: Debug output
+       print(f"Session tracked: {duration//3600}h {(du...
+
+L 372: Catch specific exception
+       except Exception as e:
+
+L 373: Debug output
+       print(f"Error: {e}")
+
+L 374: Exit program
+       sys.exit(1)
+

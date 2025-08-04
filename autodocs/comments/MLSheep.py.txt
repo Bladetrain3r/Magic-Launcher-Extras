@@ -1,0 +1,155 @@
+Comments for MLSheep.py:
+--------------------------------------------------
+L   6: Import module
+       import os
+
+L   7: Import module
+       import tkinter as tk
+
+L   8: Import module
+       import random
+
+L   9: Import module
+       import math
+
+L  10: Import module
+       from colorsys import hsv_to_rgb
+
+L  12: Class definition
+       class FlameGenerator:
+
+L  13: Constructor method
+       def __init__(self):
+
+L  40: Random operation
+       self.active_transforms = random.sample(self.tra...
+
+L  47: Random operation
+       self.hue_shift = random.random()
+
+L  59: Function definition
+       def save_to_file(self, filename="flame_bg.png"):
+
+L  61: Import module
+       from PIL import Image, ImageDraw
+
+L  72: Random operation
+       x, y = random.uniform(-1, 1), random.uniform(-1...
+
+L  74: Iterate N times
+       for i in range(10000):
+
+L  75: Random operation
+       transform = random.choice(self.active_transforms)
+
+L  81: Random operation
+       x += random.uniform(-0.01, 0.01)
+
+L  82: Random operation
+       y += random.uniform(-0.01, 0.01)
+
+L  85: Random operation
+       x, y = random.uniform(-1, 1), random.uniform(-1...
+
+L 100: Debug output
+       print(f"Saved to {filename}")
+
+L 102: Function definition
+       def linear(self, x, y):
+
+L 104: Return value
+       return x, y
+
+L 106: Function definition
+       def sinusoidal(self, x, y):
+
+L 108: Return value
+       return math.sin(x), math.sin(y)
+
+L 110: Function definition
+       def spherical(self, x, y):
+
+L 113: Return value
+       return x/r2, y/r2
+
+L 115: Function definition
+       def swirl(self, x, y):
+
+L 118: Return value
+       return x*math.sin(r2) - y*math.cos(r2), x*math....
+
+L 120: Function definition
+       def horseshoe(self, x, y):
+
+L 123: Return value
+       return (x-y)*(x+y)/r, 2*x*y/r
+
+L 125: Function definition
+       def polar(self, x, y):
+
+L 129: Return value
+       return theta/math.pi, r - 1
+
+L 131: Function definition
+       def hyperbolic(self, x, y):
+
+L 135: Return value
+       return math.sin(theta) / r, r * math.cos(theta)
+
+L 137: Function definition
+       def on_resize(self, event):
+
+L 150: Function definition
+       def generate(self):
+
+L 164: Random operation
+       x, y = random.uniform(-1, 1), random.uniform(-1...
+
+L 168: Iterate N times
+       for i in range(point_count):
+
+L 170: Random operation
+       transform = random.choice(self.active_transforms)
+
+L 178: Random operation
+       x += random.uniform(-0.01, 0.01)
+
+L 179: Random operation
+       y += random.uniform(-0.01, 0.01)
+
+L 183: Random operation
+       x, y = random.uniform(-1, 1), random.uniform(-1...
+
+L 193: Add to list
+       points.append((sx, sy, i))
+
+L 207: Function definition
+       def regenerate(self):
+
+L 209: Random operation
+       self.active_transforms = random.sample(self.tra...
+
+L 210: Random operation
+       self.hue_shift = random.random()
+
+L 213: Random operation
+       if random.random() > 0.5:
+
+L 216: Random operation
+       self.julia_c = (random.uniform(-0.5, 0.5), rand...
+
+L 223: Function definition
+       def run(self):
+
+L 225: Debug output
+       print("MLFlame - Click or press space for new f...
+
+L 226: Iterate over collection
+       print(f"Using transforms: {[t.__name__ for t in...
+
+L 228: Debug output
+       print(f"Julia effect active with C = {self.juli...
+
+L 236: Debug output
+       print("Fractal saved to flame_bg.png")
+

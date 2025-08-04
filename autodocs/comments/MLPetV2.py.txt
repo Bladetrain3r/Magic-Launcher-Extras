@@ -1,0 +1,605 @@
+Comments for MLPetV2.py:
+--------------------------------------------------
+L   8: Import module
+       import json
+
+L   9: Import module
+       import time
+
+L  10: Import module
+       import random
+
+L  11: Import module
+       import sys
+
+L  12: Import module
+       import threading
+
+L  13: Import module
+       from pathlib import Path
+
+L  14: Import module
+       from datetime import datetime
+
+L  23: Class definition
+       class MLPet:
+
+L  24: Constructor method
+       def __init__(self):
+
+L  25: Create directory
+       PET_DIR.mkdir(exist_ok=True)
+
+L  31: Get current timestamp
+       self.last_interaction = time.time()
+
+L  36: Function definition
+       def check_graveyard(self):
+
+L  38: Check existence
+       if GRAVEYARD_FILE.exists():
+
+L  39: File operation with auto-close
+       with open(GRAVEYARD_FILE) as f:
+
+L  40: Parse JSON from file
+       graveyard = json.load(f)
+
+L  43: Debug output
+       print("\n=== Pet Cemetery ===")
+
+L  46: Debug output
+       print(f"  {pet['name']} - Lived {lived} day{'s'...
+
+L  47: Debug output
+       print("=" * 20 + "\n")
+
+L  49: Function definition
+       def add_to_graveyard(self, cause_of_death):
+
+L  52: Check existence
+       if GRAVEYARD_FILE.exists():
+
+L  53: File operation with auto-close
+       with open(GRAVEYARD_FILE) as f:
+
+L  54: Parse JSON from file
+       graveyard = json.load(f)
+
+L  57: Iterate over collection
+       for pet in graveyard:
+
+L  62: Get current timestamp
+       lived_seconds = time.time() - self.birth_time
+
+L  67: Get current datetime
+       'died': datetime.now().isoformat(),
+
+L  73: Add to list
+       graveyard.append(memorial)
+
+L  79: File operation with auto-close
+       with open(GRAVEYARD_FILE, 'w') as f:
+
+L  80: Write JSON to file
+       json.dump(graveyard, f)
+
+L  82: Function definition
+       def load_or_create(self):
+
+L  84: Check existence
+       if STATE_FILE.exists():
+
+L  85: File operation with auto-close
+       with open(STATE_FILE) as f:
+
+L  86: Parse JSON from file
+       state = json.load(f)
+
+L  94: Get current timestamp
+       self.last_update = state.get('last_update', tim...
+
+L  95: Get current timestamp
+       self.last_interaction = state.get('last_interac...
+
+L  99: Debug output
+       print("Welcome to MLPet 2.0!")
+
+L 100: Remove whitespace
+       self.name = input("Name your pet: ").strip() or...
+
+L 104: Random operation
+       self.favorite_game = random.choice(games)
+
+L 111: Get current timestamp
+       self.last_update = time.time()
+
+L 112: Get current timestamp
+       self.birth_time = time.time()
+
+L 114: Debug output
+       print(f"\n{self.name} is born! They love playin...
+
+L 115: Debug output
+       print("Commands: feed, play, sleep, warm, cool,...
+
+L 117: Function definition
+       def save(self):
+
+L 127: Get current timestamp
+       'last_update': time.time(),
+
+L 131: File operation with auto-close
+       with open(STATE_FILE, 'w') as f:
+
+L 132: Write JSON to file
+       json.dump(state, f)
+
+L 134: Function definition
+       def calculate_mood(self):
+
+L 136: Negative condition check
+       if not self.alive:
+
+L 137: Return value
+       return "dead"
+
+L 140: Return value
+       return "lonely"
+
+L 146: Return value
+       return "happy"
+
+L 148: Return value
+       return "content"
+
+L 150: Return value
+       return "grumpy"
+
+L 152: Return value
+       return "miserable"
+
+L 154: Return value
+       return "dying"
+
+L 156: Function definition
+       def update_stats(self):
+
+L 159: Get current timestamp
+       if time.time() - self.last_interaction > 900:
+
+L 172: Debug output
+       print(f"🥵 {self.name} is panting from the heat!")
+
+L 175: Random operation
+       if random.random() < 0.05:
+
+L 176: Debug output
+       print(f"🥶 {self.name} is shivering!")
+
+L 197: Debug output
+       print(f"\n💀 {self.name} has died from starvatio...
+
+L 203: Debug output
+       print(f"\n💀 {self.name} has died from exhaustio...
+
+L 209: Debug output
+       print(f"\n💀 {self.name} froze to death...")
+
+L 215: Debug output
+       print(f"\n💀 {self.name} died of heatstroke...")
+
+L 218: Random operation
+       elif self.fun == 0 and self.lonely and random.r...
+
+L 221: Debug output
+       print(f"\n💔 {self.name} died of loneliness...")
+
+L 225: Function definition
+       def auto_actions(self):
+
+L 243: Function definition
+       def start_sleep(self, auto=False):
+
+L 249: Get current timestamp
+       self.sleep_start = time.time()
+
+L 251: Debug output
+       print(f"😴 {self.name} yawns and curls up to sle...
+
+L 253: Debug output
+       print(f"😴 {self.name} settles down for a nap...")
+
+L 255: Function definition
+       def check_sleep(self, interrupt=False):
+
+L 257: Negative condition check
+       if not self.sleeping:
+
+L 260: Get current timestamp
+       elapsed = time.time() - self.sleep_start
+
+L 266: Debug output
+       print(f"😊 {self.name} wakes up refreshed!")
+
+L 272: Debug output
+       print(f"😫 {self.name}'s sleep was interrupted!")
+
+L 274: Function definition
+       def start_play(self, auto=False):
+
+L 280: Get current timestamp
+       self.play_start = time.time()
+
+L 291: Debug output
+       print(f"{self.name} {games[game]}!")
+
+L 294: Random operation
+       game = random.choice(list(games.keys()))
+
+L 295: Debug output
+       print(f"{self.name} {games[game]}!")
+
+L 297: Function definition
+       def check_play(self):
+
+L 299: Negative condition check
+       if not self.playing:
+
+L 302: Get current timestamp
+       elapsed = time.time() - self.play_start
+
+L 310: Debug output
+       print(f"🎮 {self.name} had a great time playing!")
+
+L 312: Function definition
+       def get_status(self):
+
+L 314: Negative condition check
+       if not self.alive:
+
+L 315: Return value
+       return f"{self.name} is dead. :("
+
+L 318: Get current timestamp
+       elapsed = time.time() - self.sleep_start
+
+L 319: Return value
+       return f"{self.name} is sleeping... ({30-elapse...
+
+L 322: Get current timestamp
+       elapsed = time.time() - self.play_start
+
+L 323: Return value
+       return f"{self.name} is playing... ({20-elapsed...
+
+L 331: Add to list
+       status_parts.append("lonely")
+
+L 334: Add to list
+       status_parts.append("starving")
+
+L 336: Add to list
+       status_parts.append("hungry")
+
+L 338: Add to list
+       status_parts.append("stuffed")
+
+L 341: Add to list
+       status_parts.append("exhausted")
+
+L 343: Add to list
+       status_parts.append("tired")
+
+L 345: Add to list
+       status_parts.append("hyperactive")
+
+L 348: Add to list
+       status_parts.append("bored")
+
+L 350: Add to list
+       status_parts.append("ecstatic")
+
+L 353: Add to list
+       status_parts.append("freezing")
+
+L 355: Add to list
+       status_parts.append("overheating")
+
+L 358: Join strings
+       status = f"{self.name} is {' and '.join(status_...
+
+L 362: Return value
+       return f"{status} (Mood: {mood})"
+
+L 364: Function definition
+       def feed(self):
+
+L 366: Negative condition check
+       if not self.alive:
+
+L 367: Debug output
+       print(f"{self.name} is dead and cannot eat.")
+
+L 374: Debug output
+       print(f"{self.name} overeats and throws up!")
+
+L 378: Get current timestamp
+       self.last_interaction = time.time()
+
+L 383: Get current timestamp
+       self.last_interaction = time.time()
+
+L 384: Debug output
+       print(f"🍔 {self.name} munches happily!")
+
+L 386: Function definition
+       def play(self):
+
+L 388: Negative condition check
+       if not self.alive:
+
+L 389: Debug output
+       print(f"{self.name} is dead and cannot play.")
+
+L 397: Debug output
+       print(f"{self.name} is too tired to play.")
+
+L 400: Negative condition check
+       if not self.playing:
+
+L 403: Get current timestamp
+       self.last_interaction = time.time()
+
+L 405: Function definition
+       def sleep(self):
+
+L 407: Negative condition check
+       if not self.alive:
+
+L 408: Debug output
+       print(f"{self.name} is in eternal sleep.")
+
+L 411: Negative condition check
+       if not self.sleeping:
+
+L 414: Get current timestamp
+       self.last_interaction = time.time()
+
+L 416: Function definition
+       def pet_pet(self):
+
+L 418: Negative condition check
+       if not self.alive:
+
+L 421: Get current timestamp
+       self.last_interaction = time.time()
+
+L 424: Debug output
+       print(f"💝 {self.name} loves the attention!")
+
+L 426: Function definition
+       def warm(self):
+
+L 428: Negative condition check
+       if not self.alive:
+
+L 432: Get current timestamp
+       self.last_interaction = time.time()
+
+L 433: Debug output
+       print(f"🔥 {self.name} warms up.")
+
+L 435: Function definition
+       def cool(self):
+
+L 437: Negative condition check
+       if not self.alive:
+
+L 441: Get current timestamp
+       self.last_interaction = time.time()
+
+L 442: Debug output
+       print(f"❄️ {self.name} cools down.")
+
+L 444: Function definition
+       def show_stats(self):
+
+L 446: Debug output
+       print(f"\n=== {self.name}'s Stats ===")
+
+L 447: Debug output
+       print(f"Hunger: {'█' * (int(self.hunger)//10)}{...
+
+L 448: Debug output
+       print(f"Energy: {'█' * (int(self.energy)//10)}{...
+
+L 449: Debug output
+       print(f"Fun:    {'█' * (int(self.fun)//10)}{'░'...
+
+L 450: Debug output
+       print(f"Temp:   {'█' * (int(self.temp)//10)}{'░...
+
+L 451: Debug output
+       print(f"Mood:   {self.calculate_mood()}")
+
+L 452: Debug output
+       print(f"Lonely: {'Yes' if self.lonely else 'No'}")
+
+L 453: Debug output
+       print(f"Favorite: {self.favorite_game}")
+
+L 454: Debug output
+       print(f"Status: {'ALIVE' if self.alive else 'DE...
+
+L 457: Get current timestamp
+       age_seconds = time.time() - self.birth_time
+
+L 460: Debug output
+       print(f"Age:    {age_days} days, {age_hours} ho...
+
+L 462: Function definition
+       def graveyard(self):
+
+L 464: Negative condition check
+       if not GRAVEYARD_FILE.exists():
+
+L 465: Debug output
+       print("No pets have died yet. Take good care of...
+
+L 468: File operation with auto-close
+       with open(GRAVEYARD_FILE) as f:
+
+L 469: Parse JSON from file
+       graveyard = json.load(f)
+
+L 471: Negative condition check
+       if not graveyard:
+
+L 472: Debug output
+       print("The graveyard is empty.")
+
+L 475: Debug output
+       print("\n=== Complete Pet Cemetery ===")
+
+L 476: Debug output
+       print(f"Total pets remembered: {len(graveyard)}")
+
+L 477: Debug output
+       print("-" * 40)
+
+L 481: Debug output
+       print(f"{pet['name']:12} | {lived:3} day{'s' if...
+
+L 484: Debug output
+       print(f"... and {len(graveyard) - 20} more")
+
+L 485: Debug output
+       print("=" * 40)
+
+L 487: Function definition
+       def background_update(self):
+
+L 491: Conditional loop
+       while self.running:
+
+L 503: Random operation
+       if random.random() < 0.05 and time.time() - las...
+
+L 504: Negative condition check
+       if not self.sleeping and not self.playing:
+
+L 505: Debug output
+       print(f"\n💭 {self.get_status()}")
+
+L 506: Debug output
+       print("Command: ", end='', flush=True)
+
+L 507: Get current timestamp
+       last_message = time.time()
+
+L 510: Error handling block
+       try:
+
+L 511: File operation with auto-close
+       with open(STATUS_FILE, 'w') as f:
+
+L 513: Catch all exceptions
+       except:
+
+L 518: Pause execution
+       time.sleep(1)
+
+L 520: Function definition
+       def run(self):
+
+L 522: Debug output
+       print(f"\n{self.get_status()}")
+
+L 523: Debug output
+       print("\nCommands: feed, play, sleep, pet, warm...
+
+L 530: Conditional loop
+       while self.running:
+
+L 531: Error handling block
+       try:
+
+L 532: Remove whitespace
+       cmd = input("Command: ").strip().lower()
+
+L 551: Debug output
+       print(self.get_status())
+
+L 553: Debug output
+       print("Commands: feed, play, sleep, pet, warm, ...
+
+L 555: Debug output
+       print(f"Goodbye! {self.name} will miss you.")
+
+L 561: Error handling block
+       try:
+
+L 566: Debug output
+       print(f"{self.name} has been released.")
+
+L 567: Catch specific exception
+       except FileNotFoundError:
+
+L 568: Debug output
+       print(f"{self.name} has been released.")
+
+L 569: Catch specific exception
+       except Exception as e:
+
+L 570: Debug output
+       print(f"Failed to delete {self.name}: {e}")
+
+L 572: Exit program
+       sys.exit(0)
+
+L 576: Debug output
+       print(f"Unknown command: {cmd}")
+
+L 579: Debug output
+       print(f"\nSaving {self.name}...")
+
+L 599: Debug output
+       'status': lambda: print(pet.get_status()),
+
+L 606: Debug output
+       print(f"Unknown command: {cmd}")
+
+L 607: Debug output
+       print("Available: feed, play, sleep, pet, warm,...
+
+L 608: Exit program
+       sys.exit(0)
+
+L 614: Check existence
+       if lock_file.exists():
+
+L 615: Debug output
+       print("Another instance is running. Please clos...
+
+L 616: Debug output
+       print(f"(If this is an error, delete {lock_file...
+
+L 617: Exit program
+       sys.exit(1)
+
+L 620: Error handling block
+       try:
+
+L 624: Catch specific exception
+       except Exception as e:
+
+L 625: Debug output
+       print(f"Error: {e}")
+
+L 627: Debug output
+       print("Pet saved despite error!" if 'pet' in lo...
+
+L 631: Debug output
+       print("Goodbye!")
+

@@ -1,0 +1,263 @@
+Comments for MLComment.py:
+--------------------------------------------------
+L   7: Import module
+       import json
+
+L   8: Import module
+       import re
+
+L   9: Import module
+       import sys
+
+L  10: Import module
+       from pathlib import Path
+
+L  11: Import module
+       import argparse
+
+L  14: Class definition
+       class MLComment:
+
+L  16: Class definition
+       Core class for the MLComment tool.
+
+L  19: Constructor method
+       def __init__(self):
+
+L  22: Create directory
+       self.config_dir.mkdir(parents=True, exist_ok=True)
+
+L  32: Function definition
+       def load_kb(self):
+
+L  34: Check existence
+       if self.kb_file.exists():
+
+L  35: File operation with auto-close
+       with open(self.kb_file, 'r') as f:
+
+L  36: Parse JSON from file
+       return json.load(f)
+
+L  75: Create directory
+       r"\.mkdir": "Create directory",
+
+L 101: Return value
+       return default_kb
+
+L 103: Function definition
+       def save_kb(self, kb=None):
+
+L 105: Null check
+       if kb is None:
+
+L 107: File operation with auto-close
+       with open(self.kb_file, 'w') as f:
+
+L 108: Write JSON to file
+       json.dump(kb, f, indent=2)
+
+L 110: Function definition
+       def add_pattern(self, pattern, comment, context...
+
+L 119: Debug output
+       print(f"Added pattern: {pattern} -> {comment} (...
+
+L 122: Function definition
+       def find_comment(self, line, context=None):
+
+L 124: Remove whitespace
+       line_stripped = line.strip()
+
+L 127: Negative condition check
+       if not line_stripped or line_stripped.startswit...
+
+L 128: Explicit null return
+       return None
+
+L 138: Explicit null return
+       return None
+
+L 143: Regex pattern search
+       if re.search(pattern, line_stripped):
+
+L 148: Regex pattern search
+       if re.search(pattern, line_stripped):
+
+L 151: Explicit null return
+       return None
+
+L 154: Function definition
+       def comment_file(self, filepath, context=None):
+
+L 155: Return value
+       """Add comments to a file and return the new co...
+
+L 156: Error handling block
+       try:
+
+L 157: File operation with auto-close
+       with open(filepath, 'r', encoding='utf-8') as f:
+
+L 159: Catch specific exception
+       except Exception as e:
+
+L 160: Debug output
+       print(f"Error reading file: {e}")
+
+L 161: Explicit null return
+       return None
+
+L 167: Iterate over collection
+       for line in lines:
+
+L 170: Negative condition check
+       if not in_multiline_string:
+
+L 172: Iterate over collection
+       for delim in ['"""', "'''"]:
+
+L 181: Add to list
+       output_lines.append(line)
+
+L 187: Remove whitespace
+       if comment and line.strip():
+
+L 193: Remove whitespace
+       if len(line_content.strip()) < 50:
+
+L 194: Remove whitespace
+       padding = ' ' * (50 - len(line_content.strip())...
+
+L 199: Add to list
+       output_lines.append(commented_line)
+
+L 201: Add to list
+       output_lines.append(line)
+
+L 203: Return value
+       return ''.join(output_lines)
+
+L 206: Function definition
+       def learn_from_file(self, filepath):
+
+L 208: Error handling block
+       try:
+
+L 209: File operation with auto-close
+       with open(filepath, 'r', encoding='utf-8') as f:
+
+L 211: Catch specific exception
+       except Exception as e:
+
+L 212: Debug output
+       print(f"Error reading file: {e}")
+
+L 217: Iterate over collection
+       for line in lines:
+
+L 219: Remove whitespace
+       if '#' in line and not line.strip().startswith(...
+
+L 220: Split string
+       parts = line.split('#', 1)
+
+L 221: Remove whitespace
+       code_part = parts[0].strip()
+
+L 222: Remove whitespace
+       comment_part = parts[1].strip()
+
+L 237: Debug output
+       print(f"Learned {learned} new patterns from {fi...
+
+L 239: Debug output
+       print(f"No new patterns found in {filepath}")
+
+L 241: Function definition
+       def save_to_file(self, filepath, content):
+
+L 243: Error handling block
+       try:
+
+L 244: File operation with auto-close
+       with open(filepath, 'w', encoding='utf-8') as f:
+
+L 246: Debug output
+       print(f"Successfully saved commented file to {f...
+
+L 247: Catch specific exception
+       except Exception as e:
+
+L 248: Debug output
+       print(f"Error saving file: {e}")
+
+L 250: Function definition
+       def comment_file_external(self, filepath, conte...
+
+L 252: Error handling block
+       try:
+
+L 253: File operation with auto-close
+       with open(filepath, 'r', encoding='utf-8') as f:
+
+L 255: Catch specific exception
+       except Exception as e:
+
+L 256: Debug output
+       print(f"Error reading file: {e}")
+
+L 257: Explicit null return
+       return None
+
+L 263: Negative condition check
+       if not line.strip():
+
+L 269: Remove whitespace
+       code_snippet = line.strip()
+
+L 273: Add to list
+       comments.append({
+
+L 279: Return value
+       return comments
+
+L 282: Function definition
+       def main():
+
+L 310: Debug output
+       print(json.dumps(commenter.kb, indent=2))
+
+L 318: Debug output
+       print(json.dumps(comments, indent=2))
+
+L 320: Debug output
+       print(f"# Code Comments for {args.file}\n")
+
+L 321: Iterate over collection
+       for c in comments:
+
+L 322: Debug output
+       print(f"**Line {c['line']}**: `{c['code']}`")
+
+L 323: Debug output
+       print(f"- {c['comment']}\n")
+
+L 325: Debug output
+       print(f"Comments for {args.file}:")
+
+L 326: Debug output
+       print("-" * 50)
+
+L 327: Iterate over collection
+       for c in comments:
+
+L 328: Debug output
+       print(f"L{c['line']:4d}: {c['comment']}")
+
+L 329: Debug output
+       print(f"       {c['code']}\n")
+
+L 337: Debug output
+       print(result)
+

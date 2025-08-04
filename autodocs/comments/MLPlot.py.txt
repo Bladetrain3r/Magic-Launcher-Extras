@@ -1,0 +1,110 @@
+Comments for MLPlot.py:
+--------------------------------------------------
+L   7: Import module
+       import tkinter as tk
+
+L   8: Import module
+       import csv
+
+L   9: Import module
+       import sys
+
+L  10: Import module
+       from pathlib import Path
+
+L  22: Class definition
+       class MLPlot:
+
+L  23: Constructor method
+       def __init__(self, root, data, xlabel="X", ylab...
+
+L  37: Function definition
+       def _create_ui(self):
+
+L  69: Function definition
+       def _plot_data(self):
+
+L  73: Negative condition check
+       if not self.data or len(self.data) < 2:
+
+L  90: Iterate over collection
+       x_values = [point[0] for point in self.data]
+
+L  91: Iterate over collection
+       y_values = [point[1] for point in self.data]
+
+L 114: Iterate N times
+       for i in range(5):
+
+L 139: Add multiple items
+       points.extend([px, py])
+
+L 146: Iterate N times
+       for i in range(0, len(points), 2):
+
+L 155: Function definition
+       def load_csv(filename):
+
+L 158: Error handling block
+       try:
+
+L 159: File operation with auto-close
+       with open(filename, 'r') as f:
+
+L 165: Error handling block
+       try:
+
+L 168: Add to list
+       data.append((float(first_row[0]), float(first_r...
+
+L 169: Catch all exceptions
+       except:
+
+L 173: Iterate over collection
+       for row in reader:
+
+L 175: Error handling block
+       try:
+
+L 178: Add to list
+       data.append((x, y))
+
+L 179: Catch all exceptions
+       except:
+
+L 181: Catch specific exception
+       except Exception as e:
+
+L 182: Debug output
+       print(f"Error loading {filename}: {e}")
+
+L 184: Return value
+       return data
+
+L 186: Function definition
+       def main():
+
+L 189: Debug output
+       print("MLPlot - Minimal timeseries plotter")
+
+L 190: Debug output
+       print("Usage: mlplot.py <csv_file> [xlabel] [yl...
+
+L 191: Debug output
+       print("CSV format: x,y values (one per line)")
+
+L 192: Exit program
+       sys.exit(1)
+
+L 198: Path object creation
+       title = sys.argv[4] if len(sys.argv) > 4 else P...
+
+L 202: Negative condition check
+       if not data:
+
+L 203: Debug output
+       print(f"No valid data found in {csv_file}")
+
+L 204: Exit program
+       sys.exit(1)
+

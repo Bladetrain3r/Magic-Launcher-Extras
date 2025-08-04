@@ -1,0 +1,239 @@
+Comments for MLPetwork.py:
+--------------------------------------------------
+L   7: Import module
+       import time
+
+L   8: Import module
+       import json
+
+L   9: Import module
+       import sys
+
+L  10: Import module
+       import os
+
+L  11: Import module
+       from pathlib import Path
+
+L  12: Import module
+       from datetime import datetime
+
+L  13: Import module
+       import threading
+
+L  14: Import module
+       import random
+
+L  16: Error handling block
+       try:
+
+L  17: Import module
+       import psutil
+
+L  19: Catch specific exception
+       except ImportError:
+
+L  20: Debug output
+       print("MLPetWork requires psutil. Install with:...
+
+L  21: Exit program
+       sys.exit(1)
+
+L  33: Class definition
+       class WorkPet:
+
+L  34: Constructor method
+       def __init__(self, name="Codey"):
+
+L  58: Function definition
+       def update(self, is_working):
+
+L  60: Negative condition check
+       if not self.alive:
+
+L  64: Negative condition check
+       if not self.work_start:
+
+L  65: Get current timestamp
+       self.work_start = time.time()
+
+L  69: Get current timestamp
+       work_duration = time.time() - self.work_start
+
+L  84: Debug output
+       print(f"\n⚠️ {self.name}: 'Please... I need res...
+
+L  86: Debug output
+       print(f"\n⚠️ {self.name}: 'Break time was 30 mi...
+
+L  89: Negative condition check
+       if not self.break_start:
+
+L  90: Get current timestamp
+       self.break_start = time.time()
+
+L  92: Get current timestamp
+       self.continuous_work = time.time() - self.work_...
+
+L  95: Get current timestamp
+       break_duration = time.time() - self.break_start
+
+L 109: Debug output
+       print(f"\n🎉 {self.name} is happy you took a pro...
+
+L 115: Debug output
+       print(f"\n{self.moods['dead']}")
+
+L 116: Debug output
+       print(f"Cause: {'Mental exhaustion' if self.foc...
+
+L 117: Debug output
+       print(f"Deaths today: {self.deaths_today}")
+
+L 120: Pause execution
+       time.sleep(3)
+
+L 123: Function definition
+       def revive(self):
+
+L 125: Debug output
+       print(f"\n🔄 {self.name} has respawned, but reme...
+
+L 133: Function definition
+       def get_mood(self):
+
+L 135: Negative condition check
+       if not self.alive:
+
+L 136: Return value
+       return 'dead'
+
+L 140: Return value
+       return 'happy'
+
+L 142: Return value
+       return 'content'
+
+L 144: Return value
+       return 'tired'
+
+L 146: Return value
+       return 'stressed'
+
+L 148: Return value
+       return 'dying'
+
+L 150: Function definition
+       def status(self):
+
+L 152: Negative condition check
+       if not self.alive:
+
+L 153: Return value
+       return self.moods['dead']
+
+L 184: Return value
+       return status
+
+L 186: Function definition
+       def is_working():
+
+L 188: Error handling block
+       try:
+
+L 189: Iterate over collection
+       for proc in psutil.process_iter(['pid', 'name']):
+
+L 192: Iterate over collection
+       for work_app in WORK_APPS:
+
+L 194: Return value
+       return True
+
+L 195: Catch all exceptions
+       except:
+
+L 197: Return value
+       return False
+
+L 199: Function definition
+       def clear_screen():
+
+L 203: Function definition
+       def monitor_loop(pet):
+
+L 207: Infinite loop
+       while True:
+
+L 213: Debug output
+       print(f"\n👔 Work session started at {datetime.n...
+
+L 215: Debug output
+       print(f"\n☕ Break started at {datetime.now().st...
+
+L 221: Function definition
+       def main():
+
+L 224: Debug output
+       print("MLPetWork - Work/Break Balance Pet")
+
+L 225: Debug output
+       print("\nYour pet thrives on balanced work sess...
+
+L 226: Debug output
+       print("Work 25 minutes, break 5 minutes, keep p...
+
+L 227: Debug output
+       print("\nPet dies from:")
+
+L 228: Debug output
+       print("- Working too long without breaks")
+
+L 229: Debug output
+       print("- Ignoring break warnings")
+
+L 230: Debug output
+       print("- General overwork")
+
+L 231: Exit program
+       sys.exit(0)
+
+L 237: Debug output
+       print(f"MLPetWork - {pet_name} is here to monit...
+
+L 238: Debug output
+       print("Press Ctrl+C to exit\n")
+
+L 245: Error handling block
+       try:
+
+L 246: Infinite loop
+       while True:
+
+L 248: Debug output
+       print(pet.status())
+
+L 252: Debug output
+       print("⚠️  SERIOUSLY, TAKE A BREAK! ⚠️")
+
+L 254: Debug output
+       print("⏰ Break time recommended!")
+
+L 258: Catch specific exception
+       except KeyboardInterrupt:
+
+L 259: Debug output
+       print(f"\n\nSaving {pet_name}'s stats...")
+
+L 260: Debug output
+       print(f"Total breaks taken: {pet.breaks_taken}")
+
+L 261: Debug output
+       print(f"Deaths from overwork: {pet.deaths_today}")
+
+L 263: Debug output
+       print(f"\n💭 {pet_name} hopes you'll take better...
+
+L 265: Debug output
+       print(f"\n🌟 {pet_name} is proud of your work/li...
+

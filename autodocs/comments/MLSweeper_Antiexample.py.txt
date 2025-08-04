@@ -1,0 +1,254 @@
+Comments for MLSweeper_Antiexample.py:
+--------------------------------------------------
+L  11: Import module
+       import tkinter as tk
+
+L  12: Import module
+       from tkinter import messagebox
+
+L  13: Import module
+       import random
+
+L  14: Import module
+       import time
+
+L  15: Import module
+       import json
+
+L  16: Import module
+       import os
+
+L  17: Import module
+       from datetime import datetime
+
+L  18: Import module
+       from pathlib import Path
+
+L  44: Class definition
+       class MLSweeper:
+
+L  45: Constructor method
+       def __init__(self, root, width=9, height=9, min...
+
+L  62: Create directory
+       self.stats_file.parent.mkdir(parents=True, exis...
+
+L  67: Function definition
+       def _create_ui(self):
+
+L  97: Iterate N times
+       for y in range(self.height):
+
+L  98: Iterate N times
+       for x in range(self.width):
+
+L 114: Function definition
+       def _new_game(self):
+
+L 124: Iterate N times
+       positions = [(x, y) for x in range(self.width) ...
+
+L 125: Random operation
+       self.mines = set(random.sample(positions, min(s...
+
+L 134: Function definition
+       def _click(self, x, y):
+
+L 139: Null check
+       if self.start_time is None:
+
+L 140: Get current timestamp
+       self.start_time = time.time()
+
+L 148: Function definition
+       def _flag(self, x, y):
+
+L 162: Function definition
+       def _reveal(self, x, y):
+
+L 177: Iterate over collection
+       for dx in [-1, 0, 1]:
+
+L 178: Iterate over collection
+       for dy in [-1, 0, 1]:
+
+L 183: Function definition
+       def _count_adjacent_mines(self, x, y):
+
+L 186: Iterate over collection
+       for dx in [-1, 0, 1]:
+
+L 187: Iterate over collection
+       for dy in [-1, 0, 1]:
+
+L 192: Return value
+       return count
+
+L 194: Function definition
+       def _check_win(self):
+
+L 197: Iterate N times
+       for x in range(self.width):
+
+L 198: Iterate N times
+       for y in range(self.height):
+
+L 205: Function definition
+       def _game_over(self, won):
+
+L 211: Get current timestamp
+       elapsed = int(time.time() - self.start_time) if...
+
+L 227: Function definition
+       def _save_stats(self, won, time_seconds):
+
+L 230: Get current datetime
+       'timestamp': datetime.now().isoformat(),
+
+L 239: Error handling block
+       try:
+
+L 240: Check existence
+       if self.stats_file.exists():
+
+L 241: File operation with auto-close
+       with open(self.stats_file, 'r') as f:
+
+L 242: Parse JSON from file
+       data = json.load(f)
+
+L 246: Add to list
+       data.append(stats)
+
+L 252: File operation with auto-close
+       with open(self.stats_file, 'w') as f:
+
+L 253: Write JSON to file
+       json.dump(data, f, indent=2)
+
+L 254: Catch all exceptions
+       except:
+
+L 257: Function definition
+       def _update_info(self):
+
+L 262: Get current timestamp
+       time_str = str(int(time.time() - self.start_time))
+
+L 265: Function definition
+       def _update_timer(self):
+
+L 267: Negative condition check
+       if not self.game_over:
+
+L 271: Function definition
+       def _show_settings(self):
+
+L 289: Function definition
+       def apply_settings():
+
+L 290: Error handling block
+       try:
+
+L 306: Iterate N times
+       for y in range(self.height):
+
+L 307: Iterate N times
+       for x in range(self.width):
+
+L 320: Catch all exceptions
+       except:
+
+L 325: Function definition
+       def _boss_key(self):
+
+L 361: Function definition
+       def update_matrix():
+
+L 362: Negative condition check
+       if not boss.winfo_exists():
+
+L 365: Iterate N times
+       line = ''.join(random.choice(matrix_chars + '  ...
+
+L 369: Split string
+       if int(text.index('end-1c').split('.')[0]) > 40:
+
+L 376: Function definition
+       def restore(event=None):
+
+L 388: Function definition
+       def _lock_screen(self):
+
+L 390: Import module
+       import hashlib
+
+L 396: Check existence
+       if lock_file.exists():
+
+L 397: File operation with auto-close
+       with open(lock_file, 'r') as f:
+
+L 398: Remove whitespace
+       password_hash = f.read().strip()
+
+L 428: Iterate N times
+       drops = [random.randint(-rows, 0) for _ in rang...
+
+L 434: Function definition
+       def check_password(event):
+
+L 436: Add to list
+       password_entered.append(event.char)
+
+L 439: Join strings
+       attempt = ''.join(password_entered)
+
+L 441: Iterate N times
+       for i in range(1, len(attempt) + 1):
+
+L 448: Negative condition check
+       elif not password_hash and event.keysym == 'Esc...
+
+L 457: Function definition
+       def animate():
+
+L 458: Negative condition check
+       if not lock.winfo_exists():
+
+L 463: Iterate N times
+       for i in range(cols):
+
+L 464: Random operation
+       char = random.choice(chars)
+
+L 475: Iterate N times
+       for j in range(1, 20):
+
+L 478: Random operation
+       trail_char = random.choice(chars)
+
+L 487: Random operation
+       drops[i] = random.randint(-20, -1)
+
+L 490: Negative condition check
+       if not password_hash:
+
+L 500: Function definition
+       def main():
+
+L 505: Import module
+       import sys
+
+L 510: Error handling block
+       try:
+
+L 514: Catch all exceptions
+       except:
+
+L 515: Debug output
+       print("Usage: mlsweeper.py [width] [height] [mi...
+
+L 516: Debug output
+       print("Default: mlsweeper.py 9 9 10")
+

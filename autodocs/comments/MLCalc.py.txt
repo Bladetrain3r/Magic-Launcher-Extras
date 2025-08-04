@@ -1,0 +1,77 @@
+Comments for MLCalc.py:
+--------------------------------------------------
+L  13: Decorator applied
+       Report any issues with precision or correctness...
+
+L  16: Import module
+       import tkinter as tk
+
+L  17: Import module
+       import sys
+
+L  31: Class definition
+       class MLCalc:
+
+L  33: Class definition
+       The main class for the MLCalc application.
+
+L  35: Constructor method
+       def __init__(self, root):
+
+L  50: Function definition
+       def _create_ui(self):
+
+L  74: Iterate over collection
+       for button_text in mem_buttons:
+
+L  86: Iterate over collection
+       for button_text in parentheses_buttons:
+
+L 104: Iterate over collection
+       for button_text in buttons:
+
+L 116: Iterate N times
+       for i in range(4):
+
+L 121: Function definition
+       def _bind_keys(self):
+
+L 129: Function definition
+       def _on_key_press(self, event):
+
+L 150: Function definition
+       def _on_button_click(self, char):
+
+L 153: Error handling block
+       try:
+
+L 161: Catch specific exception
+       except Exception as e:
+
+L 164: Debug output
+       print(f"Calculation Error: {e}", file=sys.stderr)
+
+L 173: Debug output
+       print("Memory Cleared")
+
+L 178: Error handling block
+       try:
+
+L 181: Debug output
+       print(f"Memory: {self.memory}")
+
+L 182: Catch specific exception
+       except ValueError:
+
+L 186: Error handling block
+       try:
+
+L 189: Debug output
+       print(f"Memory: {self.memory}")
+
+L 190: Catch specific exception
+       except ValueError:
+
+L 198: Function definition
+       def main():
+
