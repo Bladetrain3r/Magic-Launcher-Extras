@@ -1,0 +1,53 @@
+#!/bin/bash
+# prepare-commit-msg hook for MLGitAudit integration
+# Place in .git/hooks/prepare-commit-msg and chmod +x
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+
+# Only add template for new commits (not amends or merges)
+if [ -z "$COMMIT_SOURCE" ]; then
+    # Try to read categories from MLGitAudit config
+    MLGITAUDIT_CONFIG="$HOME/.config/mlgitaudit/keywords.json"
+    
+    if [ -f "$MLGITAUDIT_CONFIG" ]; then
+        # Extract categories using Python (since we know they have it)
+        CATEGORIES=$(python3 -c "
+import json
+with open('$MLGITAUDIT_CONFIG') as f:
+    data = json.load(f)
+    for cat in data.keys():
+        if cat != 'uncategorized':
+            print(f'{cat}: {', '.join(data[cat][:3])}...')
+" 2>/dev/null)
+    else
+        # Fallback to defaults
+        CATEGORIES="feat: add, new, implement...
+fix: bug, error, issue...
+chore: update, bump, merge...
+refactor: clean, improve, optimize..."
+    fi
+    
+    # Get current content
+    CURRENT_MSG=$(cat "$COMMIT_MSG_FILE")
+    
+    # Create new message with template
+    echo "" > "$COMMIT_MSG_FILE"
+    echo "" >> "$COMMIT_MSG_FILE"
+    echo "# === MLGitAudit Commit Types ===" >> "$COMMIT_MSG_FILE"
+    echo "#" >> "$COMMIT_MSG_FILE"
+    echo "$CATEGORIES" | while read -r line; do
+        echo "# $line" >> "$COMMIT_MSG_FILE"
+    done
+    echo "#" >> "$COMMIT_MSG_FILE"
+    echo "# Start your message with a category keyword!" >> "$COMMIT_MSG_FILE"
+    echo "# Examples:" >> "$COMMIT_MSG_FILE"
+    echo "#   fix: resolve issue with..." >> "$COMMIT_MSG_FILE"
+    echo "#   feat: add new ML tool..." >> "$COMMIT_MSG_FILE"
+    echo "#   chore: bump version" >> "$COMMIT_MSG_FILE"
+    echo "# ===============================" >> "$COMMIT_MSG_FILE"
+    
+    # Append original message if any
+    echo "$CURRENT_MSG" >> "$COMMIT_MSG_FILE"
+fi
