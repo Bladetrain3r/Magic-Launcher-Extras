@@ -38,16 +38,20 @@ class MLGitAudit:
                 "fix": ["fix", "bug", "defect", "resolve", "patch", "hotfix", 
                         "issue", "broken", "error", "crash", "fault"],
                 "feature": ["feat", "add", "new", "implement", "feature", 
-                           "enhance", "create", "introduce"],
+                           "enhance", "create", "introduce", "modules"],
                 "refactor": ["refactor", "clean", "improve", "optimize", 
-                            "restructure", "reorganize", "simplify"],
+                            "restructure", "reorganize", "simplify", "bump"],
                 "chore": ["chore", "docs", "build", "ci", "test", "config",
-                         "deps", "update", "bump", "merge"],
+                         "deps", "update", "bump", "merge", "formatting"],
                 "revert": ["revert", "rollback", "undo"],
                 "workaround": ["workaround", "hack", "temp", "temporary", 
-                              "quick fix", "bandaid", "kludge"]
+                              "quick fix", "bandaid", "kludge"],
+                "swearwords": ["fuck", "shit", "damn", "bitch", "asshole", 
+                               "kak", "crap", "bollocks", "bollok",]
             }
-            
+
+
+
             # Save defaults
             with open(self.keywords_file, 'w') as f:
                 json.dump(default_keywords, f, indent=2)
