@@ -103,6 +103,14 @@ System and user wide persistent notes.
 Quick Page - bookmark a section of a text file with `mqp #name#`
 ~~Why do I need a full syntax to lookup a section in a page?~~
 
+### MLSwarm
+File based chat channel. 
+~~Bring your own encrypted connection.~~
+
+### MLComment
+Comment your python code for human OR language model ingestion
+~~Give the comments to Claude and create a mutated clone~~
+
 ~~mqp#End#~~
 ## Contributing
 These tools follow the ML paradigm of being simple, focused, and dependency-light. When contributing:

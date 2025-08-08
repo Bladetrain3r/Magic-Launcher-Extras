@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>UniSheet</title>
+<meta charset="utf-8">
+</head>
+<body>
+<h1>UniSheet</h1>
+<blockquote>
+<p><em>The sheer fury I felt in having to deal with the 800k line monstrosity at SuiteCRM has led me to basically rediscover Unix philosophy.</em></p>
+<p><em>It's honestly quite rare these days in computing for something to be new we just can't. Stop. Complicating things until they need to be figured out all over again and some pissed off devops engineer realizes that Denis Ritchie invented monads with the pipe.</em></p>
+<p>— A spreadsheet in 150 lines, because fuck your frameworks</p>
+</blockquote>
+<button onclick="saveSheet()">Save</button>
+<button onclick="loadSheet()">Load</button>
+<button onclick="clearSheet()">Clear</button>
+<input type="file" id="fileInput" onchange="loadFile(event)" accept=".json">
+<br><br>
+<table id="sheet" border="1">
+</table>
+
+<script>
+// Grid size
+const ROWS = 20;
+const COLS = 10;
+
+// Storage
+let cells = {};
+
+// Initialize grid
+function initGrid() {
+  const table = document.getElementById('sheet');
+  table.innerHTML = '';
+  
+  // Header row
+  const headerRow = table.insertRow();
+  headerRow.insertCell(); // Empty corner
+  for (let c = 0; c < COLS; c++) {
+    const th = document.createElement('th');
+    th.textContent = String.fromCharCode(65 + c); // A, B, C...
+    headerRow.appendChild(th);
+  }
+  
+  // Data rows
+  for (let r = 0; r < ROWS; r++) {
+    const row = table.insertRow();
+    const th = document.createElement('th');
+    th.textContent = r + 1;
+    row.appendChild(th);
+    
+    for (let c = 0; c < COLS; c++) {
+      const cell = row.insertCell();
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.id = `${String.fromCharCode(65 + c)}${r + 1}`;
+      input.value = cells[input.id] || '';
+      input.onchange = () => updateCell(input.id, input.value);
+      input.onfocus = () => showFormula(input);
+      input.onblur = () => showValue(input);
+      cell.appendChild(input);
+    }
+  }
+  
+  // Calculate all formulas
+  recalculate();
+}
+
+// Update cell value
+function updateCell(id, value) {
+  cells[id] = value;
+  recalculate();
+}
+
+// Show formula in input
+function showFormula(input) {
+  input.value = cells[input.id] || '';
+}
+
+// Show calculated value
+function showValue(input) {
+  const value = cells[input.id] || '';
+  if (value.startsWith('=')) {
+    input.value = calculateFormula(value, input.id);
+  } else {
+    input.value = value;
+  }
+}
+
+// Calculate formula
+function calculateFormula(formula, cellId) {
+  try {
+    // Remove the = sign
+    let expr = formula.substring(1);
+    
+    // Handle COUNT(A:A) style formulas
+    const countMatch = expr.match(/COUNT\(([A-Z]):([A-Z])\)/);
+    if (countMatch) {
+      const col = countMatch[1];
+      let count = 0;
+      for (let r = 1; r <= ROWS; r++) {
+        const id = `${col}${r}`;
+        if (cells[id] && cells[id] !== '' && !cells[id].startsWith('=')) {
+          count++;
+        }
+      }
+      return count;
+    }
+    
+    // Handle cell references (A1, B2, etc)
+    expr = expr.replace(/([A-Z]\d+)/g, (match) => {
+      const val = cells[match] || '0';
+      if (val.startsWith('=')) {
+        return calculateFormula(val, match);
+      }
+      return isNaN(val) ? `"${val}"` : val;
+    });
+    
+    // Evaluate as JavaScript
+    return eval(expr);
+  } catch (e) {
+    return '#ERROR';
+  }
+}
+
+// Recalculate all formulas
+function recalculate() {
+  for (let id in cells) {
+    if (cells[id].startsWith('=')) {
+      const input = document.getElementById(id);
+      if (input && document.activeElement !== input) {
+        input.value = calculateFormula(cells[id], id);
+      }
+    }
+  }
+}
+
+// Save to localStorage
+function saveSheet() {
+  localStorage.setItem('unisheet', JSON.stringify(cells));
+  alert('Saved to browser storage');
+}
+
+// Load from localStorage
+function loadSheet() {
+  const saved = localStorage.getItem('unisheet');
+  if (saved) {
+    cells = JSON.parse(saved);
+    initGrid();
+  }
+}
+
+// Load from file
+function loadFile(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        cells = JSON.parse(e.target.result);
+        initGrid();
+      } catch (err) {
+        alert('Invalid JSON file');
+      }
+    };
+    reader.readAsText(file);
+  }
+}
+
+// Clear sheet
+function clearSheet() {
+  if (confirm('Clear all cells?')) {
+    cells = {};
+    initGrid();
+  }
+}
+
+// Initialize on load
+initGrid();
+</script>
+</body>
+</html>
