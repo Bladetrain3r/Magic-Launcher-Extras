@@ -1,0 +1,287 @@
+/* Base layout */
+html {
+  max-height: 960px;
+  overflow-y: auto;
+}
+
+body {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.mobile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* Logo */
+.logo {
+  width: 360px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Box styling */
+.box {
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 12px;
+  background-color: #fff;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.controls-box {
+  background-color: #f0f8ff;
+  max-width: 480px;
+}
+
+.calendar-box {
+  background-color: #f9f9f9;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* List box scrollable */
+.list-box {
+  background-color: #fefaf7;
+  flex-grow: 1;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.list-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+/* Controls */
+.controls-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.month-controls,
+.filter-controls {
+  width: 230px;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  box-sizing: border-box;
+}
+
+.month-controls button {
+  font-size: 0.9rem;
+  padding: 2px 8px;
+  height: 26px;
+  margin: 0 5px;
+}
+
+.filter-controls {
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+.filter-controls select {
+  width: 140px;
+  height: 26px;
+  font-size: 0.9rem;
+}
+
+.filter-controls label {
+  margin-right: 6px;
+  font-size: 0.9rem;
+}
+
+#monthLabel {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Calendar grid */
+.calendar-weekdays,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.weekday-name {
+  text-align: center;
+  font-weight: bold;
+  padding: 6px 0;
+  background-color: #c5daf8;
+  border-radius: 6px;
+}
+
+.weekday-name:nth-child(1),
+.weekday-name:nth-child(7) {
+  background-color: #acb6c4;
+}
+
+.day {
+  border: 1px solid #ccc;
+  min-height: 44px;
+  padding: 2px;
+  text-align: center;
+  position: relative;
+  font-size: 0.85em;
+}
+
+.day.weekend {
+  background-color: #bae2e2 !important;
+  border: 1px solid #96c5bb !important;
+}
+
+.blank {
+  background-color: #dbdbdb;
+  border: none;
+}
+
+/* Event markers */
+.event-dots {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: 2px;
+}
+
+.event-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Event list scroll */
+.event-list-scroll {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+/* List styling */
+#eventList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#eventList li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+#eventList li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Scrollbar optional */
+.event-list-box::-webkit-scrollbar {
+  width: 6px;
+}
+.event-list-box::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+/* Popup */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.popup-event {
+  margin-bottom: 12px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Responsive tweaks */
+@media screen and (max-width: 480px) {
+  .day {
+    min-height: 40px;
+    font-size: 0.75em;
+  }
+}
+
+/* Legend */
+.legend-box {
+  background-color: #f3f9f9;
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85em;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: #fefefe;
+  border: 1px solid #ddd;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Calendar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="mobile-container">  
+
+    <img src="lionsLogo480x100.png" alt="Lions Logo" class="logo" />
+    
+
+    <!-- Controls: Month navigation + filter    NEW -->
+    <div class="box controls-box">
+      <div class="controls-row">
+        <div class="month-controls">
+          <button id="prevMonth">❮</button>
+          <span id="monthLabel">Month YYYY</span>
+          <button id="nextMonth">❯</button>
+        </div>
+        <div class="filter-controls">
+          <label for="eventFilter">Filter:</label>
+          <select id="eventFilter">
+            <option value="all">All</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Calendar -->
+    <div class="box calendar-box">
+      <div class="calendar-weekdays">
+        <div class="weekday-name">Sun</div>
+        <div class="weekday-name">Mon</div>
+        <div class="weekday-name">Tue</div>
+        <div class="weekday-name">Wed</div>
+        <div class="weekday-name">Thu</div>
+        <div class="weekday-name">Fri</div>
+        <div class="weekday-name">Sat</div>
+      </div>
+      <div id="calendar-days" class="calendar-days"></div>
+    </div>
+
+    <!-- Event list -->
+    <div class="box list-box">
+      <h4 id="eventListHeading">Planner</h4>
+       <div class="event-list-scroll">
+        <ul id="eventList"></ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div id="eventPopup" class="popup hidden">
+    <div class="popup-content">
+      <span id="closePopup" class="close-btn">&times;</span>
+      <div id="popupEventsContainer"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

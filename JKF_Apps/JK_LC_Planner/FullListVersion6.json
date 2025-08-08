@@ -1,0 +1,680 @@
+[
+  {
+    "ActivityNo": "01",
+    "ActivityName": "Jennifer Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-02-28",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "02",
+    "ActivityName": "Wilna Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-04-01",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "03",
+    "ActivityName": "Etienne Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-04-24",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "04",
+    "ActivityName": "Hilary Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-05-12",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "05",
+    "ActivityName": "International Coastal Cleanup Day",
+    "ActivityService": "Observance",
+    "ActSerAbr": "OBSR",
+    "ActSerColor": "#391e82",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-06-20",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "06",
+    "ActivityName": "Gavin Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-06-24",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "07",
+    "ActivityName": "Rod Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-06-28",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "08",
+    "ActivityName": "GBM Meeting",
+    "ActivityService": "TVLC",
+    "ActSerAbr": "TVLC",
+    "ActSerColor": "#0a83f5",
+    "ActivityLocal": "Roundtable Clubhouse",
+    "ActivityDate": "2025-07-08",
+    "ActivityTime": "19:00"
+  },
+  {
+    "ActivityNo": "09",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-07-09",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "10",
+    "ActivityName": "Presidential Induction DeGrendel LC",
+    "ActivityService": "TVLC",
+    "ActSerAbr": "TVLC",
+    "ActSerColor": "#0a83f5",
+    "ActivityLocal": "Edgemead Seniors Club",
+    "ActivityCost": "R150 pp",
+    "ActivityNotes": "RSVP by 4 July",
+    "ActivityDate": "2025-07-12",
+    "ActivityTime": "11:00"
+  },
+  {
+    "ActivityNo": "11",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-07-16",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "12",
+    "ActivityName": "Mandela Day",
+    "ActivityService": "Observance",
+    "ActSerAbr": "OBSR",
+    "ActSerColor": "#391e82",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-07-18",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "13",
+    "ActivityName": "Frith Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-07-22",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "14",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-07-23",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "15",
+    "ActivityName": "Blouberg Ridge Sandwiches",
+    "ActivityService": "Hunger",
+    "ActSerAbr": "HNGR",
+    "ActSerColor": "#FF5722",
+    "ActivityLocal": "Blouberg Ridge Primary School",
+    "ActivityDate": "2025-07-23",
+    "ActivityTime": "10:30"
+  },
+  {
+    "ActivityNo": "16",
+    "ActivityName": "Homecoming Banquet DGE Bevil Lakay",
+    "ActivityService": "TVLC",
+    "ActSerAbr": "TVLC",
+    "ActSerColor": "#0a83f5",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-07-26",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "17",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-07-30",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "18",
+    "ActivityName": "Blouberg Ridge Sandwiches",
+    "ActivityService": "Hunger",
+    "ActSerAbr": "HNGR",
+    "ActSerColor": "#FF5722",
+    "ActivityLocal": "Blouberg Ridge Primary School",
+    "ActivityDate": "2025-07-30",
+    "ActivityTime": "10:30"
+  },
+  {
+    "ActivityNo": "19",
+    "ActivityName": "Diabetes Screening",
+    "ActivityService": "Diabetes",
+    "ActSerAbr": "DIAB",
+    "ActSerColor": "#5cf1f1ff",
+    "ActivityLocal": "West Coast Village",
+    "ActivityDate": "2025-07-31",
+    "ActivityTime": "09:30"
+  },
+  {
+    "ActivityNo": "20",
+    "ActivityName": "Quiz Night",
+    "ActivityService": "TVLC",
+    "ActSerAbr": "TVLC",
+    "ActSerColor": "#0a83f5",
+    "ActivityLocal": "Portalia Pizzeria",
+    "ActivityCost": "R50 pp",
+    "ActivityNotes": "Teams of 4 Max.",
+    "ActivityDate": "2025-08-05",
+    "ActivityTime": "18:30"
+  },
+  {
+    "ActivityNo": "21",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-08-06",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "22",
+    "ActivityName": "Blouberg Ridge Sandwiches",
+    "ActivityService": "Hunger",
+    "ActSerAbr": "HNGR",
+    "ActSerColor": "#FF5722",
+    "ActivityLocal": "Blouberg Ridge Primary School",
+    "ActivityDate": "2025-08-06",
+    "ActivityTime": "10:30"
+  },
+  {
+    "ActivityNo": "23",
+    "ActivityName": "Jacky Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-08-07",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "24",
+    "ActivityName": "National Women's Day",
+    "ActivityService": "Observance",
+    "ActSerAbr": "OBSR",
+    "ActSerColor": "#391e82",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-08-09",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "25",
+    "ActivityName": "Club Birthday",
+    "ActivityService": "TVLC",
+    "ActSerAbr": "TVLC",
+    "ActSerColor": "#0a83f5",
+    "ActivityLocal": "GreenHaus",
+    "ActivityDate": "2025-08-09",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "26",
+    "ActivityName": "Kuwala Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-08-10",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "27",
+    "ActivityName": "International Youth Day",
+    "ActivityService": "Observance",
+    "ActSerAbr": "OBSR",
+    "ActSerColor": "#391e82",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-08-12",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "28",
+    "ActivityName": "GBM Meeting",
+    "ActivityService": "TVLC",
+    "ActSerAbr": "TVLC",
+    "ActSerColor": "#0a83f5",
+    "ActivityLocal": "Roundtable Clubhouse",
+    "ActivityDate": "2025-08-12",
+    "ActivityTime": "19:00"
+  },
+  {
+    "ActivityNo": "29",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-08-13",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "30",
+    "ActivityName": "Blouberg Ridge Sandwiches",
+    "ActivityService": "Hunger",
+    "ActSerAbr": "HNGR",
+    "ActSerColor": "#FF5722",
+    "ActivityLocal": "Blouberg Ridge Primary School",
+    "ActivityDate": "2025-08-13",
+    "ActivityTime": "10:30"
+  },
+  {
+    "ActivityNo": "31",
+    "ActivityName": "Freda Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-08-15",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "32",
+    "ActivityName": "Zone Meeting",
+    "ActivityService": "Zone Meeting",
+    "ActSerAbr": "ZONE",
+    "ActSerColor": "#a6b55c",
+    "ActivityDate": "2025-08-16",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "33",
+    "ActivityName": "World Humanitarian Day",
+    "ActivityService": "Observance",
+    "ActSerAbr": "OBSR",
+    "ActSerColor": "#391e82",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-08-19",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "34",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-08-20",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "35",
+    "ActivityName": "Blouberg Ridge Sandwiches",
+    "ActivityService": "Youth",
+    "ActSerAbr": "YOUH",
+    "ActSerColor": "#0f9790ff",
+    "ActivityLocal": "Blouberg Ridge Primary School",
+    "ActivityDate": "2025-08-20",
+    "ActivityTime": "10:30"
+  },
+  {
+    "ActivityNo": "36",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-08-27",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "37",
+    "ActivityName": "Blouberg Ridge Sandwiches",
+    "ActivityService": "Hunger",
+    "ActSerAbr": "HNGR",
+    "ActSerColor": "#FF5722",
+    "ActivityLocal": "Blouberg Ridge Primary School",
+    "ActivityDate": "2025-08-27",
+    "ActivityTime": "10:30"
+  },
+  {
+    "ActivityNo": "38",
+    "ActivityName": "Diabetes Screening",
+    "ActivityService": "Diabetes",
+    "ActSerAbr": "DIAB",
+    "ActSerColor": "#5cf1f1ff",
+    "ActivityLocal": "West Coast Village",
+    "ActivityDate": "2025-08-28",
+    "ActivityTime": "09:30"
+  },
+  {
+    "ActivityNo": "39",
+    "ActivityName": "Soup Kitchen Outreach",
+    "ActivityService": "Hunger",
+    "ActSerAbr": "HNGR",
+    "ActSerColor": "#FF5722",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-08-29",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "40",
+    "ActivityName": "Blisters for Bread",
+    "ActivityService": "Childhood Cancer",
+    "ActSerAbr": "CHDC",
+    "ActSerColor": "#e5ee66ff",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-08-31",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "41",
+    "ActivityName": "Liz Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-09-02",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "42",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-09-03",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "43",
+    "ActivityName": "Blouberg Ridge Sandwiches",
+    "ActivityService": "Hunger",
+    "ActSerAbr": "HNGR",
+    "ActSerColor": "#FF5722",
+    "ActivityLocal": "Blouberg Ridge Primary School",
+    "ActivityDate": "2025-09-03",
+    "ActivityTime": "10:30"
+  },
+  {
+    "ActivityNo": "44",
+    "ActivityName": "International Day of Charity",
+    "ActivityService": "Observance",
+    "ActSerAbr": "OBSR",
+    "ActSerColor": "#391e82",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-09-05",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "45",
+    "ActivityName": "GBM Meeting",
+    "ActivityService": "TVLC",
+    "ActSerAbr": "TVLC",
+    "ActSerColor": "#0a83f5",
+    "ActivityLocal": "Roundtable Clubhouse",
+    "ActivityDate": "2025-09-09",
+    "ActivityTime": "19:00"
+  },
+  {
+    "ActivityNo": "46",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-09-10",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "47",
+    "ActivityName": "Blouberg Ridge Sandwiches",
+    "ActivityService": "Youth",
+    "ActSerAbr": "YOUH",
+    "ActSerColor": "#0f9790ff",
+    "ActivityLocal": "Blouberg Ridge Primary School",
+    "ActivityDate": "2025-09-10",
+    "ActivityTime": "10:30"
+  },
+  {
+    "ActivityNo": "48",
+    "ActivityName": "Coastal Clean up Day",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-09-16",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "49",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-09-17",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "50",
+    "ActivityName": "Blouberg Ridge Sandwiches",
+    "ActivityService": "Hunger",
+    "ActSerAbr": "HNGR",
+    "ActSerColor": "#FF5722",
+    "ActivityLocal": "Blouberg Ridge Primary School",
+    "ActivityDate": "2025-09-17",
+    "ActivityTime": "10:30"
+  },
+  {
+    "ActivityNo": "51",
+    "ActivityName": "Recycling",
+    "ActivityService": "Environment",
+    "ActSerAbr": "ENVR",
+    "ActSerColor": "#3d8a3bff",
+    "ActivityLocal": "Table View",
+    "ActivityDate": "2025-09-24",
+    "ActivityTime": "08:30"
+  },
+  {
+    "ActivityNo": "52",
+    "ActivityName": "Blouberg Ridge Sandwiches",
+    "ActivityService": "Hunger",
+    "ActSerAbr": "HNGR",
+    "ActSerColor": "#FF5722",
+    "ActivityLocal": "Blouberg Ridge Primary School",
+    "ActivityDate": "2025-09-24",
+    "ActivityTime": "10:30"
+  },
+  {
+    "ActivityNo": "53",
+    "ActivityName": "South African Heritage Day",
+    "ActivityService": "Observance",
+    "ActSerAbr": "OBSR",
+    "ActSerColor": "#391e82",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-09-24",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "54",
+    "ActivityName": "Heritage Day Braai",
+    "ActivityService": "TVLC",
+    "ActSerAbr": "TVLC",
+    "ActSerColor": "#0a83f5",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-09-24",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "55",
+    "ActivityName": "Diabetes Screening",
+    "ActivityService": "Diabetes",
+    "ActSerAbr": "DIAB",
+    "ActSerColor": "#5cf1f1ff",
+    "ActivityLocal": "West Coast Village",
+    "ActivityDate": "2025-09-26",
+    "ActivityTime": "09:30"
+  },
+  {
+    "ActivityNo": "56",
+    "ActivityName": "Cupcakes for Cancer",
+    "ActivityService": "Childhood Cancer",
+    "ActSerAbr": "CHDC",
+    "ActSerColor": "#e5ee66ff",
+    "ActivityLocal": "TBA",
+    "ActivityDate": "2025-09-27",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "57",
+    "ActivityName": "Rocky Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-10-08",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "58",
+    "ActivityName": "Zone Meeting",
+    "ActivityService": "Zone Meeting",
+    "ActSerAbr": "ZONE",
+    "ActSerColor": "#a6b55c",
+    "ActivityDate": "2025-10-18",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "59",
+    "ActivityName": "Kennedy Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-10-22",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "60",
+    "ActivityName": "Helene Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-10-31",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "61",
+    "ActivityName": "Natasha Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-10-31",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "62",
+    "ActivityName": "Tatenda Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-11-15",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "63",
+    "ActivityName": "John Birthday",
+    "ActivityService": "Birthday",
+    "ActSerAbr": "BDAY",
+    "ActSerColor": "#5e031d",
+    "ActivityDate": "2025-12-21",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "64",
+    "ActivityName": "Zone Meeting",
+    "ActivityService": "Zone Meeting",
+    "ActSerAbr": "ZONE",
+    "ActSerColor": "#a6b55c",
+    "ActivityDate": "2026-02-21",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "65",
+    "ActivityName": "Zone Meeting",
+    "ActivityService": "Zone Meeting",
+    "ActSerAbr": "ZONE",
+    "ActSerColor": "#a6b55c",
+    "ActivityDate": "2026-06-06",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "66",
+    "ActivityName": "Lend an Ear",
+    "ActivityService": "Mental Health",
+    "ActSerAbr": "MHLT",
+    "ActSerColor": "#948f8dff",
+    "ActivityDate": "2027-03-01",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "67",
+    "ActivityName": "Eye Tests",
+    "ActivityService": "Vision",
+    "ActSerAbr": "VISN",
+    "ActSerColor": "#5d1e91ff",
+    "ActivityDate": "2027-04-01",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "68",
+    "ActivityName": "Helping Hands",
+    "ActivityService": "Humanitarian",
+    "ActSerAbr": "HMNT",
+    "ActSerColor": "#f364a7ff",
+    "ActivityDate": "2027-05-01",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "69",
+    "ActivityName": "Feed The Kids",
+    "ActivityService": "Youth",
+    "ActSerAbr": "YOUH",
+    "ActSerColor": "#0f9790ff",
+    "ActivityDate": "2027-07-11",
+    "ActivityTime": "00:00"
+  },
+  {
+    "ActivityNo": "70",
+    "ActivityName": "Fire Patrol",
+    "ActivityService": "Disaster Relief",
+    "ActSerAbr": "DISR",
+    "ActSerColor": "#8b40a1ff",
+    "ActivityDate": "2027-10-01",
+    "ActivityTime": "00:00"
+  }
+]
