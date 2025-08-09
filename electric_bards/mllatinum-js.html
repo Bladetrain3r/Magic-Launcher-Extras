@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLLatinum - Bad Latin for Programmers</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #0a0a0a;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        
+        .translator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .input-section {
+            background: #111;
+            border: 1px solid #00ff00;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        
+        .label {
+            display: block;
+            margin-bottom: 10px;
+            color: #00ff00;
+            font-weight: bold;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            background: #000;
+            color: #00ff00;
+            border: 1px solid #333;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #00ff00;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        button {
+            flex: 1;
+            padding: 10px;
+            background: #00ff00;
+            color: #000;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        
+        button:hover {
+            background: #00aa00;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        
+        .error-button {
+            background: #ff0000;
+        }
+        
+        .error-button:hover {
+            background: #aa0000;
+            box-shadow: 0 0 10px #ff0000;
+        }
+        
+        .error-display {
+            margin-top: 20px;
+            padding: 20px;
+            background: #200000;
+            border: 1px solid #ff0000;
+            color: #ff6666;
+            display: none;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        
+        .error-display.visible {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">MLLatinum</h1>
+        <p class="subtitle">Pessimus Latinus pro Programmatores</p>
+        
+        <div class="translator-grid">
+            <div class="input-section">
+                <label class="label">English:</label>
+                <textarea id="englishInput" placeholder="Enter text or code..."></textarea>
+            </div>
+            
+            <div class="input-section">
+                <label class="label">Latin:</label>
+                <textarea id="latinOutput" readonly placeholder="Translation appears here..."></textarea>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button onclick="translate()">TRANSLATE</button>
+            <button onclick="generateError()" class="error-button">GENERATE ERROR</button>
+        </div>
+        
+        <div class="error-display" id="errorDisplay"></div>
+    </div>
+    
+    <script>
+        // Load language data from external file
+        let LANG_DATA = null;
+        
+        // Default embedded data as fallback
+        const DEFAULT_LANG_DATA = {
+            vocabulary: {
+                "error": "erratum",
+                "memory": "memoria",
+                "segmentation": "fragmentatio",
+                "fault": "culpa",
+                "null": "nullus",
+                "pointer": "index",
+                "exception": "exceptio",
+                "the": "ille",
+                "is": "est",
+                "broken": "fractus",
+                "hostile": "hostilis",
+                "architecture": "architectura"
+            },
+            phrases: {
+                "hello world": "salve munde",
+                "segmentation fault": "fragmentatio culpa",
+                "null pointer exception": "nullus index exceptio"
+            },
+            errors: [
+                "FRAGMENTATIO MEMORIAE: Nucleus ejectus est",
+                "NULLUS INDEX: Accessus ad nihilum",
+                "MAXIMUS RISIBILLUS: Valde ridiculosum erratum"
+            ]
+        };
+        
+        // Try to load external language file
+        function loadLanguageData() {
+            // Check if mllatinum-lang.json exists
+            fetch('mllatinum-lang.json')
+                .then(response => response.json())
+                .then(data => {
+                    LANG_DATA = data;
+                    console.log('Loaded external language data');
+                })
+                .catch(() => {
+                    // Fall back to default
+                    LANG_DATA = DEFAULT_LANG_DATA;
+                    console.log('Using embedded language data');
+                });
+        }
+        
+        function translate() {
+            const data = LANG_DATA || DEFAULT_LANG_DATA;
+            const input = document.getElementById('englishInput').value;
+            let output = input;
+            
+            // Check for exact phrases first
+            for (const [eng, lat] of Object.entries(data.phrases)) {
+                const regex = new RegExp(eng, 'gi');
+                output = output.replace(regex, lat);
+            }
+            
+            // Translate word by word
+            const words = output.split(/\b/);
+            const translated = words.map(word => {
+                const lower = word.toLowerCase();
+                if (data.vocabulary[lower]) {
+                    // Preserve capitalization
+                    if (word[0] === word[0].toUpperCase()) {
+                        return data.vocabulary[lower].charAt(0).toUpperCase() + data.vocabulary[lower].slice(1);
+                    }
+                    return data.vocabulary[lower];
+                }
+                return word;
+            });
+            
+            document.getElementById('latinOutput').value = translated.join('');
+        }
+        
+        function generateError() {
+            const data = LANG_DATA || DEFAULT_LANG_DATA;
+            const error = data.errors[Math.floor(Math.random() * data.errors.length)];
+            const display = document.getElementById('errorDisplay');
+            display.textContent = error;
+            display.classList.add('visible');
+            
+            setTimeout(() => {
+                display.classList.remove('visible');
+            }, 3000);
+            
+            // Also put in output
+            document.getElementById('latinOutput').value = error;
+        }
+        
+        // Load language data on page load
+        window.onload = loadLanguageData;
+    </script>
+</body>
+</html>
