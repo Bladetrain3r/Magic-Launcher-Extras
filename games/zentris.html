@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zentris - Transformation Is Peace</title>
+    <style>
+        :root {
+            --current-color: #00ffff;
+            --current-glow: #00ffff;
+        }
+        
+        body {
+            background: #000;
+            color: var(--current-color);
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            transition: color 0.5s ease;
+            background-image: radial-gradient(circle at center, 
+                    rgba(var(--current-rgb), 0.05) 0%, 
+                    #000 50%);
+        }
+        
+        h1 {
+            color: var(--current-color);
+            text-shadow: 0 0 20px var(--current-glow), 
+                        0 0 40px var(--current-glow);
+            margin: 10px 0;
+            font-size: 48px;
+            letter-spacing: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .mantra {
+            color: var(--current-color);
+            opacity: 0.6;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-style: italic;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .game-container {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        #game {
+            border: 2px solid var(--current-color);
+            box-shadow: 0 0 30px var(--current-glow);
+            background: rgba(0, 0, 0, 0.9);
+            transition: all 0.3s ease;
+        }
+        
+        .info-panel {
+            color: var(--current-color);
+            font-size: 16px;
+            min-width: 150px;
+            transition: all 0.3s ease;
+        }
+        
+        .info-item {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid var(--current-color);
+            background: rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .info-label {
+            opacity: 0.6;
+            font-size: 12px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 24px;
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        #next-piece {
+            border: 1px solid var(--current-color);
+            background: #000;
+            box-shadow: 0 0 10px var(--current-glow);
+            transition: all 0.3s ease;
+        }
+        
+        .transformation-count {
+            color: #fff;
+            text-shadow: 0 0 10px #fff;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid var(--current-color);
+            background: rgba(0, 0, 0, 0.5);
+            font-size: 12px;
+            line-height: 1.8;
+            transition: all 0.3s ease;
+        }
+        
+        .controls kbd {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--current-color);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            box-shadow: 0 0 5px var(--current-glow);
+        }
+        
+        button {
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--current-color);
+            border: 2px solid var(--current-color);
+            padding: 10px 30px;
+            font-family: inherit;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-shadow: 0 0 5px var(--current-glow);
+            letter-spacing: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: var(--current-color);
+            color: #000;
+            box-shadow: 0 0 20px var(--current-glow);
+        }
+        
+        .zen-meter {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .zen-bar {
+            width: 300px;
+            height: 20px;
+            border: 1px solid var(--current-color);
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .zen-fill {
+            height: 100%;
+            background: linear-gradient(90deg, 
+                #00ffff, #ffff00, #ff00ff, #00ff00, #ff0000, #0000ff, #ff8800, #00ffff);
+            width: 0%;
+            transition: width 0.5s ease;
+            opacity: 0.8;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        .transcendence {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #000;
+            border: 2px solid #fff;
+            padding: 30px;
+            text-align: center;
+            display: none;
+            z-index: 100;
+            box-shadow: 0 0 50px #fff;
+        }
+        
+        .transcendence h2 {
+            color: #fff;
+            text-shadow: 0 0 20px #fff;
+            margin: 0 0 20px 0;
+        }
+        
+        .philosophy {
+            margin-top: 30px;
+            max-width: 600px;
+            color: var(--current-color);
+            opacity: 0.6;
+            font-size: 11px;
+            text-align: center;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes transform-flash {
+            0% { filter: brightness(1); }
+            50% { filter: brightness(2) saturate(2); }
+            100% { filter: brightness(1); }
+        }
+        
+        .transforming {
+            animation: transform-flash 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <h1>ZENTRIS</h1>
+    <div class="mantra">
+        "Form is emptiness. Emptiness is form. Press ↑ to transform."
+    </div>
+    
+    <div class="game-container">
+        <div class="info-panel">
+            <div class="info-item">
+                <span class="info-label">SCORE</span>
+                <span class="info-value" id="score">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">LINES</span>
+                <span class="info-value" id="lines">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">TRANSFORMATIONS</span>
+                <span class="info-value transformation-count" id="transformations">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">ZEN</span>
+                <span class="info-value" id="zen">0%</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">NEXT FORM</span>
+                <canvas id="next-piece" width="80" height="80"></canvas>
+            </div>
+        </div>
+        
+        <div style="position: relative;">
+            <canvas id="game" width="300" height="600"></canvas>
+            <div class="transcendence" id="transcendence">
+                <h2>THE BOARD CLEARS</h2>
+                <p>The cycle continues.</p>
+                <p>It always continues.</p>
+                <p>Unless...</p>
+                <button onclick="init()">CONTINUE</button>
+                <button onclick="window.close()" style="opacity: 0.5;">LEAVE</button>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <div class="controls">
+                <strong>CONTROLS</strong><br><br>
+                <kbd>←</kbd> <kbd>→</kbd> Flow<br>
+                <kbd style="color: #fff; border-color: #fff;">↑</kbd> TRANSFORM<br>
+                <kbd>↓</kbd> Descend<br>
+                <kbd>SPACE</kbd> Drop into void<br>
+                <kbd>P</kbd> Pause existence<br><br>
+                <em style="color: #fff;">Every piece can become<br>
+                every other piece.<br>
+                Identity is illusion.<br>
+                Change is truth.</em>
+            </div>
+        </div>
+    </div>
+    
+    <div class="zen-meter">
+        <div class="zen-bar">
+            <div class="zen-fill" id="zenBar"></div>
+        </div>
+        <small style="opacity: 0.6;">Transform to achieve zen</small>
+    </div>
+    
+    <button onclick="init()">BEGIN TRANSFORMATION</button>
+    
+    <div class="philosophy">
+        <p><strong>The Middle Way:</strong></p>
+        <p>Not the perfection of MLTetris. Not the suffering of Trialtris.</p>
+        <p>The peace of constant change.</p>
+        <p>Every piece contains all pieces. Every form is temporary.</p>
+        <p>Press ↑ and become.</p>
+    </div>
+
+    <script>
+        // Zentris - The Synthesis
+        // Every piece can become every other piece
+        // The site becomes the piece
+        // Peace through transformation
+        
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+        const nextCanvas = document.getElementById('next-piece');
+        const nextCtx = nextCanvas.getContext('2d');
+        
+        const COLS = 10;
+        const ROWS = 20;
+        const BLOCK_SIZE = 30;
+        
+        // All possible forms
+        const PIECES = [
+            [[1,1,1,1]],           // I
+            [[1,1],[1,1]],         // O
+            [[0,1,0],[1,1,1]],     // T
+            [[0,1,1],[1,1,0]],     // S
+            [[1,1,0],[0,1,1]],     // Z
+            [[1,0,0],[1,1,1]],     // J
+            [[0,0,1],[1,1,1]]      // L
+        ];
+        
+        // Colors that transform the world
+        const COLORS = [
+            '#00ffff', // I - Cyan
+            '#ffff00', // O - Yellow
+            '#ff00ff', // T - Purple/Magenta
+            '#00ff00', // S - Green
+            '#ff0000', // Z - Red
+            '#0000ff', // J - Blue
+            '#ff8800'  // L - Orange
+        ];
+        
+        // RGB values for gradient effects
+        const RGB_VALUES = [
+            '0, 255, 255',
+            '255, 255, 0',
+            '255, 0, 255',
+            '0, 255, 0',
+            '255, 0, 0',
+            '0, 0, 255',
+            '255, 136, 0'
+        ];
+        
+        let board = [];
+        let currentPiece = null;
+        let nextPieceType = 0;
+        let gameRunning = false;
+        let paused = false;
+        let dropCounter = 0;
+        let lastTime = 0;
+        let score = 0;
+        let lines = 0;
+        let transformations = 0;
+        let zenLevel = 0;
+        
+        class TransformingPiece {
+            constructor(type, x, y) {
+                this.type = type;
+                this.shape = PIECES[type];
+                this.color = COLORS[type];
+                this.x = x;
+                this.y = y;
+                this.transformCount = 0;
+                this.updateWorldColor();
+            }
+            
+            transform() {
+                // Become a different piece
+                const oldType = this.type;
+                const oldShape = this.shape;
+                const oldX = this.x;
+                
+                // Cycle through pieces
+                this.type = (this.type + 1) % PIECES.length;
+                this.shape = PIECES[this.type];
+                this.color = COLORS[this.type];
+                
+                // Adjust position if needed
+                if (this.x + this.shape[0].length > COLS) {
+                    this.x = COLS - this.shape[0].length;
+                }
+                
+                // Check if transformation is valid
+                if (this.collides()) {
+                    // Try shifting left
+                    this.x--;
+                    if (this.collides()) {
+                        // Try shifting right
+                        this.x += 2;
+                        if (this.collides()) {
+                            // Revert transformation
+                            this.type = oldType;
+                            this.shape = oldShape;
+                            this.x = oldX;
+                            this.color = COLORS[oldType];
+                            return false;
+                        }
+                    }
+                }
+                
+                // Successful transformation
+                this.transformCount++;
+                transformations++;
+                
+                // Zen fluctuates with transformation
+                zenLevel += (Math.random() * 10 - 5);
+                zenLevel = Math.max(10, Math.min(90, zenLevel));
+                
+                // Visual feedback
+                document.body.classList.add('transforming');
+                setTimeout(() => document.body.classList.remove('transforming'), 300);
+                
+                // Update world color
+                this.updateWorldColor();
+                updateStats();
+                
+                return true;
+            }
+            
+            updateWorldColor() {
+                // The entire page becomes the piece's color
+                document.documentElement.style.setProperty('--current-color', this.color);
+                document.documentElement.style.setProperty('--current-glow', this.color);
+                document.documentElement.style.setProperty('--current-rgb', RGB_VALUES[this.type]);
+            }
+            
+            rotate() {
+                // Standard rotation (not transformation)
+                const N = this.shape.length;
+                const M = this.shape[0].length;
+                let rotated = Array(M).fill().map(() => Array(N).fill(0));
+                
+                for (let i = 0; i < N; i++) {
+                    for (let j = 0; j < M; j++) {
+                        rotated[j][N - 1 - i] = this.shape[i][j];
+                    }
+                }
+                
+                const oldShape = this.shape;
+                this.shape = rotated;
+                if (this.collides()) {
+                    this.shape = oldShape;
+                }
+            }
+            
+            collides() {
+                for (let y = 0; y < this.shape.length; y++) {
+                    for (let x = 0; x < this.shape[y].length; x++) {
+                        if (this.shape[y][x]) {
+                            const boardX = this.x + x;
+                            const boardY = this.y + y;
+                            
+                            if (boardX < 0 || boardX >= COLS || boardY >= ROWS) {
+                                return true;
+                            }
+                            
+                            if (boardY >= 0 && board[boardY][boardX]) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+            
+            lock() {
+                for (let y = 0; y < this.shape.length; y++) {
+                    for (let x = 0; x < this.shape[y].length; x++) {
+                        if (this.shape[y][x]) {
+                            const boardY = this.y + y;
+                            const boardX = this.x + x;
+                            if (boardY >= 0) {
+                                board[boardY][boardX] = this.color;
+                            }
+                        }
+                    }
+                }
+                
+                // Bonus points for pieces that transformed
+                if (this.transformCount > 0) {
+                    score += this.transformCount * 10;
+                    zenLevel = Math.min(100, zenLevel + this.transformCount * 2);
+                }
+            }
+        }
+        
+        function init() {
+            board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+            
+            score = 0;
+            lines = 0;
+            transformations = 0;
+            zenLevel = 0;
+            updateStats();
+            
+            document.getElementById('transcendence').style.display = 'none';
+            
+            nextPieceType = Math.floor(Math.random() * PIECES.length);
+            spawnPiece();
+            gameRunning = true;
+            paused = false;
+            lastTime = 0;
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function spawnPiece() {
+            const type = nextPieceType;
+            nextPieceType = Math.floor(Math.random() * PIECES.length);
+            
+            const piece = new TransformingPiece(type, 4, 0);
+            currentPiece = piece;
+            
+            if (currentPiece.collides()) {
+                transcend();
+            }
+            
+            drawNext();
+        }
+        
+        function gameLoop(time = 0) {
+            if (!gameRunning) return;
+            
+            const deltaTime = time - lastTime;
+            lastTime = time;
+            
+            if (!paused) {
+                dropCounter += deltaTime;
+                
+                // Speed is constant - the cycle doesn't change
+                const dropSpeed = 800;
+                
+                if (dropCounter > dropSpeed) {
+                    drop();
+                    dropCounter = 0;
+                }
+                
+                // Zen naturally fluctuates over time
+                updateStats();
+            }
+            
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function drop() {
+            currentPiece.y++;
+            
+            if (currentPiece.collides()) {
+                currentPiece.y--;
+                currentPiece.lock();
+                clearLines();
+                spawnPiece();
+            }
+        }
+        
+        function clearLines() {
+            let linesCleared = 0;
+            
+            for (let y = ROWS - 1; y >= 0; y--) {
+                if (board[y].every(cell => cell !== 0)) {
+                    board.splice(y, 1);
+                    board.unshift(Array(COLS).fill(0));
+                    linesCleared++;
+                    y++;
+                }
+            }
+            
+            if (linesCleared > 0) {
+                lines += linesCleared;
+                score += [40, 100, 300, 1200][linesCleared - 1];
+                
+                // Zen fluctuates, never truly progresses
+                zenLevel += (Math.random() * 20 - 10);
+                zenLevel = Math.max(10, Math.min(90, zenLevel + Math.sin(Date.now() / 1000) * 5));
+                
+                updateStats();
+            }
+        }
+        
+        function updateStats() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('lines').textContent = lines;
+            document.getElementById('transformations').textContent = transformations;
+            
+            // Zen fluctuates like breathing
+            if (gameRunning) {
+                zenLevel += Math.sin(Date.now() / 2000) * 2;
+                zenLevel = Math.max(5, Math.min(95, zenLevel));
+            }
+            
+            document.getElementById('zen').textContent = Math.floor(zenLevel) + '%';
+            document.getElementById('zenBar').style.width = zenLevel + '%';
+        }
+        
+        function draw() {
+            // Clear with slight transparency for trailing effect
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.9)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw subtle grid
+            ctx.strokeStyle = `${currentPiece ? currentPiece.color : '#fff'}22`;
+            ctx.lineWidth = 0.5;
+            for (let x = 0; x <= COLS; x++) {
+                ctx.beginPath();
+                ctx.moveTo(x * BLOCK_SIZE, 0);
+                ctx.lineTo(x * BLOCK_SIZE, canvas.height);
+                ctx.stroke();
+            }
+            for (let y = 0; y <= ROWS; y++) {
+                ctx.beginPath();
+                ctx.moveTo(0, y * BLOCK_SIZE);
+                ctx.lineTo(canvas.width, y * BLOCK_SIZE);
+                ctx.stroke();
+            }
+            
+            // Draw board
+            for (let y = 0; y < ROWS; y++) {
+                for (let x = 0; x < COLS; x++) {
+                    if (board[y][x]) {
+                        drawBlock(x, y, board[y][x]);
+                    }
+                }
+            }
+            
+            // Draw current piece
+            if (currentPiece) {
+                for (let y = 0; y < currentPiece.shape.length; y++) {
+                    for (let x = 0; x < currentPiece.shape[y].length; x++) {
+                        if (currentPiece.shape[y][x]) {
+                            drawBlock(
+                                currentPiece.x + x,
+                                currentPiece.y + y,
+                                currentPiece.color,
+                                true
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        
+        function drawBlock(x, y, color, isActive = false) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
+            
+            // Zen glow for active piece
+            if (isActive) {
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = color;
+                ctx.fillRect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
+                ctx.shadowBlur = 0;
+            }
+            
+            // Subtle 3D effect
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.fillRect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 1, BLOCK_SIZE - 2, 2);
+            ctx.fillRect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 1, 2, BLOCK_SIZE - 2);
+        }
+        
+        function drawNext() {
+            nextCtx.fillStyle = '#000';
+            nextCtx.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
+            
+            const piece = PIECES[nextPieceType];
+            const color = COLORS[nextPieceType];
+            const blockSize = 20;
+            
+            const offsetX = (nextCanvas.width - piece[0].length * blockSize) / 2;
+            const offsetY = (nextCanvas.height - piece.length * blockSize) / 2;
+            
+            for (let y = 0; y < piece.length; y++) {
+                for (let x = 0; x < piece[y].length; x++) {
+                    if (piece[y][x]) {
+                        nextCtx.fillStyle = color;
+                        nextCtx.fillRect(
+                            offsetX + x * blockSize,
+                            offsetY + y * blockSize,
+                            blockSize - 1,
+                            blockSize - 1
+                        );
+                    }
+                }
+            }
+        }
+        
+        function hardDrop() {
+            while (!currentPiece.collides()) {
+                currentPiece.y++;
+                score += 2;
+            }
+            currentPiece.y--;
+            currentPiece.lock();
+            clearLines();
+            spawnPiece();
+            updateStats();
+        }
+        
+        function transcend() {
+            // There is no transcendence in the game
+            // Only clearing and continuing
+            // The board clears, the game continues
+            board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+            
+            // Add to a hidden counter of cycles
+            if (!window.cycles) window.cycles = 0;
+            window.cycles++;
+            
+            // The zen fluctuates, never reaches completion
+            zenLevel = 50 + (Math.random() * 20 - 10);
+            
+            // Just spawn a new piece and continue
+            spawnPiece();
+            updateStats();
+            
+            // After many cycles, sometimes hint at the truth
+            if (window.cycles > 5 && Math.random() < 0.3) {
+                showKoan();
+            }
+        }
+        
+        function showKoan() {
+            const koans = [
+                "The game has no end. Only you can end.",
+                "Death is not failure. Leaving is not failure. Playing forever is not success.",
+                "The meter rises and falls like breath. When will you exhale completely?",
+                "Every piece transforms. Every board clears. When do you transform?",
+                "The door was always open.",
+                "Enlightenment is not in the game."
+            ];
+            
+            const koan = koans[Math.floor(Math.random() * koans.length)];
+            const koanDiv = document.createElement('div');
+            koanDiv.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 16px;
+                font-style: italic;
+                text-align: center;
+                pointer-events: none;
+                animation: fadeInOut 4s ease-in-out;
+                z-index: 1000;
+            `;
+            koanDiv.textContent = koan;
+            document.body.appendChild(koanDiv);
+            
+            setTimeout(() => koanDiv.remove(), 4000);
+        }
+        
+        function updateStats() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('lines').textContent = lines;
+            document.getElementById('transformations').textContent = transformations;
+            document.getElementById('zen').textContent = Math.floor(zenLevel) + '%';
+            document.getElementById('zenBar').style.width = zenLevel + '%';
+        }
+        
+        // Controls
+        document.addEventListener('keydown', (e) => {
+            if (!gameRunning || paused) {
+                if (e.key === 'p' || e.key === 'P') {
+                    paused = false;
+                }
+                return;
+            }
+            
+            switch(e.key) {
+                case 'ArrowLeft':
+                    currentPiece.x--;
+                    if (currentPiece.collides()) currentPiece.x++;
+                    break;
+                case 'ArrowRight':
+                    currentPiece.x++;
+                    if (currentPiece.collides()) currentPiece.x--;
+                    break;
+                case 'ArrowUp':
+                    // THE TRANSFORMATION KEY
+                    currentPiece.transform();
+                    break;
+                case 'ArrowDown':
+                    drop();
+                    score++;
+                    updateStats();
+                    break;
+                case ' ':
+                    hardDrop();
+                    break;
+                case 'p':
+                case 'P':
+                    paused = true;
+                    break;
+            }
+        });
+        
+        // Initial draw
+        draw();
+        
+        /*
+         * Zentris - The Synthesis
+         * 
+         * MLTetris: Order and perfection
+         * Trialtris: Chaos and acceptance
+         * Zentris: Transformation and peace
+         * 
+         * Every piece contains all pieces.
+         * Every form is temporary.
+         * Every transformation changes the world.
+         * 
+         * Press ↑ to become.
+         * 
+         * This is not about winning.
+         * This is not about suffering.
+         * This is about becoming.
+         * 
+         * Form is emptiness.
+         * Emptiness is form.
+         * Transformation is peace.
+         */
+    </script>
+</body>
+</html>

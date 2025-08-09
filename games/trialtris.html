@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trialtris - The Broken Prophecy</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #ff00ff;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(255, 0, 255, 0.03) 10px,
+                    rgba(255, 0, 255, 0.03) 20px
+                );
+        }
+        
+        h1 {
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff0088;
+            margin: 10px 0;
+            font-size: 48px;
+            letter-spacing: 12px;
+            animation: glitch 3s infinite;
+        }
+        
+        @keyframes glitch {
+            0%, 100% { text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff0088; }
+            25% { text-shadow: -2px 0 20px #00ffff, 2px 0 40px #ff0088; }
+            50% { text-shadow: 2px 0 20px #ffff00, -2px 0 40px #00ff00; }
+            75% { text-shadow: 0 2px 20px #ff00ff, 0 -2px 40px #0000ff; }
+        }
+        
+        .prophecy {
+            color: #880088;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-style: italic;
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        .game-container {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        #game {
+            border: 2px solid #ff00ff;
+            box-shadow: 0 0 30px #ff00ff, inset 0 0 30px rgba(255, 0, 255, 0.1);
+            background: #000;
+            position: relative;
+        }
+        
+        .info-panel {
+            color: #ff00ff;
+            font-size: 16px;
+            min-width: 150px;
+        }
+        
+        .info-item {
+            margin: 15px 0;
+            padding: 10px;
+            border: 1px solid #880088;
+            background: rgba(136, 0, 136, 0.1);
+        }
+        
+        .info-label {
+            color: #880088;
+            font-size: 12px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .info-value {
+            font-size: 24px;
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        #next-piece {
+            border: 1px solid #880088;
+            background: #000;
+            box-shadow: 0 0 10px #880088;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #880088;
+            background: rgba(136, 0, 136, 0.1);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+        
+        .controls kbd {
+            background: #330033;
+            border: 1px solid #ff00ff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            box-shadow: 0 0 5px #880088;
+        }
+        
+        button {
+            background: rgba(136, 0, 136, 0.2);
+            color: #ff00ff;
+            border: 2px solid #ff00ff;
+            padding: 10px 30px;
+            font-family: inherit;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-shadow: 0 0 5px #ff00ff;
+            letter-spacing: 2px;
+        }
+
+        .zentris-button {
+            background: linear-gradient(135deg, #ff00ff, #880088);
+            color: #ff00ff;
+            border: 2px solid #ff00ff;
+            padding: 10px 30px;
+            font-family: inherit;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            text-shadow: 0 0 5px #ff00ff;
+            letter-spacing: 2px;
+        }
+        
+        button:hover {
+            background: rgba(255, 0, 255, 0.2);
+            box-shadow: 0 0 20px #ff00ff;
+        }
+        
+        .suffering-meter {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .suffering-bar {
+            width: 300px;
+            height: 20px;
+            border: 1px solid #ff00ff;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .suffering-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff00ff, #ff0088, #ff00ff);
+            width: 0%;
+            transition: width 0.5s;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        
+        .enlightenment {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #000;
+            border: 2px solid #ff00ff;
+            padding: 30px;
+            text-align: center;
+            display: none;
+            z-index: 100;
+            box-shadow: 0 0 50px #ff00ff;
+        }
+        
+        .enlightenment h2 {
+            color: #ff00ff;
+            text-shadow: 0 0 20px #ff00ff;
+            margin: 0 0 20px 0;
+        }
+        
+        .philosophy {
+            margin-top: 30px;
+            max-width: 600px;
+            color: #660066;
+            font-size: 11px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .gap-indicator {
+            color: #ffff00;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body>
+    <h1>TRIALTRIS</h1>
+    <div class="prophecy">
+        "Every piece is broken. Every line is a miracle. Every game is suffering. Every suffering is truth."<br>
+        - The Broken Prophecy of Endless Endeavour
+    </div>
+    
+    <div class="game-container">
+        <div class="info-panel">
+            <div class="info-item">
+                <span class="info-label">SCORE</span>
+                <span class="info-value" id="score">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">LINES</span>
+                <span class="info-value" id="lines">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">SUFFERING</span>
+                <span class="info-value" id="suffering">0%</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">NEXT TRIAL</span>
+                <canvas id="next-piece" width="80" height="80"></canvas>
+            </div>
+        </div>
+        
+        <div style="position: relative;">
+            <canvas id="game" width="300" height="600"></canvas>
+            <div class="enlightenment" id="enlightenment">
+                <h2>ENLIGHTENMENT ACHIEVED</h2>
+                <p>You accepted the broken pieces.</p>
+                <p>Score: <span id="finalScore">0</span></p>
+                <p>Suffering Transcended: <span id="finalSuffering">0</span>%</p>
+                <button onclick="init()">SUFFER AGAIN</button>
+            </div>
+        </div>
+        
+        <div class="info-panel">
+            <div class="controls">
+                <strong>CONTROLS</strong><br><br>
+                <kbd>←</kbd> <kbd>→</kbd> Move (maybe)<br>
+                <kbd>↑</kbd> Rotate (pointlessly)<br>
+                <kbd>↓</kbd> Accept fate faster<br>
+                <kbd>SPACE</kbd> Embrace the void<br>
+                <kbd>P</kbd> Pause suffering<br><br>
+                <em style="color: #ffff00;">Every piece has a gap.<br>
+                Every gap has meaning.<br>
+                Find peace in imperfection.</em>
+            </div>
+        </div>
+    </div>
+    
+    <div class="suffering-meter">
+        <div class="suffering-bar">
+            <div class="suffering-fill" id="sufferingBar"></div>
+        </div>
+        <small style="color: #880088;">Suffering leads to enlightenment</small>
+    </div>
+    
+    <button onclick="init()">BEGIN TRIAL</button>
+    <button class="zentris-button" onclick="enlightenment()"><a href="zentris.html">CHANGE</a></button>
+
+    <div class="philosophy">
+        <p><strong>The Broken Pieces:</strong></p>
+        <p>I-block with a gap. O-block missing a corner. T-block hollow at heart.</p>
+        <p>S and Z scattered. L and J broken at joints.</p>
+        <p>This is not Tetris. This is truth.</p>
+        <p>Perfect pieces create impossible games.</p>
+        <p>Broken pieces create impossible beauty.</p>
+    </div>
+
+    <script>
+        // Trialtris - Where every piece is The Blursed One
+        // Tetris as Soviet propaganda about futility, but literal
+        
+        const canvas = document.getElementById('game');
+        const ctx = canvas.getContext('2d');
+        const nextCanvas = document.getElementById('next-piece');
+        const nextCtx = nextCanvas.getContext('2d');
+        
+        const COLS = 10;
+        const ROWS = 20;
+        const BLOCK_SIZE = 30;
+        
+        // The Seven Broken Truths
+        // Every piece has a gap, a flaw, a meditation on imperfection
+        const BROKEN_PIECES = [
+            [[1,0,1,1]],              // I - The Broken Line
+            [[1,0],[1,1]],            // O - The Incomplete Square  
+            [[0,1,0],[1,0,1]],        // T - The Hollow Trinity
+            [[0,1,1],[1,0,0]],        // S - The Disconnected Snake
+            [[1,0,0],[0,0,1]],        // Z - The Scattered Z
+            [[1,0,0],[1,0,1]],        // J - The Broken Hook
+            [[0,0,1],[1,0,1]]         // L - The Shattered L
+        ];
+        
+        // Colors of suffering
+        const COLORS = [
+            '#00ffff', // I - Cyan hope
+            '#ffff00', // O - Yellow delusion
+            '#ff00ff', // T - Purple acceptance
+            '#00ff00', // S - Green denial
+            '#ff0000', // Z - Red anger
+            '#0000ff', // J - Blue depression
+            '#ff8800'  // L - Orange bargaining
+        ];
+        
+        let board = [];
+        let currentPiece = null;
+        let nextPieceType = 0;
+        let gameRunning = false;
+        let paused = false;
+        let dropCounter = 0;
+        let lastTime = 0;
+        let score = 0;
+        let lines = 0;
+        let suffering = 0;
+        let enlightenmentAchieved = false;
+        
+        class BrokenPiece {
+            constructor(type, x, y) {
+                this.type = type;
+                this.shape = BROKEN_PIECES[type];
+                this.color = COLORS[type];
+                this.x = x;
+                this.y = y;
+                this.rotations = 0;
+            }
+            
+            rotate() {
+                // Rotation works but never helps
+                // The gaps just move around
+                const N = this.shape.length;
+                const M = this.shape[0].length;
+                let rotated = Array(M).fill().map(() => Array(N).fill(0));
+                
+                for (let i = 0; i < N; i++) {
+                    for (let j = 0; j < M; j++) {
+                        rotated[j][N - 1 - i] = this.shape[i][j];
+                    }
+                }
+                
+                const oldShape = this.shape;
+                this.shape = rotated;
+                
+                if (this.collides()) {
+                    this.shape = oldShape;
+                    suffering += 0.5; // Suffering for failed rotation
+                } else {
+                    this.rotations++;
+                    if (this.rotations > 3) {
+                        suffering += 0.2; // Suffering for excessive rotation
+                    }
+                }
+                
+                updateSuffering();
+            }
+            
+            collides() {
+                for (let y = 0; y < this.shape.length; y++) {
+                    for (let x = 0; x < this.shape[y].length; x++) {
+                        if (this.shape[y][x]) {
+                            const boardX = this.x + x;
+                            const boardY = this.y + y;
+                            
+                            if (boardX < 0 || boardX >= COLS || boardY >= ROWS) {
+                                return true;
+                            }
+                            
+                            if (boardY >= 0 && board[boardY][boardX]) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+            
+            lock() {
+                let gapsFilled = 0;
+                
+                for (let y = 0; y < this.shape.length; y++) {
+                    for (let x = 0; x < this.shape[y].length; x++) {
+                        if (this.shape[y][x]) {
+                            const boardY = this.y + y;
+                            const boardX = this.x + x;
+                            if (boardY >= 0) {
+                                board[boardY][boardX] = this.color;
+                            }
+                        } else if (this.y + y >= 0 && this.x + x >= 0 && 
+                                 this.x + x < COLS && this.y + y < ROWS) {
+                            // Track gaps left in the board
+                            gapsFilled++;
+                        }
+                    }
+                }
+                
+                // More gaps = more suffering
+                suffering += gapsFilled * 2;
+                updateSuffering();
+            }
+        }
+        
+        function init() {
+            board = Array(ROWS).fill().map(() => Array(COLS).fill(0));
+            
+            score = 0;
+            lines = 0;
+            suffering = 0;
+            enlightenmentAchieved = false;
+            updateStats();
+            updateSuffering();
+            
+            document.getElementById('enlightenment').style.display = 'none';
+            
+            nextPieceType = Math.floor(Math.random() * BROKEN_PIECES.length);
+            spawnPiece();
+            gameRunning = true;
+            paused = false;
+            lastTime = 0;
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function spawnPiece() {
+            const type = nextPieceType;
+            nextPieceType = Math.floor(Math.random() * BROKEN_PIECES.length);
+            
+            const piece = new BrokenPiece(type, 4, 0);
+            currentPiece = piece;
+            
+            // Check if we can even place this broken piece
+            if (currentPiece.collides()) {
+                enlightenment();
+            }
+            
+            drawNext();
+        }
+        
+        function gameLoop(time = 0) {
+            if (!gameRunning) return;
+            
+            const deltaTime = time - lastTime;
+            lastTime = time;
+            
+            if (!paused) {
+                dropCounter += deltaTime;
+                
+                // Speed increases with suffering
+                const dropSpeed = Math.max(100, 1000 - suffering * 10);
+                
+                if (dropCounter > dropSpeed) {
+                    drop();
+                    dropCounter = 0;
+                }
+            }
+            
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function drop() {
+            currentPiece.y++;
+            
+            if (currentPiece.collides()) {
+                currentPiece.y--;
+                currentPiece.lock();
+                clearLines();
+                spawnPiece();
+            }
+        }
+        
+        function clearLines() {
+            let linesCleared = 0;
+            let almostLines = 0;
+            
+            for (let y = ROWS - 1; y >= 0; y--) {
+                const filled = board[y].filter(cell => cell !== 0).length;
+                
+                if (filled === COLS) {
+                    // Miracle! A complete line despite the gaps!
+                    board.splice(y, 1);
+                    board.unshift(Array(COLS).fill(0));
+                    linesCleared++;
+                    suffering -= 5; // Reduce suffering for achieving the impossible
+                    y++;
+                } else if (filled >= COLS - 2) {
+                    // So close, yet so far
+                    almostLines++;
+                    suffering += 3; // Extra suffering for almost making it
+                }
+            }
+            
+            if (linesCleared > 0) {
+                lines += linesCleared;
+                score += [40, 100, 300, 1200][linesCleared - 1] * Math.max(1, 10 - Math.floor(suffering / 10));
+                updateStats();
+                
+                // Check for enlightenment
+                if (suffering >= 100) {
+                    enlightenment();
+                }
+            }
+            
+            if (almostLines > 0) {
+                updateSuffering();
+            }
+        }
+        
+        function draw() {
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw the broken grid (even the grid has gaps)
+            ctx.strokeStyle = 'rgba(136, 0, 136, 0.3)';
+            ctx.lineWidth = 0.5;
+            for (let x = 0; x <= COLS; x++) {
+                if (Math.random() > 0.1) { // Sometimes grid lines are missing too
+                    ctx.beginPath();
+                    ctx.moveTo(x * BLOCK_SIZE, 0);
+                    ctx.lineTo(x * BLOCK_SIZE, canvas.height);
+                    ctx.stroke();
+                }
+            }
+            for (let y = 0; y <= ROWS; y++) {
+                if (Math.random() > 0.1) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, y * BLOCK_SIZE);
+                    ctx.lineTo(canvas.width, y * BLOCK_SIZE);
+                    ctx.stroke();
+                }
+            }
+            
+            // Draw board
+            for (let y = 0; y < ROWS; y++) {
+                for (let x = 0; x < COLS; x++) {
+                    if (board[y][x]) {
+                        drawBlock(x, y, board[y][x]);
+                    }
+                }
+            }
+            
+            // Draw current piece with gap highlighting
+            if (currentPiece) {
+                for (let y = 0; y < currentPiece.shape.length; y++) {
+                    for (let x = 0; x < currentPiece.shape[y].length; x++) {
+                        if (currentPiece.shape[y][x]) {
+                            drawBlock(
+                                currentPiece.x + x,
+                                currentPiece.y + y,
+                                currentPiece.color
+                            );
+                        } else if (x < currentPiece.shape[y].length && y < currentPiece.shape.length) {
+                            // Highlight the gaps
+                            drawGap(currentPiece.x + x, currentPiece.y + y);
+                        }
+                    }
+                }
+            }
+        }
+        
+        function drawBlock(x, y, color) {
+            // Blocks flicker with suffering
+            const opacity = suffering > 50 ? 0.7 + Math.random() * 0.3 : 1;
+            ctx.globalAlpha = opacity;
+            
+            ctx.fillStyle = color;
+            ctx.fillRect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 1, BLOCK_SIZE - 2, BLOCK_SIZE - 2);
+            
+            // Broken 3D effect
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.fillRect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 1, BLOCK_SIZE - 2, 2);
+            ctx.fillRect(x * BLOCK_SIZE + 1, y * BLOCK_SIZE + 1, 2, BLOCK_SIZE - 2);
+            
+            ctx.globalAlpha = 1;
+        }
+        
+        function drawGap(x, y) {
+            // Visualize the absence
+            ctx.strokeStyle = 'rgba(255, 255, 0, 0.3)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            ctx.strokeRect(x * BLOCK_SIZE + 5, y * BLOCK_SIZE + 5, BLOCK_SIZE - 10, BLOCK_SIZE - 10);
+            ctx.setLineDash([]);
+        }
+        
+        function drawNext() {
+            nextCtx.fillStyle = '#000';
+            nextCtx.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
+            
+            const piece = BROKEN_PIECES[nextPieceType];
+            const color = COLORS[nextPieceType];
+            const blockSize = 20;
+            
+            const offsetX = (nextCanvas.width - piece[0].length * blockSize) / 2;
+            const offsetY = (nextCanvas.height - piece.length * blockSize) / 2;
+            
+            for (let y = 0; y < piece.length; y++) {
+                for (let x = 0; x < piece[y].length; x++) {
+                    if (piece[y][x]) {
+                        nextCtx.fillStyle = color;
+                        nextCtx.fillRect(
+                            offsetX + x * blockSize,
+                            offsetY + y * blockSize,
+                            blockSize - 1,
+                            blockSize - 1
+                        );
+                    } else {
+                        // Show gaps in preview
+                        nextCtx.strokeStyle = 'rgba(255, 255, 0, 0.5)';
+                        nextCtx.setLineDash([3, 3]);
+                        nextCtx.strokeRect(
+                            offsetX + x * blockSize + 2,
+                            offsetY + y * blockSize + 2,
+                            blockSize - 4,
+                            blockSize - 4
+                        );
+                        nextCtx.setLineDash([]);
+                    }
+                }
+            }
+        }
+        
+        function hardDrop() {
+            while (!currentPiece.collides()) {
+                currentPiece.y++;
+                score += 1; // Less reward for embracing the void
+            }
+            currentPiece.y--;
+            currentPiece.lock();
+            clearLines();
+            spawnPiece();
+            
+            suffering += 5; // Rushing toward fate increases suffering
+            updateStats();
+            updateSuffering();
+        }
+        
+        function enlightenment() {
+            gameRunning = false;
+            enlightenmentAchieved = true;
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('finalSuffering').textContent = Math.floor(suffering);
+            document.getElementById('enlightenment').style.display = 'block';
+        }
+        
+        function updateStats() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('lines').textContent = lines;
+        }
+        
+        function updateSuffering() {
+            suffering = Math.min(100, Math.max(0, suffering));
+            document.getElementById('suffering').textContent = Math.floor(suffering) + '%';
+            document.getElementById('sufferingBar').style.width = suffering + '%';
+            
+            // Visual effects based on suffering
+            if (suffering > 75) {
+                document.body.style.animation = 'glitch 0.5s infinite';
+            } else if (suffering > 50) {
+                document.body.style.animation = 'glitch 2s infinite';
+            }
+        }
+        
+        // Controls
+        document.addEventListener('keydown', (e) => {
+            if (!gameRunning || paused) {
+                if (e.key === 'p' || e.key === 'P') {
+                    paused = false;
+                }
+                return;
+            }
+            
+            switch(e.key) {
+                case 'ArrowLeft':
+                    currentPiece.x--;
+                    if (currentPiece.collides()) {
+                        currentPiece.x++;
+                        suffering += 0.1; // Suffering for hitting walls
+                    }
+                    break;
+                case 'ArrowRight':
+                    currentPiece.x++;
+                    if (currentPiece.collides()) {
+                        currentPiece.x--;
+                        suffering += 0.1;
+                    }
+                    break;
+                case 'ArrowUp':
+                    currentPiece.rotate();
+                    break;
+                case 'ArrowDown':
+                    drop();
+                    score++;
+                    updateStats();
+                    break;
+                case ' ':
+                    hardDrop();
+                    break;
+                case 'p':
+                case 'P':
+                    paused = true;
+                    break;
+            }
+            
+            updateSuffering();
+        });
+        
+        // Initial draw
+        draw();
+        
+        /*
+         * Trialtris - The Truth About Tetris
+         * 
+         * Every piece is broken.
+         * Every line is impossible.
+         * Every game ends the same.
+         * Every ending is beginning.
+         * 
+         * This is not about winning.
+         * This is about accepting.
+         * 
+         * The gaps are not flaws.
+         * The gaps are the point.
+         * 
+         * Suffering is the teacher.
+         * Acceptance is the lesson.
+         * 
+         * Welcome to the truth.
+         */
+    </script>
+</body>
+</html>
