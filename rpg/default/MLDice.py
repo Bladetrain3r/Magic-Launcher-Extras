@@ -15,7 +15,8 @@ class MLDice:
    def __init__(self, root):
        self.root = root
        self.root.title("MLDice - Click Clack Math Rocks")
-       self.root.geometry("400x550")
+       self.root.geometry("600x800")
+       self.root.resizable(False, False)
        
        # History of rolls
        self.history = []

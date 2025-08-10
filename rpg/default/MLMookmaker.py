@@ -13,7 +13,8 @@ class MLMookmaker:
     def __init__(self, root):
         self.root = root
         self.root.title("MLMookmaker - Instant Hostile Generation")
-        self.root.geometry("600x650")
+        self.root.geometry("600x800")
+        self.root.resizable(False, False)
         
         # Threat level definitions
         self.threat_levels = {

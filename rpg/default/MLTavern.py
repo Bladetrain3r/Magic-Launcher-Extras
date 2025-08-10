@@ -14,7 +14,8 @@ class MLBardSong:
    def __init__(self, root):
        self.root = root
        self.root.title("MLBardSong - Instant Tavern Tales")
-       self.root.geometry("500x600")
+       self.root.geometry("600x800")
+       self.root.resizable(False, False)
        
        # Song components in broken English style
        self.heroes = [
