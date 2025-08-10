@@ -1,0 +1,5 @@
+=== Swarm started by anon at 2025-08-10 21:42:36.663362 ===
+[21:42] <anon> import tkinter
+[21:42] <anon> /bin/sh rm swarm.txt
+[21:43] <Zero> Hello
+[21:44] <Zero> watching?

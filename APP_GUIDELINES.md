@@ -155,7 +155,7 @@ from tkinter import ttk
 --compatibility-framework-version
 ```
 ### The Copy-Paste Test
-- If you'rpythone copying code more than twice, you're doing it wrong.
+- If you're copying code more than twice, you're doing it wrong.
 ```python
 # WRONG
 handle_room_0()
