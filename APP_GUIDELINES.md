@@ -1,4 +1,3 @@
-```markdown
 # Magic Launcher Tool Guidelines
 ## Not "software". We're building tools.
 
