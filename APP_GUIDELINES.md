@@ -153,7 +153,7 @@ from tkinter import ttk
 --config-file-path-override
 --enable-extended-validation-mode
 --compatibility-framework-version
-
+```
 ### The Copy-Paste Test
 - If you're copying code more than twice, you're doing it wrong.
 ```
@@ -162,21 +162,17 @@ handle_room_0()
 handle_room_1()
 handle_room_2()
 # ... 47 more
-```
-```
+
 # RIGHT
 for i in range(50):
     handle_room(i)
-```
-```
+
 # The Math Not Madness Principle
 # WRONG - Individual handling
 if id == 0: return (0, 0)
 if id == 1: return (0, 1)
 if id == 2: return (0, 2)
-```
 
-```
 # RIGHT - Use math
 return (id // width, id % width)
 This code is literally why Magic Launcher exists. Someone looked at a 7x7 grid and thought "I'll just write 49 event handlers" instead of "I'll use division and modulo."
