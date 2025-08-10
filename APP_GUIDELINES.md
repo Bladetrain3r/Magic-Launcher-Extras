@@ -1,5 +1,5 @@
-# Magic Launcher Tool Guidelines
-## Not "software". We're building tools.
+# Magic Launcher Application Guidelines
+## Building Tools That Just Fucking Work
 
 ### Core Philosophy
 **Simple enough to be wrong consistently beats complex enough to be right occasionally.**
@@ -15,7 +15,7 @@ If you're arguing for complexity, you've already lost.
 - Under 200 lines: Perfect, ship it
 - 200-300 lines: Acceptable if necessary
 - 300-500 lines: Better have a damn good reason
-- Over 500 lines: You're building the wrong tool
+- Over 500 lines: You're building the wrong tool, or applying this to the wrong problem.
 
 **Why:** If you can't understand the entire tool in one reading, it's too complex.
 
@@ -109,6 +109,37 @@ tool.py          # CLI version
 tool_gui.py      # GUI wrapper
 ```
 
+### The GUI Split Rule
+
+**When GUI code exceeds 40% of your tool, split it.**
+
+```python
+# Good candidates for splitting:
+- Battlemap generator (complex canvas drawing)
+- Character sheet manager (many input fields)
+- Initiative tracker (dynamic lists)
+
+# Keep together:
+- Dice roller (few buttons)
+- NPC generator (simple output)
+- Loot generator (basic display)
+```
+
+**The Import Rule:** If you split, the GUI imports the logic, never the reverse.
+
+```python
+# RIGHT
+# tool.py - standalone CLI tool
+# tool_gui.py - imports tool.py
+
+# WRONG  
+# tool_core.py - can't run alone
+# tool_cli.py - wrapper
+# tool_gui.py - another wrapper
+```
+
+**The Test:** Can you delete the GUI file and still have a working tool? If yes, you did it right.
+
 ---
 
 ## Common Patterns
@@ -154,8 +185,10 @@ from tkinter import ttk
 --enable-extended-validation-mode
 --compatibility-framework-version
 ```
+
 ### The Copy-Paste Test
-- If you're copying code more than twice, you're doing it wrong.
+If you're copying code more than twice, you're doing it wrong.
+
 ```python
 # WRONG
 handle_room_0()
@@ -166,8 +199,10 @@ handle_room_2()
 # RIGHT
 for i in range(50):
     handle_room(i)
+```
 
-# The Math Not Madness Principle
+### The Math Not Madness Principle
+```python
 # WRONG - Individual handling
 if id == 0: return (0, 0)
 if id == 1: return (0, 1)
@@ -176,7 +211,7 @@ if id == 2: return (0, 2)
 # RIGHT - Use math
 return (id // width, id % width)
 ```
-~~The revolution isn't just simpler code. It's knowing that math exists.~~
+
 ---
 
 ## What Makes a Good ML Tool
@@ -259,6 +294,27 @@ from tool.models.dice import DiceModel
 
 ---
 
+## Know how complicated the problem actually is.
+
+Not all problems can be solved in under 500 lines of code.
+- Advanced 3D rendering (Vector graphics however...)
+- Physics Engines
+- Scientific simulations
+
+### The questions then become: 
+#### How can I compartmentalise each aspect of the problem?
+#### How atomic can I make each problem?
+
+1. What's the actual problem? (Not the system, the PROBLEM)
+2. Can this be multiple simple tools instead of one complex one?
+3. What's the smallest useful piece I can build?
+
+~~99% of problems are really simple if you keep focused on the problem itself~~
+
+---
+
+
+
 ## Testing Philosophy
 
 **No unit tests.** 
@@ -333,3 +389,7 @@ But also:
 ---
 
 ## END TRANSMISSION
+
+May your tools be simple and your code be short.
+
+The revolution continues.
