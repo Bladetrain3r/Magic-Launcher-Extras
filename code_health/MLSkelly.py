@@ -1,146 +1,301 @@
 #!/usr/bin/env python3
 """
-MLSkelly - Magic Launcher Python skeleton builder
-Generate consistent ML tool skeletons
+MLSkelly - Magic Launcher Tool Skeleton Generator
+Creates ML tools from templates that actually follow ML principles
+Under 200 lines of skeleton generation
 """
 
 import sys
+import os
 from pathlib import Path
 
-TEMPLATE = '''#!/usr/bin/env python3
+# Core CLI template - the default
+TEMPLATE_SIMPLE = '''#!/usr/bin/env python3
 """
 {name} - {description}
-Part of ML-Extras
+{tagline}
+Under {lines} lines of {adjective} {noun}
 """
 
 import sys
-import json
-from pathlib import Path
 import argparse
 
-class {class_name}:
-    def __init__(self):
-        """Initialize {name}"""
-        self.config_dir = Path.home() / '.config' / '{lower_name}'
-        self.config_dir.mkdir(parents=True, exist_ok=True)
-        
-    def load_config(self):
-        """Load configuration if needed"""
-        config_file = self.config_dir / 'config.json'
-        if config_file.exists():
-            with open(config_file) as f:
-                return json.load(f)
-        return {{}}
-    
-    def save_config(self, config):
-        """Save configuration"""
-        config_file = self.config_dir / 'config.json'
-        with open(config_file, 'w') as f:
-            json.dump(config, f, indent=2)
-    
-    def process(self, input_data):
-        """Main processing logic"""
-        # TODO: Implement core functionality
-        return input_data
-    
-    def run(self):
-        """Main interactive loop"""
-        print("{name} - {description}")
-        print("Commands: process, config, help, quit")
-        
-        while True:
-            try:
-                cmd = input("> ").strip().lower()
-                
-                if cmd == 'quit':
-                    break
-                elif cmd == 'help':
-                    self.show_help()
-                elif cmd == 'config':
-                    print(self.load_config())
-                else:
-                    print(f"Unknown command: {{cmd}}")
-                    
-            except KeyboardInterrupt:
-                print("\\nExiting...")
-                break
-    
-    def show_help(self):
-        """Display help information"""
-        print("""
-{name} Help
-============
-TODO: Add help text
-        """)
+def {func_name}(text):
+    """Core logic - replace this with your tool's purpose"""
+    # TODO: Implement actual functionality
+    return text.upper()  # Example: uppercase everything
 
 def main():
     parser = argparse.ArgumentParser(description="{description}")
-    parser.add_argument('input', nargs='?', help='Input file or data')
+    parser.add_argument('input', nargs='?', default='-', 
+                       help='Input file or - for stdin')
     parser.add_argument('-o', '--output', help='Output file')
-    parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output')
+    parser.add_argument('-q', '--quiet', action='store_true', 
+                       help='Suppress output')
     
     args = parser.parse_args()
     
-    # Handle piped input
-    if not sys.stdin.isatty():
+    # Input handling
+    if args.input == '-':
         data = sys.stdin.read()
-        # TODO: Process piped data
-        print(data)
-    elif args.input:
-        # TODO: Process file input
-        print(f"Processing: {{args.input}}")
     else:
-        # Interactive mode
-        app = {class_name}()
-        app.run()
+        with open(args.input, 'r', encoding='utf-8') as f:
+            data = f.read()
+    
+    # Process
+    result = {func_name}(data)
+    
+    # Output handling
+    if args.output:
+        with open(args.output, 'w', encoding='utf-8') as f:
+            f.write(result)
+    elif not args.quiet:
+        print(result, end='')
 
 if __name__ == "__main__":
     main()
 '''
 
-def create_template(name, description="TODO: Add description"):
+# CLI + GUI template
+TEMPLATE_GUI = '''#!/usr/bin/env python3
+"""
+{name} - {description}
+{tagline}
+Under {lines} lines of {adjective} {noun}
+"""
+
+import sys
+import argparse
+
+COLORS = {{'bg':'#3C3C3C','fg':'#00FF00','lite':'#C0C0C0','blk':'#000000'}}
+
+def {func_name}(text):
+    """Core logic - replace this with your tool's purpose"""
+    # TODO: Implement actual functionality
+    return text.upper()  # Example: uppercase everything
+
+def main():
+    parser = argparse.ArgumentParser(description="{description}")
+    parser.add_argument('input', nargs='?', default='-', 
+                       help='Input file or - for stdin')
+    parser.add_argument('-o', '--output', help='Output file')
+    parser.add_argument('-q', '--quiet', action='store_true', 
+                       help='Suppress output')
+    parser.add_argument('--title', default='{name}', 
+                       help='GUI window title')
+    
+    args = parser.parse_args()
+    
+    # Input handling
+    if args.input == '-':
+        data = sys.stdin.read()
+    else:
+        with open(args.input, 'r', encoding='utf-8') as f:
+            data = f.read()
+    
+    # Process
+    result = {func_name}(data)
+    
+    # Output handling
+    if args.output:
+        with open(args.output, 'w', encoding='utf-8') as f:
+            f.write(result)
+    elif not args.quiet:
+        print(result, end='')
+    
+    # Optional GUI
+    try:
+        import tkinter as tk
+        import tkinter.scrolledtext as st
+        if '--gui' in sys.argv:
+            root = tk.Tk()
+            root.title(args.title)
+            root.configure(bg=COLORS['bg'])
+            
+            mainbar = tk.Label(root, text=args.title, 
+                             bg=COLORS['lite'], fg=COLORS['blk'])
+            mainbar.pack(fill='x')
+            
+            text_widget = st.ScrolledText(root, bg=COLORS['blk'], 
+                                         fg=COLORS['fg'], 
+                                         insertbackground=COLORS['fg'])
+            text_widget.pack(expand=True, fill='both')
+            text_widget.insert('1.0', result)
+            
+            root.bind('<Escape>', lambda e: root.destroy())
+            root.mainloop()
+    except Exception as e:
+        if '--gui' in sys.argv and not args.quiet:
+            print(f"GUI unavailable: {{e}}", file=sys.stderr)
+
+if __name__ == "__main__":
+    main()
+'''
+
+# Command expansion focused template
+TEMPLATE_EXPANSION = '''#!/usr/bin/env python3
+"""
+{name} - {description}
+Designed for command expansion: $(python3 {filename})
+Under {lines} lines of {adjective} {noun}
+"""
+
+import sys
+
+def {func_name}(args):
+    """Generate output for command expansion"""
+    # TODO: Implement actual functionality
+    # Remember: Output ONLY the result, no decoration
+    
+    if not args:
+        return "default"
+    
+    command = args[0] if args else 'default'
+    
+    if command == 'example':
+        return "example_output"
+    else:
+        return command
+
+def main():
+    # No argparse needed for expansion tools
+    # Just process sys.argv directly
+    
+    result = {func_name}(sys.argv[1:])
+    
+    # Just print the result - no formatting
+    print(result)
+
+if __name__ == "__main__":
+    main()
+'''
+
+# Minimal processor template
+TEMPLATE_MINIMAL = '''#!/usr/bin/env python3
+"""
+{name} - {description}
+{tagline}
+"""
+
+import sys
+
+# Process stdin to stdout
+for line in sys.stdin:
+    # TODO: Process each line
+    print(line.upper(), end='')  # Example: uppercase
+'''
+
+def create_skeleton(name, description=None, template_type='simple'):
     """Generate ML tool from template"""
-    # Create names
-    class_name = f"ML{name.title().replace(' ', '')}"
-    file_name = f"ML{name.title().replace(' ', '')}.py"
-    lower_name = name.lower().replace(' ', '')
+    
+    # Generate names
+    filename = f"ml{name.lower().replace(' ', '')}.py"
+    func_name = f"process_{name.lower().replace(' ', '_')}"
+    
+    # Generate tagline
+    taglines = [
+        "Part of the Magic Launcher suite",
+        "Because enterprise complexity is a choice",
+        "Simple tools for hostile environments",
+        "Doing one thing well since right now",
+    ]
+    tagline = taglines[hash(name) % len(taglines)]
+    
+    # Generate fun adjectives/nouns
+    adjectives = ["procedural", "functional", "practical", "focused", "atomic"]
+    nouns = ["simplicity", "clarity", "utility", "revolution", "solutions"]
+    adjective = adjectives[hash(name + "adj") % len(adjectives)]
+    noun = nouns[hash(name + "noun") % len(nouns)]
+    
+    # Default description
+    if not description:
+        description = f"Does {name} things quickly and simply"
+    
+    # Estimate lines
+    lines = "200" if template_type in ['simple', 'minimal'] else "300"
+    
+    # Select template
+    templates = {
+        'simple': TEMPLATE_SIMPLE,
+        'gui': TEMPLATE_GUI,
+        'expansion': TEMPLATE_EXPANSION,
+        'minimal': TEMPLATE_MINIMAL
+    }
+    
+    template = templates.get(template_type, TEMPLATE_SIMPLE)
     
     # Generate content
-    content = TEMPLATE.format(
-        name=file_name[:-3],
+    content = template.format(
+        name=f"ML{name.title().replace(' ', '')}",
+        filename=filename,
+        func_name=func_name,
         description=description,
-        class_name=class_name,
-        lower_name=lower_name
+        tagline=tagline,
+        lines=lines,
+        adjective=adjective,
+        noun=noun
     )
     
-    # Write file
-    output_path = Path(file_name)
+    # Check if file exists
+    output_path = Path(filename)
     if output_path.exists():
-        print(f"Error: {file_name} already exists!")
-        return
-        
+        print(f"Error: {filename} already exists!")
+        return False
+    
+    # Write file
     with open(output_path, 'w') as f:
         f.write(content)
     
-    print(f"Created {file_name}")
-    print(f"Class: {class_name}")
-    print(f"Config: ~/.config/{lower_name}/")
-    print("\nNext steps:")
-    print("1. Edit the process() method with your logic")
-    print("2. Update the help text")
-    print("3. Implement any command handlers")
+    # Make executable
+    os.chmod(output_path, 0o755)
+    
+    print(f"Created: {filename}")
+    print(f"Type: {template_type}")
+    print(f"Function: {func_name}()")
+    print(f"\nNext steps:")
+    print(f"1. Edit {func_name}() with your logic")
+    print(f"2. Test: echo 'test' | python3 {filename}")
+    print(f"3. Ship it!")
+    
+    return True
 
 def main():
-    if len(sys.argv) < 2:
-        print("MLSkelly - Magic Launcher Python Skeleton builder")
-        print("Usage: mlskelly <name> [description]")
-        print("Example: mlskelly 'converter' 'Convert between formats'")
-        sys.exit(1)
+    if len(sys.argv) < 2 or sys.argv[1] in ['-h', '--help']:
+        print("""MLSkelly - Magic Launcher Skeleton Generator
+
+Usage: 
+    mlskelly <name> [type] [description]
+
+Types:
+    simple    - Basic CLI tool (default)
+    gui       - CLI with optional GUI (--gui flag)
+    expansion - Tool designed for command expansion
+    minimal   - Bare minimum line processor
+
+Examples:
+    mlskelly reverse simple "Reverses text line by line"
+    mlskelly config expansion "Configuration value getter"
+    mlskelly viewer gui "Text file viewer with GUI option"
+    mlskelly filter minimal "Filters lines by pattern"
+
+The skeleton will be created as ml<name>.py""")
+        sys.exit(0)
     
     name = sys.argv[1]
-    description = ' '.join(sys.argv[2:]) if len(sys.argv) > 2 else "TODO: Add description"
     
-    create_template(name, description)
+    # Parse optional type and description
+    template_type = 'simple'
+    description = None
+    
+    if len(sys.argv) > 2:
+        if sys.argv[2] in ['simple', 'gui', 'expansion', 'minimal']:
+            template_type = sys.argv[2]
+            if len(sys.argv) > 3:
+                description = ' '.join(sys.argv[3:])
+        else:
+            description = ' '.join(sys.argv[2:])
+    
+    create_skeleton(name, description, template_type)
 
 if __name__ == "__main__":
     main()
