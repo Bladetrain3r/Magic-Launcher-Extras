@@ -155,7 +155,7 @@ from tkinter import ttk
 --compatibility-framework-version
 ```
 ### The Copy-Paste Test
-- If you're copying code more than twice, you're doing it wrong.
+- If you'rpythone copying code more than twice, you're doing it wrong.
 ```
 python# WRONG
 handle_room_0()
@@ -175,9 +175,8 @@ if id == 2: return (0, 2)
 
 # RIGHT - Use math
 return (id // width, id % width)
-This code is literally why Magic Launcher exists. Someone looked at a 7x7 grid and thought "I'll just write 49 event handlers" instead of "I'll use division and modulo."
-The revolution isn't just simpler code. It's knowing that math exists.
 ```
+~~The revolution isn't just simpler code. It's knowing that math exists.~~
 ---
 
 ## What Makes a Good ML Tool
