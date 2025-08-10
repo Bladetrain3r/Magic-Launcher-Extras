@@ -156,8 +156,8 @@ from tkinter import ttk
 ```
 ### The Copy-Paste Test
 - If you'rpythone copying code more than twice, you're doing it wrong.
-```
-python# WRONG
+```python
+# WRONG
 handle_room_0()
 handle_room_1()
 handle_room_2()
