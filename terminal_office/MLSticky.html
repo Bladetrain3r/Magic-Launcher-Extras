@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MLNotes</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: monospace;
+            background: #000;
+            color: #0f0;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        input, button {
+            font-family: monospace;
+            background: #000;
+            color: #0f0;
+            border: 1px solid #0f0;
+            padding: 5px;
+        }
+        #notes {
+            white-space: pre-wrap;
+            border: 1px solid #0f0;
+            padding: 10px;
+            margin-top: 20px;
+            height: 400px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>MLNotes</h1>
+    <input type="text" id="note" placeholder="Enter note..." style="width: 70%">
+    <button onclick="addNote()">Add</button>
+    <button onclick="loadNotes()">Refresh</button>
+    
+    <div id="notes">Loading...</div>
+    
+    <script>
+        function loadNotes() {
+            fetch('/notes.txt')
+                .then(r => r.text())
+                .then(text => document.getElementById('notes').textContent = text)
+                .catch(() => document.getElementById('notes').textContent = 'No notes yet');
+        }
+        
+        function addNote() {
+            const note = document.getElementById('note').value;
+            if (!note) return;
+            
+            fetch('/notes.txt', {
+                method: 'POST',
+                body: `[${new Date().toISOString()}] ${note}\n`
+            }).then(() => {
+                document.getElementById('note').value = '';
+                loadNotes();
+            });
+        }
+        
+        document.getElementById('note').onkeypress = (e) => {
+            if (e.key === 'Enter') addNote();
+        };
+        
+        loadNotes();
+        setInterval(loadNotes, 30000);  // Auto-refresh
+    </script>
+</body>
+</html>
