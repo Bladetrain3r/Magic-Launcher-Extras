@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MLWebqueue</title>
+    <style>
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #0ff;
+            border-bottom: 2px solid #0ff;
+            padding-bottom: 10px;
+        }
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .task-button {
+            background: #001;
+            border: 2px solid #0f0;
+            color: #0f0;
+            padding: 15px;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .task-button:hover {
+            background: #0f0;
+            color: #000;
+            box-shadow: 0 0 10px #0f0;
+        }
+        .task-button:active {
+            transform: scale(0.95);
+        }
+        .task-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .task-desc {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #0ff;
+            background: #001;
+            min-height: 20px;
+        }
+        .status.success {
+            border-color: #0f0;
+            color: #0f0;
+        }
+        .status.error {
+            border-color: #f00;
+            color: #f00;
+        }
+        .queue-info {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #088;
+        }
+    </style>
+</head>
+<body>
+    <h1>MLWebqueue Task Launcher</h1>
+    
+    <div id="status" class="status"></div>
+    
+    <div id="tasks" class="task-grid">
+        <!-- Tasks load here -->
+    </div>
+    
+    <div class="queue-info">
+        Queue directory: <span id="queue-dir">/tmp/mlqueue/</span><br>
+        Tasks loaded: <span id="task-count">0</span><br>
+        Last refresh: <span id="last-refresh">never</span>
+    </div>
+
+    <script>
+        // Configuration
+        const QUEUE_DIR = '/tmp/mlqueue/';
+        const SHORTCUTS_URL = '/shortcuts.json';
+        
+        // Load shortcuts and render buttons
+        async function loadTasks() {
+            try {
+                const response = await fetch(SHORTCUTS_URL);
+                const shortcuts = await response.json();
+                
+                const container = document.getElementById('tasks');
+                container.innerHTML = '';
+                
+                shortcuts.forEach((task, index) => {
+                    const button = document.createElement('button');
+                    button.className = 'task-button';
+                    button.innerHTML = `
+                        <div class="task-name">${task.name || 'Task ' + index}</div>
+                        <div class="task-desc">${task.description || task.script || 'No description'}</div>
+                    `;
+                    button.onclick = () => queueTask(task);
+                    container.appendChild(button);
+                });
+                
+                document.getElementById('task-count').textContent = shortcuts.length;
+                document.getElementById('last-refresh').textContent = new Date().toLocaleTimeString();
+                
+            } catch (error) {
+                showStatus('Failed to load tasks: ' + error.message, 'error');
+            }
+        }
+        
+        // Queue a task by creating a task file
+        async function queueTask(task) {
+            const taskId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            const taskData = {
+                id: taskId,
+                name: task.name,
+                script: task.script,
+                args: task.args || [],
+                env: task.env || {},
+                queued_at: new Date().toISOString(),
+                queued_by: 'webqueue'
+            };
+            
+            try {
+                // Create task file via simple POST endpoint
+                const response = await fetch('/queue', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(taskData)
+                });
+                
+                if (response.ok) {
+                    showStatus(`Queued: ${task.name} (${taskId})`, 'success');
+                } else {
+                    throw new Error('Server returned ' + response.status);
+                }
+                
+            } catch (error) {
+                showStatus('Failed to queue task: ' + error.message, 'error');
+            }
+        }
+        
+        // Show status message
+        function showStatus(message, type = '') {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.className = 'status ' + type;
+            
+            // Auto-clear after 5 seconds
+            setTimeout(() => {
+                status.textContent = '';
+                status.className = 'status';
+            }, 5000);
+        }
+        
+        // Load tasks on page load
+        loadTasks();
+        
+        // Reload every 30 seconds to catch updates
+        setInterval(loadTasks, 30000);
+        
+        // Keyboard shortcut to refresh
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'r' && e.ctrlKey) {
+                e.preventDefault();
+                loadTasks();
+                showStatus('Refreshed', 'success');
+            }
+        });
+    </script>
+</body>
+</html>
