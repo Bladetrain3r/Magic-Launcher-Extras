@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLBarChart Primitive</title>
+    <!-- Use a CDN for Tailwind CSS to keep the file self-contained and simple -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font for a clean, modern look -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 p-6 sm:p-10 antialiased">
+
+    <div class="max-w-4xl mx-auto">
+        <!-- Header Section -->
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-extrabold text-blue-400">MLBarChart.html</h1>
+            <p class="mt-2 text-lg text-gray-400 max-w-2xl mx-auto">
+                A web primitive for visualizing simple data. The MLWebapp Way.
+            </p>
+        </header>
+
+        <!-- Main Content Grid -->
+        <main class="grid md:grid-cols-2 gap-8">
+            <!-- Input Section -->
+            <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 text-blue-300">Data Input</h2>
+                <textarea
+                    id="input-data"
+                    class="w-full h-64 bg-gray-700 text-gray-200 p-4 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
+                    placeholder="Enter your data here, e.g., 'Projects: 5'">
+GitHub Stars: 1250
+Docker Containers: 7
+Team Members: 12
+Coffee Consumed: 15
+                </textarea>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="bg-gray-800 rounded-2xl p-6 shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 text-blue-300">Generated Chart</h2>
+                <div id="chart-container" class="flex flex-col space-y-4">
+                    <!-- Chart bars will be dynamically inserted here by the script -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-gray-500 text-sm">
+            <p>
+                &copy; 2024 ML-Extras. A simple tool for a complicated world.
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // --- Core JavaScript Logic ---
+        // This script is entirely self-contained and handles all the logic
+        // for parsing the input and rendering the chart.
+
+        // Get references to the input and chart container elements.
+        const inputElement = document.getElementById('input-data');
+        const chartContainer = document.getElementById('chart-container');
+
+        /**
+         * Parses the raw text input into an array of objects.
+         * It handles "label: count" and "label count" formats.
+         * @param {string} text - The raw text from the textarea.
+         * @returns {Array<Object>} An array of { label, value } objects.
+         */
+        function parseInput(text) {
+            const lines = text.trim().split('\n');
+            const parsed = [];
+            lines.forEach(line => {
+                line = line.trim();
+                if (!line) return;
+                
+                // Regex to capture the label and the numerical value.
+                const match = line.match(/(.+?)\s*[:\s]\s*(\d+(\.\d+)?)/);
+                if (match) {
+                    const label = match[1].trim();
+                    const value = parseFloat(match[2]);
+                    if (!isNaN(value)) {
+                        parsed.push({ label, value });
+                    }
+                }
+            });
+            return parsed;
+        }
+
+        /**
+         * Renders the bar chart based on the parsed data.
+         * It dynamically creates and appends HTML elements for each bar.
+         * @param {Array<Object>} data - The parsed chart data.
+         */
+        function renderChart(data) {
+            chartContainer.innerHTML = ''; // Clear previous chart content
+            
+            if (data.length === 0) {
+                chartContainer.innerHTML = '<div class="text-center text-gray-500 p-8">No valid data to display. Please enter `label: count` pairs.</div>';
+                return;
+            }
+
+            // Find the maximum value to scale all bars relative to it.
+            const maxValue = Math.max(...data.map(d => d.value));
+
+            // Iterate over the data and create a bar for each item.
+            data.forEach(d => {
+                // Create the main container for a single bar row.
+                const barRow = document.createElement('div');
+                barRow.className = 'flex items-center space-x-4';
+
+                // Create the label element.
+                const labelElement = document.createElement('div');
+                labelElement.className = 'min-w-[120px] text-gray-300 font-medium truncate sm:min-w-[150px]';
+                labelElement.textContent = d.label;
+
+                // Create the bar and value container.
+                const barValueContainer = document.createElement('div');
+                barValueContainer.className = 'flex-1 flex items-center';
+                
+                // Create the bar element itself.
+                const barElement = document.createElement('div');
+                barElement.className = 'h-6 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full shadow-md transition-all duration-500 ease-out';
+                barElement.style.width = `${(d.value / maxValue) * 100}%`;
+
+                // Create the value element.
+                const valueElement = document.createElement('span');
+                valueElement.className = 'ml-3 text-sm text-gray-400 font-semibold';
+                valueElement.textContent = d.value;
+
+                // Assemble the elements.
+                barValueContainer.appendChild(barElement);
+                barValueContainer.appendChild(valueElement);
+                barRow.appendChild(labelElement);
+                barRow.appendChild(barValueContainer);
+                
+                // Append the complete bar row to the chart container.
+                chartContainer.appendChild(barRow);
+            });
+        }
+
+        // Event listener to re-render the chart whenever the input changes.
+        // The 'input' event is perfect for real-time updates as the user types.
+        inputElement.addEventListener('input', () => {
+            const data = parseInput(inputElement.value);
+            renderChart(data);
+        });
+
+        // Initial render on page load.
+        window.onload = () => {
+            const data = parseInput(inputElement.value);
+            renderChart(data);
+        };
+
+    </script>
+</body>
+</html>
