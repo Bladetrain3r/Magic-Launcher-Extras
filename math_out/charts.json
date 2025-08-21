@@ -1,0 +1,4 @@
+[
+  {"title": "System", "data": [["CPU", 45], ["RAM", 78], ["Disk", 92]]},
+  {"title": "Network", "data": [["In", 150], ["Out", 230]]}
+]
