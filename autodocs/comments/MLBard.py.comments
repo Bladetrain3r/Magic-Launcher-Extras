@@ -1,0 +1,227 @@
+Comments for ./electric_bards/MLBard.py:
+--------------------------------------------------
+L  13: Import module
+       import re
+
+L  14: Import module
+       import random
+
+L  15: Import module
+       import sys
+
+L  16: Import module
+       from collections import Counter
+
+L  17: Import module
+       from pathlib import Path
+
+L  19: Class definition
+       class MLBard:
+
+L  25: Constructor method
+       def __init__(self):
+
+L  87: Function definition
+       def extract_concepts(self, text):
+
+L 102: Add to list
+       concepts.append(word)
+
+L 108: Add multiple items
+       concepts.extend(['code', 'function', 'system', ...
+
+L 110: Return value
+       return concepts
+
+L 112: Function definition
+       def count_syllables(self, word):
+
+L 119: Iterate over collection
+       for char in word:
+
+L 130: Return value
+       return max(1, syllables)
+
+L 132: Function definition
+       def count_line_syllables(self, line):
+
+L 134: Split string
+       words = line.split()
+
+L 135: Iterate over collection
+       return sum(self.count_syllables(word) for word ...
+
+L 137: Function definition
+       def get_rhyme_word(self, rhyme_group):
+
+L 140: Return value
+       return random.choice(self.rhyme_groups[rhyme_gr...
+
+L 142: Return value
+       return random.choice(['day', 'way', 'light', 'n...
+
+L 144: Function definition
+       def build_line(self, template, concepts, target...
+
+L 149: Replace substring
+       line = line.replace('{noun}', random.choice(con...
+
+L 150: Replace substring
+       line = line.replace('{concept}', random.choice(...
+
+L 151: Replace substring
+       line = line.replace('{verb}', random.choice(sel...
+
+L 152: Replace substring
+       line = line.replace('{verb2}', random.choice(se...
+
+L 153: Replace substring
+       line = line.replace('{adj}', random.choice(self...
+
+L 159: Split string
+       words = line.split()
+
+L 160: Conditional loop
+       while current < target_syllables and len(words)...
+
+L 162: Random operation
+       position = random.randint(0, len(words))
+
+L 163: Random operation
+       words.insert(position, random.choice(self.fille...
+
+L 164: Join strings
+       line = ' '.join(words)
+
+L 167: Conditional loop
+       while current > target_syllables and len(words)...
+
+L 169: Iterate over collection
+       for word in ['the', 'a', 'an', 'doth', 'shall',...
+
+L 175: Random operation
+       words.pop(random.randint(0, len(words)-1))
+
+L 176: Join strings
+       line = ' '.join(words)
+
+L 179: Return value
+       return line
+
+L 181: Function definition
+       def create_sonnet(self, text):
+
+L 189: Iterate over collection
+       for char in set(self.rhyme_scheme):
+
+L 190: Iterate over collection
+       available = [g for g in self.rhyme_groups.keys(...
+
+L 192: Random operation
+       group = random.choice(available)
+
+L 193: Add to list
+       used_groups.append(group)
+
+L 201: Random operation
+       template = random.choice(self.templates['openin...
+
+L 203: Random operation
+       template = random.choice(self.templates['volta'])
+
+L 205: Random operation
+       template = random.choice(self.templates['couple...
+
+L 207: Random operation
+       template = random.choice(self.templates['middle'])
+
+L 215: Split string
+       words = line.split()
+
+L 218: Join strings
+       line = ' '.join(words)
+
+L 220: Add to list
+       lines.append(line)
+
+L 224: Add multiple items
+       formatted.extend(lines[0:4])   # First quatrain
+
+L 225: Add to list
+       formatted.append('')            # Blank line
+
+L 226: Add multiple items
+       formatted.extend(lines[4:8])   # Second quatrain
+
+L 227: Add to list
+       formatted.append('')            # Blank line
+
+L 228: Add multiple items
+       formatted.extend(lines[8:12])  # Third quatrain
+
+L 229: Add to list
+       formatted.append('')            # Blank line
+
+L 230: Add multiple items
+       formatted.extend(lines[12:14]) # Couplet
+
+L 232: Return value
+       return '\n'.join(formatted)
+
+L 234: Function definition
+       def create_title(self, text):
+
+L 239: Return value
+       return f"Sonnet Upon the {random.choice(['Hosti...
+
+L 240: Return value
+       return "Sonnet DCCLXXI"  # 771 in Roman numerals
+
+L 242: Function definition
+       def main():
+
+L 248: Debug output
+       print("Usage: mlbard.py <text or filename>")
+
+L 249: Debug output
+       print("       mlbard.py --about <topic>")
+
+L 250: Debug output
+       print("       cat file | mlbard.py -")
+
+L 251: Exit program
+       sys.exit(1)
+
+L 255: Join strings
+       topic = ' '.join(sys.argv[2:]) if len(sys.argv)...
+
+L 262: Path object creation
+       path = Path(sys.argv[1])
+
+L 263: Check existence
+       if path.exists():
+
+L 266: Join strings
+       text = ' '.join(sys.argv[1:])
+
+L 273: Debug output
+       print("\n" + "="*50)
+
+L 274: Debug output
+       print(f"{title:^50}")
+
+L 275: Debug output
+       print("="*50 + "\n")
+
+L 276: Debug output
+       print(sonnet)
+
+L 277: Debug output
+       print("\n" + "-"*50)
+
+L 278: Debug output
+       print(f"{'-- MLBard': >50}")
+
+L 279: Debug output
+       print("-"*50 + "\n")
+

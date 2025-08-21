@@ -1,0 +1,122 @@
+Comments for ./launch_magically/MLQueue/mlwebqueue-server.py:
+--------------------------------------------------
+L   8: Import module
+       import json
+
+L   9: Import module
+       import os
+
+L  10: Import module
+       import sys
+
+L  11: Import module
+       from http.server import HTTPServer, SimpleHTTPR...
+
+L  12: Import module
+       from pathlib import Path
+
+L  13: Import module
+       import time
+
+L  16: Path object creation
+       QUEUE_DIR = Path("/tmp/mlqueue")
+
+L  18: Path object creation
+       SHORTCUTS_FILE = Path("shortcuts.json")
+
+L  21: Create directory
+       QUEUE_DIR.mkdir(parents=True, exist_ok=True)
+
+L  23: Class definition
+       class QueueHandler(SimpleHTTPRequestHandler):
+
+L  26: Function definition
+       def do_POST(self):
+
+L  29: Log stack trace
+       self.send_error(404)
+
+L  32: Error handling block
+       try:
+
+L  36: Parse JSON from string
+       task_data = json.loads(post_data)
+
+L  39: Get current timestamp
+       task_id = task_data.get('id', f"{time.time()}_{...
+
+L  44: File operation with auto-close
+       with open(temp_file, 'w') as f:
+
+L  45: Write JSON to file
+       json.dump(task_data, f, indent=2)
+
+L  55: Debug output
+       print(f"[QUEUED] {task_data.get('name', 'unknow...
+
+L  57: Catch specific exception
+       except Exception as e:
+
+L  58: Log stack trace
+       self.send_error(500, str(e))
+
+L  59: Debug output
+       print(f"[ERROR] Failed to queue task: {e}", fil...
+
+L  61: Function definition
+       def do_GET(self):
+
+L  65: Check existence
+       if SHORTCUTS_FILE.exists():
+
+L  69: File operation with auto-close
+       with open(SHORTCUTS_FILE, 'rb') as f:
+
+L  92: Decorator applied
+       "script": "echo 'Test alert at $(date)' | mail ...
+
+L  95: File operation with auto-close
+       with open(SHORTCUTS_FILE, 'w') as f:
+
+L  96: Write JSON to file
+       json.dump(example, f, indent=2)
+
+L  97: Debug output
+       print(f"[INFO] Created example {SHORTCUTS_FILE}")
+
+L 103: Function definition
+       def log_message(self, format, *args):
+
+L 105: Debug output
+       print(f"[{time.strftime('%H:%M:%S')}] {format %...
+
+L 107: Function definition
+       def main():
+
+L 109: Debug output
+       print(f"MLWebqueue Server")
+
+L 110: Debug output
+       print(f"Queue directory: {QUEUE_DIR}")
+
+L 111: Debug output
+       print(f"Shortcuts file: {SHORTCUTS_FILE}")
+
+L 112: Debug output
+       print(f"Starting server on port {PORT}...")
+
+L 116: Debug output
+       print(f"Server running at http://localhost:{POR...
+
+L 117: Debug output
+       print(f"Press Ctrl+C to stop")
+
+L 119: Error handling block
+       try:
+
+L 121: Catch specific exception
+       except KeyboardInterrupt:
+
+L 122: Debug output
+       print("\n[INFO] Server stopped")
+

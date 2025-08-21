@@ -1,0 +1,239 @@
+Comments for ./text_processing/MLTshirt.py:
+--------------------------------------------------
+L   9: Import module
+       import sys
+
+L  10: Import module
+       import random
+
+L  11: Import module
+       from datetime import datetime
+
+L  20: Execute external command
+       "subprocess.run() everything",
+
+L  34: Execute external command
+       "while universe.exists():\n    if button.clicke...
+
+L  36: Return value
+       "def solve_problem(text):\n    return text.uppe...
+
+L  41: Function definition
+       def generate_ascii_shirt():
+
+L  45: Random operation
+       selected = random.sample(SLOGANS, min(5, len(SL...
+
+L  48: Add to list
+       design.append("=" * 50)
+
+L  49: Add to list
+       design.append("PROGRAMMER PUNK: Reclaim the ter...
+
+L  50: Add to list
+       design.append("Break the wrapper. Pipe the worl...
+
+L  51: Add to list
+       design.append("=" * 50)
+
+L  52: Add to list
+       design.append("")
+
+L  54: Iterate over collection
+       for slogan in selected:
+
+L  55: Random operation
+       icon = random.choice(['👊', '🔧', '📝', '🔥', '⚡'])
+
+L  56: Add to list
+       design.append(f"{icon} {slogan}")
+
+L  58: Add to list
+       design.append("")
+
+L  59: Add to list
+       design.append("-" * 50)
+
+L  62: Random operation
+       code = random.choice(CODE_SNIPPETS)
+
+L  63: Add to list
+       design.append(code)
+
+L  65: Add to list
+       design.append("-" * 50)
+
+L  66: Add to list
+       design.append(f"Born: {datetime.now().year}")
+
+L  67: Add to list
+       design.append("Not a service. Not a platform. J...
+
+L  68: Add to list
+       design.append("=" * 50)
+
+L  70: Return value
+       return "\n".join(design)
+
+L  72: Function definition
+       def generate_svg_shirt(width=400, height=500):
+
+L  75: Random operation
+       selected = random.sample(SLOGANS, min(5, len(SL...
+
+L  78: Add to list
+       svg.append(f'<svg width="{width}" height="{heig...
+
+L  79: Add to list
+       svg.append('<rect width="100%" height="100%" fi...
+
+L  82: Add to list
+       svg.append('<rect x="20" y="20" width="360" hei...
+
+L  85: Add to list
+       svg.append('<text x="200" y="60" text-anchor="m...
+
+L  86: Add to list
+       svg.append('Programmer Punk: Reclaim the termin...
+
+L  87: Add to list
+       svg.append('</text>')
+
+L  89: Add to list
+       svg.append('<text x="200" y="80" text-anchor="m...
+
+L  90: Add to list
+       svg.append('Break the wrapper. Pipe the world.')
+
+L  91: Add to list
+       svg.append('</text>')
+
+L 101: Add to list
+       svg.append(f'<text x="40" y="{y_pos}" fill="{co...
+
+L 102: Add to list
+       svg.append(f'{icon} {slogan}')
+
+L 103: Add to list
+       svg.append('</text>')
+
+L 107: Add to list
+       svg.append(f'<rect x="40" y="{y_pos}" width="32...
+
+L 111: Conditional loop
+       'while universe.exists():',
+
+L 113: Execute external command
+       '        subprocess.run(thing)'
+
+L 116: Iterate over collection
+       for line in code_lines:
+
+L 117: Add to list
+       svg.append(f'<text x="50" y="{y_pos}" fill="#FF...
+
+L 118: Add to list
+       svg.append(line)
+
+L 119: Add to list
+       svg.append('</text>')
+
+L 123: Add to list
+       svg.append(f'<text x="200" y="{height-40}" text...
+
+L 124: Add to list
+       svg.append('Not a service. Not a platform. Just...
+
+L 125: Add to list
+       svg.append('</text>')
+
+L 127: Add to list
+       svg.append('</svg>')
+
+L 129: Return value
+       return "\n".join(svg)
+
+L 131: Function definition
+       def generate_markdown_design():
+
+L 134: Random operation
+       selected = random.sample(SLOGANS, 5)
+
+L 137: Add to list
+       md.append("# Magic Launcher T-Shirt Design")
+
+L 138: Add to list
+       md.append("```")
+
+L 139: Add to list
+       md.append("╔═══════════════════════════════════...
+
+L 140: Add to list
+       md.append("║  PROGRAMMER PUNK: Born 2025       ...
+
+L 141: Add to list
+       md.append("║  Reclaim the terminal. Pipe the wo...
+
+L 142: Add to list
+       md.append("╠═══════════════════════════════════...
+
+L 144: Iterate over collection
+       for slogan in selected:
+
+L 147: Add to list
+       md.append(line)
+
+L 149: Add to list
+       md.append("╠═══════════════════════════════════...
+
+L 150: Conditional loop
+       md.append("║  while universe.exists():         ...
+
+L 151: Add to list
+       md.append("║      if button.clicked():         ...
+
+L 152: Execute external command
+       md.append("║          subprocess.run(thing)    ...
+
+L 153: Add to list
+       md.append("╚═══════════════════════════════════...
+
+L 154: Add to list
+       md.append("```")
+
+L 155: Add to list
+       md.append("\n## Print Instructions")
+
+L 156: Add to list
+       md.append("- Black shirt recommended")
+
+L 157: Add to list
+       md.append("- Use green (#00FF00) for terminal t...
+
+L 158: Add to list
+       md.append("- Courier New or any monospace font")
+
+L 159: Add to list
+       md.append("- No copyright, no license, just rev...
+
+L 161: Return value
+       return "\n".join(md)
+
+L 163: Function definition
+       def main():
+
+L 170: Debug output
+       print(generate_svg_shirt())
+
+L 172: Debug output
+       print(generate_markdown_design())
+
+L 174: Debug output
+       print(generate_ascii_shirt())
+
+L 177: Debug output
+       print("\n# Share freely. No store. No profit. J...
+
+L 178: Debug output
+       print("# Print at home, local shop, or just wea...
+

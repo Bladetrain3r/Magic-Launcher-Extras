@@ -1,0 +1,89 @@
+Comments for ./text_processing/mlj2c.py:
+--------------------------------------------------
+L   7: Import module
+       import json
+
+L   8: Import module
+       import sys
+
+L   9: Import module
+       import csv
+
+L  10: Import module
+       import io
+
+L  12: Function definition
+       def main():
+
+L  14: Debug output
+       print("MLJ2C - JSON to CSV converter")
+
+L  15: Debug output
+       print("Usage: mlj2c.py <json_file> <key1> <key2>")
+
+L  16: Debug output
+       print("Example: mlj2c.py stats.json timestamp t...
+
+L  17: Debug output
+       print("\nOutputs CSV to stdout")
+
+L  18: Exit program
+       sys.exit(1)
+
+L  22: Error handling block
+       try:
+
+L  25: Parse JSON from file
+       data = json.load(sys.stdin)
+
+L  27: File operation with auto-close
+       with open(filename, 'r') as f:
+
+L  28: Parse JSON from file
+       data = json.load(f)
+
+L  32: Import module
+       import os
+
+L  44: Iterate over collection
+       for item in data:
+
+L  57: Error handling block
+       try:
+
+L  62: Error handling block
+       try:
+
+L  81: Error handling block
+       try:
+
+L  86: Error handling block
+       try:
+
+L  96: Catch specific exception
+       except FileNotFoundError:
+
+L  97: Debug output
+       print(f"Error: File '{filename}' not found", fi...
+
+L  98: Exit program
+       sys.exit(1)
+
+L  99: Catch specific exception
+       except json.JSONDecodeError:
+
+L 100: Debug output
+       print("Error: Invalid JSON", file=sys.stderr)
+
+L 101: Exit program
+       sys.exit(1)
+
+L 102: Catch specific exception
+       except Exception as e:
+
+L 103: Debug output
+       print(f"Error: {e}", file=sys.stderr)
+
+L 104: Exit program
+       sys.exit(1)
+

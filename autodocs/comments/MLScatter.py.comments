@@ -1,0 +1,227 @@
+Comments for ./math_out/MLScatter.py:
+--------------------------------------------------
+L  19: Import module
+       import sys
+
+L  20: Import module
+       import csv
+
+L  21: Import module
+       import math
+
+L  22: Import module
+       from pathlib import Path
+
+L  27: Class definition
+       class TerminalScatter:
+
+L  30: Constructor method
+       def __init__(self, width=60, height=20):
+
+L  34: Function definition
+       def render(self, data, xlabel="X", ylabel="Y"):
+
+L  36: Negative condition check
+       if not data or len(data) < 2:
+
+L  37: Return value
+       return "No data to plot"
+
+L  40: Iterate over collection
+       x_vals = [p[0] for p in data]
+
+L  41: Iterate over collection
+       y_vals = [p[1] for p in data]
+
+L  51: Iterate N times
+       grid = [[0 for _ in range(self.width)] for _ in...
+
+L  71: Add to list
+       output.append(f"{ylabel} vs {xlabel}")
+
+L  72: Add to list
+       output.append("=" * self.width)
+
+L  75: Add to list
+       output.append(f"{y_max:.2f}")
+
+L  78: Iterate over collection
+       for row in grid:
+
+L  80: Iterate over collection
+       for density in row:
+
+L  82: Add to list
+       output.append(line)
+
+L  85: Add to list
+       output.append(f"{y_min:.2f}" + "-" * (self.widt...
+
+L  86: Add to list
+       output.append(f"{x_min:.2f}" + " " * (self.widt...
+
+L  89: Add to list
+       output.append("")
+
+L  90: Add to list
+       output.append(f"Points: {len(data)} | X: [{x_mi...
+
+L  96: Add to list
+       output.append(f"Correlation: {correlation:.3f}")
+
+L  98: Return value
+       return '\n'.join(output)
+
+L 100: Function definition
+       def _calculate_correlation(self, x_vals, y_vals):
+
+L 104: Explicit null return
+       return None
+
+L 113: Iterate over collection
+       x_squared = sum((x - x_mean) ** 2 for x in x_vals)
+
+L 114: Iterate over collection
+       y_squared = sum((y - y_mean) ** 2 for y in y_vals)
+
+L 119: Return value
+       return 0
+
+L 121: Return value
+       return numerator / denominator
+
+L 124: Error handling block
+       try:
+
+L 125: Import module
+       import tkinter as tk
+
+L 139: Class definition
+       class MLScatter:
+
+L 140: Constructor method
+       def __init__(self, root, data, xlabel="X", ylab...
+
+L 159: Function definition
+       def _create_ui(self):
+
+L 215: Function definition
+       def _on_click(self, event):
+
+L 219: Function definition
+       def _on_drag(self, event):
+
+L 229: Function definition
+       def _on_scroll(self, event):
+
+L 242: Function definition
+       def _reset_view(self):
+
+L 249: Function definition
+       def _plot_data(self):
+
+L 253: Negative condition check
+       if not self.data or len(self.data) < 1:
+
+L 262: Return value
+       return  # Too small
+
+L 270: Iterate over collection
+       x_values = [point[0] for point in self.data]
+
+L 271: Iterate over collection
+       y_values = [point[1] for point in self.data]
+
+L 313: Iterate N times
+       for i in range(5):
+
+L 366: Function definition
+       def _calculate_correlation(self, x_vals, y_vals):
+
+L 370: Explicit null return
+       return None
+
+L 377: Iterate over collection
+       x_squared = sum((x - x_mean) ** 2 for x in x_vals)
+
+L 378: Iterate over collection
+       y_squared = sum((y - y_mean) ** 2 for y in y_vals)
+
+L 382: Return value
+       return numerator / denominator if denominator !...
+
+L 384: Function definition
+       def _show_help(self):
+
+L 386: Import module
+       import tkinter.messagebox as messagebox
+
+L 407: Catch specific exception
+       except ImportError:
+
+L 409: Debug output
+       print("Note: tkinter not available, terminal mo...
+
+L 411: Function definition
+       def load_csv(filename, x_col=0, y_col=1):
+
+L 417: Import module
+       import sys
+
+L 421: Error handling block
+       try:
+
+L 422: File operation with auto-close
+       with open(filename, 'r') as f:
+
+L 425: Catch specific exception
+       except Exception as e:
+
+L 426: Debug output
+       print(f"Error loading {filename}: {e}")
+
+L 427: Return value
+       return data
+
+L 433: Error handling block
+       try:
+
+L 440: Error handling block
+       try:
+
+L 444: Add to list
+       data.append((x, y))
+
+L 448: Return value
+       return data
+
+L 450: Function definition
+       def main():
+
+L 452: Import module
+       import argparse
+
+L 470: Negative condition check
+       if not data:
+
+L 471: Debug output
+       print(f"No valid data found in {args.file}")
+
+L 472: Exit program
+       sys.exit(1)
+
+L 478: Debug output
+       print(scatter.render(data, args.xlabel, args.yl...
+
+L 481: Negative condition check
+       if not GUI_AVAILABLE:
+
+L 482: Debug output
+       print("Error: tkinter not available for GUI mode")
+
+L 483: Exit program
+       sys.exit(1)
+
+L 485: Path object creation
+       title = args.title or Path(args.file).stem if a...
+

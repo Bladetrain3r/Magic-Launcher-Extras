@@ -1,0 +1,242 @@
+Comments for ./code_health/MLGitaudit.py:
+--------------------------------------------------
+L   8: Import module
+       import json
+
+L   9: Import module
+       import sys
+
+L  10: Import module
+       import re
+
+L  11: Import module
+       import argparse
+
+L  12: Import module
+       from pathlib import Path
+
+L  13: Import module
+       from collections import defaultdict
+
+L  14: Import module
+       from datetime import datetime
+
+L  16: Class definition
+       class MLGitAudit:
+
+L  17: Constructor method
+       def __init__(self):
+
+L  19: Create directory
+       self.config_dir.mkdir(parents=True, exist_ok=True)
+
+L  30: Function definition
+       def load_keywords(self):
+
+L  32: Check existence
+       if self.keywords_file.exists():
+
+L  33: File operation with auto-close
+       with open(self.keywords_file, 'r') as f:
+
+L  34: Parse JSON from file
+       return json.load(f)
+
+L  56: File operation with auto-close
+       with open(self.keywords_file, 'w') as f:
+
+L  57: Write JSON to file
+       json.dump(default_keywords, f, indent=2)
+
+L  59: Return value
+       return default_keywords
+
+L  61: Function definition
+       def categorize_commit(self, message):
+
+L  67: Iterate over collection
+       for keyword in keywords:
+
+L  69: Regex pattern search
+       if re.search(r'\b' + re.escape(keyword) + r'\b'...
+
+L  71: Return value
+       return category
+
+L  74: Add to list
+       self.uncategorized.append(message)
+
+L  76: Return value
+       return "uncategorized"
+
+L  78: Function definition
+       def process_log(self, log_input):
+
+L  80: Iterate over collection
+       for line in log_input:
+
+L  81: Remove whitespace
+       line = line.strip()
+
+L  82: Negative condition check
+       if not line:
+
+L  91: Split string
+       parts = line.split(' ', 1)
+
+L  99: Function definition
+       def calculate_percentages(self):
+
+L 102: Return value
+       return {}
+
+L 108: Return value
+       return percentages
+
+L 110: Function definition
+       def get_hostile_score(self):
+
+L 112: Get user by ID
+       fixes = self.counts.get("fix", 0) + self.counts...
+
+L 113: Get user by ID
+       features = self.counts.get("feature", 0)
+
+L 116: Return value
+       return float('inf') if fixes > 0 else 0
+
+L 118: Return value
+       return fixes / features
+
+L 120: Function definition
+       def format_default(self):
+
+L 123: Return value
+       return "No commits found in the provided input."
+
+L 129: Add to list
+       output.append(f"=== Git Commit Analysis ===")
+
+L 130: Add to list
+       output.append(f"Total commits analyzed: {self.t...
+
+L 131: Add to list
+       output.append("")
+
+L 138: Add to list
+       output.append(f"{category.capitalize()}: {count...
+
+L 140: Add to list
+       output.append("")
+
+L 141: Add to list
+       output.append(f"Hostile Architecture Score: {ho...
+
+L 142: Add to list
+       output.append("(Ratio of fixes+workarounds to f...
+
+L 144: Get user by ID
+       unknown_percentage = percentages.get("uncategor...
+
+L 147: Add to list
+       output.append("")
+
+L 149: Add to list
+       output.append("🔥 SEVERE: You're fighting fires,...
+
+L 151: Add to list
+       output.append("⚠️  WARNING: More time fixing th...
+
+L 153: Add to list
+       output.append("😐 CONCERN: Significant time on f...
+
+L 155: Add to list
+       output.append(f"🤔 VISIBILITY: {unknown_percenta...
+
+L 157: Add to list
+       output.append("✅ HEALTHY: Good feature/fix bala...
+
+L 161: Add to list
+       output.append("")
+
+L 162: Add to list
+       output.append("Uncategorized commits:")
+
+L 163: Iterate over collection
+       for msg in self.uncategorized[:5]:
+
+L 164: Add to list
+       output.append(f"  - {msg[:60]}...")
+
+L 166: Return value
+       return "\n".join(output)
+
+L 168: Function definition
+       def format_barchart(self):
+
+L 176: Replace substring
+       label = category.replace("_", " ").title()
+
+L 177: Add to list
+       output.append(f"{label}: {count}")
+
+L 179: Return value
+       return "\n".join(output)
+
+L 181: Function definition
+       def format_json(self):
+
+L 190: Return value
+       return json.dumps(data, indent=2)
+
+L 192: Function definition
+       def format_csv(self):
+
+L 195: Add to list
+       output.append("Category,Count,Percentage")
+
+L 200: Add to list
+       output.append(f"{category},{count},{pct:.1f}")
+
+L 202: Return value
+       return "\n".join(output)
+
+L 204: Function definition
+       def main():
+
+L 235: Debug output
+       print(json.dumps(auditor.keywords, indent=2))
+
+L 243: Add to list
+       auditor.keywords[category].append(keyword)
+
+L 244: File operation with auto-close
+       with open(auditor.keywords_file, 'w') as f:
+
+L 245: Write JSON to file
+       json.dump(auditor.keywords, f, indent=2)
+
+L 246: Debug output
+       print(f"Added '{keyword}' to category '{categor...
+
+L 250: Error handling block
+       try:
+
+L 251: Startup message
+       auditor.process_log(args.file)
+
+L 252: Catch specific exception
+       except KeyboardInterrupt:
+
+L 257: Debug output
+       print(auditor.format_barchart())
+
+L 259: Debug output
+       print(auditor.format_json())
+
+L 261: Debug output
+       print(auditor.format_csv())
+
+L 263: Debug output
+       print(auditor.format_default())
+

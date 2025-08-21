@@ -1,0 +1,407 @@
+Comments for ./math_out/MLDiff.py:
+--------------------------------------------------
+L  20: Import module
+       import sys
+
+L  21: Import module
+       import csv
+
+L  22: Import module
+       import json
+
+L  23: Import module
+       from pathlib import Path
+
+L  24: Import module
+       from collections import defaultdict
+
+L  26: Class definition
+       class MLDiff:
+
+L  27: Constructor method
+       def __init__(self):
+
+L  37: Function definition
+       def diff_csv(self, file1, file2, key_col=0):
+
+L  43: Negative condition check
+       if not data1 or not data2:
+
+L  44: Return value
+       return "Error loading files"
+
+L  52: Error handling block
+       try:
+
+L  59: Iterate over collection
+       self.changes['cols_added'] = [h for h in header...
+
+L  60: Iterate over collection
+       self.changes['cols_removed'] = [h for h in head...
+
+L  70: Iterate over collection
+       for row in data1:
+
+L  75: Iterate over collection
+       for row in data2:
+
+L  83: Iterate over collection
+       for key in all_keys:
+
+L  85: Add to list
+       self.changes['rows_removed'].append((key, looku...
+
+L  87: Add to list
+       self.changes['rows_added'].append((key, lookup2...
+
+L  99: Add to list
+       changes.append((col_name, old, new))
+
+L 102: Add to list
+       self.changes['rows_modified'].append((key, chan...
+
+L 107: Return value
+       return self._format_output()
+
+L 109: Function definition
+       def diff_json(self, file1, file2):
+
+L 111: Error handling block
+       try:
+
+L 112: File operation with auto-close
+       with open(file1, 'r') as f:
+
+L 113: Parse JSON from file
+       data1 = json.load(f)
+
+L 114: File operation with auto-close
+       with open(file2, 'r') as f:
+
+L 115: Parse JSON from file
+       data2 = json.load(f)
+
+L 116: Catch specific exception
+       except Exception as e:
+
+L 117: Return value
+       return f"Error loading JSON: {e}"
+
+L 121: Return value
+       return self._format_json_changes(changes)
+
+L 123: Function definition
+       def _diff_dict(self, d1, d2, path=""):
+
+L 131: Negative condition check
+       if not isinstance(d1, dict) or not isinstance(d...
+
+L 133: Return value
+       return {'value_changed': {'old': d1, 'new': d2}}
+
+L 134: Return value
+       return {}
+
+L 141: Iterate over collection
+       for key in keys2 - keys1:
+
+L 145: Iterate over collection
+       for key in keys1 - keys2:
+
+L 149: Iterate over collection
+       for key in keys1 & keys2:
+
+L 161: Return value
+       return {k: v for k, v in changes.items() if v}
+
+L 163: Function definition
+       def diff_text(self, file1, file2):
+
+L 165: File operation with auto-close
+       with open(file1, 'r') as f:
+
+L 167: File operation with auto-close
+       with open(file2, 'r') as f:
+
+L 174: Conditional loop
+       while i < len(lines1) or j < len(lines2):
+
+L 176: Conditional loop
+       while i < len(lines1) and j < len(lines2) and l...
+
+L 188: Iterate N times
+       for look_ahead in range(1, 10):  # Look ahead u...
+
+L 189: Iterate N times
+       for di in range(look_ahead + 1):
+
+L 191: Check if any updates
+       if (i + di < len(lines1) and j + dj < len(lines...
+
+L 200: Negative condition check
+       if not found:
+
+L 205: Add to list
+       changes.append({
+
+L 211: Return value
+       return self._format_text_changes(changes)
+
+L 213: Function definition
+       def _load_csv(self, filename):
+
+L 215: Error handling block
+       try:
+
+L 216: File operation with auto-close
+       with open(filename, 'r') as f:
+
+L 218: Return value
+       return list(reader)
+
+L 219: Catch specific exception
+       except Exception as e:
+
+L 220: Debug output
+       print(f"Error loading {filename}: {e}")
+
+L 221: Explicit null return
+       return None
+
+L 223: Function definition
+       def _calculate_stats(self, data1, data2, headers):
+
+L 228: Iterate N times
+       for col_idx in range(min(len(data1[0]) if data1...
+
+L 232: Iterate over collection
+       for row in data1[:10] + data2[:10]:  # Sample f...
+
+L 234: Error handling block
+       try:
+
+L 241: Add to list
+       numeric_cols.append(col_idx)
+
+L 244: Iterate over collection
+       for col_idx in numeric_cols:
+
+L 250: Iterate over collection
+       for row in data1:
+
+L 252: Error handling block
+       try:
+
+L 253: Add to list
+       values1.append(float(row[col_idx]))
+
+L 254: Catch specific exception
+       except ValueError:
+
+L 257: Iterate over collection
+       for row in data2:
+
+L 259: Error handling block
+       try:
+
+L 260: Add to list
+       values2.append(float(row[col_idx]))
+
+L 261: Catch specific exception
+       except ValueError:
+
+L 277: Check if any updates
+       if (abs(stats['old_mean'] - stats['new_mean']) ...
+
+L 283: Function definition
+       def _format_output(self):
+
+L 286: Add to list
+       output.append("=" * 60)
+
+L 287: Add to list
+       output.append("DATA DIFF SUMMARY")
+
+L 288: Add to list
+       output.append("=" * 60)
+
+L 291: Add to list
+       output.append(f"Rows added:    {len(self.change...
+
+L 292: Add to list
+       output.append(f"Rows removed:  {len(self.change...
+
+L 293: Add to list
+       output.append(f"Rows modified: {len(self.change...
+
+L 296: Add to list
+       output.append("")
+
+L 298: Add to list
+       output.append(f"Columns added: {', '.join(self....
+
+L 300: Add to list
+       output.append(f"Columns removed: {', '.join(sel...
+
+L 304: Add to list
+       output.append("\n--- SAMPLE ROWS ADDED (first 5...
+
+L 306: Add to list
+       output.append(f"  + [{key}]: {row[:5]}...")  # ...
+
+L 309: Add to list
+       output.append("\n--- SAMPLE ROWS REMOVED (first...
+
+L 311: Add to list
+       output.append(f"  - [{key}]: {row[:5]}...")
+
+L 314: Add to list
+       output.append("\n--- SAMPLE MODIFICATIONS (firs...
+
+L 316: Add to list
+       output.append(f"  ~ [{key}]:")
+
+L 318: Add to list
+       output.append(f"      {col}: '{old}' -> '{new}'")
+
+L 322: Add to list
+       output.append("\n--- STATISTICAL CHANGES ---")
+
+L 324: Add to list
+       output.append(f"\n  {col}:")
+
+L 326: Add to list
+       output.append(f"    Mean:  {stats['old_mean']:....
+
+L 327: Add to list
+       output.append(f"    Range: [{stats['old_min']:....
+
+L 328: Add to list
+       output.append(f"    Count: {stats['old_count']}...
+
+L 330: Add to list
+       output.append("\n" + "=" * 60)
+
+L 332: Return value
+       return '\n'.join(output)
+
+L 334: Function definition
+       def _format_json_changes(self, changes):
+
+L 337: Add to list
+       output.append("=" * 60)
+
+L 338: Add to list
+       output.append("JSON DIFF")
+
+L 339: Add to list
+       output.append("=" * 60)
+
+L 341: Function definition
+       def format_path(path, changes, indent=0):
+
+L 346: Add to list
+       output.append(f"{prefix}+ {key}: {json.dumps(va...
+
+L 350: Add to list
+       output.append(f"{prefix}- {key}: {json.dumps(va...
+
+L 355: Add to list
+       output.append(f"{prefix}~ {key}: {value['old']}...
+
+L 357: Add to list
+       output.append(f"{prefix}~ {key}:")
+
+L 361: Add to list
+       output.append(f"{prefix}~ {changes['value_chang...
+
+L 365: Add to list
+       output.append("=" * 60)
+
+L 366: Return value
+       return '\n'.join(output)
+
+L 368: Function definition
+       def _format_text_changes(self, changes):
+
+L 371: Add to list
+       output.append("=" * 60)
+
+L 372: Add to list
+       output.append(f"TEXT DIFF - {len(changes)} chan...
+
+L 373: Add to list
+       output.append("=" * 60)
+
+L 376: Add to list
+       output.append(f"\n--- Section {i} (lines {chang...
+
+L 379: Add to list
+       output.append("Removed:")
+
+L 380: Iterate over collection
+       for line in change['removed'][:5]:  # Show firs...
+
+L 381: Add to list
+       output.append(f"  - {line.rstrip()}")
+
+L 383: Add to list
+       output.append(f"  ... and {len(change['removed'...
+
+L 386: Add to list
+       output.append("Added:")
+
+L 387: Iterate over collection
+       for line in change['added'][:5]:
+
+L 388: Add to list
+       output.append(f"  + {line.rstrip()}")
+
+L 390: Add to list
+       output.append(f"  ... and {len(change['added'])...
+
+L 392: Add to list
+       output.append("\n" + "=" * 60)
+
+L 393: Return value
+       return '\n'.join(output)
+
+L 395: Function definition
+       def main():
+
+L 397: Import module
+       import argparse
+
+L 412: Negative condition check
+       if not Path(args.file1).exists():
+
+L 413: Debug output
+       print(f"Error: {args.file1} not found")
+
+L 414: Exit program
+       sys.exit(1)
+
+L 415: Negative condition check
+       if not Path(args.file2).exists():
+
+L 416: Debug output
+       print(f"Error: {args.file2} not found")
+
+L 417: Exit program
+       sys.exit(1)
+
+L 421: Negative condition check
+       # Detect format from extension if not specified
+
+L 422: Path object creation
+       ext1 = Path(args.file1).suffix.lower()
+
+L 423: Path object creation
+       ext2 = Path(args.file2).suffix.lower()
+
+L 426: Return user data
+       result = differ.diff_json(args.file1, args.file2)
+
+L 433: Debug output
+       print(result)
+

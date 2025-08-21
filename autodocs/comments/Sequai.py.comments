@@ -1,0 +1,131 @@
+Comments for ./launch_magically/Sequai.py:
+--------------------------------------------------
+L   9: Import module
+       import json
+
+L  10: Import module
+       import sys
+
+L  11: Import module
+       import os
+
+L  12: Import module
+       from pathlib import Path
+
+L  14: Function definition
+       def check_shortcuts():
+
+L  17: Negative condition check
+       if not path.exists():
+
+L  18: Debug output
+       print(f"Error: No shortcuts.json at {path}")
+
+L  19: Exit program
+       sys.exit(1)
+
+L  20: Return value
+       return path
+
+L  22: Function definition
+       def shortcuts_to_menu(shortcuts_path):
+
+L  24: File operation with auto-close
+       with open(shortcuts_path) as f:
+
+L  25: Parse JSON from file
+       data = json.load(f)
+
+L  28: Function definition
+       def add_items(items, depth=0):
+
+L  31: Get user by ID
+       if item.get('type') == 'folder':
+
+L  32: Add to list
+       menu.append(f"{indent}{i}. {name}/")
+
+L  36: Add to list
+       menu.append(f"{indent}{i}. {name}")
+
+L  39: Return value
+       return "\n".join(menu)
+
+L  41: Function definition
+       def ask_llm(prompt, menu_text, api_url="http://...
+
+L  43: Import module
+       import requests
+
+L  60: Error handling block
+       try:
+
+L  61: Create user endpoint
+       resp = requests.post(api_url, json={
+
+L  71: Return value
+       return resp.json()['choices'][0]['message']['co...
+
+L  72: Catch specific exception
+       except Exception as e:
+
+L  73: Debug output
+       print(f"LLM Error: {e}")
+
+L  75: Explicit null return
+       return None
+
+L  77: Function definition
+       def main():
+
+L  79: Debug output
+       print("MLAgent - Natural language to menu numbe...
+
+L  80: Debug output
+       print("Usage: mlagent 'what you want to do'")
+
+L  81: Debug output
+       print("Example: mlagent 'build then deploy'")
+
+L  82: Exit program
+       sys.exit(1)
+
+L  84: Join strings
+       prompt = ' '.join(sys.argv[1:])
+
+L  91: Debug output
+       print(f"Request: {prompt}")
+
+L  94: Negative condition check
+       if not result:
+
+L  95: Debug output
+       print("Failed to get answer")
+
+L  96: Exit program
+       sys.exit(1)
+
+L  99: Debug output
+       print(f"\nCommands:\n{result}")
+
+L 102: Debug output
+       print(f"\nTo run:")
+
+L 103: Iterate over collection
+       for line in result.split('\n'):
+
+L 106: Split string
+       cmds = line.split('&')
+
+L 107: Iterate over collection
+       for cmd in cmds:
+
+L 108: Debug output
+       print(f"mlmenu -c '{cmd.strip()}' &")
+
+L 109: Debug output
+       print("wait")
+
+L 112: Debug output
+       print(f"mlmenu -c '{line.strip()}'")
+

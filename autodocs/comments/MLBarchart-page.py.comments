@@ -1,0 +1,146 @@
+Comments for ./math_out/MLBarchart-page.py:
+--------------------------------------------------
+L   8: Import module
+       import sys
+
+L   9: Import module
+       import json
+
+L  10: Import module
+       import argparse
+
+L  11: Import module
+       from pathlib import Path
+
+L  12: Import module
+       from datetime import datetime
+
+L 110: Decorator applied
+       @media (max-width: 600px) {{
+
+L 147: Function definition
+       def parse_data(input_text):
+
+L 150: Split string
+       lines = input_text.strip().split('\n')
+
+L 152: Iterate over collection
+       for line in lines:
+
+L 153: Remove whitespace
+       line = line.strip()
+
+L 154: Negative condition check
+       if not line or line.startswith('#'):
+
+L 159: Error handling block
+       try:
+
+L 160: Parse JSON from string
+       json_data = json.loads(line)
+
+L 163: Add to list
+       data.append((key, value))
+
+L 164: Catch all exceptions
+       except:
+
+L 169: Iterate over collection
+       for separator in [':', '=', '\t', '  ']:
+
+L 171: Split string
+       parts = line.split(separator, 1)
+
+L 173: Remove whitespace
+       label = parts[0].strip()
+
+L 174: Error handling block
+       try:
+
+L 175: Remove whitespace
+       value = float(parts[1].strip())
+
+L 176: Add to list
+       data.append((label, value))
+
+L 178: Catch specific exception
+       except ValueError:
+
+L 181: Return value
+       return data
+
+L 183: Function definition
+       def create_chart(data, title="Chart", max_value...
+
+L 185: Negative condition check
+       if not data:
+
+L 186: Return value
+       return '<div class="chart-container"><p>No data...
+
+L 188: Null check
+       if max_value is None:
+
+L 212: Add to list
+       bars_html.append(bar_html)
+
+L 214: Return value
+       return CHART_TEMPLATE.format(
+
+L 216: Join strings
+       bars='\n'.join(bars_html)
+
+L 219: Function definition
+       def generate_dashboard(charts_data, title="MLBa...
+
+L 223: Iterate over collection
+       for chart_info in charts_data:
+
+L 226: Get user by ID
+       chart_info.get('title', 'Chart'),
+
+L 227: Get user by ID
+       chart_info.get('max')
+
+L 229: Add to list
+       charts_html.append(chart_html)
+
+L 231: Return value
+       return HTML_TEMPLATE.format(
+
+L 233: Get current datetime
+       timestamp=datetime.now().strftime('%Y-%m-%d %H:...
+
+L 235: Join strings
+       charts='\n'.join(charts_html)
+
+L 238: Function definition
+       def main():
+
+L 277: File operation with auto-close
+       with open(args.json, 'r') as f:
+
+L 278: Parse JSON from file
+       charts_config = json.load(f)
+
+L 288: Join strings
+       input_text = '\n'.join(args.data)
+
+L 294: File operation with auto-close
+       with open(args.input, 'r') as f:
+
+L 310: Path object creation
+       output_path = Path(args.output)
+
+L 311: Create directory
+       output_path.parent.mkdir(parents=True, exist_ok...
+
+L 312: File operation with auto-close
+       with open(output_path, 'w') as f:
+
+L 314: Debug output
+       print(f"Dashboard written to {output_path}")
+
+L 316: Debug output
+       print(html)
+

@@ -1,0 +1,143 @@
+Comments for ./text_processing/MLMDHT.py:
+--------------------------------------------------
+L   7: Import module
+       import sys
+
+L   8: Import module
+       import json
+
+L   9: Import module
+       import re
+
+L  10: Import module
+       from pathlib import Path
+
+L  12: Class definition
+       class MLHTMD:
+
+L  34: Constructor method
+       def __init__(self, theme_json=None):
+
+L  38: Error handling block
+       try:
+
+L  39: Parse JSON from string
+       custom = json.loads(theme_json)
+
+L  41: Debug output
+       print(f"Theme loaded: {custom}")
+
+L  42: Catch all exceptions
+       except:
+
+L  43: Debug output
+       print("Invalid JSON theme, using defaults like ...
+
+L  45: Function definition
+       def markdown_to_html(self, md_text):
+
+L  53: Regex substitution
+       html = re.sub(r'^### (.+)$', r'<h3>\1</h3>', ht...
+
+L  54: Regex substitution
+       html = re.sub(r'^## (.+)$', r'<h2>\1</h2>', htm...
+
+L  55: Regex substitution
+       html = re.sub(r'^# (.+)$', r'<h1>\1</h1>', html...
+
+L  58: Regex substitution
+       html = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</s...
+
+L  59: Regex substitution
+       html = re.sub(r'\*(.+?)\*', r'<em>\1</em>', html)
+
+L  62: Regex substitution
+       html = re.sub(r'```(.+?)```', r'<pre><code>\1</...
+
+L  63: Regex substitution
+       html = re.sub(r'`(.+?)`', r'<code>\1</code>', h...
+
+L  66: Regex substitution
+       html = re.sub(r'\[(.+?)\]\((.+?)\)', r'<a href=...
+
+L  69: Replace substring
+       html = '<p>' + html.replace('\n\n', '</p><p>') ...
+
+L  72: Regex substitution
+       html = re.sub(r'^\- (.+)$', r'<li>\1</li>', htm...
+
+L  73: Regex substitution
+       html = re.sub(r'(<li>.*</li>)', r'<ul>\1</ul>',...
+
+L  75: Return value
+       return html
+
+L  77: Function definition
+       def generate_html(self, md_content, title="MLHT...
+
+L  86: Return value
+       return f"""<!DOCTYPE html>
+
+L  96: Get user by ID
+       background: {self.theme.get('backgroundum', '#f...
+
+L  98: Get user by ID
+       font-family: {self.theme.get('fontprimary', 'sa...
+
+L 100: Get user by ID
+       max-width: {self.theme.get('maxwidthicus', '800...
+
+L 107: Get user by ID
+       font-family: {self.theme.get('fontsecundus', 's...
+
+L 137: Get user by ID
+       border-radius: {self.theme.get('borderradius', ...
+
+L 138: Get user by ID
+       font-family: {self.theme.get('fontprimary', 'mo...
+
+L 143: Get user by ID
+       color: {self.theme.get('backgroundum', '#fff')};
+
+L 200: Function definition
+       def main():
+
+L 209: Debug output
+       print("Usage: mlhtmd input.md output.html [them...
+
+L 210: Debug output
+       print('Example: mlhtmd readme.md index.html \'{...
+
+L 211: Exit program
+       sys.exit(1)
+
+L 218: Error handling block
+       try:
+
+L 219: File operation with auto-close
+       with open(input_file, 'r') as f:
+
+L 221: Catch all exceptions
+       except:
+
+L 222: Debug output
+       print(f"Cannot read {input_file}, are you sure ...
+
+L 223: Exit program
+       sys.exit(1)
+
+L 229: Path object creation
+       html = converter.generate_html(md_content, titl...
+
+L 232: File operation with auto-close
+       with open(output_file, 'w') as f:
+
+L 235: Debug output
+       print(f"HTML generated: {output_file}")
+
+L 237: Debug output
+       print("Theme applied: colortertius and friends")
+
+L 239: Debug output
+       print("Default theme used (coward)")
+

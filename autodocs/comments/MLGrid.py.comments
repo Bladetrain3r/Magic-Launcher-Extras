@@ -1,0 +1,101 @@
+Comments for ./math_out/MLGrid.py:
+--------------------------------------------------
+L   7: Import module
+       import sys
+
+L   8: Import module
+       import random
+
+L  10: Class definition
+       class MLGrid:
+
+L  15: Constructor method
+       def __init__(self, width=40, height=20):
+
+L  18: Iterate N times
+       self.grid = [[0 for _ in range(width)] for _ in...
+
+L  20: Function definition
+       def load_file(self, filename):
+
+L  22: Error handling block
+       try:
+
+L  23: File operation with auto-close
+       with open(filename, 'r') as f:
+
+L  25: Catch all exceptions
+       except:
+
+L  39: Function definition
+       def shift(self, direction='random', amount=1):
+
+L  43: Iterate N times
+       for y in range(self.height):
+
+L  44: Iterate N times
+       for x in range(self.width):
+
+L  45: Random operation
+       if random.random() < 0.3:  # 30% chance to shift
+
+L  46: Random operation
+       self.grid[y][x] = (self.grid[y][x] + random.ran...
+
+L  50: Iterate N times
+       for x in range(self.width):
+
+L  51: Iterate N times
+       col = [self.grid[y][x] for y in range(self.heig...
+
+L  52: Iterate over collection
+       non_zero = [v for v in col if v > 0]
+
+L  55: Iterate N times
+       for y in range(self.height):
+
+L  60: Iterate N times
+       new_grid = [[0 for _ in range(self.width)] for ...
+
+L  61: Iterate N times
+       for y in range(self.height):
+
+L  62: Iterate N times
+       for x in range(self.width):
+
+L  77: Iterate N times
+       for y in range(self.height):
+
+L  78: Iterate N times
+       for x in range(self.width):
+
+L  84: Iterate N times
+       new_grid = [[0 for _ in range(self.width)] for ...
+
+L  85: Iterate N times
+       for y in range(self.height):
+
+L  86: Iterate N times
+       for x in range(self.width):
+
+L  93: Function definition
+       def render(self):
+
+L  97: Iterate N times
+       for y in range(self.height):
+
+L  98: Iterate N times
+       for x in range(self.width):
+
+L 100: Debug output
+       print(chars[val], end='')
+
+L 101: Debug output
+       print()
+
+L 103: Function definition
+       def main():
+
+L 105: Import module
+       import argparse
+

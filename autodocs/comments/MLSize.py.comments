@@ -1,0 +1,143 @@
+Comments for ./terminal_office/MLSize.py:
+--------------------------------------------------
+L   7: Import module
+       import os
+
+L   8: Import module
+       import sys
+
+L   9: Import module
+       from pathlib import Path
+
+L  11: Function definition
+       def human_size(bytes):
+
+L  13: Iterate over collection
+       for unit in ['B', 'K', 'M', 'G', 'T']:
+
+L  15: Return value
+       return f"{bytes:6.1f}{unit}"
+
+L  17: Return value
+       return f"{bytes:.1f}P"  # Petabytes, because wh...
+
+L  19: Function definition
+       def get_sizes(path='.', min_size=0, show_hidden...
+
+L  23: Error handling block
+       try:
+
+L  26: Negative condition check
+       if not show_hidden:
+
+L  27: Negative condition check
+       dirs[:] = [d for d in dirs if not d.startswith(...
+
+L  29: Iterate over collection
+       for file in files:
+
+L  30: Negative condition check
+       if not show_hidden and file.startswith('.'):
+
+L  33: Path object creation
+       filepath = Path(root) / file
+
+L  34: Error handling block
+       try:
+
+L  37: Add to list
+       sizes.append((size, str(filepath)))
+
+L  38: Catch all exceptions
+       except:
+
+L  40: Catch all exceptions
+       except:
+
+L  43: Return value
+       return sorted(sizes, reverse=True)
+
+L  45: Function definition
+       def show_dir_sizes(path='.'):
+
+L  49: Iterate over collection
+       for item in Path(path).iterdir():
+
+L  53: Iterate over collection
+       for file in files:
+
+L  54: Error handling block
+       try:
+
+L  55: Path object creation
+       total += (Path(root) / file).stat().st_size
+
+L  56: Catch all exceptions
+       except:
+
+L  58: Add to list
+       sizes.append((total, f"{item}/", True))  # True...
+
+L  60: Error handling block
+       try:
+
+L  61: Add to list
+       sizes.append((item.stat().st_size, str(item), F...
+
+L  62: Catch all exceptions
+       except:
+
+L  65: Return value
+       return sorted(sizes, reverse=True)
+
+L  67: Function definition
+       def main():
+
+L  68: Import module
+       import argparse
+
+L 104: Error handling block
+       try:
+
+L 106: Catch all exceptions
+       except:
+
+L 107: Debug output
+       print(f"Invalid size: {args.min_size}")
+
+L 108: Exit program
+       sys.exit(1)
+
+L 117: Debug output
+       print(f"{human_size(size)} {name}{marker}")
+
+L 124: Iterate over collection
+       for item in Path(args.path).iterdir():
+
+L 125: Negative condition check
+       if not args.all and item.name.startswith('.'):
+
+L 128: Error handling block
+       try:
+
+L 131: Add to list
+       sizes.append((size, item.name))
+
+L 132: Catch all exceptions
+       except:
+
+L 140: Debug output
+       print(f"{human_size(size)} {name}")
+
+L 143: Debug output
+       print("-" * 40)
+
+L 144: Debug output
+       print(f"{human_size(total)} Total shown")
+
+L 147: Debug output
+       print(f"{human_size(full_total)} Total found")
+
+L 148: Debug output
+       print(f"({len(sizes) - args.number} more files ...
+

@@ -1,0 +1,122 @@
+Comments for ./rpg/default/MLVillager.py:
+--------------------------------------------------
+L   8: Import module
+       import random
+
+L   9: Import module
+       import tkinter as tk
+
+L  10: Import module
+       from tkinter import ttk
+
+L  12: Class definition
+       class MLVillager:
+
+L  13: Constructor method
+       def __init__(self, root):
+
+L 169: Function definition
+       def get_npc(self):
+
+L 171: Get user by ID
+       prof = self.profession_var.get()
+
+L 172: Get user by ID
+       mood = self.mood_var.get()
+
+L 175: Random operation
+       prof = random.choice(self.professions)
+
+L 177: Random operation
+       mood = random.choice(self.moods)
+
+L 179: Return value
+       return f"{mood} {prof}"
+
+L 181: Function definition
+       def generate_line(self, line_type):
+
+L 186: Random operation
+       line = random.choice(self.greetings)
+
+L 188: Random operation
+       line = random.choice(self.rumors)
+
+L 190: Random operation
+       line = random.choice(self.warnings)
+
+L 192: Random operation
+       line = random.choice(self.directions)
+
+L 194: Random operation
+       line = random.choice(self.complaints)
+
+L 209: Function definition
+       def generate_conversation(self):
+
+L 217: Random operation
+       greeting = random.choice(self.greetings)
+
+L 218: Add to list
+       conversation.append(f"{greeting}.")
+
+L 222: Random operation
+       if random.random() > 0.3:
+
+L 223: Add to list
+       elements.append(('rumor', self.rumors))
+
+L 224: Random operation
+       if random.random() > 0.5:
+
+L 225: Add to list
+       elements.append(('complaint', self.complaints))
+
+L 226: Random operation
+       if random.random() > 0.7:
+
+L 227: Add to list
+       elements.append(('warning', self.warnings))
+
+L 229: Random operation
+       random.shuffle(elements)
+
+L 231: Random operation
+       for element_type, pool in elements[:random.rand...
+
+L 232: Random operation
+       line = random.choice(pool)
+
+L 234: Random operation
+       if len(conversation) > 1 and random.random() > ...
+
+L 236: Random operation
+       line = f"{random.choice(connectors)}, {line}"
+
+L 237: Add to list
+       conversation.append(f"{line[0].upper()}{line[1:...
+
+L 240: Random operation
+       if random.random() > 0.3:
+
+L 241: Random operation
+       dismissal = random.choice(self.dismissals)
+
+L 242: Add to list
+       conversation.append(f"Now, {dismissal}.")
+
+L 246: Iterate over collection
+       for line in conversation:
+
+L 253: Function definition
+       def clear_output(self):
+
+L 257: Function definition
+       def copy_all(self):
+
+L 259: Get user by ID
+       text = self.output_text.get(1.0, tk.END)
+
+L 263: Function definition
+       def main():
+

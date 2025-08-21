@@ -1,0 +1,341 @@
+Comments for ./rpg/default/MLMookbox.py:
+--------------------------------------------------
+L  10: Import module
+       import random
+
+L  11: Import module
+       import json
+
+L  12: Import module
+       import os
+
+L  13: Import module
+       from pathlib import Path
+
+L  15: Class definition
+       class MLMookLoot:
+
+L  22: Constructor method
+       def __init__(self):
+
+L  25: Create directory
+       self.config_dir.mkdir(parents=True, exist_ok=Tr...
+
+L 141: Function definition
+       def load_custom_items(self):
+
+L 143: Check existence
+       if self.custom_file.exists():
+
+L 144: Error handling block
+       try:
+
+L 145: File operation with auto-close
+       with open(self.custom_file, 'r') as f:
+
+L 146: Parse JSON from file
+       return json.load(f)
+
+L 147: Catch specific exception
+       except json.JSONDecodeError:
+
+L 149: Debug output
+       print(f"Warning: Could not decode {self.custom_...
+
+L 150: Return value
+       return {"trash": [], "trinkets": [], "decent": ...
+
+L 151: Return value
+       return {"trash": [], "trinkets": [], "decent": ...
+
+L 153: Function definition
+       def save_custom_items(self):
+
+L 155: Error handling block
+       try:
+
+L 156: File operation with auto-close
+       with open(self.custom_file, 'w') as f:
+
+L 157: Write JSON to file
+       json.dump(self.custom_items, f, indent=2)
+
+L 158: Catch specific exception
+       except IOError as e:
+
+L 159: Debug output
+       print(f"Error saving custom items to {self.cust...
+
+L 161: Function definition
+       def insert_item(self, category, item):
+
+L 164: Return value
+       return f"Error: Invalid category '{category}'. ...
+
+L 171: Add to list
+       self.custom_items[category].append(item)
+
+L 173: Return value
+       return f"Added '{item}' to {category}."
+
+L 174: Return value
+       return f"Item '{item}' already exists in {categ...
+
+L 176: Function definition
+       def get_items(self, category):
+
+L 178: Get user by ID
+       custom = self.custom_items.get(category, [])
+
+L 181: Return value
+       return self.default_trash + custom
+
+L 183: Return value
+       return self.default_trinkets + custom
+
+L 185: Return value
+       return self.default_decent + custom
+
+L 187: Return value
+       return self.default_special + custom
+
+L 188: Return value
+       return []
+
+L 190: Function definition
+       def generate_coins(self, tier="basic"):
+
+L 196: Random operation
+       coins = random.randint(min_coin, max_coin)
+
+L 199: Return value
+       return "No coins (the universe mocks you)"
+
+L 201: Return value
+       return "1 tarnished copper piece"
+
+L 203: Return value
+       return f"{coins} copper pieces"
+
+L 207: Return value
+       return f"{sp} silver, {cp} copper"
+
+L 213: Add to list
+       if gp: parts.append(f"{gp} gold")
+
+L 214: Add to list
+       if sp: parts.append(f"{sp} silver")
+
+L 215: Add to list
+       if cp: parts.append(f"{cp} copper")
+
+L 216: Return value
+       return ", ".join(parts)
+
+L 218: Function definition
+       def generate_loot(self, tier="basic", count=1, ...
+
+L 222: Iterate N times
+       for i in range(count):
+
+L 227: Add to list
+       mook_loot.append(coins)
+
+L 230: Random operation
+       roll = random.random()
+
+L 240: Random operation
+       item = random.choice(items)
+
+L 241: Add to list
+       mook_loot.append(f"✨ {item} ✨")
+
+L 243: Add to list
+       mook_loot.append(f"[{random.choice(self.prophec...
+
+L 248: Add to list
+       mook_loot.append(random.choice(items))
+
+L 253: Add to list
+       mook_loot.append(random.choice(items))
+
+L 258: Add to list
+       mook_loot.append(random.choice(items))
+
+L 261: Add to list
+       loot.append(mook_loot)
+
+L 263: Return value
+       return loot
+
+L 265: Function definition
+       def format_loot(self, loot, names=None):
+
+L 268: Add to list
+       output.append("=" * 50)
+
+L 269: Add to list
+       output.append("MOOK LOOT MANIFEST")
+
+L 270: Add to list
+       output.append("=" * 50)
+
+L 274: Add to list
+       output.append(f"\n{names[i]}:")
+
+L 276: Add to list
+       output.append(f"\nMook #{i+1}:")
+
+L 278: Iterate over collection
+       for item in mook_loot:
+
+L 279: Add to list
+       output.append(f"  • {item}")
+
+L 281: Add to list
+       output.append("\n" + "=" * 50)
+
+L 285: Iterate over collection
+       total_items = sum(len(m) for m in loot)
+
+L 286: Iterate over collection
+       specials = sum(1 for m in loot for item in m if...
+
+L 288: Add to list
+       output.append(f"Looted: {total_mooks} corpses")
+
+L 289: Add to list
+       output.append(f"Found: {total_items} items total")
+
+L 291: Add to list
+       output.append(f"Special items: {specials} (luck...
+
+L 294: Iterate over collection
+       total_custom = sum(len(v) for v in self.custom_...
+
+L 296: Add to list
+       output.append(f"Custom items in pool: {total_cu...
+
+L 298: Return value
+       return "\n".join(output)
+
+L 300: Function definition
+       def generate_hoard(self, tier="boss"):
+
+L 303: Add to list
+       output.append("=" * 50)
+
+L 304: Add to list
+       output.append("TREASURE HOARD")
+
+L 305: Add to list
+       output.append("=" * 50)
+
+L 309: Get user by ID
+       min_hoard_coin, max_hoard_coin = self.coin_tier...
+
+L 310: Random operation
+       base_coins = random.randint(min_hoard_coin * 10...
+
+L 311: Add to list
+       output.append(f"\nCoins: {base_coins} gold piec...
+
+L 314: Add to list
+       output.append("\nItems:")
+
+L 315: Iterate N times
+       for _ in range(random.randint(3, 8)):
+
+L 316: Random operation
+       roll = random.random()
+
+L 320: Random operation
+       item = random.choice(items)
+
+L 321: Add to list
+       output.append(f"  • ✨ {item} ✨")
+
+L 325: Add to list
+       output.append(f"  • {random.choice(items)}")
+
+L 329: Add to list
+       output.append(f"  • {random.choice(items)}")
+
+L 332: Add to list
+       output.append(f"\n[{random.choice(self.propheci...
+
+L 334: Return value
+       return "\n".join(output)
+
+L 336: Function definition
+       def main():
+
+L 338: Import module
+       import argparse
+
+L 374: Join strings
+       item = ' '.join(args.insert[1:])
+
+L 376: Debug output
+       print(result)
+
+L 377: Return value
+       return # Exit after handling custom item operation
+
+L 380: Debug output
+       print("=" * 50)
+
+L 381: Debug output
+       print("CUSTOM ITEMS")
+
+L 382: Debug output
+       print("=" * 50)
+
+L 387: Debug output
+       print(f"\n{category.upper()}:")
+
+L 388: Iterate over collection
+       for item in items:
+
+L 389: Debug output
+       print(f"  • {item}")
+
+L 390: Negative condition check
+       if not found_custom:
+
+L 391: Debug output
+       print("\nNo custom items yet. Use --insert to a...
+
+L 392: Return value
+       return # Exit after listing custom items
+
+L 403: Error handling block
+       try:
+
+L 404: File operation with auto-close
+       with open(args.export, 'w') as f:
+
+L 405: Write JSON to file
+       json.dump(all_items, f, indent=2)
+
+L 406: Debug output
+       print(f"Exported all default and custom items t...
+
+L 407: Catch specific exception
+       except IOError as e:y
+
+L 408: Debug output
+       print(f"Error exporting items to {args.export}:...
+
+L 409: Return value
+       return # Exit after exporting
+
+L 413: Debug output
+       print(looter.generate_hoard(args.tier))
+
+L 420: Debug output
+       print(json.dumps(loot, indent=2))
+
+L 422: Debug output
+       print(looter.format_loot(loot, args.names))
+

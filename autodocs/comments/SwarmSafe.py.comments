@@ -1,0 +1,50 @@
+Comments for ./comms_too/container_swarm/SwarmSafe.py:
+--------------------------------------------------
+L   7: Import module
+       from http.server import HTTPServer, BaseHTTPReq...
+
+L   8: Import module
+       from pathlib import Path
+
+L   9: Import module
+       from datetime import datetime
+
+L  14: Random operation
+       'random.txt',
+
+L  19: Class definition
+       class SwarmHandler(BaseHTTPRequestHandler):
+
+L  20: Function definition
+       def do_GET(self):
+
+L  22: Remove whitespace
+       filename = self.path[7:].strip('/')
+
+L  32: Path object creation
+       filepath = Path(filename)
+
+L  33: Negative condition check
+       if not filepath.exists():
+
+L  36: Get current datetime
+       filepath.write_text(f"=== Swarm {filename} star...
+
+L  39: File operation with auto-close
+       with open(filepath, 'rb') as f:
+
+L  48: Function definition
+       def do_POST(self):
+
+L  51: Remove whitespace
+       filename = self.path[7:].strip('/')
+
+L  60: Path object creation
+       filepath = Path(filename)
+
+L  65: File operation with auto-close
+       with open(filepath, 'ab') as f:
+
+L  76: Debug output
+       print("MLSwarm HTTP Server running on http://lo...
+

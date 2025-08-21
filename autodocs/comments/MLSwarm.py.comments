@@ -1,0 +1,179 @@
+Comments for ./comms_too/MLSwarm.py:
+--------------------------------------------------
+L  13: Import module
+       import sys
+
+L  14: Import module
+       import time
+
+L  15: Import module
+       import os
+
+L  16: Import module
+       import threading
+
+L  17: Import module
+       from datetime import datetime
+
+L  18: Import module
+       from pathlib import Path
+
+L  19: Import module
+       import argparse
+
+L  20: Import module
+       import getpass  # A more reliable way to get th...
+
+L  22: Class definition
+       class MLSwarm:
+
+L  24: Class definition
+       A class to handle the shared file chat logic.
+
+L  26: Constructor method
+       def __init__(self, file_path='swarm.txt', nick=...
+
+L  27: Path object creation
+       self.file_path = Path(file_path)
+
+L  33: Function definition
+       def start(self):
+
+L  37: Error handling block
+       try:
+
+L  38: File operation with auto-close
+       with open(self.file_path, 'w') as f:
+
+L  39: Get current datetime
+       f.write(f"=== Swarm started by {self.nick} at {...
+
+L  40: Debug output
+       print(f"Swarm file started at: {self.file_path}")
+
+L  41: Catch specific exception
+       except IOError as e:
+
+L  42: Debug output
+       print(f"Error: Could not create file at {self.f...
+
+L  43: Exit program
+       sys.exit(1)
+
+L  45: Function definition
+       def send(self, message):
+
+L  49: Get current datetime
+       timestamp = datetime.now().strftime('%H:%M')
+
+L  50: Error handling block
+       try:
+
+L  52: File operation with auto-close
+       with open(self.file_path, 'a') as f:
+
+L  54: Catch specific exception
+       except IOError as e:
+
+L  55: Debug output
+       print(f"Error: Could not write to file at {self...
+
+L  57: Function definition
+       def get_new_lines(self):
+
+L  62: Negative condition check
+       if not self.file_path.exists():
+
+L  63: Explicit null return
+       return None
+
+L  65: Error handling block
+       try:
+
+L  68: Return value
+       return []
+
+L  71: File operation with auto-close
+       with open(self.file_path, 'rb') as f:
+
+L  83: Return value
+       # Ensure we don't return an empty list if the l...
+
+L  85: Return value
+       return new_lines if new_content.strip() else []
+
+L  88: Debug output
+       print(f"Error reading file: {e}", file=sys.stderr)
+
+L  89: Explicit null return
+       return None
+
+L  91: Function definition
+       def watch_thread(self):
+
+L  96: Conditional loop
+       while self.running:
+
+L 102: Debug output
+       print('\n'.join(new_lines))
+
+L 106: Pause execution
+       time.sleep(1)
+
+L 108: Function definition
+       def watch(self):
+
+L 112: Debug output
+       print(f"Watching {self.file_path} as {self.nick}")
+
+L 113: Debug output
+       print("Type messages and press Enter. Type /qui...
+
+L 116: Check existence
+       if self.file_path.exists():
+
+L 117: File operation with auto-close
+       with open(self.file_path, 'r') as f:
+
+L 118: Debug output
+       print(f.read(), end='')
+
+L 126: Error handling block
+       try:
+
+L 127: Conditional loop
+       while self.running:
+
+L 134: Remove whitespace
+       elif message.strip():
+
+L 141: Debug output
+       print("\nExiting swarm...")
+
+L 143: Function definition
+       def show_history(self):
+
+L 147: Check existence
+       if self.file_path.exists():
+
+L 148: Error handling block
+       try:
+
+L 149: File operation with auto-close
+       with open(self.file_path, 'r') as f:
+
+L 150: Debug output
+       print(f.read())
+
+L 151: Catch specific exception
+       except IOError as e:
+
+L 152: Debug output
+       print(f"Error: Could not read file at {self.fil...
+
+L 154: Debug output
+       print(f"No swarm file found at {self.file_path}...
+
+L 156: Function definition
+       def main():
+

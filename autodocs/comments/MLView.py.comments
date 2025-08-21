@@ -1,0 +1,95 @@
+Comments for ./image_stuff/MLView.py:
+--------------------------------------------------
+L   7: Import module
+       import tkinter as tk
+
+L   8: Import module
+       from PIL import Image, ImageTk, ImageFilter, Im...
+
+L   9: Import module
+       import sys
+
+L  10: Import module
+       from pathlib import Path
+
+L  12: Class definition
+       class MLView:
+
+L  13: Constructor method
+       def __init__(self, image_path):
+
+L  15: Path object creation
+       self.root.title(f"MLView - {Path(image_path).na...
+
+L  20: Error handling block
+       try:
+
+L  23: Catch specific exception
+       except Exception as e:
+
+L  24: Debug output
+       print(f"Error loading image: {e}")
+
+L  25: Exit program
+       sys.exit(1)
+
+L  43: Debug output
+       print("MLView - Space for emboss mode, R to res...
+
+L  45: Function definition
+       def calculate_fit(self, img_width, img_height, ...
+
+L  57: Return value
+       return new_width, new_height
+
+L  59: Function definition
+       def toggle_emboss(self, event=None):
+
+L  65: Debug output
+       print(f"Display mode: {mode}")
+
+L  67: Function definition
+       def reset_view(self, event=None):
+
+L  72: Function definition
+       def process_image(self):
+
+L  81: Return value
+       return img
+
+L  83: Return value
+       return self.image
+
+L  85: Function definition
+       def update_display(self):
+
+L 115: Function definition
+       def on_resize(self, event):
+
+L 120: Function definition
+       def run(self):
+
+L 124: Function definition
+       def main():
+
+L 127: Debug output
+       print("MLView - Simple image viewer")
+
+L 128: Debug output
+       print("Usage: mlview <image_file>")
+
+L 129: Debug output
+       print("\nControls:")
+
+L 130: Debug output
+       print("  Space - Toggle emboss mode")
+
+L 131: Debug output
+       print("  R     - Reset to normal view")
+
+L 132: Debug output
+       print("  Esc   - Quit")
+
+L 133: Exit program
+       sys.exit(1)
+

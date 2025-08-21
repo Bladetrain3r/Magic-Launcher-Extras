@@ -1,0 +1,227 @@
+Comments for ./comms_too/mlsocial-launcher.py:
+--------------------------------------------------
+L   7: Import module
+       import os
+
+L   8: Import module
+       import json
+
+L   9: Import module
+       import time
+
+L  10: Import module
+       from pathlib import Path
+
+L  11: Import module
+       from datetime import datetime
+
+L  13: Class definition
+       class MLSocial:
+
+L  14: Constructor method
+       def __init__(self):
+
+L  21: Create directory
+       self.posts.mkdir(parents=True, exist_ok=True)
+
+L  22: Create directory
+       self.friends.mkdir(exist_ok=True)
+
+L  25: Check existence
+       if self.config.exists():
+
+L  26: File operation with auto-close
+       with open(self.config) as f:
+
+L  27: Parse JSON from file
+       self.data = json.load(f)
+
+L  30: Get user by ID
+       "username": os.environ.get('USER', 'anon'),
+
+L  36: Function definition
+       def save_config(self):
+
+L  37: File operation with auto-close
+       with open(self.config, 'w') as f:
+
+L  38: Write JSON to file
+       json.dump(self.data, f, indent=2)
+
+L  40: Function definition
+       def post(self, content, type='text'):
+
+L  41: Create user endpoint
+       """Create a post (just write a file)"""
+
+L  42: Get current timestamp
+       timestamp = int(time.time())
+
+L  52: File operation with auto-close
+       with open(self.posts / filename, 'w') as f:
+
+L  53: Write JSON to file
+       json.dump(post_data, f)
+
+L  55: Return value
+       return filename
+
+L  57: Function definition
+       def timeline(self, limit=20):
+
+L  62: Iterate over collection
+       for post_file in self.posts.glob('*.*'):
+
+L  63: Error handling block
+       try:
+
+L  64: File operation with auto-close
+       with open(post_file) as f:
+
+L  65: Parse JSON from file
+       post = json.load(f)
+
+L  66: Add to list
+       all_posts.append(post)
+
+L  67: Catch all exceptions
+       except:
+
+L  71: Iterate over collection
+       for friend in self.friends.iterdir():
+
+L  73: Iterate over collection
+       for post_file in (friend / 'posts').glob('*.*'):
+
+L  74: Error handling block
+       try:
+
+L  75: File operation with auto-close
+       with open(post_file) as f:
+
+L  76: Parse JSON from file
+       post = json.load(f)
+
+L  77: Add to list
+       all_posts.append(post)
+
+L  78: Catch all exceptions
+       except:
+
+L  81: Return value
+       # Sort by time, return recent
+
+L  82: Get user by ID
+       all_posts.sort(key=lambda x: x.get('time', 0), ...
+
+L  83: Return value
+       return all_posts[:limit]
+
+L  85: Function definition
+       def follow(self, username, server=None):
+
+L  88: Create directory
+       friend_dir.mkdir(exist_ok=True)
+
+L  89: Create directory
+       (friend_dir / 'posts').mkdir(exist_ok=True)
+
+L  92: Add to list
+       self.data['following'].append(username)
+
+L  97: File operation with auto-close
+       with open(friend_dir / 'server.txt', 'w') as f:
+
+L 100: Function definition
+       def sync(self):
+
+L 102: Iterate over collection
+       for friend in self.data['following']:
+
+L 106: Check existence
+       if server_file.exists():
+
+L 107: File operation with auto-close
+       with open(server_file) as f:
+
+L 108: Remove whitespace
+       server = f.read().strip()
+
+L 114: Function definition
+       def generate_shortcuts(self):
+
+L 120: Import module
+       "command": f"python3 -c \"from mlsocial import ...
+
+L 128: Import module
+       "command": f"python3 -c \"from mlsocial import ...
+
+L 138: Iterate over collection
+       for friend in self.data['following']:
+
+L 139: Add to list
+       shortcuts['shortcuts'].append({
+
+L 145: Return value
+       return shortcuts
+
+L 147: Function definition
+       def cli(self):
+
+L 149: Import module
+       import sys
+
+L 159: Create user endpoint
+       self.post(content)
+
+L 160: Debug output
+       print("Posted!")
+
+L 167: Remove whitespace
+       server = input("Server (optional): ").strip() o...
+
+L 169: Debug output
+       print(f"Following {username}!")
+
+L 173: Debug output
+       print("Synced!")
+
+L 177: Debug output
+       print(json.dumps(self.generate_shortcuts(), ind...
+
+L 179: Function definition
+       def show_timeline(self):
+
+L 183: Negative condition check
+       if not posts:
+
+L 184: Debug output
+       print("No posts yet. Be the first!")
+
+L 187: Debug output
+       print("\n=== TIMELINE ===\n")
+
+L 188: Iterate over collection
+       for post in posts:
+
+L 189: Get user by ID
+       author = post.get('author', 'unknown')
+
+L 190: Get user by ID
+       content = post.get('content', '')
+
+L 191: Get user by ID
+       timestamp = post.get('time', 0)
+
+L 194: Debug output
+       print(f"[{author} @ {date}]")
+
+L 195: Debug output
+       print(f"{content}\n")
+
+L 196: Debug output
+       print("-" * 40)
+
+L 198: Function definition
+       def main():
+

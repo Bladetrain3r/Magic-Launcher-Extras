@@ -1,0 +1,200 @@
+Comments for ./rpg/doom/MLMookmaker.py:
+--------------------------------------------------
+L   8: Import module
+       import random
+
+L   9: Import module
+       import tkinter as tk
+
+L  10: Import module
+       from tkinter import ttk
+
+L  12: Class definition
+       class MLMookmaker:
+
+L  13: Constructor method
+       def __init__(self, root):
+
+L  94: Iterate N times
+       for i in range(1, 6):
+
+L 153: Function definition
+       def set_encounter(self, grunts, leaders):
+
+L 158: Function definition
+       def roll_hit_dice(self, hd):
+
+L 159: Return value
+       """Roll hit dice and return HP"""
+
+L 161: Iterate N times
+       for _ in range(hd):
+
+L 162: Random operation
+       total += random.randint(1, 8)  # Standard d8 hi...
+
+L 163: Return value
+       return total
+
+L 165: Function definition
+       def generate_hostile(self, threat_level, is_lea...
+
+L 172: Random operation
+       hd = max_hd + random.randint(0, 2)  # Leaders g...
+
+L 174: Random operation
+       hd = random.randint(min_hd, max_hd)
+
+L 179: Random operation
+       armor = random.choice(threat["armor"])
+
+L 180: Random operation
+       if is_leader and random.random() > 0.5:
+
+L 182: Replace substring
+       armor = armor.replace("AC ", "AC +1 ")
+
+L 185: Random operation
+       weapon, damage, special = random.choice(threat[...
+
+L 188: Replace substring
+       damage = damage.replace("d", "d+1 or d")  # Sli...
+
+L 201: Return value
+       return hostile
+
+L 203: Function definition
+       def generate_encounter(self):
+
+L 207: Get user by ID
+       threat_level = self.threat_var.get()
+
+L 208: Get user by ID
+       grunt_count = self.grunt_count.get()
+
+L 209: Get user by ID
+       leader_count = self.leader_count.get()
+
+L 215: Add to list
+       output.append("=" * 60)
+
+L 216: Add to list
+       output.append(f"ENCOUNTER: {threat_name}")
+
+L 217: Add to list
+       output.append(f"Total Hostiles: {grunt_count + ...
+
+L 218: Add to list
+       output.append("=" * 60)
+
+L 219: Add to list
+       output.append("")
+
+L 223: Add to list
+       output.append("LEADERS:")
+
+L 224: Add to list
+       output.append("-" * 30)
+
+L 225: Iterate N times
+       for i in range(leader_count):
+
+L 227: Add to list
+       output.append(f"Leader #{i+1}:")
+
+L 228: Add to list
+       output.append(f"  HD: {hostile['hd']} ({hostile...
+
+L 229: Add to list
+       output.append(f"  Armor: {hostile['armor']}")
+
+L 230: Add to list
+       output.append(f"  Weapon: {hostile['weapon']} (...
+
+L 232: Add to list
+       output.append(f"  Special: {hostile['special']}")
+
+L 233: Add to list
+       output.append("")
+
+L 237: Add to list
+       output.append("GRUNTS:")
+
+L 238: Add to list
+       output.append("-" * 30)
+
+L 242: Iterate N times
+       for i in range(grunt_count):
+
+L 247: Add to list
+       grunt_groups[key].append(hostile['hp'])
+
+L 252: Add to list
+       output.append(f"Group {group_num} ({len(hp_list...
+
+L 253: Add to list
+       output.append(f"  HD: {hd} (HP: {', '.join(map(...
+
+L 254: Add to list
+       output.append(f"  Armor: {armor}")
+
+L 257: Iterate N times
+       for hostile in [self.generate_hostile(threat_le...
+
+L 259: Add to list
+       output.append(f"  Weapon: {weapon} ({hostile['d...
+
+L 261: Add to list
+       output.append(f"  Special: {hostile['special']}")
+
+L 263: Add to list
+       output.append("")
+
+L 267: Add to list
+       output.append("=" * 60)
+
+L 268: Add to list
+       output.append("ENCOUNTER SUMMARY:")
+
+L 272: Iterate N times
+       for _ in range(leader_count))
+
+L 274: Iterate N times
+       for _ in range(grunt_count))
+
+L 278: Add to list
+       output.append(f"  Average HP: ~{avg_hp}")
+
+L 279: Add to list
+       output.append(f"  Threat Level: {threat_level}/5")
+
+L 283: Add to list
+       output.append(f"  Tactics: Leaders will coordin...
+
+L 285: Add to list
+       output.append(f"  Tactics: Will attempt to flan...
+
+L 287: Add to list
+       output.append(f"  Tactics: Disciplined, won't b...
+
+L 289: Add to list
+       output.append(f"  Tactics: May flee if half are...
+
+L 291: Add to list
+       output.append("=" * 60)
+
+L 294: Join strings
+       self.output_text.insert(tk.END, "\n".join(output))
+
+L 296: Function definition
+       def clear_output(self):
+
+L 300: Function definition
+       def copy_output(self):
+
+L 302: Get user by ID
+       text = self.output_text.get(1.0, tk.END)
+
+L 306: Function definition
+       def main():
+

@@ -1,0 +1,107 @@
+Comments for ./simple_data/Gemswarm/kv.py:
+--------------------------------------------------
+L   9: Import module
+       from flask import Flask, request, jsonify, send...
+
+L  10: Import module
+       import json
+
+L  11: Import module
+       import os
+
+L  12: Import module
+       from pathlib import Path
+
+L  19: Create directory
+       STORE_DIR.mkdir(parents=True, exist_ok=True)
+
+L  20: Debug output
+       print(f"K/V store directory: {STORE_DIR}")
+
+L  23: Decorator applied
+       @app.route('/kv/<key>', methods=['GET'])
+
+L  24: Function definition
+       def get_key(key):
+
+L  35: Negative condition check
+       if not file_path.is_relative_to(STORE_DIR):
+
+L  36: Return value
+       return jsonify({"error": "Invalid key"}), 400
+
+L  38: Error handling block
+       try:
+
+L  39: File operation with auto-close
+       with open(file_path, 'r', encoding='utf-8') as f:
+
+L  40: Return value
+       return f.read(), 200, {'Content-Type': 'applica...
+
+L  41: Catch specific exception
+       except FileNotFoundError:
+
+L  43: Return value
+       return jsonify({}), 404
+
+L  44: Catch specific exception
+       except Exception as e:
+
+L  45: Log stack trace
+       app.logger.error(f"Error reading file for key '...
+
+L  46: Return value
+       return jsonify({"error": "Internal server error...
+
+L  48: Decorator applied
+       @app.route('/kv/<key>', methods=['POST'])
+
+L  49: Function definition
+       def set_key(key):
+
+L  60: Negative condition check
+       if not file_path.is_relative_to(STORE_DIR):
+
+L  61: Return value
+       return jsonify({"error": "Invalid key"}), 400
+
+L  64: Negative condition check
+       if not request.is_json:
+
+L  65: Return value
+       return jsonify({"error": "Request body must be ...
+
+L  67: Error handling block
+       try:
+
+L  68: Return user data
+       data = request.get_json()
+
+L  69: File operation with auto-close
+       with open(file_path, 'w', encoding='utf-8') as f:
+
+L  70: Write JSON to file
+       json.dump(data, f, ensure_ascii=False, indent=2)
+
+L  72: Return value
+       return jsonify({"status": "ok", "message": f"Da...
+
+L  73: Catch specific exception
+       except Exception as e:
+
+L  74: Log stack trace
+       app.logger.error(f"Error writing file for key '...
+
+L  75: Return value
+       return jsonify({"error": "Internal server error...
+
+L  77: Decorator applied
+       @app.route('/')
+
+L  78: Function definition
+       def serve_index():
+
+L  82: Return value
+       return "The K/V-JSON backend is running. Please...
+

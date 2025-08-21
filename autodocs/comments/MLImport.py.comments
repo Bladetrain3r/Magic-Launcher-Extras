@@ -1,0 +1,125 @@
+Comments for ./launch_magically/MLImport.py:
+--------------------------------------------------
+L   3: Import module
+       MLImport - Magic Launcher bulk import tool
+
+L   8: Import module
+       import sys
+
+L   9: Import module
+       import json
+
+L  10: Import module
+       from pathlib import Path
+
+L  12: Function definition
+       def import_shortcuts(input_file=None):
+
+L  20: Check existence
+       if config_file.exists():
+
+L  21: Error handling block
+       try:
+
+L  22: File operation with auto-close
+       with open(config_file, 'r', encoding='utf-8') a...
+
+L  23: Parse JSON from file
+       shortcuts = json.load(f)
+
+L  24: Catch specific exception
+       except Exception as e:
+
+L  25: Debug output
+       print(f"Warning: Could not load existing config...
+
+L  28: Create directory
+       config_file.parent.mkdir(parents=True, exist_ok...
+
+L  40: Path object creation
+       if input_file and Path(input_file).exists():
+
+L  41: File operation with auto-close
+       with open(input_file, 'r', encoding='utf-8') as f:
+
+L  44: Debug output
+       print("Paste JSON entries (one per line), Ctrl+...
+
+L  52: Remove whitespace
+       line = line.strip()
+
+L  53: Negative condition check
+       if not line:
+
+L  56: Error handling block
+       try:
+
+L  58: Parse JSON from string
+       entry = json.loads(line)
+
+L  61: Get user by ID
+       name = entry.get('name')
+
+L  62: Get user by ID
+       path = entry.get('path')
+
+L  64: Negative condition check
+       if not name or not path:
+
+L  65: Debug output
+       print(f"Line {line_num}: Missing name or path")
+
+L  81: Import module
+       # Add to import folder
+
+L  84: Debug output
+       print(f"✓ Imported: {name}")
+
+L  86: Catch specific exception
+       except json.JSONDecodeError as e:
+
+L  87: Debug output
+       print(f"Line {line_num}: Invalid JSON - {e}")
+
+L  89: Catch specific exception
+       except Exception as e:
+
+L  90: Debug output
+       print(f"Line {line_num}: Error - {e}")
+
+L  96: Check existence
+       if config_file.exists():
+
+L  99: Debug output
+       print(f"\nBacked up existing config to {backup}")
+
+L 102: File operation with auto-close
+       with open(config_file, 'w', encoding='utf-8') a...
+
+L 103: Write JSON to file
+       json.dump(shortcuts, f, indent=2)
+
+L 105: Debug output
+       print(f"\n✅ Imported {imported} shortcuts to Im...
+
+L 106: Debug output
+       print(f"📁 Config saved to {config_file}")
+
+L 109: Debug output
+       print(f"\n⚠️  {failed} entries failed to import")
+
+L 111: Return value
+       return imported, failed
+
+L 113: Function definition
+       def main():
+
+L 117: Import module
+       print("""MLImport - Bulk import Magic Launcher ...
+
+L 120: Import module
+       mlimport [file]      Import from file
+
+L 121: Import module
+       mlimport            Import from stdin
+

@@ -1,0 +1,83 @@
+Comments for ./screen_prettification/MLMatrix.py:
+--------------------------------------------------
+L   7: Import module
+       import tkinter as tk
+
+L   8: Import module
+       import random
+
+L   9: Import module
+       import hashlib
+
+L  10: Import module
+       from pathlib import Path
+
+L  17: Class definition
+       class MLMatrix:
+
+L  18: Constructor method
+       def __init__(self, root):
+
+L  29: Check existence
+       if self.lock_file.exists():
+
+L  30: File operation with auto-close
+       with open(self.lock_file, 'r') as f:
+
+L  31: Remove whitespace
+       self.password_hash = f.read().strip()
+
+L  43: Iterate N times
+       self.drops = [random.randint(-20, 0) for _ in r...
+
+L  55: Function definition
+       def _animate(self):
+
+L  59: Iterate N times
+       for i in range(self.cols):
+
+L  65: Random operation
+       char = random.choice(CHARS)
+
+L  70: Iterate N times
+       for j in range(1, 64):
+
+L  75: Random operation
+       trail_char = random.choice(CHARS)
+
+L  85: Random operation
+       self.drops[i] = random.randint(-20, -1)
+
+L  88: Negative condition check
+       if not self.password_hash:
+
+L  96: Function definition
+       def _check_password(self, event):
+
+L  98: Negative condition check
+       if not self.password_hash or not event.char:
+
+L 101: Add to list
+       self.password_buffer.append(event.char)
+
+L 108: Join strings
+       password_str = ''.join(self.password_buffer)
+
+L 109: Iterate N times
+       for i in range(1, len(password_str) + 1):
+
+L 115: Function definition
+       def _check_escape(self, event):
+
+L 117: Negative condition check
+       if not self.password_hash:
+
+L 120: Function definition
+       def main():
+
+L 129: Error handling block
+       try:
+
+L 131: Catch specific exception
+       except KeyboardInterrupt:
+

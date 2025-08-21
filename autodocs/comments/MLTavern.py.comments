@@ -1,0 +1,116 @@
+Comments for ./rpg/default/MLTavern.py:
+--------------------------------------------------
+L   9: Import module
+       import random
+
+L  10: Import module
+       import tkinter as tk
+
+L  11: Import module
+       from tkinter import ttk
+
+L  13: Class definition
+       class MLBardSong:
+
+L  14: Constructor method
+       def __init__(self, root):
+
+L 154: Function definition
+       def generate_epic(self):
+
+L 156: Random operation
+       hero = random.choice(self.heroes)
+
+L 157: Random operation
+       villain = random.choice(self.villains)
+
+L 158: Random operation
+       location = random.choice(self.locations)
+
+L 159: Random operation
+       action = random.choice(self.actions)
+
+L 160: Random operation
+       consequence = random.choice(self.consequences)
+
+L 169: Random operation
+       random.choice(self.chorus_fragments)
+
+L 172: Return value
+       return "\n".join(lines)
+
+L 174: Function definition
+       def generate_romance(self):
+
+L 176: Random operation
+       start = random.choice(self.romantic_starts)
+
+L 177: Random operation
+       location = random.choice(self.locations)
+
+L 178: Random operation
+       end = random.choice(self.romantic_ends)
+
+L 190: Return value
+       return "\n".join(lines)
+
+L 192: Function definition
+       def generate_drunken(self):
+
+L 206: Random operation
+       selected = random.sample(snippets, random.randi...
+
+L 207: Add to list
+       selected.append("")
+
+L 208: Add to list
+       selected.append("Drink up! Drink up! Till we fa...
+
+L 210: Return value
+       return "\n".join(selected)
+
+L 212: Function definition
+       def generate_prophecy(self):
+
+L 225: Random operation
+       selected = random.sample(elements, 4)
+
+L 226: Add to list
+       selected.append("")
+
+L 227: Add to list
+       selected.append("Mark well! Mark well! The futu...
+
+L 229: Return value
+       return "\n".join(selected)
+
+L 231: Function definition
+       def generate_song(self):
+
+L 235: Get user by ID
+       song_type = self.song_type.get()
+
+L 239: Random operation
+       song_type = random.choice(["Epic Tale", "Tragic...
+
+L 244: Random operation
+       title = "The Ballad of " + random.choice([
+
+L 250: Random operation
+       title = "The Lament of " + random.choice([
+
+L 259: Random operation
+       title = "The Prophecy of " + random.choice([
+
+L 274: Function definition
+       def clear_output(self):
+
+L 278: Function definition
+       def copy_output(self):
+
+L 280: Get user by ID
+       text = self.output_text.get(1.0, tk.END)
+
+L 284: Function definition
+       def main():
+

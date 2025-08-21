@@ -1,0 +1,170 @@
+Comments for ./math_out/MLBarchart.py:
+--------------------------------------------------
+L  33: Import module
+       import sys
+
+L  34: Import module
+       import json
+
+L  35: Import module
+       import re
+
+L  36: Import module
+       from pathlib import Path
+
+L  38: Class definition
+       class MLBarchart:
+
+L  39: Constructor method
+       def __init__(self, width=50, height=20):
+
+L  44: Function definition
+       def parse_input(self, text):
+
+L  46: Split string
+       lines = text.strip().split('\n')
+
+L  48: Iterate over collection
+       for line in lines:
+
+L  49: Remove whitespace
+       line = line.strip()
+
+L  50: Negative condition check
+       if not line:
+
+L  54: Error handling block
+       try:
+
+L  55: Parse JSON from string
+       data = json.loads(line)
+
+L  58: Error handling block
+       try:
+
+L  59: Add to list
+       self.data.append((str(k), float(v)))
+
+L  60: Catch all exceptions
+       except:
+
+L  63: Catch all exceptions
+       except:
+
+L  68: Split string
+       parts = line.split(':', 1)
+
+L  69: Remove whitespace
+       label = parts[0].strip()
+
+L  70: Error handling block
+       try:
+
+L  71: Remove whitespace
+       count = float(parts[1].strip())
+
+L  72: Add to list
+       self.data.append((label, count))
+
+L  74: Catch all exceptions
+       except:
+
+L  78: Split string
+       parts = line.split(None, 1)
+
+L  80: Error handling block
+       try:
+
+L  84: Add to list
+       self.data.append((label, count))
+
+L  85: Catch all exceptions
+       except:
+
+L  87: Error handling block
+       try:
+
+L  90: Add to list
+       self.data.append((label, count))
+
+L  91: Catch all exceptions
+       except:
+
+L  94: Function definition
+       def render(self, sort=True, char='█'):
+
+L  96: Negative condition check
+       if not self.data:
+
+L  97: Return value
+       return "No data to display"
+
+L 107: Iterate over collection
+       max_val = max(d[1] for d in display_data) if di...
+
+L 110: Iterate over collection
+       max_label = max(len(d[0]) for d in display_data...
+
+L 116: Add to list
+       output.append(f"{'Label':<{max_label}} {'Count'...
+
+L 117: Add to list
+       output.append("-" * (max_label + self.width + 15))
+
+L 130: Add to list
+       output.append(f"{label:<{max_label}} {count:>10...
+
+L 134: Add to list
+       output.append("-" * (max_label + self.width + 15))
+
+L 135: Add to list
+       output.append(f"Showing top {self.height} of {l...
+
+L 137: Iterate over collection
+       total = sum(d[1] for d in self.data)
+
+L 138: Add to list
+       output.append(f"Total: {total:.0f}")
+
+L 140: Return value
+       return '\n'.join(output)
+
+L 142: Function definition
+       def main():
+
+L 143: Import module
+       import argparse
+
+L 159: Negative condition check
+       if not sys.stdin.isatty():
+
+L 162: Debug output
+       print("MLBarchart - Terminal bar charts")
+
+L 163: Debug output
+       print("Enter data as 'label: count' or 'label c...
+
+L 165: Infinite loop
+       while True:
+
+L 166: Error handling block
+       try:
+
+L 168: Negative condition check
+       if not line:
+
+L 170: Add to list
+       lines.append(line)
+
+L 173: Join strings
+       input_text = '\n'.join(lines)
+
+L 182: File operation with auto-close
+       with open(args.output, 'w') as f:
+
+L 184: Debug output
+       print(f"Chart saved to {args.output}")
+
+L 186: Debug output
+       print(output)
+

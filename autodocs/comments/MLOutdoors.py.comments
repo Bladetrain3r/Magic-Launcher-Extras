@@ -1,0 +1,218 @@
+Comments for ./rpg/default/MLOutdoors.py:
+--------------------------------------------------
+L   9: Import module
+       import random
+
+L  10: Import module
+       import argparse
+
+L  11: Import module
+       from pathlib import Path
+
+L  13: Class definition
+       class MLBattlemap:
+
+L  14: Constructor method
+       def __init__(self, width=20, height=20, biome='...
+
+L  18: Iterate N times
+       self.grid = [['.' for _ in range(width)] for _ ...
+
+L 105: Function definition
+       def add_cluster(self, x, y, symbol, size):
+
+L 107: Iterate N times
+       for _ in range(size):
+
+L 108: Random operation
+       dx = random.randint(-2, 2)
+
+L 109: Random operation
+       dy = random.randint(-2, 2)
+
+L 112: Random operation
+       if random.random() > 0.3:  # Some randomness
+
+L 115: Function definition
+       def add_river(self):
+
+L 118: Random operation
+       if random.random() > 0.5:
+
+L 120: Random operation
+       y = random.randint(self.height//4, 3*self.heigh...
+
+L 121: Iterate N times
+       for x in range(self.width):
+
+L 124: Random operation
+       if random.random() > 0.7 and 0 < y < self.heigh...
+
+L 125: Random operation
+       y += random.choice([-1, 1])
+
+L 129: Random operation
+       x = random.randint(self.width//4, 3*self.width//4)
+
+L 130: Iterate N times
+       for y in range(self.height):
+
+L 133: Random operation
+       if random.random() > 0.7 and 0 < x < self.width-1:
+
+L 134: Random operation
+       x += random.choice([-1, 1])
+
+L 137: Function definition
+       def add_road(self):
+
+L 139: Random operation
+       if random.random() > 0.5:
+
+L 141: Random operation
+       y = random.randint(self.height//4, 3*self.heigh...
+
+L 142: Iterate N times
+       for x in range(self.width):
+
+L 148: Random operation
+       x = random.randint(self.width//4, 3*self.width//4)
+
+L 149: Iterate N times
+       for y in range(self.height):
+
+L 154: Function definition
+       def generate(self):
+
+L 163: Iterate N times
+       for y in range(self.height):
+
+L 164: Iterate N times
+       for x in range(self.width):
+
+L 165: Random operation
+       if random.random() > 0.1:  # 90% base terrain
+
+L 173: Iterate N times
+       for _ in range(num_clusters):
+
+L 174: Random operation
+       cx = random.randint(0, self.width-1)
+
+L 175: Random operation
+       cy = random.randint(0, self.height-1)
+
+L 176: Random operation
+       size = random.randint(3, 8)
+
+L 180: Iterate N times
+       for y in range(self.height):
+
+L 181: Iterate N times
+       for x in range(self.width):
+
+L 182: Random operation
+       if random.random() < density:
+
+L 186: Random operation
+       if random.random() > 0.6:
+
+L 188: Random operation
+       if random.random() > 0.7:
+
+L 193: Iterate N times
+       for y in range(min(3, self.height)):
+
+L 194: Iterate N times
+       for x in range(min(3, self.width)):
+
+L 195: Random operation
+       if random.random() > 0.3:
+
+L 198: Function definition
+       def to_text(self):
+
+L 203: Iterate N times
+       output.append("   " + "".join(str(i%10) for i i...
+
+L 204: Add to list
+       output.append("  +" + "-"*self.width + "+")
+
+L 208: Join strings
+       row_str = "".join(row)
+
+L 209: Add to list
+       output.append(f"{y:2}|{row_str}|")
+
+L 212: Add to list
+       output.append("  +" + "-"*self.width + "+")
+
+L 215: Add to list
+       output.append("\nLEGEND:")
+
+L 217: Iterate over collection
+       for row in self.grid:
+
+L 220: Iterate over collection
+       for symbol in sorted(used_symbols):
+
+L 222: Add to list
+       output.append(f"  {symbol} = {self.legend[symbo...
+
+L 224: Add to list
+       output.append(f"\nBiome: {self.biome.upper()}")
+
+L 225: Add to list
+       output.append(f"Size: {self.width}x{self.height}")
+
+L 227: Return value
+       return "\n".join(output)
+
+L 229: Function definition
+       def to_image(self, filename):
+
+L 231: Error handling block
+       try:
+
+L 232: Import module
+       from PIL import Image, ImageDraw
+
+L 259: Iterate N times
+       for y in range(self.height):
+
+L 260: Iterate N times
+       for x in range(self.width):
+
+L 262: Get user by ID
+       color = colors.get(symbol, (200, 180, 140))
+
+L 270: Iterate N times
+       for x in range(self.width + 1):
+
+L 272: Iterate N times
+       for y in range(self.height + 1):
+
+L 277: Return value
+       return f"Map saved to {filename}"
+
+L 279: Catch specific exception
+       except ImportError:
+
+L 280: Return value
+       return "Error: PIL/Pillow not installed. Use 'p...
+
+L 282: Function definition
+       def main():
+
+L 307: Debug output
+       print(result)
+
+L 308: Negative condition check
+       if not result.startswith("Error"):
+
+L 309: Debug output
+       print(f"Biome: {args.biome}, Size: {args.width}...
+
+L 311: Debug output
+       print(battlemap.to_text())
+

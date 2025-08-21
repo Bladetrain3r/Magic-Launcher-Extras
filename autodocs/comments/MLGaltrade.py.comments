@@ -1,0 +1,422 @@
+Comments for ./games/MLGaltrade.py:
+--------------------------------------------------
+L  17: Import module
+       import os
+
+L  18: Import module
+       import json
+
+L  19: Import module
+       import time
+
+L  20: Import module
+       import random
+
+L  21: Import module
+       from math import sqrt
+
+L  22: Import module
+       import sys
+
+L  23: Import module
+       import select # For non-blocking input on Unix/...
+
+L  33: Class definition
+       class Economy:
+
+L  36: Class definition
+       This class contains only the simulation logic, ...
+
+L  38: Constructor method
+       def __init__(self, initial_goods=None, initial_...
+
+L  55: Function definition
+       def simulate(self, current_galaxy_tick):
+
+L  68: Iterate over collection
+       for agent in self.agents:
+
+L  70: Random operation
+       production_amount = agent['amt'] * agent['eff']...
+
+L  74: Random operation
+       consumption_needed = agent['need'] * (0.9 + ran...
+
+L 105: Function definition
+       def decay_to_baseline(self, current_galaxy_tick):
+
+L 126: Function definition
+       def get_goods_data(self):
+
+L 128: Return value
+       return self.goods
+
+L 130: Function definition
+       def get_agents_data(self):
+
+L 132: Return value
+       return self.agents
+
+L 134: Function definition
+       def to_dict(self):
+
+L 136: Return value
+       return {
+
+L 141: Decorator applied
+       @staticmethod
+
+L 142: Function definition
+       def from_dict(data):
+
+L 148: Return value
+       return Economy(initial_goods=data['goods'], ini...
+
+L 151: Class definition
+       class GalaxySimulator:
+
+L 155: Constructor method
+       def __init__(self):
+
+L 163: Function definition
+       def load_galaxy(self):
+
+L 165: Path operation
+       if os.path.exists(GALAXY_FILE):
+
+L 166: Debug output
+       print(f"Loading galaxy from {GALAXY_FILE}...")
+
+L 167: File operation with auto-close
+       with open(GALAXY_FILE, 'r') as f:
+
+L 168: Parse JSON from file
+       data = json.load(f)
+
+L 174: Return value
+       return galaxy_dict
+
+L 176: Debug output
+       print("Generating new galaxy...")
+
+L 177: Return value
+       return self._generate_new_galaxy()
+
+L 179: Function definition
+       def _generate_new_galaxy(self):
+
+L 203: Iterate over collection
+       for good in economy_instance.goods.values():
+
+L 204: Random operation
+       good['supply'] = random.uniform(50, 200)
+
+L 205: Random operation
+       good['demand'] = random.uniform(50, 200)
+
+L 206: Random operation
+       good['price'] = good['base'] * random.uniform(0...
+
+L 213: Return value
+       return galaxy
+
+L 215: Function definition
+       def save_galaxy(self):
+
+L 217: Debug output
+       print(f"Saving galaxy to {GALAXY_FILE}...")
+
+L 225: File operation with auto-close
+       with open(GALAXY_FILE, 'w') as f:
+
+L 226: Write JSON to file
+       json.dump(serializable_galaxy, f, indent=4)
+
+L 228: Function definition
+       def calculate_distance(self, sys1_name, sys2_na...
+
+L 232: Return value
+       return sqrt((s1['x'] - s2['x'])**2 + (s1['y'] -...
+
+L 234: Function definition
+       def update_galaxy_economies(self):
+
+L 249: Add to list
+       systems_with_distances.append((name, dist, data...
+
+L 265: Function definition
+       def display_current_system_economy(self):
+
+L 271: Debug output
+       print("=" * 70)
+
+L 272: Debug output
+       print(f"       MLELITE GALAXY SIMULATOR - TICK ...
+
+L 273: Debug output
+       print("       'Working economy, unlike some mul...
+
+L 274: Debug output
+       print("=" * 70)
+
+L 275: Debug output
+       print("\n--- MARKET PRICES ---")
+
+L 276: Debug output
+       print("-" * 40)
+
+L 285: Debug output
+       print(f"{name:8} ${good_data['price']:7.2f}[{ar...
+
+L 287: Debug output
+       print("\n--- ECONOMIC AGENTS ---")
+
+L 288: Debug output
+       print("-" * 40)
+
+L 289: Iterate over collection
+       for agent in current_economy.get_agents_data():
+
+L 290: Debug output
+       print(f"{agent['name']:8} +{agent['amt']*agent[...
+
+L 292: Debug output
+       print("\n--- YOUR ASSETS ---")
+
+L 293: Debug output
+       print("-" * 40)
+
+L 294: Debug output
+       print(f"Cash: ${self.player_cash:.2f}")
+
+L 295: Join strings
+       inventory_str = ' '.join([f'{k}:{v}' for k,v in...
+
+L 296: Debug output
+       print(f"Inventory: {inventory_str}")
+
+L 299: Debug output
+       print("\n--- GALAXY STATUS ---")
+
+L 300: Debug output
+       print("-" * 40)
+
+L 304: Iterate over collection
+       [(name, self.calculate_distance(self.current_sy...
+
+L 308: Debug output
+       print(f"You are in: {self.current_system_name} ...
+
+L 309: Debug output
+       print("Nearby Systems (Active Simulation):")
+
+L 312: Debug output
+       print(f"  - {name} (Dist: {dist:.1f})")
+
+L 313: Debug output
+       print(f"Distant Systems (Decaying Simulation): ...
+
+L 319: Add to list
+       trends.append(f"{name} shortage!")
+
+L 321: Add to list
+       trends.append(f"{name} glut!")
+
+L 324: Debug output
+       print(f"\nCURRENT SYSTEM TRENDS: {trends[0]}")
+
+L 326: Debug output
+       print("\nCURRENT SYSTEM TRENDS: Market is findi...
+
+L 328: Debug output
+       print("\n[B]uy [S]ell [J]ump [W]ait [Q]uit [?] ...
+
+L 330: Function definition
+       def buy_goods(self):
+
+L 335: Debug output
+       print("\nBuy what? ", end='')
+
+L 337: Debug output
+       print(f"[{i+1}]{name} ", end='')
+
+L 339: Error handling block
+       try:
+
+L 347: Debug output
+       print("Invalid amount.")
+
+L 358: Debug output
+       print(f"Bought {amount} {good_name} for ${cost:...
+
+L 360: Debug output
+       print("Can't afford or not enough supply!")
+
+L 362: Debug output
+       print("Invalid choice.")
+
+L 363: Catch specific exception
+       except ValueError:
+
+L 364: Debug output
+       print("Invalid input.")
+
+L 365: Pause execution
+       time.sleep(1) # Pause for user to read feedback
+
+L 367: Function definition
+       def sell_goods(self):
+
+L 372: Debug output
+       print("\nSell what? ", end='')
+
+L 374: Debug output
+       print(f"[{i+1}]{name}:{self.player_inventory[na...
+
+L 376: Error handling block
+       try:
+
+L 384: Debug output
+       print("Invalid amount.")
+
+L 395: Debug output
+       print(f"Sold {amount} {good_name} for ${revenue...
+
+L 397: Debug output
+       print("Not enough inventory!")
+
+L 399: Debug output
+       print("Invalid choice.")
+
+L 400: Catch specific exception
+       except ValueError:
+
+L 401: Debug output
+       print("Invalid input.")
+
+L 402: Pause execution
+       time.sleep(1) # Pause for user to read feedback
+
+L 404: Function definition
+       def jump_to_system(self):
+
+L 406: Debug output
+       print("\nAvailable Systems:")
+
+L 411: Debug output
+       print(f"[{i+1}]{name}{status}")
+
+L 413: Error handling block
+       try:
+
+L 418: Debug output
+       print(f"Jumping to {new_system}...")
+
+L 422: Pause execution
+       time.sleep(1)
+
+L 424: Debug output
+       print("Already in this system.")
+
+L 426: Debug output
+       print("Invalid system choice.")
+
+L 427: Catch specific exception
+       except ValueError:
+
+L 428: Debug output
+       print("Invalid input.")
+
+L 429: Pause execution
+       time.sleep(1)
+
+L 431: Function definition
+       def display_help(self):
+
+L 434: Debug output
+       print("--- HELP ---")
+
+L 435: Debug output
+       print("B: Buy goods in your current system.")
+
+L 436: Debug output
+       print("S: Sell goods from your inventory.")
+
+L 437: Debug output
+       print("J: Jump to a different star system.")
+
+L 438: Debug output
+       print("W: Advance the simulation by one galaxy ...
+
+L 439: Debug output
+       print("Q: Quit the simulator and save your prog...
+
+L 440: Debug output
+       print("?: Show this help message.")
+
+L 441: Debug output
+       print("\nPress Enter to continue...")
+
+L 444: Function definition
+       def run(self):
+
+L 446: Get current timestamp
+       last_galaxy_tick_time = time.time()
+
+L 447: Get current timestamp
+       last_display_time = time.time()
+
+L 449: Debug output
+       print("MLELITE - Loading galaxy and economic si...
+
+L 450: Debug output
+       print("(This actually works, unlike Star Citize...
+
+L 451: Pause execution
+       time.sleep(2)
+
+L 453: Conditional loop
+       while self.running:
+
+L 455: Get current timestamp
+       if time.time() - last_galaxy_tick_time > GALAXY...
+
+L 458: Get current timestamp
+       last_galaxy_tick_time = time.time()
+
+L 461: Get current timestamp
+       last_display_time = time.time()
+
+L 464: Get current timestamp
+       if time.time() - last_display_time > DISPLAY_UP...
+
+L 466: Get current timestamp
+       last_display_time = time.time()
+
+L 470: Import module
+       import msvcrt
+
+L 478: Remove whitespace
+       cmd = sys.stdin.readline().strip().lower() # Re...
+
+L 481: Pause execution
+       time.sleep(0.01) # Small sleep to prevent busy-...
+
+L 483: Debug output
+       print("\nSimulator shut down. Progress saved. C...
+
+L 485: Function definition
+       def _handle_command(self, cmd):
+
+L 499: Debug output
+       print("Manual galaxy tick applied.")
+
+L 500: Pause execution
+       time.sleep(1) # Pause to show message
+
+L 506: Debug output
+       print("Invalid command. Press '?' for help.")
+
+L 507: Pause execution
+       time.sleep(1) # Pause for user to read message
+

@@ -1,0 +1,113 @@
+Comments for ./text_processing/MLQpage.py:
+--------------------------------------------------
+L  18: Import module
+       import sys
+
+L  19: Import module
+       import os
+
+L  20: Import module
+       from pathlib import Path
+
+L  24: Import module
+       import codecs
+
+L  29: Function definition
+       def extract_section(content, section_name, end_...
+
+L  31: Split string
+       lines = content.split('\n')
+
+L  38: Iterate over collection
+       for line in lines:
+
+L  58: Add to list
+       result.append(line)
+
+L  60: Return value
+       return '\n'.join(result)
+
+L  62: Function definition
+       def list_sections(content):
+
+L  64: Split string
+       lines = content.split('\n')
+
+L  67: Iterate over collection
+       for line in lines:
+
+L  75: Add to list
+       sections.append(section_name)
+
+L  77: Return value
+       return sections
+
+L  79: Function definition
+       def main():
+
+L  82: Debug output
+       print(__doc__)
+
+L  83: Exit program
+       sys.exit(0)
+
+L  86: Path object creation
+       script = Path(sys.argv[0]).name
+
+L  87: Debug output
+       print(f"Usage: {script} <file> <section> [end_s...
+
+L  88: Debug output
+       print(f"       {script} <file> --list")
+
+L  89: Exit program
+       sys.exit(1)
+
+L  91: Path object creation
+       filepath = Path(sys.argv[1])
+
+L  95: Negative condition check
+       if not filepath.exists():
+
+L  96: Debug output
+       print(f"Error: File '{filepath}' not found!", f...
+
+L  97: Exit program
+       sys.exit(1)
+
+L  99: Error handling block
+       try:
+
+L 100: File operation with auto-close
+       with open(filepath, 'r', encoding='utf-8') as f:
+
+L 102: Catch specific exception
+       except Exception as e:
+
+L 103: Debug output
+       print(f"Error reading file: {e}", file=sys.stderr)
+
+L 104: Exit program
+       sys.exit(1)
+
+L 110: Debug output
+       print("Sections found:")
+
+L 111: Iterate over collection
+       for s in sections:
+
+L 112: Debug output
+       print(f"  {s}")
+
+L 114: Debug output
+       print("No sections found")
+
+L 115: Exit program
+       sys.exit(0)
+
+L 121: Debug output
+       print(result, end='')  # Don't add extra newline
+
+L 124: Exit program
+       sys.exit(1)
+

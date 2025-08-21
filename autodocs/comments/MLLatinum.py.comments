@@ -1,0 +1,206 @@
+Comments for ./electric_bards/MLLatinum.py:
+--------------------------------------------------
+L   7: Import module
+       import re
+
+L   8: Import module
+       import json
+
+L   9: Import module
+       from pathlib import Path
+
+L  10: Import module
+       from typing import Dict, List, Optional
+
+L  12: Class definition
+       class MLLatinum:
+
+L  18: Constructor method
+       def __init__(self):
+
+L 832: Return value
+       "return on": "reditus in",
+
+L 920: Function definition
+       def translate_word(self, word: str) -> str:
+
+L 934: Return value
+       return translation
+
+L 936: Negative condition check
+       # Return original if not found (probably a name...
+
+L 937: Return value
+       return word
+
+L 939: Function definition
+       def translate_phrase(self, phrase: str) -> str:
+
+L 945: Return value
+       return self.phrases[phrase_lower]
+
+L 950: Return value
+       return phrase_lower.replace(known_phrase, trans...
+
+L 952: Explicit null return
+       return None
+
+L 954: Function definition
+       def translate(self, text: str) -> str:
+
+L 959: Return value
+       return phrase_translation
+
+L 962: Split string
+       lines = text.split('\n')
+
+L 965: Iterate over collection
+       for line in lines:
+
+L 969: Add to list
+       translated_lines.append(phrase_trans)
+
+L 973: Split string
+       words = line.split()
+
+L 976: Iterate over collection
+       for word in words:
+
+L 983: Conditional loop
+       while clean_word and not clean_word[0].isalnum():
+
+L 988: Conditional loop
+       while clean_word and not clean_word[-1].isalnum():
+
+L 995: Add to list
+       translated_words.append(prefix + translated + s...
+
+L 997: Add to list
+       translated_words.append(word)  # Just punctuation
+
+L1001: Add to list
+       translated_lines.append(translated_line)
+
+L1003: Return value
+       return '\n'.join(translated_lines)
+
+L1005: Function definition
+       def apply_word_order(self, words: List[str]) ->...
+
+L1009: Return value
+       return ' '.join(words)
+
+L1011: Function definition
+       def translate_code_comment(self, code: str) -> ...
+
+L1013: Split string
+       lines = code.split('\n')
+
+L1016: Iterate over collection
+       for line in lines:
+
+L1019: Split string
+       parts = line.split('#', 1)
+
+L1021: Add to list
+       translated.append(parts[0] + '# ' + self.transl...
+
+L1023: Add to list
+       translated.append(line)
+
+L1025: Split string
+       parts = line.split('//', 1)
+
+L1027: Add to list
+       translated.append(parts[0] + '// ' + self.trans...
+
+L1029: Add to list
+       translated.append(line)
+
+L1031: Split string
+       parts = line.split('/*', 1)
+
+L1033: Add to list
+       translated.append(parts[0] + '/* ' + self.trans...
+
+L1035: Add to list
+       translated.append(line)
+
+L1037: Add to list
+       translated.append(line)
+
+L1039: Return value
+       return '\n'.join(translated)
+
+L1041: Function definition
+       def generate_error_message(self, error_type: st...
+
+L1058: Return value
+       return error_messages.get(error_type, error_mes...
+
+L1060: Function definition
+       def main():
+
+L1062: Import module
+       import argparse
+
+L1082: Debug output
+       print(translator.generate_error_message(args.er...
+
+L1084: File operation with auto-close
+       with open(args.file, 'r') as f:
+
+L1087: Debug output
+       print(translator.translate_code_comment(text))
+
+L1089: Debug output
+       print(translator.translate(text))
+
+L1093: Replace substring
+       text = args.text.replace("and", "and doth")
+
+L1094: Replace substring
+       text = text.replace("the", "the yet")
+
+L1097: Replace substring
+       result = result.replace("est", "est doth")
+
+L1098: Debug output
+       print(result)
+
+L1100: Debug output
+       print(translator.translate(args.text))
+
+L1103: Debug output
+       print("MLLatinum - Interactive Mode")
+
+L1104: Debug output
+       print("Type 'quit' to exit")
+
+L1105: Debug output
+       print("-" * 40)
+
+L1107: Infinite loop
+       while True:
+
+L1108: Error handling block
+       try:
+
+L1111: Debug output
+       print("Vale! (Farewell!)")
+
+L1115: Debug output
+       print(f"Latin> {result}")
+
+L1117: Catch specific exception
+       except KeyboardInterrupt:
+
+L1118: Debug output
+       print("\nVale! (Farewell!)")
+
+L1120: Catch specific exception
+       except Exception as e:
+
+L1121: Debug output
+       print(f"Erratum: {e}")
+

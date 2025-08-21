@@ -1,0 +1,302 @@
+Comments for ./simple_data/auth/kv-auth-manager.py:
+--------------------------------------------------
+L   8: Import module
+       import json
+
+L   9: Import module
+       import hashlib
+
+L  10: Import module
+       import secrets
+
+L  11: Import module
+       import sys
+
+L  12: Import module
+       import getpass
+
+L  13: Import module
+       from pathlib import Path
+
+L  14: Import module
+       from datetime import datetime
+
+L  22: Create directory
+       USERS_DIR.mkdir(parents=True, exist_ok=True)
+
+L  23: Create directory
+       DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+L  25: Function definition
+       def hash_token(token):
+
+L  27: Return value
+       return hashlib.sha256(token.encode()).hexdigest()
+
+L  29: Function definition
+       def generate_token():
+
+L  31: Return value
+       return secrets.token_urlsafe(32)
+
+L  33: Function definition
+       def add_user(username, token=None, is_admin=Fal...
+
+L  37: Check existence
+       if user_file.exists():
+
+L  38: Debug output
+       print(f"Error: User '{username}' already exists")
+
+L  39: Return value
+       return False
+
+L  41: Negative condition check
+       # Generate token if not provided
+
+L  42: Null check
+       if token is None:
+
+L  44: Debug output
+       print(f"Generated token: {token}")
+
+L  50: Get current datetime
+       'created': datetime.now().isoformat(),
+
+L  56: File operation with auto-close
+       with open(user_file, 'w') as f:
+
+L  57: Write JSON to file
+       json.dump(user_data, f, indent=2)
+
+L  61: Create directory
+       user_data_dir.mkdir(exist_ok=True)
+
+L  63: Debug output
+       print(f"✓ User '{username}' created")
+
+L  65: Debug output
+       print("  (with admin privileges)")
+
+L  67: Return value
+       return token
+
+L  69: Function definition
+       def remove_user(username):
+
+L  73: Negative condition check
+       if not user_file.exists():
+
+L  74: Debug output
+       print(f"Error: User '{username}' not found")
+
+L  75: Return value
+       return False
+
+L  80: Debug output
+       print("Cancelled")
+
+L  81: Return value
+       return False
+
+L  88: Check existence
+       if user_data_dir.exists():
+
+L  91: Import module
+       import shutil
+
+L  93: Debug output
+       print(f"  Data directory removed")
+
+L  95: Debug output
+       print(f"✓ User '{username}' removed")
+
+L  96: Return value
+       return True
+
+L  98: Function definition
+       def reset_token(username):
+
+L 102: Negative condition check
+       if not user_file.exists():
+
+L 103: Debug output
+       print(f"Error: User '{username}' not found")
+
+L 104: Explicit null return
+       return None
+
+L 110: File operation with auto-close
+       with open(user_file, 'r') as f:
+
+L 111: Parse JSON from file
+       user_data = json.load(f)
+
+L 114: Get current datetime
+       user_data['token_reset'] = datetime.now().isofo...
+
+L 116: File operation with auto-close
+       with open(user_file, 'w') as f:
+
+L 117: Write JSON to file
+       json.dump(user_data, f, indent=2)
+
+L 119: Debug output
+       print(f"✓ Token reset for '{username}'")
+
+L 120: Debug output
+       print(f"New token: {new_token}")
+
+L 121: Return value
+       return new_token
+
+L 123: Function definition
+       def list_users():
+
+L 127: Negative condition check
+       if not users:
+
+L 128: Debug output
+       print("No users found")
+
+L 131: Debug output
+       print(f"\nUsers ({len(users)}):")
+
+L 132: Debug output
+       print("-" * 60)
+
+L 134: Iterate over collection
+       for user_file in sorted(users):
+
+L 135: File operation with auto-close
+       with open(user_file, 'r') as f:
+
+L 136: Parse JSON from file
+       user_data = json.load(f)
+
+L 139: Get user by ID
+       created = user_data.get('created', 'Unknown')[:10]
+
+L 140: Get user by ID
+       last_seen = user_data.get('last_seen', 'Never')
+
+L 144: Get user by ID
+       admin = " [ADMIN]" if user_data.get('is_admin')...
+
+L 146: Debug output
+       print(f"  {username:<20} Created: {created}  La...
+
+L 148: Debug output
+       print("-" * 60)
+
+L 150: Function definition
+       def toggle_admin(username):
+
+L 154: Negative condition check
+       if not user_file.exists():
+
+L 155: Debug output
+       print(f"Error: User '{username}' not found")
+
+L 156: Return value
+       return False
+
+L 158: File operation with auto-close
+       with open(user_file, 'r') as f:
+
+L 159: Parse JSON from file
+       user_data = json.load(f)
+
+L 162: Get user by ID
+       user_data['is_admin'] = not user_data.get('is_a...
+
+L 164: File operation with auto-close
+       with open(user_file, 'w') as f:
+
+L 165: Write JSON to file
+       json.dump(user_data, f, indent=2)
+
+L 168: Debug output
+       print(f"✓ Admin privileges {status} for '{usern...
+
+L 169: Return value
+       return True
+
+L 171: Function definition
+       def main():
+
+L 174: Debug output
+       print("KV-Auth User Manager")
+
+L 175: Debug output
+       print("=" * 40)
+
+L 176: Debug output
+       print("\nUsage:")
+
+L 177: Debug output
+       print("  kv_auth_manager.py add <username> [--a...
+
+L 178: Debug output
+       print("  kv_auth_manager.py remove <username>")
+
+L 179: Debug output
+       print("  kv_auth_manager.py reset <username>")
+
+L 180: Debug output
+       print("  kv_auth_manager.py list")
+
+L 181: Debug output
+       print("  kv_auth_manager.py admin <username>")
+
+L 182: Debug output
+       print("\nExamples:")
+
+L 183: Debug output
+       print("  kv_auth_manager.py add alice --admin")
+
+L 184: Debug output
+       print("  kv_auth_manager.py reset bob")
+
+L 185: Debug output
+       print("  kv_auth_manager.py list")
+
+L 186: Exit program
+       sys.exit(1)
+
+L 192: Debug output
+       print("Error: Username required")
+
+L 193: Exit program
+       sys.exit(1)
+
+L 199: Remove whitespace
+       custom = input("Enter custom token (or press En...
+
+L 206: Debug output
+       print("Error: Username required")
+
+L 207: Exit program
+       sys.exit(1)
+
+L 212: Debug output
+       print("Error: Username required")
+
+L 213: Exit program
+       sys.exit(1)
+
+L 217: SQL with placeholders
+       list_users()
+
+L 221: Debug output
+       print("Error: Username required")
+
+L 222: Exit program
+       sys.exit(1)
+
+L 226: Debug output
+       print(f"Error: Unknown command '{command}'")
+
+L 227: Exit program
+       sys.exit(1)
+

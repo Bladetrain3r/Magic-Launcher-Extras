@@ -1,0 +1,380 @@
+Comments for ./simple_data/auth/kv-auth-server.py:
+--------------------------------------------------
+L   8: Import module
+       from flask import Flask, request, jsonify
+
+L   9: Import module
+       import json
+
+L  10: Import module
+       import hashlib
+
+L  11: Import module
+       import secrets
+
+L  12: Import module
+       from pathlib import Path
+
+L  13: Import module
+       from functools import wraps
+
+L  14: Import module
+       from datetime import datetime
+
+L  24: Iterate over collection
+       for dir in [STORE_DIR, USERS_DIR, DATA_DIR, PUB...
+
+L  25: Create directory
+       dir.mkdir(parents=True, exist_ok=True)
+
+L  27: Debug output
+       print(f"K/V store: {STORE_DIR}")
+
+L  28: Debug output
+       print(f"Users: {USERS_DIR}")
+
+L  29: Debug output
+       print(f"Protected data: {DATA_DIR}")
+
+L  30: Debug output
+       print(f"Public data: {PUBLIC_DIR}")
+
+L  33: Function definition
+       def hash_token(token):
+
+L  35: Return value
+       return hashlib.sha256(token.encode()).hexdigest()
+
+L  37: Function definition
+       def verify_auth():
+
+L  39: Get user by ID
+       auth_header = request.headers.get('Authorizatio...
+
+L  41: Negative condition check
+       if not auth_header.startswith('Bearer '):
+
+L  42: Explicit null return
+       return None, None
+
+L  44: Error handling block
+       try:
+
+L  46: Split string
+       auth_parts = auth_header[7:].split(':', 1)
+
+L  48: Explicit null return
+       return None, None
+
+L  54: Negative condition check
+       if not user_file.exists():
+
+L  55: Explicit null return
+       return None, None
+
+L  58: File operation with auto-close
+       with open(user_file, 'r') as f:
+
+L  59: Parse JSON from file
+       user_data = json.load(f)
+
+L  63: Get current datetime
+       user_data['last_seen'] = datetime.now().isoform...
+
+L  64: File operation with auto-close
+       with open(user_file, 'w') as f:
+
+L  65: Write JSON to file
+       json.dump(user_data, f, indent=2)
+
+L  66: Return value
+       return username, user_data
+
+L  68: Catch specific exception
+       except Exception as e:
+
+L  69: Log stack trace
+       app.logger.error(f"Auth error: {e}")
+
+L  71: Explicit null return
+       return None, None
+
+L  73: Function definition
+       def require_auth(f):
+
+L  75: Decorator applied
+       @wraps(f)
+
+L  76: Function definition
+       def decorated_function(*args, **kwargs):
+
+L  78: Null check
+       if username is None:
+
+L  79: Return value
+       return jsonify({"error": "Authentication requir...
+
+L  82: Return value
+       return f(*args, **kwargs)
+
+L  83: Return value
+       return decorated_function
+
+L  85: Function definition
+       def require_admin(f):
+
+L  87: Decorator applied
+       @wraps(f)
+
+L  88: Function definition
+       def decorated_function(*args, **kwargs):
+
+L  90: Null check
+       if username is None:
+
+L  91: Return value
+       return jsonify({"error": "Authentication requir...
+
+L  92: Negative condition check
+       if not user_data.get('is_admin', False):
+
+L  93: Return value
+       return jsonify({"error": "Admin privileges requ...
+
+L  96: Return value
+       return f(*args, **kwargs)
+
+L  97: Return value
+       return decorated_function
+
+L 100: Decorator applied
+       @app.route('/public/<key>', methods=['GET'])
+
+L 101: Function definition
+       def get_public(key):
+
+L 105: Negative condition check
+       if not file_path.is_relative_to(PUBLIC_DIR):
+
+L 106: Return value
+       return jsonify({"error": "Invalid key"}), 400
+
+L 108: Error handling block
+       try:
+
+L 109: File operation with auto-close
+       with open(file_path, 'r') as f:
+
+L 110: Return value
+       return f.read(), 200, {'Content-Type': 'applica...
+
+L 111: Catch specific exception
+       except FileNotFoundError:
+
+L 112: Return value
+       return jsonify({}), 404
+
+L 113: Catch specific exception
+       except Exception as e:
+
+L 114: Return value
+       return jsonify({"error": str(e)}), 500
+
+L 116: Decorator applied
+       @app.route('/public/<key>', methods=['POST'])
+
+L 117: Decorator applied
+       @require_auth
+
+L 118: Function definition
+       def set_public(key):
+
+L 122: Negative condition check
+       if not file_path.is_relative_to(PUBLIC_DIR):
+
+L 123: Return value
+       return jsonify({"error": "Invalid key"}), 400
+
+L 125: Error handling block
+       try:
+
+L 126: Return user data
+       data = request.get_json()
+
+L 128: Get current datetime
+       data['_modified_at'] = datetime.now().isoformat()
+
+L 130: File operation with auto-close
+       with open(file_path, 'w') as f:
+
+L 131: Write JSON to file
+       json.dump(data, f, indent=2)
+
+L 133: Return value
+       return jsonify({"status": "ok", "key": key}), 200
+
+L 134: Catch specific exception
+       except Exception as e:
+
+L 135: Return value
+       return jsonify({"error": str(e)}), 500
+
+L 138: Decorator applied
+       @app.route('/kv/<key>', methods=['GET'])
+
+L 139: Decorator applied
+       @require_auth
+
+L 140: Function definition
+       def get_protected(key):
+
+L 144: Split string
+       owner, subkey = key.split('/', 1)
+
+L 145: Get user by ID
+       if owner != request.username and not request.us...
+
+L 146: Return value
+       return jsonify({"error": "Access denied"}), 403
+
+L 152: Negative condition check
+       if not file_path.is_relative_to(DATA_DIR):
+
+L 153: Return value
+       return jsonify({"error": "Invalid key"}), 400
+
+L 155: Error handling block
+       try:
+
+L 156: File operation with auto-close
+       with open(file_path, 'r') as f:
+
+L 157: Return value
+       return f.read(), 200, {'Content-Type': 'applica...
+
+L 158: Catch specific exception
+       except FileNotFoundError:
+
+L 159: Return value
+       return jsonify({}), 404
+
+L 160: Catch specific exception
+       except Exception as e:
+
+L 161: Return value
+       return jsonify({"error": str(e)}), 500
+
+L 163: Decorator applied
+       @app.route('/kv/<key>', methods=['POST'])
+
+L 164: Decorator applied
+       @require_auth
+
+L 165: Function definition
+       def set_protected(key):
+
+L 169: Split string
+       owner, subkey = key.split('/', 1)
+
+L 170: Get user by ID
+       if owner != request.username and not request.us...
+
+L 171: Return value
+       return jsonify({"error": "Access denied"}), 403
+
+L 176: Negative condition check
+       if not file_path.is_relative_to(DATA_DIR):
+
+L 177: Return value
+       return jsonify({"error": "Invalid key"}), 400
+
+L 180: Create directory
+       file_path.parent.mkdir(parents=True, exist_ok=T...
+
+L 182: Error handling block
+       try:
+
+L 183: Return user data
+       data = request.get_json()
+
+L 185: Get current datetime
+       data['_modified_at'] = datetime.now().isoformat()
+
+L 187: File operation with auto-close
+       with open(file_path, 'w') as f:
+
+L 188: Write JSON to file
+       json.dump(data, f, indent=2)
+
+L 190: Return value
+       return jsonify({"status": "ok", "key": key}), 200
+
+L 191: Catch specific exception
+       except Exception as e:
+
+L 192: Return value
+       return jsonify({"error": str(e)}), 500
+
+L 195: Decorator applied
+       @app.route('/users', methods=['GET'])
+
+L 196: Decorator applied
+       @require_admin
+
+L 197: Function definition
+       def list_users():
+
+L 200: Iterate over collection
+       for user_file in USERS_DIR.glob("*.json"):
+
+L 201: File operation with auto-close
+       with open(user_file, 'r') as f:
+
+L 202: Parse JSON from file
+       user_data = json.load(f)
+
+L 206: Get user by ID
+       'created': user_data.get('created'),
+
+L 207: Get user by ID
+       'last_seen': user_data.get('last_seen'),
+
+L 208: Get user by ID
+       'is_admin': user_data.get('is_admin', False)
+
+L 210: Add to list
+       users.append(safe_data)
+
+L 212: Return value
+       return jsonify(users), 200
+
+L 215: Decorator applied
+       @app.route('/')
+
+L 216: Function definition
+       def index():
+
+L 218: Return value
+       return jsonify({
+
+L 224: SQL with placeholders
+       "users": "/users (admin only)"
+
+L 231: Debug output
+       print("\nKV-Auth Server")
+
+L 232: Debug output
+       print("=" * 40)
+
+L 233: Debug output
+       print("Public data: No auth for GET, auth for P...
+
+L 234: Debug output
+       print("Protected data: Auth required for all op...
+
+L 235: Debug output
+       print("Auth format: 'Authorization: Bearer user...
+
+L 236: Debug output
+       print("=" * 40)
+

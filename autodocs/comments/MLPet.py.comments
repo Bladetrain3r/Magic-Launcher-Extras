@@ -1,0 +1,335 @@
+Comments for ./tamagotchi_neo/MLPet.py:
+--------------------------------------------------
+L   7: Import module
+       import json
+
+L   8: Import module
+       import time
+
+L   9: Import module
+       import random
+
+L  10: Import module
+       import sys
+
+L  11: Import module
+       import os
+
+L  12: Import module
+       import threading
+
+L  13: Import module
+       from pathlib import Path
+
+L  14: Import module
+       from datetime import datetime
+
+L  22: Class definition
+       class MLPet:
+
+L  23: Constructor method
+       def __init__(self):
+
+L  24: Create directory
+       PET_DIR.mkdir(exist_ok=True)
+
+L  26: Create in database
+       self.load_or_create()
+
+L  28: Function definition
+       def load_or_create(self):
+
+L  30: Check existence
+       if STATE_FILE.exists():
+
+L  31: File operation with auto-close
+       with open(STATE_FILE) as f:
+
+L  32: Parse JSON from file
+       state = json.load(f)
+
+L  42: Debug output
+       print("Welcome to MLPet!")
+
+L  43: Remove whitespace
+       self.name = input("Name your pet: ").strip() or...
+
+L  49: Get current timestamp
+       self.last_update = time.time()
+
+L  51: Debug output
+       print(f"\n{self.name} is born! Take good care o...
+
+L  52: Debug output
+       print("Commands: feed, play, sleep, warm, cool,...
+
+L  54: Function definition
+       def save(self):
+
+L  63: Get current timestamp
+       'last_update': time.time()
+
+L  65: File operation with auto-close
+       with open(STATE_FILE, 'w') as f:
+
+L  66: Write JSON to file
+       json.dump(state, f)
+
+L  68: Function definition
+       def calculate_mood(self):
+
+L  70: Negative condition check
+       if not self.alive:
+
+L  71: Return value
+       return "dead"
+
+L  77: Return value
+       return "happy"
+
+L  79: Return value
+       return "content"
+
+L  81: Return value
+       return "grumpy"
+
+L  83: Return value
+       return "miserable"
+
+L  85: Return value
+       return "dying"
+
+L  87: Function definition
+       def update_stats(self):
+
+L 105: Debug output
+       print(f"\n💀 {self.name} has died from neglect...")
+
+L 108: Debug output
+       print(f"\n😵 {self.name} is unconscious!")
+
+L 110: Function definition
+       def get_status(self):
+
+L 112: Negative condition check
+       if not self.alive:
+
+L 113: Return value
+       return f"{self.name} is dead. :("
+
+L 121: Add to list
+       status_parts.append("starving")
+
+L 123: Add to list
+       status_parts.append("hungry")
+
+L 125: Add to list
+       status_parts.append("stuffed")
+
+L 128: Add to list
+       status_parts.append("exhausted")
+
+L 130: Add to list
+       status_parts.append("tired")
+
+L 132: Add to list
+       status_parts.append("hyperactive")
+
+L 135: Add to list
+       status_parts.append("bored")
+
+L 137: Add to list
+       status_parts.append("ecstatic")
+
+L 140: Add to list
+       status_parts.append("freezing")
+
+L 142: Add to list
+       status_parts.append("overheating")
+
+L 145: Join strings
+       status = f"{self.name} is {' and '.join(status_...
+
+L 149: Return value
+       return f"{status} (Mood: {mood})"
+
+L 151: Function definition
+       def feed(self):
+
+L 153: Negative condition check
+       if not self.alive:
+
+L 154: Debug output
+       print(f"{self.name} is dead and cannot eat.")
+
+L 159: Debug output
+       print(f"🍔 {self.name} munches happily!")
+
+L 161: Function definition
+       def play(self):
+
+L 163: Negative condition check
+       if not self.alive:
+
+L 164: Debug output
+       print(f"{self.name} is dead and cannot play.")
+
+L 168: Debug output
+       print(f"{self.name} is too tired to play.")
+
+L 174: Debug output
+       print(f"🎮 {self.name} plays enthusiastically!")
+
+L 176: Function definition
+       def sleep(self):
+
+L 178: Negative condition check
+       if not self.alive:
+
+L 179: Debug output
+       print(f"{self.name} is in eternal sleep.")
+
+L 184: Debug output
+       print(f"😴 {self.name} takes a nice nap.")
+
+L 186: Function definition
+       def warm(self):
+
+L 188: Negative condition check
+       if not self.alive:
+
+L 192: Debug output
+       print(f"🔥 {self.name} warms up.")
+
+L 194: Function definition
+       def cool(self):
+
+L 196: Negative condition check
+       if not self.alive:
+
+L 200: Debug output
+       print(f"❄️ {self.name} cools down.")
+
+L 202: Function definition
+       def show_stats(self):
+
+L 204: Debug output
+       print(f"\n=== {self.name}'s Stats ===")
+
+L 205: Debug output
+       print(f"Hunger: {'█' * (int(self.hunger)//10)}{...
+
+L 206: Debug output
+       print(f"Energy: {'█' * (int(self.energy)//10)}{...
+
+L 207: Debug output
+       print(f"Fun:    {'█' * (int(self.fun)//10)}{'░'...
+
+L 208: Debug output
+       print(f"Temp:   {'█' * (int(self.temp)//10)}{'░...
+
+L 209: Debug output
+       print(f"Mood:   {self.calculate_mood()}")
+
+L 210: Debug output
+       print(f"Status: {'ALIVE' if self.alive else 'DE...
+
+L 212: Function definition
+       def background_update(self):
+
+L 216: Conditional loop
+       while self.running:
+
+L 221: Random operation
+       if random.random() < 0.05 and time.time() - las...
+
+L 222: Debug output
+       print(f"\n💭 {self.get_status()}")
+
+L 223: Debug output
+       print("Command: ", end='', flush=True)  # Re-pr...
+
+L 224: Get current timestamp
+       last_message = time.time()
+
+L 227: Check existence
+       if ACTION_FILE.exists():
+
+L 228: Error handling block
+       try:
+
+L 229: File operation with auto-close
+       with open(ACTION_FILE) as f:
+
+L 230: Remove whitespace
+       action = f.read().strip()
+
+L 239: Catch all exceptions
+       except:
+
+L 243: Error handling block
+       try:
+
+L 244: File operation with auto-close
+       with open(STATUS_FILE, 'w') as f:
+
+L 245: Generic error response
+       f.write(self.get_status())
+
+L 246: Catch all exceptions
+       except:
+
+L 251: Pause execution
+       time.sleep(1)
+
+L 253: Function definition
+       def run(self):
+
+L 255: Debug output
+       print(f"\n{self.get_status()}")
+
+L 256: Debug output
+       print("\nCommands: feed, play, sleep, warm, coo...
+
+L 263: Conditional loop
+       while self.running:
+
+L 264: Error handling block
+       try:
+
+L 265: Remove whitespace
+       cmd = input("Command: ").strip().lower()
+
+L 280: Debug output
+       print(self.get_status())
+
+L 282: Debug output
+       print("Commands: feed, play, sleep, warm, cool,...
+
+L 284: Debug output
+       print(f"Goodbye! {self.name} will miss you.")
+
+L 290: Debug output
+       print(f"{self.name} has been released.")
+
+L 296: Debug output
+       print(f"Unknown command: {cmd}")
+
+L 299: Debug output
+       print(f"\nSaving {self.name}...")
+
+L 307: Error handling block
+       try:
+
+L 309: Catch specific exception
+       except Exception as e:
+
+L 310: Debug output
+       print(f"Error: {e}")
+
+L 312: Debug output
+       print("Pet saved despite error!")
+
+L 313: Debug output
+       print("Goodbye!")
+

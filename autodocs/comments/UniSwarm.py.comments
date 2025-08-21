@@ -1,0 +1,176 @@
+Comments for ./comms_too/UniSwarm.py:
+--------------------------------------------------
+L   8: Import module
+       import tkinter as tk
+
+L   9: Import module
+       from tkinter import scrolledtext, messagebox, f...
+
+L  10: Import module
+       import threading
+
+L  11: Import module
+       import sys
+
+L  12: Import module
+       import os
+
+L  13: Import module
+       from datetime import datetime
+
+L  14: Import module
+       from pathlib import Path
+
+L  15: Import module
+       import time
+
+L  30: Class definition
+       class MLSwarmGUI:
+
+L  31: Constructor method
+       def __init__(self, root, swarm_file=None):
+
+L  38: Path object creation
+       self.swarm_file = Path(swarm_file) if swarm_fil...
+
+L  39: Get user by ID
+       self.nick = os.environ.get('USER', 'anon')
+
+L  50: Function definition
+       def _create_ui(self):
+
+L 205: Function definition
+       def _load_existing(self):
+
+L 207: Check existence
+       if self.swarm_file.exists():
+
+L 208: Error handling block
+       try:
+
+L 209: File operation with auto-close
+       with open(self.swarm_file, 'r', encoding='utf-8...
+
+L 214: Catch specific exception
+       except Exception as e:
+
+L 217: Function definition
+       def _append_to_chat(self, text, tag=None, is_in...
+
+L 226: Iterate over collection
+       for line in text.splitlines():
+
+L 232: Error handling block
+       try:
+
+L 254: Catch all exceptions
+       except:
+
+L 267: Function definition
+       def _watcher_thread(self):
+
+L 269: Conditional loop
+       while self.running:
+
+L 270: Error handling block
+       try:
+
+L 271: Check existence
+       if self.swarm_file.exists():
+
+L 275: File operation with auto-close
+       with open(self.swarm_file, 'rb') as f:
+
+L 286: Remove whitespace
+       if new_content.strip():
+
+L 291: Catch specific exception
+       except Exception as e:
+
+L 294: Pause execution
+       time.sleep(0.5)  # Check twice per second
+
+L 296: Function definition
+       def _start_watcher(self):
+
+L 301: Function definition
+       def send_message(self):
+
+L 303: Remove whitespace
+       message = self.input_entry.get().strip()
+
+L 304: Negative condition check
+       if not message:
+
+L 316: Remove whitespace
+       new_nick = message[6:].strip()
+
+L 325: Get current datetime
+       timestamp = datetime.now().strftime('%H:%M')
+
+L 328: Error handling block
+       try:
+
+L 329: File operation with auto-close
+       with open(self.swarm_file, 'a', encoding='utf-8...
+
+L 336: Catch specific exception
+       except Exception as e:
+
+L 337: Log stack trace
+       messagebox.showerror("Send Error", f"Could not ...
+
+L 339: Function definition
+       def toggle_autoscroll(self):
+
+L 346: Function definition
+       def clear_chat(self):
+
+L 353: Function definition
+       def change_nick(self):
+
+L 367: Function definition
+       def set_nick(event=None):
+
+L 368: Remove whitespace
+       new_nick = entry.get().strip()
+
+L 378: Function definition
+       def change_file(self):
+
+L 388: Path object creation
+       self.swarm_file = Path(filepath)
+
+L 392: Negative condition check
+       if not self.swarm_file.exists():
+
+L 393: File operation with auto-close
+       with open(self.swarm_file, 'w') as f:
+
+L 394: Get current datetime
+       f.write(f"=== Swarm started by {self.nick} at {...
+
+L 404: Function definition
+       def show_help(self):
+
+L 435: Function definition
+       def quit(self):
+
+L 440: Function definition
+       def main():
+
+L 442: Import module
+       import argparse
+
+L 446: Global error handler
+       help='Swarm file to use (default: swarm.txt)')
+
+L 460: Negative condition check
+       if not app.swarm_file.exists():
+
+L 461: File operation with auto-close
+       with open(app.swarm_file, 'w') as f:
+
+L 462: Get current datetime
+       f.write(f"=== Swarm started by {app.nick} at {d...
+

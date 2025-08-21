@@ -1,0 +1,431 @@
+Comments for ./electric_bards/MLBabel.py:
+--------------------------------------------------
+L   9: Import module
+       import sys
+
+L  10: Import module
+       import random
+
+L  11: Import module
+       import re
+
+L  12: Import module
+       import time
+
+L  13: Import module
+       import hashlib
+
+L  14: Import module
+       from pathlib import Path
+
+L  15: Import module
+       import argparse
+
+L  16: Import module
+       from collections import defaultdict
+
+L  17: Import module
+       from datetime import datetime
+
+L  19: Class definition
+       class MLBabel:
+
+L  20: Constructor method
+       def __init__(self, entropy=0.5, fragment_size=4...
+
+L  35: Random operation
+       random.seed(seed)
+
+L  38: Random operation
+       random.seed(int(time.time() * 1000) + int(entro...
+
+L  40: Function definition
+       def consume(self, text):
+
+L  43: Remove whitespace
+       text = text.strip()
+
+L  44: Negative condition check
+       if not text:
+
+L  48: Split string
+       fragments = re.split(r'(?<=[.!?])\s+|\n', text)
+
+L  50: Iterate over collection
+       for fragment in fragments:
+
+L  51: Remove whitespace
+       if len(fragment.strip()) > 0:
+
+L  52: Add to list
+       self.memory.append(fragment.strip())
+
+L  55: Split string
+       words = fragment.lower().split()
+
+L  59: Add to list
+       self.pairs[word].append(words[i + 1])
+
+L  61: Function definition
+       def dream(self, lines=10):
+
+L  63: Negative condition check
+       if not self.memory:
+
+L  64: Return value
+       return "◉ The void dreams of nothing yet... ◉"
+
+L  71: Iterate N times
+       for _ in range(lines):
+
+L  72: Random operation
+       if random.random() < 0.7:
+
+L  74: Random operation
+       fragment = random.choice(self.memory)
+
+L  75: Add to list
+       output.append(self._light_scramble(fragment))
+
+L  78: Random operation
+       f1, f2 = random.sample(self.memory, 2)
+
+L  79: Add to list
+       output.append(self._merge_fragments(f1, f2))
+
+L  83: Iterate N times
+       for _ in range(lines):
+
+L  84: Random operation
+       if self.pairs and random.random() < 0.6:
+
+L  86: Add to list
+       output.append(self._markov_line())
+
+L  89: Add to list
+       output.append(self._splice_fragments())
+
+L  93: Iterate N times
+       for _ in range(lines):
+
+L  94: Random operation
+       if random.random() < 0.3:
+
+L  96: Add to list
+       output.append(self._word_chaos())
+
+L  97: Random operation
+       elif random.random() < 0.6:
+
+L  99: Add to list
+       output.append(self._deep_scramble())
+
+L 102: Add to list
+       output.append(self._dimensional_fold())
+
+L 104: Return value
+       return '\n'.join(output)
+
+L 106: Function definition
+       def _light_scramble(self, text):
+
+L 108: Split string
+       words = text.split()
+
+L 109: Random operation
+       if len(words) > 3 and random.random() < self.en...
+
+L 111: Random operation
+       i, j = random.sample(range(len(words)), 2)
+
+L 113: Return value
+       return ' '.join(words)
+
+L 115: Function definition
+       def _merge_fragments(self, f1, f2):
+
+L 117: Split string
+       w1 = f1.split()
+
+L 118: Split string
+       w2 = f2.split()
+
+L 120: Negative condition check
+       if not w1 or not w2:
+
+L 121: Return value
+       return f1 + " " + f2
+
+L 123: Random operation
+       cut1 = random.randint(0, len(w1))
+
+L 124: Random operation
+       cut2 = random.randint(0, len(w2))
+
+L 126: Return value
+       return ' '.join(w1[:cut1] + w2[cut2:])
+
+L 128: Function definition
+       def _markov_line(self):
+
+L 130: Negative condition check
+       if not self.pairs:
+
+L 131: Return value
+       return self._splice_fragments()
+
+L 134: Random operation
+       current = random.choice(list(self.pairs.keys()))
+
+L 137: Iterate N times
+       for _ in range(random.randint(5, 20)):
+
+L 139: Random operation
+       current = random.choice(self.pairs[current])
+
+L 140: Add to list
+       result.append(current)
+
+L 143: Random operation
+       current = random.choice(list(self.pairs.keys()))
+
+L 144: Add to list
+       result.append(current)
+
+L 146: Return value
+       return ' '.join(result)
+
+L 148: Function definition
+       def _splice_fragments(self):
+
+L 150: Random operation
+       num_parts = random.randint(2, 4)
+
+L 153: Iterate N times
+       for _ in range(num_parts):
+
+L 154: Random operation
+       fragment = random.choice(self.memory)
+
+L 155: Split string
+       words = fragment.split()
+
+L 157: Random operation
+       start = random.randint(0, len(words)-1)
+
+L 158: Random operation
+       end = random.randint(start+1, min(start+8, len(...
+
+L 159: Add to list
+       parts.append(' '.join(words[start:end]))
+
+L 161: Return value
+       return ' '.join(parts)
+
+L 163: Function definition
+       def _word_chaos(self):
+
+L 165: Negative condition check
+       if not self.word_freq:
+
+L 166: Return value
+       return self._deep_scramble()
+
+L 172: Iterate N times
+       for _ in range(random.randint(5, 25)):
+
+L 173: Random operation
+       word = random.choice(word_list)
+
+L 174: Add to list
+       words.append(word)
+
+L 176: Return value
+       return ' '.join(words)
+
+L 178: Function definition
+       def _deep_scramble(self):
+
+L 180: Random operation
+       fragment = random.choice(self.memory)
+
+L 181: Split string
+       words = fragment.split()
+
+L 184: Iterate N times
+       for _ in range(int(self.entropy * 5)):
+
+L 185: Random operation
+       random.shuffle(words)
+
+L 188: Random operation
+       if random.random() < self.entropy * 0.3:
+
+L 189: Random operation
+       idx = random.randint(0, len(words)-1)
+
+L 193: Random operation
+       if len(words) > 3 and random.random() < self.en...
+
+L 194: Random operation
+       words.pop(random.randint(0, len(words)-1))
+
+L 196: Return value
+       return ' '.join(words)
+
+L 198: Function definition
+       def _dimensional_fold(self):
+
+L 201: Random operation
+       num_sources = random.randint(3, min(7, len(self...
+
+L 204: Iterate N times
+       for _ in range(num_sources):
+
+L 205: Random operation
+       fragment = random.choice(self.memory)
+
+L 206: Split string
+       words = fragment.split()
+
+L 209: Random operation
+       start = random.randint(0, max(0, len(words)-3))
+
+L 210: Random operation
+       end = min(start + random.randint(1, 5), len(wor...
+
+L 211: Add multiple items
+       word_soup.extend(words[start:end])
+
+L 214: Random operation
+       random.shuffle(word_soup)
+
+L 218: Iterate over collection
+       for word in word_soup[:random.randint(10, 30)]:
+
+L 219: Random operation
+       if random.random() < self.entropy * 0.1:
+
+L 221: Add to list
+       result.append(word[::-1])
+
+L 222: Random operation
+       elif random.random() < self.entropy * 0.05:
+
+L 224: Add to list
+       result.append(word + word.lower())
+
+L 226: Add to list
+       result.append(word)
+
+L 228: Return value
+       return ' '.join(result)
+
+L 230: Function definition
+       def stream_dream(self, delay=0.5):
+
+L 232: Debug output
+       print("◉ MLBabel Stream Mode - Ctrl+C to wake ◉...
+
+L 234: Error handling block
+       try:
+
+L 235: Infinite loop
+       while True:
+
+L 238: Debug output
+       print(line)
+
+L 241: Random operation
+       if random.random() < 0.1:
+
+L 242: Debug output
+       print("~" * random.randint(20, 60))
+
+L 244: Pause execution
+       time.sleep(delay)
+
+L 248: Random operation
+       self.entropy + random.uniform(-0.05, 0.05)))
+
+L 250: Catch specific exception
+       except KeyboardInterrupt:
+
+L 251: Debug output
+       print("\n\n◉ The dream ends... for now ◉")
+
+L 253: Function definition
+       def oracle(self, question):
+
+L 259: Split string
+       q_words = question.lower().split()
+
+L 263: Iterate over collection
+       for word in q_words:
+
+L 266: Iterate over collection
+       for fragment in self.memory:
+
+L 268: Add to list
+       self.memory.append(fragment)
+
+L 271: Random operation
+       random.seed(q_hash + int(time.time() / 100))  #...
+
+L 273: Random operation
+       intro = random.choice([
+
+L 281: Debug output
+       print(f"\n◉ {intro} ◉\n")
+
+L 282: Random operation
+       response = self.dream(lines=random.randint(3, 7))
+
+L 287: Return value
+       return response
+
+L 289: Function definition
+       def main():
+
+L 331: Iterate over collection
+       for filepath in args.files:
+
+L 332: Error handling block
+       try:
+
+L 333: File operation with auto-close
+       with open(filepath, 'r', encoding='utf-8', erro...
+
+L 336: Debug output
+       print(f"◉ Consumed {filepath} ({len(content)} b...
+
+L 337: Catch specific exception
+       except Exception as e:
+
+L 338: Debug output
+       print(f"◉ Could not consume {filepath}: {e}", f...
+
+L 341: Negative condition check
+       if not sys.stdin.isatty():
+
+L 344: Debug output
+       print(f"◉ Consumed stdin ({len(content)} bytes)...
+
+L 346: Debug output
+       print("◉ No input provided. The void remains em...
+
+L 347: Exit program
+       sys.exit(1)
+
+L 353: Debug output
+       print(response)
+
+L 359: Debug output
+       print("\n◉ The Babel dreams begin... ◉\n")
+
+L 361: Debug output
+       print(output)
+
+L 362: Debug output
+       print("\n◉ End of transmission ◉")
+

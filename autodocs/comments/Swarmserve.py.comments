@@ -1,0 +1,47 @@
+Comments for ./comms_too/Swarmserve.py:
+--------------------------------------------------
+L   7: Import module
+       from http.server import HTTPServer, BaseHTTPReq...
+
+L   8: Import module
+       from pathlib import Path
+
+L  10: Class definition
+       class SwarmHandler(BaseHTTPRequestHandler):
+
+L  11: Function definition
+       def do_GET(self):
+
+L  15: Path object creation
+       filepath = Path(filename)
+
+L  17: Check existence
+       if filepath.exists():
+
+L  19: Get user by ID
+       range_header = self.headers.get('Range')
+
+L  23: Split string
+       start = int(range_str.split('-')[0])
+
+L  25: File operation with auto-close
+       with open(filepath, 'rb') as f:
+
+L  39: File operation with auto-close
+       with open(filepath, 'rb') as f:
+
+L  55: File operation with auto-close
+       with open('swarm.html', 'rb') as f:
+
+L  58: Function definition
+       def do_POST(self):
+
+L  62: Path object creation
+       filepath = Path(filename)
+
+L  67: File operation with auto-close
+       with open(filepath, 'ab') as f:
+
+L  78: Debug output
+       print("MLSwarm HTTP Server running on http://lo...
+

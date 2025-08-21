@@ -1,0 +1,377 @@
+Comments for ./launch_magically/MLAdmin.py:
+--------------------------------------------------
+L   8: Import module
+       import os
+
+L   9: Import module
+       import sys
+
+L  10: Import module
+       import json
+
+L  11: Import module
+       from pathlib import Path
+
+L  14: Error handling block
+       try:
+
+L  15: Import module
+       import msvcrt
+
+L  16: Function definition
+       def get_key():
+
+L  17: Return value
+       return msvcrt.getch().decode('utf-8', errors='i...
+
+L  18: Catch specific exception
+       except ImportError:
+
+L  19: Import module
+       import termios, tty
+
+L  20: Function definition
+       def get_key():
+
+L  23: Error handling block
+       try:
+
+L  28: Return value
+       return key.lower()
+
+L  30: Class definition
+       class Colors:
+
+L  38: Decorator applied
+       @staticmethod
+
+L  39: Function definition
+       def clear():
+
+L  42: Class definition
+       class MLAdmin:
+
+L  43: Constructor method
+       def __init__(self):
+
+L  50: Function definition
+       def load_shortcuts(self):
+
+L  52: Check existence
+       if self.config_file.exists():
+
+L  53: Error handling block
+       try:
+
+L  54: File operation with auto-close
+       with open(self.config_file, 'r', encoding='utf-...
+
+L  55: Parse JSON from file
+       self.shortcuts = json.load(f)
+
+L  56: Catch all exceptions
+       except:
+
+L  60: Create directory
+       self.config_file.parent.mkdir(parents=True, exi...
+
+L  62: Function definition
+       def save_shortcuts(self):
+
+L  64: Error handling block
+       try:
+
+L  66: Check existence
+       if self.config_file.exists():
+
+L  71: File operation with auto-close
+       with open(self.config_file, 'w', encoding='utf-...
+
+L  72: Write JSON to file
+       json.dump(self.shortcuts, f, indent=2)
+
+L  75: Return value
+       return True
+
+L  76: Catch specific exception
+       except Exception as e:
+
+L  77: Debug output
+       print(f"Error saving: {e}")
+
+L  78: Return value
+       return False
+
+L  80: Function definition
+       def get_current_items(self):
+
+L  83: Iterate over collection
+       for folder in self.current_path:
+
+L  85: Return value
+       return current
+
+L  87: Function definition
+       def add_shortcut(self):
+
+L  90: Debug output
+       print("=== Add New Shortcut ===\n")
+
+L  92: Remove whitespace
+       name = input("Name: ").strip()
+
+L  93: Negative condition check
+       if not name:
+
+L  96: Debug output
+       print("\nType: [S]hortcut or [F]older?")
+
+L 107: Debug output
+       print(f"\nFolder '{name}' created")
+
+L 110: Remove whitespace
+       path = input("\nPath/Command: ").strip()
+
+L 111: Remove whitespace
+       args = input("Arguments (optional): ").strip()
+
+L 118: Debug output
+       print(f"\nShortcut '{name}' created")
+
+L 123: Function definition
+       def edit_shortcut(self):
+
+L 126: Negative condition check
+       if not items:
+
+L 127: Debug output
+       print("No items to edit")
+
+L 132: Debug output
+       print("=== Edit Shortcut ===\n")
+
+L 137: Get user by ID
+       type_str = "Folder" if item.get("type") == "fol...
+
+L 138: Debug output
+       print(f"[{i+1}] {name} ({type_str})")
+
+L 140: Debug output
+       print("\nSelect item to edit (0 to cancel): ", ...
+
+L 141: Error handling block
+       try:
+
+L 145: Catch all exceptions
+       except:
+
+L 150: Debug output
+       print(f"\nEditing: {name}")
+
+L 151: Debug output
+       print("Leave blank to keep current value\n")
+
+L 154: Remove whitespace
+       new_name = input(f"Name [{name}]: ").strip()
+
+L 160: Get user by ID
+       if item.get("type") != "folder":
+
+L 161: Get user by ID
+       current_path = item.get("path", "")
+
+L 162: Remove whitespace
+       new_path = input(f"Path [{current_path}]: ").st...
+
+L 166: Get user by ID
+       current_args = item.get("args", "")
+
+L 167: Remove whitespace
+       new_args = input(f"Args [{current_args}]: ").st...
+
+L 174: Debug output
+       print("\nChanges saved to memory")
+
+L 177: Function definition
+       def delete_shortcut(self):
+
+L 180: Negative condition check
+       if not items:
+
+L 181: Debug output
+       print("No items to delete")
+
+L 186: Debug output
+       print("=== Delete Shortcut ===\n")
+
+L 191: Get user by ID
+       type_str = "Folder" if item.get("type") == "fol...
+
+L 192: Debug output
+       print(f"[{i+1}] {name} ({type_str})")
+
+L 194: Debug output
+       print("\nSelect item to DELETE (0 to cancel): "...
+
+L 195: Error handling block
+       try:
+
+L 199: Catch all exceptions
+       except:
+
+L 204: Debug output
+       print(f"\n{Colors.RED}Delete '{name}'? This can...
+
+L 205: Debug output
+       print("Type 'yes' to confirm: ", end='')
+
+L 207: Remove whitespace
+       if input().strip().lower() == 'yes':
+
+L 210: Debug output
+       print(f"\n'{name}' deleted")
+
+L 212: Debug output
+       print("\nCancelled")
+
+L 216: Function definition
+       def draw_menu(self):
+
+L 222: Debug output
+       print(f"{Colors.BLUE}{Colors.WHITE}")
+
+L 223: Debug output
+       print("╔══════════════════════════════════════╗")
+
+L 224: Debug output
+       print(f"    ML-ADMIN v1.0    [{status:^9}]    ")
+
+L 225: Debug output
+       print("╠══════════════════════════════════════╣")
+
+L 229: Join strings
+       path_str = " > ".join(self.current_path)
+
+L 232: Debug output
+       print(f"║ {path_str:<36} ║")
+
+L 233: Debug output
+       print("╠══════════════════════════════════════╣")
+
+L 239: Debug output
+       print(f" Items in current location: {item_count...
+
+L 245: Get user by ID
+       if item.get("type") == "folder":
+
+L 247: Debug output
+       print(f"   {display_name:<34} ")
+
+L 250: Debug output
+       print(f"   ... and {item_count - 5} more{' '*24...
+
+L 253: Debug output
+       print("╠═══════════════════════════════════════╣")
+
+L 254: Debug output
+       print("║ [A]dd new shortcut/folder             ║")
+
+L 255: Debug output
+       print("║ [E]dit existing                       ║")
+
+L 256: Debug output
+       print("║ [D]elete                              ║")
+
+L 257: Debug output
+       print("║ [N]avigate into folder                ║")
+
+L 258: Debug output
+       print("║ [B]ack / [H]ome                       ║")
+
+L 259: Debug output
+       print("║ [S]ave changes                        ║")
+
+L 260: Debug output
+       print("║ [Q]uit                                ║")
+
+L 261: Debug output
+       print(f"╚══════════════════════════════════════...
+
+L 262: Debug output
+       print("\nSelect option: ", end='', flush=True)
+
+L 264: Function definition
+       def navigate(self):
+
+L 268: Get user by ID
+       if item.get("type") == "folder"]
+
+L 270: Negative condition check
+       if not folders:
+
+L 271: Debug output
+       print("No folders to navigate into")
+
+L 276: Debug output
+       print("=== Navigate ===\n")
+
+L 279: Debug output
+       print(f"[{i+1}] {name}")
+
+L 281: Debug output
+       print("\nSelect folder (0 to cancel): ", end='')
+
+L 282: Error handling block
+       try:
+
+L 286: Add to list
+       self.current_path.append(folder_name)
+
+L 287: Catch all exceptions
+       except:
+
+L 290: Function definition
+       def run(self):
+
+L 292: Infinite loop
+       while True:
+
+L 298: Debug output
+       print("\n\nYou have unsaved changes!")
+
+L 299: Debug output
+       print("Really quit? (y/n): ", end='')
+
+L 303: Debug output
+       print("ML-Admin closed")
+
+L 319: Debug output
+       print("\n\nConfiguration saved!")
+
+L 321: Debug output
+       print("\n\nFailed to save!")
+
+L 324: Function definition
+       def main():
+
+L 325: Error handling block
+       try:
+
+L 328: Catch specific exception
+       except KeyboardInterrupt:
+
+L 329: Debug output
+       print("\n\nInterrupted!")
+
+L 330: Catch specific exception
+       except Exception as e:
+
+L 331: Debug output
+       print(f"\nError: {e}")
+
+L 332: Import module
+       import traceback
+
+L 335: Debug output
+       print(Colors.RESET)
+

@@ -1,0 +1,173 @@
+Comments for ./screen_prettification/MLRiver.py:
+--------------------------------------------------
+L   7: Import module
+       import random
+
+L   8: Import module
+       import time
+
+L   9: Import module
+       import sys
+
+L  10: Import module
+       import os
+
+L  20: Class definition
+       class River:
+
+L  21: Constructor method
+       def __init__(self, width=None, height=None):
+
+L  31: Function definition
+       def init_riverbed(self):
+
+L  33: Iterate N times
+       for y in range(self.height):
+
+L  35: Iterate N times
+       for x in range(self.width):
+
+L  40: Negative condition check
+       if not in_river:
+
+L  42: Random operation
+       if random.random() < 0.1:
+
+L  43: Add to list
+       row.append(random.choice(PLANTS))
+
+L  44: Random operation
+       elif random.random() < 0.05:
+
+L  45: Add to list
+       row.append(random.choice(ROCKS))
+
+L  47: Add to list
+       row.append(' ')
+
+L  50: Random operation
+       if random.random() < 0.7:
+
+L  51: Add to list
+       row.append(random.choice(WATER))
+
+L  52: Random operation
+       elif random.random() < 0.15:
+
+L  53: Add to list
+       row.append(random.choice(FOAM))
+
+L  54: Random operation
+       elif random.random() < 0.01:
+
+L  55: Add to list
+       row.append(random.choice(FISH))
+
+L  57: Add to list
+       row.append(' ')
+
+L  58: Add to list
+       self.river.append(row)
+
+L  60: Function definition
+       def update_flow(self):
+
+L  66: Iterate N times
+       for x in range(self.width):
+
+L  70: Negative condition check
+       if not in_river:
+
+L  71: Random operation
+       if random.random() < 0.1:
+
+L  72: Add to list
+       new_row.append(random.choice(PLANTS))
+
+L  73: Random operation
+       elif random.random() < 0.05:
+
+L  74: Add to list
+       new_row.append(random.choice(ROCKS))
+
+L  76: Add to list
+       new_row.append(' ')
+
+L  79: Random operation
+       flow_var = random.random()
+
+L  81: Add to list
+       new_row.append(random.choice(WATER))
+
+L  83: Add to list
+       new_row.append(random.choice(FOAM))
+
+L  85: Add to list
+       new_row.append(random.choice(FISH))
+
+L  87: Add to list
+       new_row.append(' ')
+
+L  95: Iterate N times
+       for y in range(1, self.height - 1):
+
+L  96: Iterate N times
+       for x in range(1, self.width - 1):
+
+L  97: Random operation
+       if self.river[y][x] in WATER and random.random(...
+
+L  99: Random operation
+       if random.random() < 0.5 and self.river[y][x-1]...
+
+L 105: Function definition
+       def render(self):
+
+L 110: Iterate over collection
+       for row in self.river:
+
+L 111: Debug output
+       print(''.join(row))
+
+L 115: Debug output
+       print(status.center(self.width))
+
+L 118: Function definition
+       def run(self, fps=4):
+
+L 122: Error handling block
+       try:
+
+L 126: Infinite loop
+       while True:
+
+L 129: Pause execution
+       time.sleep(frame_delay)
+
+L 131: Catch specific exception
+       except KeyboardInterrupt:
+
+L 134: Debug output
+       print("\n\nRiver flow terminated. May your stre...
+
+L 135: Exit program
+       sys.exit(0)
+
+L 137: Function definition
+       def main():
+
+L 143: Error handling block
+       try:
+
+L 146: Catch all exceptions
+       except:
+
+L 147: Debug output
+       print(f"Usage: {sys.argv[0]} [fps]")
+
+L 148: Debug output
+       print(f"  fps: frames per second (1-30, default...
+
+L 149: Exit program
+       sys.exit(1)
+

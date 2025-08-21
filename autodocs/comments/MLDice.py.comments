@@ -1,0 +1,89 @@
+Comments for ./rpg/default/MLDice.py:
+--------------------------------------------------
+L   9: Import module
+       import tkinter as tk
+
+L  10: Import module
+       from tkinter import ttk
+
+L  11: Import module
+       import random
+
+L  12: Import module
+       import re
+
+L  14: Class definition
+       class MLDice:
+
+L  15: Constructor method
+       def __init__(self, root):
+
+L 120: Function definition
+       def parse_dice(self, dice_str):
+
+L 123: Split string
+       parts = dice_str.lower().replace(' ', '').split...
+
+L 128: Regex pattern match
+       match = re.match(r'(\d+)d(\d+)([+-]?\d*)', base)
+
+L 129: Negative condition check
+       if not match:
+
+L 130: Explicit null return
+       return None
+
+L 136: Return value
+       return num_dice, die_size, modifier, command
+
+L 138: Function definition
+       def roll_dice(self, dice_str):
+
+L 141: Negative condition check
+       if not parsed:
+
+L 148: Iterate N times
+       rolls = sorted([random.randint(1, die_size) for...
+
+L 189: Function definition
+       def roll_custom(self):
+
+L 191: Get user by ID
+       dice_str = self.custom_entry.get()
+
+L 195: Function definition
+       def roll_advantage(self, is_advantage):
+
+L 197: Random operation
+       roll1 = random.randint(1, 20)
+
+L 198: Random operation
+       roll2 = random.randint(1, 20)
+
+L 212: Function definition
+       def roll_stats(self):
+
+L 217: Iterate N times
+       for i in range(6):
+
+L 218: Iterate N times
+       rolls = sorted([random.randint(1, 6) for _ in r...
+
+L 222: Add to list
+       stats.append(total)
+
+L 223: Add to list
+       details.append(f"{rolls} drop {dropped} = {tota...
+
+L 234: Function definition
+       def add_to_history(self, text):
+
+L 236: Add to list
+       self.history.append(text)
+
+L 240: Function definition
+       def clear_history(self):
+
+L 245: Function definition
+       def main():
+

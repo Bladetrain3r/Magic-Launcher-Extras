@@ -1,0 +1,218 @@
+Comments for ./text_processing/MLNukenul.py:
+--------------------------------------------------
+L  10: Import module
+       import sys
+
+L  11: Import module
+       import os
+
+L  12: Import module
+       from pathlib import Path
+
+L  14: Class definition
+       class MLNukeNul:
+
+L  20: Constructor method
+       def __init__(self):
+
+L  25: Iterate over collection
+       for c in 'abcdefghijklmnopqrstuvwxyz':
+
+L  28: Iterate over collection
+       for c in '0123456789':
+
+L  58: Function definition
+       def nuke_file(self, filepath, output_path=None):
+
+L  63: Error handling block
+       try:
+
+L  65: File operation with auto-close
+       with open(filepath, 'rb') as f:
+
+L  72: Null check
+       if output_path is None:
+
+L  77: File operation with auto-close
+       with open(output_path, 'w', encoding='utf-8') a...
+
+L  85: Debug output
+       print(f"File: {filepath}")
+
+L  86: Debug output
+       print(f"Original: {original_size:,} bytes")
+
+L  87: Debug output
+       print(f"Cleaned: {cleaned_size:,} bytes")
+
+L  88: Debug output
+       print(f"Destroyed: {destroyed:,} bytes ({destro...
+
+L  89: Debug output
+       print(f"Output: {output_path}")
+
+L  91: Return value
+       return cleaned
+
+L  93: Catch specific exception
+       except Exception as e:
+
+L  94: Debug output
+       print(f"Error nuking file: {e}")
+
+L  95: Explicit null return
+       return None
+
+L  97: Function definition
+       def nuke_bytes(self, data):
+
+L 105: Iterate over collection
+       for byte in data:
+
+L 107: Error handling block
+       try:
+
+L 119: Negative condition check
+       if not last_was_space:
+
+L 120: Add to list
+       result.append(char)
+
+L 123: Add to list
+       result.append(char)
+
+L 128: Negative condition check
+       if not last_was_space:
+
+L 129: Add to list
+       result.append(' ')
+
+L 134: Catch all exceptions
+       except:
+
+L 139: Join strings
+       text = ''.join(result)
+
+L 145: Return value
+       return text
+
+L 147: Function definition
+       def cleanup_spacing(self, text):
+
+L 150: Conditional loop
+       while '  ' in text:
+
+L 151: Replace substring
+       text = text.replace('  ', ' ')
+
+L 154: Replace substring
+       text = text.replace(' .', '.')
+
+L 155: Replace substring
+       text = text.replace(' ,', ',')
+
+L 156: Replace substring
+       text = text.replace(' ;', ';')
+
+L 157: Replace substring
+       text = text.replace(' :', ':')
+
+L 158: Replace substring
+       text = text.replace(' !', '!')
+
+L 159: Replace substring
+       text = text.replace(' ?', '?')
+
+L 160: Replace substring
+       text = text.replace(' )', ')')
+
+L 161: Replace substring
+       text = text.replace('( ', '(')
+
+L 162: Replace substring
+       text = text.replace(' ]', ']')
+
+L 163: Replace substring
+       text = text.replace('[ ', '[')
+
+L 165: Return value
+       return text.strip()
+
+L 167: Function definition
+       def cleanup_punctuation(self, text):
+
+L 170: Conditional loop
+       while '..' in text:
+
+L 171: Replace substring
+       text = text.replace('..', '.')
+
+L 172: Conditional loop
+       while ',,' in text:
+
+L 173: Replace substring
+       text = text.replace(',,', ',')
+
+L 174: Conditional loop
+       while ';;' in text:
+
+L 175: Replace substring
+       text = text.replace(';;', ';')
+
+L 178: Replace substring
+       text = text.replace('.,', '.')
+
+L 179: Replace substring
+       text = text.replace(',.', ',')
+
+L 180: Replace substring
+       text = text.replace(';.', ';')
+
+L 182: Return value
+       return text
+
+L 184: Function definition
+       def nuke_string(self, text):
+
+L 188: Return value
+       return self.nuke_bytes(data)
+
+L 190: Function definition
+       def main():
+
+L 192: Import module
+       import argparse
+
+L 214: Debug output
+       print("Original:", repr(test_text))
+
+L 216: Debug output
+       print("Cleaned:", repr(cleaned))
+
+L 217: Debug output
+       print("\nTest complete. No files modified.")
+
+L 221: Iterate over collection
+       for filepath in args.files:
+
+L 222: Negative condition check
+       if not os.path.exists(filepath):
+
+L 223: Debug output
+       print(f"File not found: {filepath}")
+
+L 232: Path object creation
+       filename = Path(filepath).name
+
+L 233: Path object creation
+       output_path = Path(args.directory) / filename
+
+L 236: Path object creation
+       path = Path(filepath)
+
+L 240: Debug output
+       print("-" * 40)
+
+L 242: Debug output
+       print("Nuclear sanitization complete.")
+

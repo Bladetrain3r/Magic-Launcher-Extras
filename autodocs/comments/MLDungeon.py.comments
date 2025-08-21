@@ -1,0 +1,218 @@
+Comments for ./rpg/default/MLDungeon.py:
+--------------------------------------------------
+L   9: Import module
+       import random
+
+L  10: Import module
+       import argparse
+
+L  12: Class definition
+       class MLDungeon:
+
+L  13: Constructor method
+       def __init__(self, rooms=8, complexity='medium'):
+
+L  52: Function definition
+       def generate_room(self, room_id, depth):
+
+L  62: Random operation
+       purpose = random.choice(self.purposes)
+
+L  65: Random operation
+       size = random.choice(['medium', 'large', 'huge'])
+
+L  67: Random operation
+       size = random.choice(['small', 'medium', 'narro...
+
+L  71: Random operation
+       if random.random() > 0.6 and room_id > 0:
+
+L  72: Random operation
+       feature = random.choice(self.features)
+
+L  76: Random operation
+       exits = random.randint(1, 3)  # Entrance has 1-...
+
+L  80: Random operation
+       exits = random.randint(1, 4)
+
+L  85: Get user by ID
+       'size': self.sizes.get(size, size),
+
+L  92: Return value
+       return room
+
+L  94: Function definition
+       def generate_layout(self):
+
+L  97: Add to list
+       self.rooms.append(self.generate_room(0, 0))
+
+L 104: Iterate N times
+       for i in range(1, self.num_rooms):
+
+L 107: Random operation
+       if random.random() < self.branch_chance.get(sel...
+
+L 109: Random operation
+       parent_id = random.choice(active_rooms)
+
+L 123: Add to list
+       self.rooms.append(room)
+
+L 126: Add to list
+       self.connections.append((parent_id, i))
+
+L 127: Add to list
+       self.rooms[parent_id]['connections'].append(i)
+
+L 128: Add to list
+       self.rooms[i]['connections'].append(parent_id)
+
+L 137: Add to list
+       active_rooms.append(i)
+
+L 148: Function definition
+       def add_loops(self):
+
+L 150: Random operation
+       num_loops = random.randint(1, self.num_rooms // 4)
+
+L 152: Iterate N times
+       for _ in range(num_loops):
+
+L 154: Random operation
+       room1 = random.choice(self.rooms[1:-1])  # Not ...
+
+L 155: Random operation
+       room2 = random.choice(self.rooms[1:-1])
+
+L 160: Add to list
+       self.connections.append((room1['id'], room2['id...
+
+L 161: Add to list
+       room1['connections'].append(room2['id'])
+
+L 162: Add to list
+       room2['connections'].append(room1['id'])
+
+L 164: Function definition
+       def describe_path(self, room_from, room_to):
+
+L 175: Add multiple items
+       paths.extend(["rickety bridge", "rope ladder do...
+
+L 177: Return value
+       return random.choice(paths)
+
+L 179: Function definition
+       def format_output(self):
+
+L 182: Add to list
+       output.append("=" * 60)
+
+L 183: Add to list
+       output.append(f"DUNGEON LAYOUT")
+
+L 184: Add to list
+       output.append(f"Rooms: {self.num_rooms} | Compl...
+
+L 185: Add to list
+       output.append("=" * 60)
+
+L 186: Add to list
+       output.append("")
+
+L 192: Iterate over collection
+       for room in rooms_by_depth:
+
+L 196: Add to list
+       output.append(f"\n--- DEPTH {current_depth} {'(...
+
+L 197: Add to list
+       output.append("")
+
+L 200: Add to list
+       output.append(f"Room #{room['id']}: {room['purp...
+
+L 201: Add to list
+       output.append(f"  Size: {room['size']}")
+
+L 203: Add to list
+       output.append(f"  Feature: {room['feature']}")
+
+L 207: Add to list
+       output.append(f"  Connects to:")
+
+L 208: Iterate over collection
+       for conn_id in room['connections']:
+
+L 214: Add to list
+       output.append(f"    → Room #{conn_id} ({conn_ro...
+
+L 216: Add to list
+       output.append("")
+
+L 219: Add to list
+       output.append("=" * 60)
+
+L 220: Add to list
+       output.append("SUMMARY:")
+
+L 223: Iterate over collection
+       max_depth = max(r['depth'] for r in self.rooms)
+
+L 224: Add to list
+       output.append(f"  Deepest level: {max_depth}")
+
+L 225: Add to list
+       output.append(f"  Total connections: {len(self....
+
+L 229: Iterate over collection
+       for room in self.rooms[1:-1]:  # Exclude entran...
+
+L 235: Add to list
+       output.append("  Room types:")
+
+L 238: Add to list
+       output.append(f"    {purpose}: {count}")
+
+L 241: Add to list
+       output.append("\nNOTES:")
+
+L 242: Iterate over collection
+       if any(r['feature'] == 'flooded (knee deep)' fo...
+
+L 243: Add to list
+       output.append("  ⚠ Contains flooded areas")
+
+L 244: Iterate over collection
+       if any(r['feature'] == 'magical darkness' for r...
+
+L 245: Add to list
+       output.append("  ⚠ Contains magical darkness")
+
+L 246: Iterate over collection
+       if any(r['feature'] == 'bottomless pit' for r i...
+
+L 247: Add to list
+       output.append("  ⚠ Contains pit hazards")
+
+L 249: Add to list
+       output.append("=" * 60)
+
+L 251: Return value
+       return "\n".join(output)
+
+L 253: Function definition
+       def main():
+
+L 273: Import module
+       import json
+
+L 278: Debug output
+       print(json.dumps(data, indent=2))
+
+L 280: Debug output
+       print(dungeon.format_output())
+

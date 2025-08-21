@@ -1,0 +1,14 @@
+Comments for ./STARTER_TEMPLATES/core.py:
+--------------------------------------------------
+L   2: Import module
+       import sys, argparse
+
+L  13: Function definition
+       def run(text:str)->str:  # <<< swap this with y...
+
+L  14: Return value
+       return text.upper()
+
+L  17: Negative condition check
+       elif not a.quiet: print(out)
+

@@ -1,0 +1,542 @@
+Comments for ./llm_stuff/MLLmswarm.py:
+--------------------------------------------------
+L  14: Import module
+       from __future__ import annotations
+
+L  16: Import module
+       import argparse
+
+L  17: Import module
+       import json
+
+L  18: Import module
+       import os
+
+L  19: Import module
+       import random
+
+L  20: Import module
+       import subprocess
+
+L  21: Import module
+       import sys
+
+L  22: Import module
+       import time
+
+L  23: Import module
+       from dataclasses import dataclass, field
+
+L  24: Import module
+       from datetime import datetime, timezone
+
+L  25: Import module
+       from hashlib import md5
+
+L  26: Import module
+       from pathlib import Path
+
+L  27: Import module
+       from typing import Dict, List, Optional
+
+L  32: Class definition
+       class FileLock:
+
+L  34: Constructor method
+       def __init__(self, path: Path):
+
+L  35: Path object creation
+       self.path = Path(str(path) + ".lock")
+
+L  38: Function definition
+       def __enter__(self):
+
+L  39: Create directory
+       self.path.parent.mkdir(parents=True, exist_ok=T...
+
+L  42: Import module
+       import msvcrt
+
+L  46: Import module
+       import fcntl
+
+L  49: Return value
+       return self
+
+L  51: Function definition
+       def __exit__(self, exc_type, exc, tb):
+
+L  54: Import module
+       import msvcrt
+
+L  55: Error handling block
+       try:
+
+L  57: Catch specific exception
+       except OSError:
+
+L  60: Import module
+       import fcntl
+
+L  61: Error handling block
+       try:
+
+L  63: Catch specific exception
+       except OSError:
+
+L  71: Function definition
+       def utc_now() -> str:
+
+L  72: Return value
+       return datetime.now(timezone.utc).isoformat().r...
+
+L  75: Function definition
+       def read_text(path: Path) -> str:
+
+L  76: Return value
+       return path.read_text(encoding="utf-8") if path...
+
+L  79: Function definition
+       def write_text(path: Path, text: str) -> None:
+
+L  80: Create directory
+       path.parent.mkdir(parents=True, exist_ok=True)
+
+L  84: Function definition
+       def append_text(path: Path, text: str) -> None:
+
+L  85: Create directory
+       path.parent.mkdir(parents=True, exist_ok=True)
+
+L  87: File operation with auto-close
+       with open(path, "a", encoding="utf-8", newline=...
+
+L  91: Function definition
+       def tail_bytes(path: Path, limit: int) -> str:
+
+L  92: Negative condition check
+       if not path.exists():
+
+L  93: Return value
+       return ""
+
+L  95: Error handling block
+       try:
+
+L  96: Return value
+       return data[-limit:].decode("utf-8", errors="ig...
+
+L  97: Catch specific exception
+       except Exception:
+
+L  98: Return value
+       return ""
+
+L 104: Decorator applied
+       @dataclass
+
+L 105: Class definition
+       class ParticipantSpec:
+
+L 117: Decorator applied
+       @dataclass
+
+L 118: Class definition
+       class Config:
+
+L 129: Decorator applied
+       @staticmethod
+
+L 130: Function definition
+       def default() -> "Config":
+
+L 131: Return value
+       return Config(
+
+L 145: Decorator applied
+       @dataclass
+
+L 146: Class definition
+       class State:
+
+L 158: Class definition
+       class Participant:
+
+L 159: Constructor method
+       def __init__(self, spec: ParticipantSpec):
+
+L 162: Function definition
+       def _env(self) -> Dict[str, str]:
+
+L 165: Iterate over collection
+       for key in self.s.env:
+
+L 167: Raise exception
+       raise RuntimeError(f"Missing required env: {key}")
+
+L 168: Return value
+       return env
+
+L 170: Function definition
+       def respond(self, prompt: str) -> str:
+
+L 172: Error handling block
+       try:
+
+L 173: Execute external command
+       r = subprocess.run(
+
+L 181: Remove whitespace
+       out = (r.stdout or "").strip()
+
+L 182: Remove whitespace
+       err = (r.stderr or "").strip()
+
+L 184: Catch specific exception
+       except Exception as e:
+
+L 189: Return value
+       return content
+
+L 195: Class definition
+       class Strategies:
+
+L 196: Decorator applied
+       @staticmethod
+
+L 197: Function definition
+       def discussion(active: List[ParticipantSpec], l...
+
+L 198: Negative condition check
+       if not last or last not in {p.name for p in act...
+
+L 199: Return value
+       return active[0]
+
+L 201: Return value
+       return active[(idx + 1) % len(active)]
+
+L 203: Decorator applied
+       @staticmethod
+
+L 204: Function definition
+       def debate(active: List[ParticipantSpec], rnd: ...
+
+L 206: Return value
+       return active[0]
+
+L 207: Return value
+       return active[0] if rnd % 2 == 0 else active[1]
+
+L 209: Decorator applied
+       @staticmethod
+
+L 210: Function definition
+       def brainstorm(active: List[ParticipantSpec]) -...
+
+L 211: Return value
+       return random.choice(active)
+
+L 213: Decorator applied
+       @staticmethod
+
+L 214: Function definition
+       def consensus(active: List[ParticipantSpec], st...
+
+L 215: Iterate over collection
+       remaining = [p for p in active if p.name not in...
+
+L 216: Return value
+       return remaining[0] if remaining else active[0]
+
+L 222: Class definition
+       class MLSwarm:
+
+L 223: Constructor method
+       def __init__(
+
+L 231: Path object creation
+       self.swarm_path = Path(swarm_file)
+
+L 232: Path object creation
+       self.jsonl_path = Path(jsonl_file)
+
+L 233: Path object creation
+       self.config_path = Path(config_file)
+
+L 234: Path object creation
+       self.state_path = Path(state_file)
+
+L 235: Path object creation
+       self.log_path = Path(log_file)
+
+L 237: Negative condition check
+       if not self.swarm_path.exists():
+
+L 242: Iterate over collection
+       self.participants = {p.name: Participant(p) for...
+
+L 245: Function definition
+       def load_config(self) -> Config:
+
+L 246: Check existence
+       if self.config_path.exists():
+
+L 247: Parse JSON from string
+       data = json.loads(read_text(self.config_path))
+
+L 248: Iterate over collection
+       participants = [ParticipantSpec(**p) for p in d...
+
+L 250: Return value
+       return cfg
+
+L 253: Return value
+       return cfg
+
+L 255: Function definition
+       def save_config(self, cfg: Optional[Config] = N...
+
+L 259: Iterate over collection
+       "participants": [p.__dict__ for p in cfg.partic...
+
+L 263: Function definition
+       def load_state(self) -> State:
+
+L 264: Check existence
+       if self.state_path.exists():
+
+L 265: Parse JSON from string
+       return State(**json.loads(read_text(self.state_...
+
+L 268: Return value
+       return st
+
+L 270: Function definition
+       def save_state(self, st: Optional[State] = None...
+
+L 275: Function definition
+       def discussion_hash(self) -> str:
+
+L 276: Return value
+       return md5(read_text(self.swarm_path).encode("u...
+
+L 278: Function definition
+       def active_participants(self) -> List[Participa...
+
+L 279: Iterate over collection
+       act = [p for p in self.config.participants if p...
+
+L 282: Iterate over collection
+       for p in act:
+
+L 283: Get user by ID
+       left = self.state.cooldowns.get(p.name, 0)
+
+L 285: Add to list
+       cooled.append(p)
+
+L 286: Return value
+       return cooled
+
+L 288: Function definition
+       def log(self, msg: str) -> None:
+
+L 293: Function definition
+       def build_prompt(self, spec: ParticipantSpec) -...
+
+L 306: Return value
+       return header
+
+L 309: Function definition
+       def append_response(self, spec: ParticipantSpec...
+
+L 326: Function definition
+       def choose_next(self) -> Optional[ParticipantSp...
+
+L 328: Negative condition check
+       if not active:
+
+L 329: Startup message
+       self.log("No active participants available (or ...
+
+L 330: Explicit null return
+       return None
+
+L 333: Iterate over collection
+       if self.state.last_speaker and self.state.last_...
+
+L 338: Return value
+       return Strategies.discussion(active, self.state...
+
+L 340: Return value
+       return Strategies.debate(active, self.state.round)
+
+L 342: Return value
+       return Strategies.brainstorm(active)
+
+L 344: Return value
+       return Strategies.consensus(active, self.state)
+
+L 346: Return value
+       return Strategies.discussion(active, self.state...
+
+L 349: Function definition
+       def run_round(self) -> bool:
+
+L 353: Startup message
+       self.log("No new content since last round; idli...
+
+L 354: Return value
+       return False
+
+L 357: Negative condition check
+       if not spec:
+
+L 358: Return value
+       return False
+
+L 360: Startup message
+       self.log(f"Round {self.state.round}: {spec.name...
+
+L 367: Conditional loop
+       while tries < 3:
+
+L 370: Negative condition check
+       if not content.startswith("(error:"):
+
+L 372: Startup message
+       self.log(f"{spec.name} error on try {tries}: {c...
+
+L 373: Pause execution
+       time.sleep(delay)
+
+L 393: Iterate over collection
+       names = {p.name for p in self.active_participan...
+
+L 405: Iterate over collection
+       for k in list(self.state.cooldowns.keys()):
+
+L 413: Startup message
+       self.log(f"Reached maximum rounds ({self.config...
+
+L 415: Return value
+       return False
+
+L 416: Return value
+       return True
+
+L 419: Function definition
+       def create_summary(self) -> None:
+
+L 423: Iterate over collection
+       spec = next((p for p in self.config.participant...
+
+L 424: Negative condition check
+       if not spec:
+
+L 428: Negative condition check
+       if not spec:
+
+L 429: Startup message
+       self.log("No spokesman available for summary.")
+
+L 443: Path object creation
+       write_text(Path("swarm_summary.txt"), content)
+
+L 444: Startup message
+       self.log(f"Summary created by {spec.name}")
+
+L 447: Function definition
+       def reset(self) -> None:
+
+L 451: Startup message
+       self.log("Discussion reset")
+
+L 453: Function definition
+       def watch(self, active_sleep: float = 5.0, idle...
+
+L 454: Debug output
+       print(f"Watching {self.swarm_path} for changes…")
+
+L 455: Debug output
+       print(f"Current round: {self.state.round}")
+
+L 456: Debug output
+       print(f"Mode: {self.config.mode}")
+
+L 457: Debug output
+       print(f"Topic: {self.config.topic}")
+
+L 458: Debug output
+       print("\nCtrl+C to stop\n")
+
+L 459: Error handling block
+       try:
+
+L 460: Infinite loop
+       while True:
+
+L 462: Pause execution
+       time.sleep(active_sleep if progressed else idle...
+
+L 463: Catch specific exception
+       except KeyboardInterrupt:
+
+L 464: Debug output
+       print("\nSwarm discussion paused")
+
+L 471: Function definition
+       def parse_args(argv: List[str]) -> argparse.Nam...
+
+L 481: Return value
+       return p.parse_args(argv)
+
+L 484: Function definition
+       def apply_inline_sets(cfg: Config, sets: List[s...
+
+L 485: Iterate over collection
+       for item in sets:
+
+L 488: Split string
+       key, raw = item.split("=", 1)
+
+L 489: Error handling block
+       try:
+
+L 490: Parse JSON from string
+       val = json.loads(raw)
+
+L 491: Catch specific exception
+       except json.JSONDecodeError:
+
+L 497: Function definition
+       def main(argv: Optional[List[str]] = None) -> int:
+
+L 504: Iterate over collection
+       data = {**cfg.__dict__, "participants": [p.__di...
+
+L 505: Debug output
+       print(json.dumps(data, indent=2))
+
+L 506: Debug output
+       print(f"\nEdit {swarm.config_path} to configure.")
+
+L 507: Return value
+       return 0
+
+L 528: Return value
+       return 0
+
+L 532: Return value
+       return 0
+
+L 536: Return value
+       return 0
+
+L 540: Return value
+       return 0
+
+L 544: Raise exception
+       raise SystemExit(main())
+

@@ -1,0 +1,224 @@
+Comments for ./simple_data/auth/kv-auth-client.py:
+--------------------------------------------------
+L   7: Import module
+       import requests
+
+L   8: Import module
+       import json
+
+L   9: Import module
+       import sys
+
+L  11: Class definition
+       class KVClient:
+
+L  14: Constructor method
+       def __init__(self, base_url='http://localhost:5...
+
+L  24: Function definition
+       def get_public(self, key):
+
+L  26: Get user by ID
+       response = self.session.get(f'{self.base_url}/p...
+
+L  28: Return value
+       return {}
+
+L  29: Generic error response
+       response.raise_for_status()
+
+L  30: Return value
+       return response.json()
+
+L  32: Function definition
+       def set_public(self, key, data):
+
+L  34: Create user endpoint
+       response = self.session.post(
+
+L  38: Generic error response
+       response.raise_for_status()
+
+L  39: Return value
+       return response.json()
+
+L  41: Function definition
+       def get(self, key):
+
+L  43: Get user by ID
+       response = self.session.get(f'{self.base_url}/k...
+
+L  45: Return value
+       return {}
+
+L  46: Generic error response
+       response.raise_for_status()
+
+L  47: Return value
+       return response.json()
+
+L  49: Function definition
+       def set(self, key, data):
+
+L  51: Create user endpoint
+       response = self.session.post(
+
+L  55: Generic error response
+       response.raise_for_status()
+
+L  56: Return value
+       return response.json()
+
+L  58: Function definition
+       def list_users(self):
+
+L  59: SQL with placeholders
+       """List all users (admin only)"""
+
+L  60: Get user by ID
+       response = self.session.get(f'{self.base_url}/u...
+
+L  61: Generic error response
+       response.raise_for_status()
+
+L  62: Return value
+       return response.json()
+
+L  64: Function definition
+       def demo():
+
+L  67: Debug output
+       print("KV-Auth Client Demo")
+
+L  68: Debug output
+       print("=" * 40)
+
+L  71: Remove whitespace
+       username = input("Username: ").strip()
+
+L  72: Remove whitespace
+       token = input("Token: ").strip()
+
+L  74: Negative condition check
+       if not username or not token:
+
+L  75: Debug output
+       print("Credentials required for most operations")
+
+L  81: Infinite loop
+       while True:
+
+L  82: Debug output
+       print("\nOptions:")
+
+L  83: Debug output
+       print("1. Get public data")
+
+L  84: Debug output
+       print("2. Set public data")
+
+L  85: Debug output
+       print("3. Get your data")
+
+L  86: Debug output
+       print("4. Set your data")
+
+L  87: Debug output
+       print("5. List users (admin only)")
+
+L  88: Debug output
+       print("6. Exit")
+
+L  90: Remove whitespace
+       choice = input("\nChoice: ").strip()
+
+L  93: Remove whitespace
+       key = input("Key: ").strip()
+
+L  95: Debug output
+       print(f"Data: {json.dumps(data, indent=2)}")
+
+L  98: Remove whitespace
+       key = input("Key: ").strip()
+
+L  99: Remove whitespace
+       value = input("Value (JSON): ").strip()
+
+L 100: Error handling block
+       try:
+
+L 101: Parse JSON from string
+       data = json.loads(value) if value else {}
+
+L 102: Catch specific exception
+       except json.JSONDecodeError:
+
+L 106: Debug output
+       print(f"Result: {result}")
+
+L 109: Remove whitespace
+       key = input("Key: ").strip()
+
+L 110: Get user by ID
+       data = client.get(key)
+
+L 111: Debug output
+       print(f"Data: {json.dumps(data, indent=2)}")
+
+L 114: Remove whitespace
+       key = input("Key: ").strip()
+
+L 115: Remove whitespace
+       value = input("Value (JSON): ").strip()
+
+L 116: Error handling block
+       try:
+
+L 117: Parse JSON from string
+       data = json.loads(value) if value else {}
+
+L 118: Catch specific exception
+       except json.JSONDecodeError:
+
+L 121: Debug output
+       print(f"Result: {result}")
+
+L 124: Error handling block
+       try:
+
+L 125: SQL with placeholders
+       users = client.list_users()
+
+L 126: Debug output
+       print("\nUsers:")
+
+L 127: Iterate over collection
+       for user in users:
+
+L 128: Get user by ID
+       admin = " [ADMIN]" if user.get('is_admin') else ""
+
+L 129: Debug output
+       print(f"  - {user['username']}{admin}")
+
+L 130: Catch specific exception
+       except requests.HTTPError as e:
+
+L 131: Debug output
+       print(f"Error: {e}")
+
+L 137: Debug output
+       print("Invalid choice")
+
+L 140: Function definition
+       def example_usage():
+
+L 158: Get user by ID
+       prefs = client.get('preferences')
+
+L 159: Debug output
+       print(f"User preferences: {prefs}")
+
+L 170: Debug output
+       print(f"Public announcement: {announcement}")
+

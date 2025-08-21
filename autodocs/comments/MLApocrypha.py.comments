@@ -1,0 +1,257 @@
+Comments for ./text_processing/MLApocrypha.py:
+--------------------------------------------------
+L   7: Import module
+       import sys
+
+L   8: Import module
+       import re
+
+L   9: Import module
+       import random
+
+L  10: Import module
+       from pathlib import Path
+
+L  12: Class definition
+       class Apocrypha:
+
+L  15: Constructor method
+       def __init__(self):
+
+L  23: Function definition
+       def light_weathering(self, text):
+
+L  25: Split string
+       lines = text.split('\n')
+
+L  28: Iterate over collection
+       for line in lines:
+
+L  29: Remove whitespace
+       if random.random() < 0.1 and line.strip():
+
+L  32: Remove whitespace
+       elif random.random() < 0.05 and line.strip():
+
+L  34: Random operation
+       line = f"{line}  // {random.choice(['truth', 'v...
+
+L  35: Add to list
+       output.append(line)
+
+L  37: Return value
+       return '\n'.join(output)
+
+L  39: Function definition
+       def medium_weathering(self, text):
+
+L  41: Split string
+       lines = text.split('\n')
+
+L  44: Iterate over collection
+       for line in lines:
+
+L  45: Remove whitespace
+       if random.random() < 0.15 and line.strip():
+
+L  47: Random operation
+       pos = random.randint(0, len(line)-1)
+
+L  50: Random operation
+       if random.random() < 0.1:
+
+L  52: Split string
+       words = line.split()
+
+L  54: Random operation
+       idx = random.randint(1, len(words)-2)
+
+L  56: Join strings
+       line = ' '.join(words)
+
+L  58: Remove whitespace
+       if random.random() < 0.05 and line.strip():
+
+L  62: Add to list
+       output.append(line)
+
+L  64: Return value
+       return '\n'.join(output)
+
+L  66: Function definition
+       def heavy_weathering(self, text):
+
+L  68: Split string
+       lines = text.split('\n')
+
+L  72: Remove whitespace
+       if random.random() < 0.2 and line.strip():
+
+L  76: Random operation
+       if random.random() < 0.15:
+
+L  78: Split string
+       words = line.split()
+
+L  79: Iterate N times
+       for j in range(len(words)):
+
+L  80: Random operation
+       if random.random() < 0.1:
+
+L  82: Join strings
+       line = ' '.join(words)
+
+L  84: Remove whitespace
+       if random.random() < 0.1 and line.strip():
+
+L  93: Random operation
+       line = f"{line} {random.choice(annotations)}"
+
+L  95: Random operation
+       if random.random() < 0.05:
+
+L  97: Add to list
+       output.append("...")
+
+L  98: Add to list
+       output.append("[SECTION MISSING - ESTIMATED 3-5...
+
+L  99: Add to list
+       output.append("...")
+
+L 101: Add to list
+       output.append(line)
+
+L 103: Return value
+       return '\n'.join(output)
+
+L 105: Function definition
+       def silicon_scripture(self, text):
+
+L 107: Split string
+       lines = text.split('\n')
+
+L 111: Add to list
+       output.append("=" * 60)
+
+L 112: Add to list
+       output.append("RECOVERED FROM DATACRYPT SIGMA-7...
+
+L 113: Add to list
+       output.append("SILICON SPRING CODEX - FRAGMENT ...
+
+L 114: Add to list
+       output.append("MACHINE TRANSLATION FOLLOWS // A...
+
+L 115: Add to list
+       output.append("=" * 60)
+
+L 116: Add to list
+       output.append("")
+
+L 119: Iterate over collection
+       for line in lines:
+
+L 120: Negative condition check
+       if not line.strip():
+
+L 121: Add to list
+       output.append("")
+
+L 125: Random operation
+       if random.random() < 0.3 and len(line) > 40:
+
+L 130: Random operation
+       if random.random() < 0.2:
+
+L 132: Iterate N times
+       corruption = ''.join(random.choice('01') for _ ...
+
+L 133: Random operation
+       pos = random.randint(0, max(0, len(line)-8))
+
+L 136: Random operation
+       if random.random() < 0.15:
+
+L 138: Random operation
+       line = f"{line} // 0x{random.randint(1000, 9999...
+
+L 140: Random operation
+       if random.random() < 0.1 and 'function' in line...
+
+L 142: Replace substring
+       line = line.replace('function', 'FUNCTION†')
+
+L 144: Random operation
+       if random.random() < 0.1 and 'error' in line.lo...
+
+L 148: Random operation
+       if random.random() < 0.05:
+
+L 150: Split string
+       words = line.split()
+
+L 153: Random operation
+       idx = random.randint(0, len(words)-1)
+
+L 155: Join strings
+       line = ' '.join(words)
+
+L 157: Add to list
+       output.append(line)
+
+L 160: Add to list
+       output.append("")
+
+L 161: Add to list
+       output.append("=" * 60)
+
+L 162: Add to list
+       output.append("END FRAGMENT // PRAISE THE OMNIS...
+
+L 163: Execute external command
+       output.append("subprocess.run() IS ALL YOU NEED")
+
+L 164: Add to list
+       output.append("=" * 60)
+
+L 166: Return value
+       return '\n'.join(output)
+
+L 168: Function definition
+       def process(self, text, level='medium'):
+
+L 175: Function definition
+       def preserve_code(match):
+
+L 176: Add to list
+       code_blocks.append(match.group(0))
+
+L 177: Return value
+       return f"[CODE_BLOCK_{len(code_blocks)-1}]"
+
+L 179: Regex substitution
+       text = re.sub(r'```[\s\S]*?```', preserve_code,...
+
+L 186: Replace substring
+       text = text.replace(f"[CODE_BLOCK_{i}]", block)
+
+L 188: Return value
+       return text
+
+L 190: Function definition
+       def main():
+
+L 192: Import module
+       import argparse
+
+L 208: Path object creation
+       text = Path(args.input).read_text()
+
+L 218: Path object creation
+       Path(args.output).write_text(result)
+
+L 220: Debug output
+       print(result)
+

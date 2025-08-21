@@ -1,0 +1,206 @@
+Comments for ./math_out/MLFermicalc.py:
+--------------------------------------------------
+L   8: Import module
+       import sys
+
+L   9: Import module
+       from math import log10
+
+L  11: Function definition
+       def drake_equation(params):
+
+L  26: Return value
+       return result
+
+L  28: Function definition
+       def print_header():
+
+L  30: Debug output
+       print("="*60)
+
+L  31: Debug output
+       print("MLDEAD EARTH - MULTIVERSE MORTALITY CALC...
+
+L  32: Debug output
+       print("How special is your 'rare but possible'?")
+
+L  33: Debug output
+       print("="*60)
+
+L  34: Debug output
+       print()
+
+L  36: Function definition
+       def get_drake_params(preset=None):
+
+L  70: Return value
+       return presets[preset]
+
+L  73: Debug output
+       print("Enter Drake Equation parameters:")
+
+L  83: Return value
+       return params
+
+L  85: Function definition
+       def fermi_filters():
+
+L 141: Return value
+       return filters
+
+L 143: Function definition
+       def calculate_dead_earths(drake_n, filters_acti...
+
+L 149: Debug output
+       print("\nFILTER ANALYSIS:")
+
+L 150: Debug output
+       print("-" * 60)
+
+L 163: Debug output
+       print(f"{filter_data['name']:<30} Survival: {su...
+
+L 164: Debug output
+       print(f"  {filter_data['description']}")
+
+L 166: Debug output
+       print(f"  Dead Earths per survivor: {dead_ratio...
+
+L 168: Debug output
+       print(f"  Dead Earths per survivor: ALL OF THEM")
+
+L 169: Debug output
+       print()
+
+L 171: Return value
+       return results, total_survival
+
+L 173: Function definition
+       def stanton_calculation(base_probability):
+
+L 176: Debug output
+       print("\nSTANTON SPECIAL:")
+
+L 177: Debug output
+       print("-" * 60)
+
+L 196: Debug output
+       print(f"Base Earth-like probability: {base_prob...
+
+L 197: Debug output
+       print(f"Three Earth-likes: {three_earths:.2e}")
+
+L 198: Debug output
+       print(f"All terraformable: {three_terraformable...
+
+L 199: Debug output
+       print(f"All terraformed: {three_terraformed:.2e}")
+
+L 200: Debug output
+       print(f"All self-maintaining: {three_maintainin...
+
+L 201: Debug output
+       print(f"\nTotal Stanton probability: {total_sta...
+
+L 205: Debug output
+       print(f"Dead systems per Stanton: {dead_stanton...
+
+L 212: Debug output
+       print(f"\nStanton is {ratio:.0f}x MORE likely t...
+
+L 214: Debug output
+       print(f"\nStanton is {1/ratio:.0f}x LESS likely...
+
+L 216: Debug output
+       print("Dead systems per Stanton: HEAT DEATH OF ...
+
+L 218: Return value
+       return total_stanton
+
+L 220: Function definition
+       def main():
+
+L 226: Debug output
+       print("Choose scenario:")
+
+L 227: Debug output
+       print("1. Optimistic (Star Trek universe)")
+
+L 228: Debug output
+       print("2. Realistic (Probably us)")
+
+L 229: Debug output
+       print("3. Pessimistic (We're alone)")
+
+L 230: Debug output
+       print("4. Custom values")
+
+L 232: Remove whitespace
+       choice = input("\nChoice [2]: ").strip() or "2"
+
+L 246: Debug output
+       print(f"\nDrake Equation Result: {drake_n:.2f} ...
+
+L 247: Debug output
+       print(f"That's 1 per {100_000_000_000/drake_n:,...
+
+L 252: Debug output
+       print("\nSelect Great Filters (y/n for each):")
+
+L 256: Remove whitespace
+       use = input(f"  {filter_data['name']}? [y]: ")....
+
+L 263: Debug output
+       print("\n" + "="*60)
+
+L 264: Debug output
+       print("FINAL VERDICT:")
+
+L 265: Debug output
+       print("="*60)
+
+L 267: Debug output
+       print(f"Combined survival rate: {total_survival...
+
+L 271: Debug output
+       print(f"Dead Earths per living Earth: {total_de...
+
+L 276: Debug output
+       print(f"Universes needed to find life: 10^{univ...
+
+L 284: Debug output
+       print(f"Time to find life: {years_needed/13_800...
+
+L 286: Debug output
+       print(f"Time to find life at 1M attempts/sec: {...
+
+L 288: Debug output
+       print("Dead Earths per living Earth: ∞")
+
+L 289: Debug output
+       print("The multiverse is a graveyard")
+
+L 292: Debug output
+       print("\n" + "="*60)
+
+L 296: Debug output
+       print("\n" + "="*60)
+
+L 297: Debug output
+       print("REMEMBER: 'Rare but possible' means some...
+
+L 298: Debug output
+       print("="*60)
+
+L 306: Debug output
+       print(f"Realistic civilizations in galaxy: {dra...
+
+L 307: Debug output
+       print(f"Chance of three Earth-likes in one syst...
+
+L 308: Debug output
+       print(f"Dead systems per Stanton: {1/0.008:,.0f}")
+
+L 309: Debug output
+       print("\nReality check: Stanton doesn't exist")
+

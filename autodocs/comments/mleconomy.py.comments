@@ -1,0 +1,215 @@
+Comments for ./games/mleconomy.py:
+--------------------------------------------------
+L   7: Import module
+       import os
+
+L   8: Import module
+       import time
+
+L   9: Import module
+       import random
+
+L  10: Import module
+       from math import sqrt
+
+L  12: Class definition
+       class Economy:
+
+L  13: Constructor method
+       def __init__(self):
+
+L  36: Function definition
+       def simulate(self):
+
+L  41: Iterate over collection
+       for g in self.goods.values():
+
+L  45: Iterate over collection
+       for a in self.agents:
+
+L  47: Random operation
+       prod = a['amt'] * a['eff'] * (0.9 + random.rand...
+
+L  51: Random operation
+       need = a['need'] * (0.9 + random.random() * 0.2)
+
+L  61: Iterate over collection
+       for g in self.goods.values():
+
+L  70: Function definition
+       def display(self):
+
+L  74: Debug output
+       print("=" * 60)
+
+L  75: Debug output
+       print(f"         MLECONOMY v0.1 - TICK {self.ti...
+
+L  76: Debug output
+       print("    'Actual working economy, unlike some...
+
+L  77: Debug output
+       print("=" * 60)
+
+L  78: Debug output
+       print("\nMARKET PRICES")
+
+L  79: Debug output
+       print("-" * 40)
+
+L  83: Get user by ID
+       arrow = '↑' if g['price'] > g.get('old', g['pri...
+
+L  84: Debug output
+       print(f"{name:8} ${g['price']:7.2f}[{arrow}]  S...
+
+L  87: Debug output
+       print("\nAGENTS")
+
+L  88: Debug output
+       print("-" * 40)
+
+L  89: Iterate over collection
+       for a in self.agents:
+
+L  90: Debug output
+       print(f"{a['name']:8} +{a['amt']*a['eff']:.1f} ...
+
+L  93: Debug output
+       print("\nYOUR ASSETS")
+
+L  94: Debug output
+       print("-" * 40)
+
+L  95: Debug output
+       print(f"Cash: ${self.cash:.2f}")
+
+L  96: Debug output
+       print(f"Inventory: {' '.join([f'{k}:{v}' for k,...
+
+L 102: Add to list
+       trends.append(f"{name} shortage!")
+
+L 104: Add to list
+       trends.append(f"{name} glut!")
+
+L 107: Debug output
+       print(f"\nTRENDS: {trends[0]}")
+
+L 109: Debug output
+       print("\n[B]uy [S]ell [W]ait [Q]uit")
+
+L 111: Function definition
+       def buy(self):
+
+L 113: Debug output
+       print("\nBuy what? ", end='')
+
+L 115: Debug output
+       print(f"[{i+1}]{name} ", end='')
+
+L 117: Error handling block
+       try:
+
+L 129: Debug output
+       print(f"Bought {amt} {good_name} for ${cost:.2f}")
+
+L 131: Debug output
+       print("Can't afford or not enough supply!")
+
+L 132: Pause execution
+       time.sleep(1)
+
+L 133: Catch all exceptions
+       except:
+
+L 136: Function definition
+       def sell(self):
+
+L 138: Debug output
+       print("\nSell what? ", end='')
+
+L 140: Debug output
+       print(f"[{i+1}]{name}:{self.inv[name]} ", end='')
+
+L 142: Error handling block
+       try:
+
+L 154: Debug output
+       print(f"Sold {amt} {good_name} for ${revenue:.2...
+
+L 156: Debug output
+       print("Not enough inventory!")
+
+L 157: Pause execution
+       time.sleep(1)
+
+L 158: Catch all exceptions
+       except:
+
+L 161: Function definition
+       def run(self):
+
+L 163: Get current timestamp
+       last_tick = time.time()
+
+L 166: Conditional loop
+       while self.running:
+
+L 168: Get current timestamp
+       if time.time() - last_display > 2:
+
+L 170: Get current timestamp
+       last_display = time.time()
+
+L 173: Get current timestamp
+       if time.time() - last_tick > 3:
+
+L 175: Get current timestamp
+       last_tick = time.time()
+
+L 178: Import module
+       import sys
+
+L 180: Import module
+       import msvcrt
+
+L 182: Debug output
+       print("> ", end='', flush=True)
+
+L 191: Get current timestamp
+       last_tick = time.time()
+
+L 193: Debug output
+       print("\nEconomy mastered! Chris Roberts in sha...
+
+L 198: Get current timestamp
+       last_display = time.time()
+
+L 200: Pause execution
+       time.sleep(0.1)
+
+L 202: Import module
+       import select
+
+L 204: Debug output
+       print("> ", end='', flush=True)
+
+L 213: Get current timestamp
+       last_tick = time.time()
+
+L 215: Debug output
+       print("\nEconomy mastered! Chris Roberts in sha...
+
+L 220: Get current timestamp
+       last_display = time.time()
+
+L 223: Debug output
+       print("MLECONOMY - Loading economic simulation....
+
+L 224: Debug output
+       print("(This actually works, unlike Star Citize...
+
+L 225: Pause execution
+       time.sleep(2)
+

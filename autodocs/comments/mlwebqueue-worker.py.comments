@@ -1,0 +1,152 @@
+Comments for ./launch_magically/MLQueue/mlwebqueue-worker.py:
+--------------------------------------------------
+L   7: Import module
+       import json
+
+L   8: Import module
+       import os
+
+L   9: Import module
+       import subprocess
+
+L  10: Import module
+       import sys
+
+L  11: Import module
+       import time
+
+L  12: Import module
+       from pathlib import Path
+
+L  15: Path object creation
+       QUEUE_DIR = Path("/tmp/mlqueue")
+
+L  20: Create directory
+       QUEUE_DIR.mkdir(parents=True, exist_ok=True)
+
+L  21: Create directory
+       COMPLETE_DIR.mkdir(exist_ok=True)
+
+L  22: Create directory
+       FAILED_DIR.mkdir(exist_ok=True)
+
+L  24: Function definition
+       def process_task(task_file):
+
+L  26: Error handling block
+       try:
+
+L  28: File operation with auto-close
+       with open(task_file, 'r') as f:
+
+L  29: Parse JSON from file
+       task = json.load(f)
+
+L  31: Debug output
+       print(f"[PROCESSING] {task.get('name', 'unknown...
+
+L  34: Get user by ID
+       script = task.get('script', '')
+
+L  35: Get user by ID
+       args = task.get('args', [])
+
+L  37: Get user by ID
+       env.update(task.get('env', {}))
+
+L  40: Get current timestamp
+       task['started_at'] = time.time()
+
+L  44: Execute external command
+       result = subprocess.run(
+
+L  54: Get current timestamp
+       task['completed_at'] = time.time()
+
+L  62: Debug output
+       print(f"[SUCCESS] {task.get('name')} completed")
+
+L  65: Debug output
+       print(f"[FAILED] {task.get('name')} exited with...
+
+L  67: Debug output
+       print(f"  Error: {result.stderr[:200]}")
+
+L  70: File operation with auto-close
+       with open(dest, 'w') as f:
+
+L  71: Write JSON to file
+       json.dump(task, f, indent=2)
+
+L  75: Debug output
+       print(f"[ERROR] No script defined in task")
+
+L  78: Catch specific exception
+       except subprocess.TimeoutExpired:
+
+L  79: Debug output
+       print(f"[TIMEOUT] Task exceeded 5 minutes")
+
+L  82: Catch specific exception
+       except Exception as e:
+
+L  83: Debug output
+       print(f"[ERROR] Failed to process task: {e}")
+
+L  84: Error handling block
+       try:
+
+L  86: Catch all exceptions
+       except:
+
+L  89: Function definition
+       def watch_queue():
+
+L  91: Debug output
+       print(f"MLWebqueue Worker")
+
+L  92: Debug output
+       print(f"Watching: {QUEUE_DIR}")
+
+L  93: Debug output
+       print(f"Complete: {COMPLETE_DIR}")
+
+L  94: Debug output
+       print(f"Failed: {FAILED_DIR}")
+
+L  97: Iterate over collection
+       for task_file in QUEUE_DIR.glob("task_*.json"):
+
+L 100: Debug output
+       print(f"Waiting for tasks... (Ctrl+C to stop)")
+
+L 104: Infinite loop
+       while True:
+
+L 105: Error handling block
+       try:
+
+L 106: Iterate over collection
+       for task_file in QUEUE_DIR.glob("task_*.json"):
+
+L 112: Pause execution
+       time.sleep(1)  # Poll every second
+
+L 116: Iterate over collection
+       processed = {f for f in processed if f.exists()}
+
+L 118: Catch specific exception
+       except KeyboardInterrupt:
+
+L 119: Debug output
+       print("\n[INFO] Worker stopped")
+
+L 121: Catch specific exception
+       except Exception as e:
+
+L 122: Debug output
+       print(f"[ERROR] Worker error: {e}")
+
+L 123: Pause execution
+       time.sleep(5)  # Wait before retrying
+

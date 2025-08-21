@@ -1,0 +1,236 @@
+Comments for ./games/MLSweeper.py:
+--------------------------------------------------
+L   7: Import module
+       import tkinter as tk
+
+L   8: Import module
+       from tkinter import messagebox
+
+L   9: Import module
+       import random
+
+L  10: Import module
+       import time
+
+L  11: Import module
+       import json
+
+L  12: Import module
+       import os
+
+L  13: Import module
+       from datetime import datetime
+
+L  14: Import module
+       from pathlib import Path
+
+L  40: Class definition
+       class MLSweeper:
+
+L  41: Constructor method
+       def __init__(self, root, width=9, height=9, min...
+
+L  58: Create directory
+       self.stats_file.parent.mkdir(parents=True, exis...
+
+L  63: Function definition
+       def _create_ui(self):
+
+L  93: Iterate N times
+       for y in range(self.height):
+
+L  94: Iterate N times
+       for x in range(self.width):
+
+L 109: Function definition
+       def _new_game(self):
+
+L 119: Iterate N times
+       positions = [(x, y) for x in range(self.width) ...
+
+L 120: Random operation
+       self.mines = set(random.sample(positions, min(s...
+
+L 129: Function definition
+       def _click(self, x, y):
+
+L 134: Null check
+       if self.start_time is None:
+
+L 135: Get current timestamp
+       self.start_time = time.time()
+
+L 137: Check if any updates
+       if (x, y) in self.mines:
+
+L 143: Function definition
+       def _flag(self, x, y):
+
+L 148: Check if any updates
+       if (x, y) in self.flags:
+
+L 157: Function definition
+       def _reveal(self, x, y):
+
+L 159: Check if any updates
+       if (x, y) in self.revealed or not (0 <= x < sel...
+
+L 169: Get user by ID
+       btn.config(text=str(count), fg=NUM_COLORS.get(c...
+
+L 172: Iterate over collection
+       for dx in [-1, 0, 1]:
+
+L 173: Iterate over collection
+       for dy in [-1, 0, 1]:
+
+L 178: Function definition
+       def _count_adjacent_mines(self, x, y):
+
+L 181: Iterate over collection
+       for dx in [-1, 0, 1]:
+
+L 182: Iterate over collection
+       for dy in [-1, 0, 1]:
+
+L 185: Check if any updates
+       if (x + dx, y + dy) in self.mines:
+
+L 187: Return value
+       return count
+
+L 189: Function definition
+       def _check_win(self):
+
+L 192: Iterate N times
+       for x in range(self.width):
+
+L 193: Iterate N times
+       for y in range(self.height):
+
+L 194: Check if any updates
+       if (x, y) not in self.revealed:
+
+L 200: Function definition
+       def _game_over(self, won):
+
+L 206: Get current timestamp
+       elapsed = int(time.time() - self.start_time) if...
+
+L 210: Check if any updates
+       if (x, y) not in self.flags:
+
+L 222: Function definition
+       def _save_stats(self, won, time_seconds):
+
+L 225: Get current datetime
+       'timestamp': datetime.now().isoformat(),
+
+L 234: Error handling block
+       try:
+
+L 235: Check existence
+       if self.stats_file.exists():
+
+L 236: File operation with auto-close
+       with open(self.stats_file, 'r') as f:
+
+L 237: Parse JSON from file
+       data = json.load(f)
+
+L 241: Add to list
+       data.append(stats)
+
+L 247: File operation with auto-close
+       with open(self.stats_file, 'w') as f:
+
+L 248: Write JSON to file
+       json.dump(data, f, indent=2)
+
+L 249: Catch all exceptions
+       except:
+
+L 252: Function definition
+       def _update_info(self):
+
+L 257: Get current timestamp
+       time_str = str(int(time.time() - self.start_time))
+
+L 260: Function definition
+       def _update_timer(self):
+
+L 262: Negative condition check
+       if not self.game_over:
+
+L 266: Function definition
+       def _show_settings(self):
+
+L 284: Function definition
+       def apply_settings():
+
+L 285: Error handling block
+       try:
+
+L 286: Get user by ID
+       w = int(width_var.get())
+
+L 287: Get user by ID
+       h = int(height_var.get())
+
+L 288: Get user by ID
+       m = int(mines_var.get())
+
+L 301: Iterate N times
+       for y in range(self.height):
+
+L 302: Iterate N times
+       for x in range(self.width):
+
+L 314: Log stack trace
+       messagebox.showerror("Invalid", "Invalid dimens...
+
+L 315: Catch all exceptions
+       except:
+
+L 316: Log stack trace
+       messagebox.showerror("Error", "Invalid input")
+
+L 320: Function definition
+       def _boss_key(self):
+
+L 353: Function definition
+       def update_matrix():
+
+L 354: Negative condition check
+       if not boss.winfo_exists():
+
+L 357: Random operation
+       no_chars = random.randint(1, widthbase // 10)
+
+L 358: Iterate N times
+       line = ''.join(random.choice(matrix_chars + '  ...
+
+L 362: Split string
+       if int(text.index('end-1c').split('.')[0]) > 40:
+
+L 369: Function definition
+       def restore(_=None):
+
+L 381: Function definition
+       def main():
+
+L 386: Import module
+       import sys
+
+L 391: Error handling block
+       try:
+
+L 395: Catch all exceptions
+       except:
+
+L 396: Debug output
+       print("Usage: mlsweeper.py [width] [height] [mi...
+
+L 397: Debug output
+       print("Default: mlsweeper.py 9 9 10")
+

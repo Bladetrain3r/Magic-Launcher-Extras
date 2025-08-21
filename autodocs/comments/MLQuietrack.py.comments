@@ -1,0 +1,254 @@
+Comments for ./time_tracking/MLQuietrack.py:
+--------------------------------------------------
+L   8: Import module
+       import json
+
+L   9: Import module
+       import time
+
+L  10: Import module
+       import sys
+
+L  11: Import module
+       from pathlib import Path
+
+L  12: Import module
+       from datetime import datetime
+
+L  13: Import module
+       import signal
+
+L  15: Error handling block
+       try:
+
+L  16: Import module
+       import psutil
+
+L  18: Catch specific exception
+       except ImportError:
+
+L  20: Debug output
+       print("Warning: psutil not found. Install with:...
+
+L  21: Debug output
+       print("MLPassive requires psutil for cross-plat...
+
+L  22: Exit program
+       sys.exit(1)
+
+L  24: Class definition
+       class MLPassive:
+
+L  25: Constructor method
+       def __init__(self):
+
+L  28: Create directory
+       self.data_file.parent.mkdir(parents=True, exist...
+
+L  42: Function definition
+       def load_known_apps(self):
+
+L  44: Check existence
+       if self.data_file.exists():
+
+L  45: Error handling block
+       try:
+
+L  46: File operation with auto-close
+       with open(self.data_file, 'r') as f:
+
+L  47: Parse JSON from file
+       data = json.load(f)
+
+L  53: Split string
+       exe_path = app_data['path'].split()[0]
+
+L  56: Debug output
+       print(f"Monitoring {len(self.known_apps)} appli...
+
+L  58: Catch specific exception
+       except Exception as e:
+
+L  59: Debug output
+       print(f"Error loading tracked.json: {e}")
+
+L  62: Debug output
+       print("No tracked.json found. Track some apps w...
+
+L  63: Exit program
+       sys.exit(1)
+
+L  65: Function definition
+       def save_session(self, app_name, exe_path, star...
+
+L  75: Check existence
+       if self.data_file.exists():
+
+L  76: File operation with auto-close
+       with open(self.data_file, 'r') as f:
+
+L  77: Parse JSON from file
+       data = json.load(f)
+
+L  87: Add to list
+       data[app_name]["sessions"].append({
+
+L  95: File operation with auto-close
+       with open(self.data_file, 'w') as f:
+
+L  96: Write JSON to file
+       json.dump(data, f, indent=2)
+
+L 101: Debug output
+       print(f"[{datetime.now().strftime('%H:%M:%S')}]...
+
+L 103: Function definition
+       def scan_processes(self):
+
+L 107: Error handling block
+       try:
+
+L 108: Iterate over collection
+       for proc in psutil.process_iter(['pid', 'name',...
+
+L 109: Error handling block
+       try:
+
+L 118: Get current timestamp
+       self.tracking[exe_lower] = time.time()
+
+L 120: Debug output
+       print(f"[{datetime.now().strftime('%H:%M:%S')}]...
+
+L 131: Get current timestamp
+       self.save_session(app_name, exe_path, start_tim...
+
+L 132: Add to list
+       stopped.append(exe_path)
+
+L 135: Iterate over collection
+       for exe_path in stopped:
+
+L 138: Catch specific exception
+       except Exception as e:
+
+L 139: Debug output
+       print(f"Error scanning processes: {e}")
+
+L 141: Function definition
+       def run(self):
+
+L 143: Debug output
+       print("MLPassive - Passive Process Tracker")
+
+L 144: Debug output
+       print("Press Ctrl+C to stop")
+
+L 145: Debug output
+       print("-" * 40)
+
+L 147: Conditional loop
+       while self.running:
+
+L 149: Pause execution
+       time.sleep(5)  # Check every 5 seconds
+
+L 151: Function definition
+       def shutdown(self, signum, frame):
+
+L 153: Debug output
+       print("\n\nShutting down...")
+
+L 159: Get current timestamp
+       self.save_session(app_name, exe_path, start_tim...
+
+L 161: Debug output
+       print("All sessions saved.")
+
+L 162: Exit program
+       sys.exit(0)
+
+L 164: Function definition
+       def list_apps(self):
+
+L 166: Negative condition check
+       if not self.known_apps:
+
+L 167: Debug output
+       print("No applications being monitored.")
+
+L 170: Debug output
+       print("Monitored applications:")
+
+L 171: Debug output
+       print("-" * 40)
+
+L 173: Debug output
+       print(f"{app_name}: {exe_path}")
+
+L 175: Function definition
+       def add_app(self, name, exe_path):
+
+L 182: Check existence
+       if self.data_file.exists():
+
+L 183: File operation with auto-close
+       with open(self.data_file, 'r') as f:
+
+L 184: Parse JSON from file
+       data = json.load(f)
+
+L 195: File operation with auto-close
+       with open(self.data_file, 'w') as f:
+
+L 196: Write JSON to file
+       json.dump(data, f, indent=2)
+
+L 198: Debug output
+       print(f"Added {name} for monitoring")
+
+L 200: Debug output
+       print(f"{name} already exists")
+
+L 202: Function definition
+       def main():
+
+L 208: Debug output
+       print("MLQuietrack - Passive Process Tracker")
+
+L 209: Debug output
+       print("\nUsage:")
+
+L 210: Debug output
+       print("  mlquietrack              - Start monit...
+
+L 211: Debug output
+       print("  mlquietrack --list       - List monito...
+
+L 212: Debug output
+       print("  mlquietrack --add <name> <exe_path> - ...
+
+L 213: Debug output
+       print("\nExamples:")
+
+L 214: Debug output
+       print("  mlquietrack")
+
+L 215: Debug output
+       print("  mlquietrack --list")
+
+L 216: Debug output
+       print("  mlquietrack --add Doom C:/Games/Doom/d...
+
+L 217: Exit program
+       sys.exit(0)
+
+L 224: Join strings
+       exe_path = ' '.join(sys.argv[3:])
+
+L 228: Debug output
+       print("Invalid arguments. Use --help for usage.")
+
+L 229: Exit program
+       sys.exit(1)
+

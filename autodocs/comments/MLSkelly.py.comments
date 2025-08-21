@@ -1,0 +1,176 @@
+Comments for ./code_health/MLSkelly.py:
+--------------------------------------------------
+L   8: Import module
+       import sys
+
+L   9: Import module
+       import os
+
+L  10: Import module
+       from pathlib import Path
+
+L  20: Import module
+       import sys
+
+L  21: Import module
+       import argparse
+
+L  26: Return value
+       return text.upper()  # Example: uppercase every...
+
+L  28: Function definition
+       def main():
+
+L  42: File operation with auto-close
+       with open(args.input, 'r', encoding='utf-8') as f:
+
+L  50: File operation with auto-close
+       with open(args.output, 'w', encoding='utf-8') a...
+
+L  52: Negative condition check
+       elif not args.quiet:
+
+L  53: Debug output
+       print(result, end='')
+
+L  67: Import module
+       import sys
+
+L  68: Import module
+       import argparse
+
+L  75: Return value
+       return text.upper()  # Example: uppercase every...
+
+L  77: Function definition
+       def main():
+
+L  93: File operation with auto-close
+       with open(args.input, 'r', encoding='utf-8') as f:
+
+L 101: File operation with auto-close
+       with open(args.output, 'w', encoding='utf-8') a...
+
+L 103: Negative condition check
+       elif not args.quiet:
+
+L 104: Debug output
+       print(result, end='')
+
+L 107: Error handling block
+       try:
+
+L 108: Import module
+       import tkinter as tk
+
+L 109: Import module
+       import tkinter.scrolledtext as st
+
+L 127: Catch specific exception
+       except Exception as e:
+
+L 129: Debug output
+       print(f"GUI unavailable: {{e}}", file=sys.stderr)
+
+L 143: Import module
+       import sys
+
+L 150: Negative condition check
+       if not args:
+
+L 151: Return value
+       return "default"
+
+L 156: Return value
+       return "example_output"
+
+L 158: Return value
+       return command
+
+L 160: Function definition
+       def main():
+
+L 167: Debug output
+       print(result)
+
+L 180: Import module
+       import sys
+
+L 183: Iterate over collection
+       for line in sys.stdin:
+
+L 185: Debug output
+       print(line.upper(), end='')  # Example: uppercase
+
+L 188: Function definition
+       def create_skeleton(name, description=None, tem...
+
+L 192: Replace substring
+       filename = f"ml{name.lower().replace(' ', '')}.py"
+
+L 193: Replace substring
+       func_name = f"process_{name.lower().replace(' '...
+
+L 211: Negative condition check
+       if not description:
+
+L 225: Get user by ID
+       template = templates.get(template_type, TEMPLAT...
+
+L 229: Replace substring
+       name=f"ML{name.title().replace(' ', '')}",
+
+L 240: Path object creation
+       output_path = Path(filename)
+
+L 241: Check existence
+       if output_path.exists():
+
+L 242: Debug output
+       print(f"Error: {filename} already exists!")
+
+L 243: Return value
+       return False
+
+L 246: File operation with auto-close
+       with open(output_path, 'w') as f:
+
+L 252: Debug output
+       print(f"Created: {filename}")
+
+L 253: Debug output
+       print(f"Type: {template_type}")
+
+L 254: Debug output
+       print(f"Function: {func_name}()")
+
+L 255: Debug output
+       print(f"\nNext steps:")
+
+L 256: Debug output
+       print(f"1. Edit {func_name}() with your logic")
+
+L 257: Debug output
+       print(f"2. Test: echo 'test' | python3 {filenam...
+
+L 258: Debug output
+       print(f"3. Ship it!")
+
+L 260: Return value
+       return True
+
+L 262: Function definition
+       def main():
+
+L 264: Debug output
+       print("""MLSkelly - Magic Launcher Skeleton Gen...
+
+L 282: Exit program
+       sys.exit(0)
+
+L 294: Join strings
+       description = ' '.join(sys.argv[3:])
+
+L 296: Join strings
+       description = ' '.join(sys.argv[2:])
+

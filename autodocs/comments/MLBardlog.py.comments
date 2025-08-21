@@ -1,0 +1,122 @@
+Comments for ./electric_bards/MLBardlog.py:
+--------------------------------------------------
+L  10: Import module
+       import random
+
+L  11: Import module
+       import sys
+
+L  13: Class definition
+       class MLBardErrors:
+
+L  19: Constructor method
+       def __init__(self):
+
+L  57: Import module
+       "Yet import seeks what filesystem knows not",
+
+L 115: Function definition
+       def get_prophecy(self, error_type="ERR"):
+
+L 139: Negative condition check
+       # Return a random prophecy for the mapped type,...
+
+L 141: Return value
+       return random.choice(self.prophecies[error_type])
+
+L 143: Return value
+       return random.choice(self.prophecies["ERR"])
+
+L 145: Function definition
+       def get_multiline(self):
+
+L 147: Return value
+       return random.choice(self.multiline)
+
+L 149: Function definition
+       def format_message(self, error_type="ERR", incl...
+
+L 155: Add to list
+       output.append("=" * 60)
+
+L 156: Add to list
+       output.append("MLBARD PROPHECY OF FAILURE")
+
+L 157: Add to list
+       output.append("=" * 60)
+
+L 158: Add to list
+       output.append("")
+
+L 159: Add to list
+       output.append(prophecy)
+
+L 160: Add to list
+       output.append("")
+
+L 162: Add to list
+       output.append("=" * 60)
+
+L 164: Return value
+       return "\n".join(output)
+
+L 166: Function definition
+       def main():
+
+L 168: Import module
+       import argparse
+
+L 190: Debug output
+       print(bard.get_multiline())
+
+L 193: Debug output
+       print("\n=== Testing MLBard Prophecy Generator ...
+
+L 196: Iterate over collection
+       for error_type in bard.prophecies.keys():
+
+L 197: Debug output
+       print(f"Prophecy for {error_type}:")
+
+L 198: Debug output
+       print(f"  {bard.get_prophecy(error_type)}")
+
+L 199: Debug output
+       print("-" * 30) # Separator for readability
+
+L 200: Debug output
+       print() # Blank line for spacing
+
+L 202: Debug output
+       print("\n=== Multiline Prophecy Example ===\n")
+
+L 203: Debug output
+       print(bard.get_multiline())
+
+L 204: Debug output
+       print("-" * 30)
+
+L 206: Debug output
+       print("\n=== Random Prophecies Example (count=3...
+
+L 208: Iterate N times
+       for _ in range(3):
+
+L 209: Random operation
+       random_type = random.choice(all_types)
+
+L 210: Debug output
+       print(bard.format_message(random_type, include_...
+
+L 218: Iterate N times
+       for _ in range(args.count):
+
+L 219: Random operation
+       random_type = random.choice(all_types)
+
+L 220: Debug output
+       print(bard.format_message(random_type, include_...
+
+L 223: Debug output
+       print(bard.format_message(args.type, include_he...
+

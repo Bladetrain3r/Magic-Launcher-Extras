@@ -1,0 +1,314 @@
+Comments for ./text_processing/MLNeotext.py:
+--------------------------------------------------
+L  12: Import module
+       import sys
+
+L  13: Import module
+       import re
+
+L  14: Import module
+       from pathlib import Path
+
+L  15: Import module
+       import argparse
+
+L  16: Import module
+       import webbrowser
+
+L  17: Import module
+       import os
+
+L  18: Import module
+       import tempfile
+
+L  19: Import module
+       import html
+
+L  21: Class definition
+       class MLHTMD:
+
+L  22: Class definition
+       """A class to handle Markdown/HTML conversions ...
+
+L  23: Constructor method
+       def __init__(self, style='basic'):
+
+L  26: Function definition
+       def md_to_html(self, text, title="Document"):
+
+L  29: Return value
+       # Just return the text content
+
+L  30: Return value
+       return self._strip_to_text(text)
+
+L  35: Add to list
+       lines.append('<!DOCTYPE html>')
+
+L  36: Add to list
+       lines.append('<html lang="en">')
+
+L  37: Add to list
+       lines.append('<head>')
+
+L  38: Add to list
+       lines.append('    <meta charset="UTF-8">')
+
+L  39: Add to list
+       lines.append('    <meta name="viewport" content...
+
+L  40: Add to list
+       lines.append(f'    <title>{title}</title>')
+
+L  44: Add multiple items
+       lines.extend(self._get_magic_style())
+
+L  47: Add multiple items
+       lines.extend(self._get_basic_style())
+
+L  49: Add to list
+       lines.append('</head>')
+
+L  50: Add to list
+       lines.append('<body>')
+
+L  54: Add to list
+       lines.append('    <div class="header">')
+
+L  55: Add to list
+       lines.append(f'        <span class="header-titl...
+
+L  56: Add to list
+       lines.append('        <div class="header-button...
+
+L  57: Add to list
+       lines.append('            <button class="header...
+
+L  58: Add to list
+       lines.append('            <button class="header...
+
+L  59: Add to list
+       lines.append('            <button class="header...
+
+L  60: Add to list
+       lines.append('        </div>')
+
+L  61: Add to list
+       lines.append('    </div>')
+
+L  62: Add to list
+       lines.append('    <div class="content manifesto...
+
+L  64: Add to list
+       lines.append('    <div class="content">')
+
+L  67: Add multiple items
+       lines.extend(self._process_markdown(text))
+
+L  69: Add to list
+       lines.append('    </div>') # Close content div
+
+L  70: Add to list
+       lines.append('</body>')
+
+L  71: Add to list
+       lines.append('</html>')
+
+L  73: Return value
+       return '\n'.join(lines)
+
+L  75: Function definition
+       def _get_basic_style(self):
+
+L  77: Return value
+       return [
+
+L  93: Function definition
+       def _get_magic_style(self):
+
+L  95: Return value
+       return [
+
+L 104: Decorator applied
+       '        @keyframes flicker { 0% { opacity: 1; ...
+
+L 121: Function definition
+       def _process_markdown(self, text):
+
+L 127: Iterate over collection
+       for line in text.split('\n'):
+
+L 128: Remove whitespace
+       line = line.strip()
+
+L 132: Negative condition check
+       if not in_list and is_list_item:
+
+L 133: Add to list
+       lines.append('<ul>')
+
+L 136: Add to list
+       lines.append('</ul>')
+
+L 142: Add to list
+       lines.append('</pre>')
+
+L 145: Add to list
+       lines.append('<pre><code>')
+
+L 150: Add to list
+       lines.append(html.escape(line))
+
+L 155: Add to list
+       lines.append(f'<h3>{self._process_inline(line[4...
+
+L 157: Add to list
+       lines.append(f'<h2>{self._process_inline(line[3...
+
+L 159: Add to list
+       lines.append(f'<h1>{self._process_inline(line[2...
+
+L 163: Add to list
+       lines.append(f'    <li>{item}</li>')
+
+L 166: Add to list
+       lines.append('<hr>')
+
+L 167: Negative condition check
+       # Regular text (if not empty)
+
+L 170: Add to list
+       lines.append(f'<p>{processed}</p>')
+
+L 174: Add to list
+       lines.append('</ul>')
+
+L 176: Add to list
+       lines.append('</code></pre>')
+
+L 178: Return value
+       return lines
+
+L 180: Function definition
+       def _process_inline(self, text):
+
+L 183: Regex substitution
+       text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</s...
+
+L 185: Regex substitution
+       text = re.sub(r'\_(.+?)\_', r'<em>\1</em>', text)
+
+L 186: Regex substitution
+       text = re.sub(r'\*(.+?)\*', r'<em>\1</em>', text)
+
+L 188: Regex substitution
+       text = re.sub(r'`(.+?)`', r'<code>\1</code>', t...
+
+L 190: Regex substitution
+       text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a ...
+
+L 191: Return value
+       return text
+
+L 193: Function definition
+       def _strip_to_text(self, text):
+
+L 196: Regex substitution
+       text = re.sub(r'```.*?```', '', text, flags=re....
+
+L 198: Regex substitution
+       text = re.sub(r'^#{1,6}\s+', '', text, flags=re...
+
+L 200: Regex substitution
+       text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+
+L 201: Regex substitution
+       text = re.sub(r'\*(.+?)\*', r'\1', text)
+
+L 203: Regex substitution
+       text = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', ...
+
+L 205: Regex substitution
+       text = re.sub(r'`(.+?)`', r'\1', text)
+
+L 207: Regex substitution
+       text = re.sub(r'\n{3,}', '\n\n', text)
+
+L 208: Return value
+       return text.strip()
+
+L 210: Function definition
+       def html_to_text(self, html_content):
+
+L 213: Regex substitution
+       html_content = re.sub(r'<script[^>]*>.*?</scrip...
+
+L 214: Regex substitution
+       html_content = re.sub(r'<style[^>]*>.*?</style>...
+
+L 216: Regex substitution
+       html_content = re.sub(r'<br\s*/?>', '\n', html_...
+
+L 217: Regex substitution
+       html_content = re.sub(r'<p[^>]*>', '\n', html_c...
+
+L 218: Regex substitution
+       html_content = re.sub(r'</p>', '\n', html_conte...
+
+L 219: Regex substitution
+       html_content = re.sub(r'</?h[1-6]>', '\n', html...
+
+L 221: Regex substitution
+       html_content = re.sub(r'<[^>]+>', '', html_cont...
+
+L 223: Replace substring
+       html_content = html_content.replace('&lt;', '<'...
+
+L 225: Regex substitution
+       html_content = re.sub(r'\n{3,}', '\n\n', html_c...
+
+L 226: Return value
+       return html_content.strip()
+
+L 228: Function definition
+       def main():
+
+L 263: Path object creation
+       input_file = Path(args.input_file)
+
+L 265: Negative condition check
+       if not input_file.exists():
+
+L 266: Debug output
+       print(f"Error: {input_file} not found", file=sy...
+
+L 267: Exit program
+       sys.exit(1)
+
+L 269: File operation with auto-close
+       with open(input_file, 'r', encoding='utf-8') as f:
+
+L 276: Replace substring
+       title = input_file.stem.replace('_', ' ').title()
+
+L 285: Debug output
+       print(output)
+
+L 292: Path operation
+       webbrowser.open_new_tab(f'file://{os.path.realp...
+
+L 293: Debug output
+       print(f"Opened preview in browser from temporar...
+
+L 296: Debug output
+       print("Error: --preview is only valid for HTML ...
+
+L 297: Exit program
+       sys.exit(1)
+
+L 302: File operation with auto-close
+       with open(output_file, 'w', encoding='utf-8') a...
+
+L 304: Debug output
+       print(f"Created: {output_file}")
+

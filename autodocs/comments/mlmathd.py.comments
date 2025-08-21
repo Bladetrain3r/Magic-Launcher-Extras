@@ -1,0 +1,263 @@
+Comments for ./misc/mlmathd.py:
+--------------------------------------------------
+L   9: Import module
+       import json
+
+L  10: Import module
+       import sys
+
+L  11: Import module
+       import math
+
+L  12: Import module
+       import socket
+
+L  13: Import module
+       import threading
+
+L  14: Import module
+       from http.server import HTTPServer, BaseHTTPReq...
+
+L  15: Import module
+       from pathlib import Path
+
+L  35: Class definition
+       class MathProcessor:
+
+L  38: Decorator applied
+       @staticmethod
+
+L  39: Function definition
+       def evaluate(expression, variables=None):
+
+L  41: Error handling block
+       try:
+
+L  51: Return value
+       return {
+
+L  58: Catch specific exception
+       except ZeroDivisionError:
+
+L  59: Return value
+       return {
+
+L  64: Catch specific exception
+       except Exception as e:
+
+L  65: Return value
+       return {
+
+L  71: Decorator applied
+       @staticmethod
+
+L  72: Function definition
+       def format_result(value):
+
+L  75: Return value
+       return str(value)
+
+L  77: Return value
+       return f"{value:,}"
+
+L  80: Return value
+       return f"{int(value):,}"
+
+L  82: Return value
+       return f"{value:.6e}"
+
+L  84: Return value
+       return f"{value:.6f}".rstrip('0').rstrip('.')
+
+L  86: Return value
+       return str(value)
+
+L  88: Decorator applied
+       @staticmethod
+
+L  89: Function definition
+       def batch_evaluate(expressions):
+
+L  94: Iterate over collection
+       for expr in expressions:
+
+L  96: Iterate over collection
+       if '=' in expr and not any(op in expr for op in...
+
+L  97: Split string
+       parts = expr.split('=', 1)
+
+L  98: Remove whitespace
+       var_name = parts[0].strip()
+
+L  99: Remove whitespace
+       var_expr = parts[1].strip()
+
+L 106: Add to list
+       results.append(result)
+
+L 109: Add to list
+       results.append(MathProcessor.evaluate(expr, var...
+
+L 111: Return value
+       return results
+
+L 113: Class definition
+       class HTTPHandler(BaseHTTPRequestHandler):
+
+L 116: Function definition
+       def do_POST(self):
+
+L 119: Log stack trace
+       self.send_error(404)
+
+L 122: Error handling block
+       try:
+
+L 124: Parse JSON from string
+       data = json.loads(self.rfile.read(length))
+
+L 130: Get user by ID
+       data.get('variables', {})
+
+L 146: Catch specific exception
+       except Exception as e:
+
+L 147: Log stack trace
+       self.send_error(500, str(e))
+
+L 149: Function definition
+       def do_GET(self):
+
+L 167: Function definition
+       def log_message(self, format, *args):
+
+L 171: Function definition
+       def socket_server(port=9999):
+
+L 175: Bind to port
+       server.listen(5)
+
+L 176: Debug output
+       print(f"Socket server on port {port}")
+
+L 178: Infinite loop
+       while True:
+
+L 180: Remove whitespace
+       expression = client.recv(1024).decode().strip()
+
+L 192: Function definition
+       def pipe_mode():
+
+L 194: Debug output
+       print("MLMathD Pipe Mode (one expression per li...
+
+L 197: Iterate over collection
+       for line in sys.stdin:
+
+L 198: Remove whitespace
+       expression = line.strip()
+
+L 199: Negative condition check
+       if not expression or expression.startswith('#'):
+
+L 208: Debug output
+       print(f"{result['variable']} = {result['formatt...
+
+L 210: Debug output
+       print(result['formatted'])
+
+L 212: Debug output
+       print(f"ERROR: {result['error']}", file=sys.std...
+
+L 214: Function definition
+       def test_mode():
+
+L 227: Debug output
+       print("Running math verification tests...")
+
+L 233: Debug output
+       print(f"✓ {expr} = {result['result']}")
+
+L 236: Debug output
+       print(f"✗ {expr} = {result['result']} (expected...
+
+L 238: Debug output
+       print(f"✗ {expr} failed: {result['error']}")
+
+L 240: Debug output
+       print(f"\n{passed}/{len(tests)} tests passed")
+
+L 241: Return value
+       return passed == len(tests)
+
+L 243: Function definition
+       def main():
+
+L 249: Exit program
+       sys.exit(0 if test_mode() else 1)
+
+L 254: Debug output
+       print(f"MLMathD HTTP on port {port}")
+
+L 255: Debug output
+       print(f"Usage: curl -X POST http://localhost:{p...
+
+L 270: Join strings
+       expression = ' '.join(sys.argv[1:])
+
+L 273: Debug output
+       print(result['formatted'])
+
+L 275: Debug output
+       print(f"ERROR: {result['error']}", file=sys.std...
+
+L 276: Exit program
+       sys.exit(1)
+
+L 279: Negative condition check
+       if not sys.stdin.isatty():
+
+L 282: Debug output
+       print("MLMathD - Math Coprocessor Protocol")
+
+L 283: Debug output
+       print("\nUsage:")
+
+L 284: Debug output
+       print("  mlmathd.py <expression>      # Direct ...
+
+L 285: Debug output
+       print("  mlmathd.py daemon [port]     # HTTP se...
+
+L 286: Debug output
+       print("  mlmathd.py socket [port]     # Raw soc...
+
+L 287: Debug output
+       print("  mlmathd.py pipe              # Pipe mo...
+
+L 288: Debug output
+       print("  mlmathd.py test              # Run ver...
+
+L 289: Debug output
+       print("\nExamples:")
+
+L 290: Debug output
+       print("  mlmathd.py '771866 / 4'")
+
+L 291: Debug output
+       print("  echo '2 + 2' | mlmathd.py")
+
+L 292: Debug output
+       print("  mlmathd.py daemon 8888")
+
+L 293: Debug output
+       print("\nHTTP API:")
+
+L 294: Debug output
+       print("  curl -X POST http://localhost:8888/cal...
+
+L 295: Debug output
+       print("    -d '{\"expression\":\"sqrt(2)\"}'")
+

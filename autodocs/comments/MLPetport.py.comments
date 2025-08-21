@@ -1,0 +1,134 @@
+Comments for ./tamagotchi_neo/MLPetport.py:
+--------------------------------------------------
+L  10: Import module
+       import sys
+
+L  11: Import module
+       import json
+
+L  12: Import module
+       import hashlib
+
+L  13: Import module
+       import random
+
+L  14: Import module
+       from pathlib import Path
+
+L  16: Class definition
+       class MLPortrait:
+
+L  17: Constructor method
+       def __init__(self, size=16):
+
+L  27: Function definition
+       def generate(self, seed_data, style='block'):
+
+L  36: Random operation
+       random.seed(seed)
+
+L  39: Get user by ID
+       charset = self.chars.get(style, self.chars['blo...
+
+L  43: Iterate N times
+       for y in range(self.size):
+
+L  45: Iterate N times
+       for x in range(self.size):
+
+L  48: Add to list
+       row.append(cell)
+
+L  49: Add to list
+       grid.append(row)
+
+L  51: Return value
+       return grid, charset
+
+L  53: Function definition
+       def _apply_rules(self, x, y, seed):
+
+L  65: Return value
+       return 2  # Special char for eyes
+
+L  71: Random operation
+       if random.random() > threshold * 0.3:
+
+L  72: Return value
+       return 1 if dist < self.size * 0.4 else random....
+
+L  76: Return value
+       return 0
+
+L  79: Return value
+       return random.choice([0, 1, 1, 0])
+
+L  81: Function definition
+       def render(self, grid, charset):
+
+L  84: Iterate over collection
+       for row in grid:
+
+L  86: Iterate over collection
+       for cell in row:
+
+L  91: Add to list
+       output.append(line.rstrip())
+
+L  92: Return value
+       return "\n".join(output)
+
+L  94: Function definition
+       def to_json(self, grid):
+
+L  96: Iterate over collection
+       return [cell for row in grid for cell in row]
+
+L  98: Function definition
+       def from_json(self, flat):
+
+L 101: Iterate N times
+       for i in range(0, len(flat), self.size):
+
+L 102: Add to list
+       grid.append(flat[i:i+self.size])
+
+L 103: Return value
+       return grid
+
+L 105: Function definition
+       def main():
+
+L 106: Import module
+       import argparse
+
+L 122: File operation with auto-close
+       with open(args.file) as f:
+
+L 123: Parse JSON from file
+       seed_data = json.load(f)
+
+L 125: Join strings
+       seed_data = ' '.join(args.seed)
+
+L 126: Negative condition check
+       elif not sys.stdin.isatty():
+
+L 127: Remove whitespace
+       seed_data = sys.stdin.read().strip()
+
+L 130: Debug output
+       print("MLPortrait - ASCII Portrait Generator")
+
+L 131: Debug output
+       print("Enter seed text (or JSON):")
+
+L 132: Remove whitespace
+       seed_data = input("> ").strip()
+
+L 139: Debug output
+       print(json.dumps(portrait.to_json(grid)))
+
+L 141: Debug output
+       print(portrait.render(grid, charset))
+

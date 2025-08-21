@@ -1,0 +1,23 @@
+Comments for ./image_stuff/MLUpsize.py:
+--------------------------------------------------
+L   3: Import module
+       import argparse
+
+L   4: Import module
+       from PIL import Image, ImageFilter
+
+L   5: Import module
+       import os
+
+L   7: Function definition
+       def upscale_and_filter_image(input_path, output...
+
+L  15: Negative condition check
+       if not output_path:
+
+L  16: Path operation
+       base, ext = os.path.splitext(input_path)
+
+L  21: Debug output
+       print(f"Saved: {output_path}")
+

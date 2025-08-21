@@ -1,0 +1,17 @@
+Comments for ./STARTER_TEMPLATES/core_plus_gui.py:
+--------------------------------------------------
+L   1: Error handling block
+       try:
+
+L   2: Import module
+       import tkinter as tk
+
+L   3: Import module
+       import tkinter.scrolledtext as st
+
+L  15: Catch specific exception
+       except Exception as e:
+
+L  16: Debug output
+       if '--gui' in sys.argv and not a.quiet: print(f...
+

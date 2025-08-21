@@ -1,0 +1,149 @@
+Comments for ./text_processing/MLTTHT.py:
+--------------------------------------------------
+L   8: Import module
+       import sys
+
+L   9: Import module
+       import subprocess
+
+L  10: Import module
+       import argparse
+
+L  11: Import module
+       from pathlib import Path
+
+L  12: Import module
+       from datetime import datetime
+
+L  13: Import module
+       import html
+
+L  14: Import module
+       import json
+
+L  15: Import module
+       import re
+
+L  17: Class definition
+       class MLTT2HT:
+
+L  18: Constructor method
+       def __init__(self, output_file="dashboard.html"...
+
+L  19: Path object creation
+       self.output_file = Path(output_file)
+
+L  23: Function definition
+       def strip_ansi(self, text):
+
+L  25: Import module
+       import re
+
+L  29: Catch specific exception
+       (?:   # 7-bit C1 Fe (except CSI)
+
+L  38: Return value
+       return ansi_escape.sub('', text)
+
+L  40: Function definition
+       def add_command(self, name, command, refresh=Fa...
+
+L  42: Error handling block
+       try:
+
+L  45: Execute external command
+       result = subprocess.run(command, shell=True, ca...
+
+L  51: Execute external command
+       result = subprocess.run(command, capture_output...
+
+L  56: Catch specific exception
+       except Exception as e:
+
+L  62: Add to list
+       self.sections.append({
+
+L  64: Join strings
+       'command': command if isinstance(command, str) ...
+
+L  66: Get current datetime
+       'timestamp': datetime.now().strftime('%Y-%m-%d ...
+
+L  70: Function definition
+       def add_text(self, name, text, source=None):
+
+L  75: Add to list
+       self.sections.append({
+
+L  79: Get current datetime
+       'timestamp': datetime.now().strftime('%Y-%m-%d ...
+
+L  83: Function definition
+       def generate_html(self, auto_refresh=0):
+
+L  86: Iterate over collection
+       for section in self.sections:
+
+L 184: Iterate over collection
+       for section in self.sections:
+
+L 186: Split string
+       full_width = len(section['output'].split('\n')[...
+
+L 199: Add to list
+       sections_html.append(section_html)
+
+L 201: Return value
+       return html_template.format(
+
+L 204: Join strings
+       sections=''.join(sections_html),
+
+L 205: Get current datetime
+       last_update=datetime.now().strftime('%Y-%m-%d %...
+
+L 209: Function definition
+       def save(self, auto_refresh=0):
+
+L 212: File operation with auto-close
+       with open(self.output_file, 'w') as f:
+
+L 214: Debug output
+       print(f"Dashboard saved to: {self.output_file}")
+
+L 216: Function definition
+       def from_config(self, config_file):
+
+L 218: File operation with auto-close
+       with open(config_file) as f:
+
+L 219: Parse JSON from file
+       config = json.load(f)
+
+L 221: Get user by ID
+       self.title = config.get('title', self.title)
+
+L 222: Path object creation
+       self.output_file = Path(config.get('output', se...
+
+L 224: Iterate over collection
+       for item in config.get('sections', []):
+
+L 230: Function definition
+       def main():
+
+L 237: Execute deletion
+       parser.add_argument('commands', nargs='*', help...
+
+L 259: Iterate over collection
+       for cmd_spec in args.commands:
+
+L 261: Split string
+       name, command = cmd_spec.split(':', 1)
+
+L 267: Negative condition check
+       if not args.commands and not args.config and no...
+
+L 274: Debug output
+       print("No content to generate. Use -e for examp...
+

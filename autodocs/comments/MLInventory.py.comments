@@ -1,0 +1,365 @@
+Comments for ./rpg/default/MLInventory.py:
+--------------------------------------------------
+L   7: Import module
+       import json
+
+L   8: Import module
+       import os
+
+L   9: Import module
+       import sys
+
+L  10: Import module
+       from datetime import datetime
+
+L  11: Import module
+       from pathlib import Path
+
+L  14: Path object creation
+       INVENTORY_FILE = Path("inventory.json")
+
+L  15: Path object creation
+       SNAPSHOT_DIR = Path("snapshots")
+
+L  16: Create directory
+       SNAPSHOT_DIR.mkdir(exist_ok=True)
+
+L  18: Class definition
+       class Inventory:
+
+L  21: Constructor method
+       def __init__(self):
+
+L  25: Function definition
+       def load(self):
+
+L  27: Check existence
+       if INVENTORY_FILE.exists():
+
+L  28: Error handling block
+       try:
+
+L  29: File operation with auto-close
+       with open(INVENTORY_FILE, 'r') as f:
+
+L  30: Parse JSON from file
+       data = json.load(f)
+
+L  31: Get user by ID
+       self.items = data.get('items', [])
+
+L  32: Debug output
+       print(f"Loaded {len(self.items)} items")
+
+L  33: Catch specific exception
+       except Exception as e:
+
+L  34: Debug output
+       print(f"Error loading inventory: {e}")
+
+L  37: Debug output
+       print("Starting with empty inventory")
+
+L  39: Function definition
+       def save(self):
+
+L  43: Get current datetime
+       'last_modified': datetime.now().isoformat(),
+
+L  48: File operation with auto-close
+       with open(INVENTORY_FILE, 'w') as f:
+
+L  49: Write JSON to file
+       json.dump(data, f, indent=2)
+
+L  50: Debug output
+       print(f"Saved {len(self.items)} items")
+
+L  52: Function definition
+       def snapshot(self, note=""):
+
+L  54: Get current datetime
+       timestamp = datetime.now().strftime("%Y%m%d_%H%...
+
+L  58: Get current datetime
+       'snapshot_time': datetime.now().isoformat(),
+
+L  68: File operation with auto-close
+       with open(snapshot_file, 'w') as f:
+
+L  69: Write JSON to file
+       json.dump(data, f, indent=2)
+
+L  71: Debug output
+       print(f"Snapshot saved: {snapshot_file.name}")
+
+L  73: Debug output
+       print(f"  Note: {note}")
+
+L  74: Return value
+       return snapshot_file
+
+L  76: Function definition
+       def add_item(self, name, weight=0, value=0, not...
+
+L  84: Get current datetime
+       'added': datetime.now().isoformat()
+
+L  86: Add to list
+       self.items.append(item)
+
+L  87: Debug output
+       print(f"Added: {name} (weight: {weight}, value:...
+
+L  89: Debug output
+       print(f"  Notes: {notes}")
+
+L  91: Function definition
+       def remove_item(self, item_id):
+
+L  94: Iterate over collection
+       self.items = [i for i in self.items if i['id'] ...
+
+L  96: Debug output
+       print(f"Removed item #{item_id}")
+
+L  97: Return value
+       return True
+
+L  98: Debug output
+       print(f"Item #{item_id} not found")
+
+L  99: Return value
+       return False
+
+L 101: Function definition
+       def list_items(self, sort_by=None):
+
+L 103: Negative condition check
+       if not self.items:
+
+L 104: Debug output
+       print("Inventory is empty")
+
+L 115: Debug output
+       print(f"\n{'='*60}")
+
+L 116: Debug output
+       print(f"INVENTORY ({len(items)} items)")
+
+L 117: Debug output
+       print(f"{'='*60}")
+
+L 118: Debug output
+       print(f"{'ID':<4} {'Name':<20} {'Weight':<8} {'...
+
+L 119: Debug output
+       print(f"{'-'*60}")
+
+L 121: Iterate over collection
+       for item in items:
+
+L 124: Debug output
+       print(f"{item['id']:<4} {name:<20} {item['weigh...
+
+L 126: Debug output
+       print(f"{'-'*60}")
+
+L 127: Debug output
+       print(f"Total Weight: {self.total_weight():.1f}")
+
+L 128: Debug output
+       print(f"Total Value: {self.total_value():.1f}")
+
+L 129: Debug output
+       print(f"{'='*60}\n")
+
+L 131: Function definition
+       def search(self, query):
+
+L 134: Iterate over collection
+       results = [i for i in self.items
+
+L 139: Debug output
+       print(f"Found {len(results)} matching items:")
+
+L 140: Iterate over collection
+       for item in results:
+
+L 141: Debug output
+       print(f"  #{item['id']}: {item['name']} - {item...
+
+L 143: Debug output
+       print(f"No items found matching '{query}'")
+
+L 144: Return value
+       return results
+
+L 146: Function definition
+       def total_weight(self):
+
+L 148: Iterate over collection
+       return sum(i['weight'] for i in self.items)
+
+L 150: Function definition
+       def total_value(self):
+
+L 152: Iterate over collection
+       return sum(i['value'] for i in self.items)
+
+L 154: Function definition
+       def list_snapshots(self):
+
+L 157: Negative condition check
+       if not snapshots:
+
+L 158: Debug output
+       print("No snapshots found")
+
+L 161: Debug output
+       print(f"\nAvailable snapshots:")
+
+L 163: File operation with auto-close
+       with open(snap, 'r') as f:
+
+L 164: Parse JSON from file
+       data = json.load(f)
+
+L 165: Get user by ID
+       stats = data.get('stats', {})
+
+L 166: Get user by ID
+       note = data.get('note', '')
+
+L 167: Debug output
+       print(f"  {i}. {snap.name}")
+
+L 168: Debug output
+       print(f"     Items: {stats.get('item_count', 0'...
+
+L 169: Get user by ID
+       f"Weight: {stats.get('total_weight', 0):.1f}, "
+
+L 170: Get user by ID
+       f"Value: {stats.get('total_value', 0):.1f}")
+
+L 172: Debug output
+       print(f"     Note: {note}")
+
+L 174: Function definition
+       def restore_snapshot(self, snapshot_name):
+
+L 177: Negative condition check
+       if not snapshot_file.exists():
+
+L 180: Error handling block
+       try:
+
+L 184: Catch specific exception
+       except ValueError:
+
+L 187: Check existence
+       if snapshot_file.exists():
+
+L 188: File operation with auto-close
+       with open(snapshot_file, 'r') as f:
+
+L 189: Parse JSON from file
+       data = json.load(f)
+
+L 191: Debug output
+       print(f"Restored from {snapshot_file.name}")
+
+L 192: Debug output
+       print(f"  {len(self.items)} items loaded")
+
+L 195: Debug output
+       print(f"Snapshot not found: {snapshot_name}")
+
+L 197: Function definition
+       def main():
+
+L 216: Debug output
+       print("MLinventory - RPG Inventory Manager")
+
+L 217: Debug output
+       print("Type 'help' for commands\n")
+
+L 219: Infinite loop
+       while True:
+
+L 220: Error handling block
+       try:
+
+L 221: Split string
+       cmd = input("> ").strip().lower().split()
+
+L 222: Negative condition check
+       if not cmd:
+
+L 228: Debug output
+       print("\nCommands:")
+
+L 230: Debug output
+       print(f"  {cmd:<12} - {desc}")
+
+L 233: Remove whitespace
+       name = input("Item name: ").strip()
+
+L 234: Negative condition check
+       if not name:
+
+L 235: Debug output
+       print("Name required")
+
+L 239: Remove whitespace
+       notes = input("Notes []: ").strip()
+
+L 256: Join strings
+       query = ' '.join(cmd[1:]) if len(cmd) > 1 else ...
+
+L 260: Debug output
+       print(f"Total weight: {inv.total_weight():.1f}")
+
+L 263: Debug output
+       print(f"Total value: {inv.total_value():.1f}")
+
+L 269: Join strings
+       note = ' '.join(cmd[1:]) if len(cmd) > 1 else i...
+
+L 277: Remove whitespace
+       snap = input("Snapshot name or number: ").strip()
+
+L 282: Debug output
+       print("Inventory saved. Goodbye!")
+
+L 286: Debug output
+       print(f"Unknown command: {action}. Type 'help' ...
+
+L 288: Catch specific exception
+       except KeyboardInterrupt:
+
+L 289: Debug output
+       print("\nUse 'quit' to exit")
+
+L 290: Catch specific exception
+       except ValueError as e:
+
+L 291: Debug output
+       print(f"Invalid input: {e}")
+
+L 292: Catch specific exception
+       except Exception as e:
+
+L 293: Debug output
+       print(f"Error: {e}")
+
+L 303: Join strings
+       notes = ' '.join(sys.argv[5:]) if len(sys.argv)...
+
+L 309: Join strings
+       note = ' '.join(sys.argv[2:]) if len(sys.argv) ...
+
+L 312: Debug output
+       print("Usage: mlinventory.py [add name weight v...
+
