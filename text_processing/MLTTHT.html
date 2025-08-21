@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal to HTML Dashboard Generator</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            margin: 0;
+            padding: 20px;
+            line-height: 1.4;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #4ec9b0;
+            border-bottom: 2px solid #4ec9b0;
+            padding-bottom: 10px;
+        }
+        
+        .input-section {
+            margin: 20px 0;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px 0;
+            color: #4ec9b0;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            background: #2d2d30;
+            border: 1px solid #3e3e42;
+            color: #d4d4d4;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 10px;
+            background: #2d2d30;
+            border: 1px solid #3e3e42;
+            color: #d4d4d4;
+            font-family: 'Courier New', Courier, monospace;
+            resize: vertical;
+        }
+        
+        button {
+            background: #4ec9b0;
+            color: #1e1e1e;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 10px 10px 0;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background: #5ed4b6;
+        }
+        
+        .preview {
+            margin: 20px 0;
+            padding: 20px;
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 5px;
+            max-height: 500px;
+            overflow: auto;
+        }
+        
+        .preview pre {
+            margin: 0;
+            white-space: pre;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .controls {
+            margin: 20px 0;
+        }
+        
+        .info {
+            color: #858585;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+        
+        #sectionList {
+            margin: 20px 0;
+        }
+        
+        .section-item {
+            background: #2d2d30;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #3e3e42;
+            border-radius: 3px;
+        }
+        
+        .section-title {
+            color: #4ec9b0;
+            font-weight: bold;
+        }
+        
+        .section-preview {
+            color: #858585;
+            font-size: 12px;
+            margin-top: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .remove-btn {
+            float: right;
+            background: #cd3131;
+            color: white;
+            border: none;
+            padding: 2px 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖥️ Terminal → HTML Dashboard Generator</h1>
+        <p class="info">Convert terminal output into beautiful HTML dashboards. No server needed - everything runs in your browser!</p>
+        
+        <div class="input-section">
+            <label for="dashTitle">Dashboard Title:</label>
+            <input type="text" id="dashTitle" value="Terminal Dashboard" />
+            
+            <label for="sectionName">Section Name:</label>
+            <input type="text" id="sectionName" placeholder="e.g., Weather, System Status, etc." />
+            
+            <label for="termOutput">Terminal Output (paste here):</label>
+            <textarea id="termOutput" placeholder="Paste your terminal output here..."></textarea>
+            
+            <div class="controls">
+                <button onclick="addSection()">Add Section</button>
+                <button onclick="clearInput()">Clear Input</button>
+            </div>
+        </div>
+        
+        <div id="sectionList">
+            <h3>Dashboard Sections:</h3>
+            <div id="sections"></div>
+        </div>
+        
+        <div class="controls">
+            <button onclick="generateDashboard()" style="background: #0dbc79;">Generate Dashboard</button>
+            <button onclick="downloadDashboard()">Download HTML</button>
+            <button onclick="previewDashboard()">Preview</button>
+            <button onclick="clearAll()" style="background: #cd3131;">Clear All</button>
+        </div>
+        
+        <div id="preview" class="preview" style="display: none;">
+            <h3>Preview:</h3>
+            <iframe id="previewFrame" style="width: 100%; height: 400px; border: 1px solid #3e3e42;"></iframe>
+        </div>
+    </div>
+
+    <script>
+        let sections = [];
+        let generatedHTML = '';
+        
+        function stripAnsi(text) {
+            // Remove ANSI escape codes
+            return text.replace(/\x1B\[[0-?]*[ -/]*[@-~]/g, '');
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function addSection() {
+            const name = document.getElementById('sectionName').value.trim();
+            const output = document.getElementById('termOutput').value;
+            
+            if (!name || !output) {
+                alert('Please enter both section name and terminal output');
+                return;
+            }
+            
+            const cleanOutput = stripAnsi(output);
+            
+            sections.push({
+                name: name,
+                output: cleanOutput,
+                timestamp: new Date().toLocaleString()
+            });
+            
+            updateSectionList();
+            clearInput();
+        }
+        
+        function updateSectionList() {
+            const container = document.getElementById('sections');
+            container.innerHTML = '';
+            
+            sections.forEach((section, index) => {
+                const div = document.createElement('div');
+                div.className = 'section-item';
+                div.innerHTML = `
+                    <button class="remove-btn" onclick="removeSection(${index})">Remove</button>
+                    <div class="section-title">${section.name}</div>
+                    <div class="section-preview">${section.output.substring(0, 100)}...</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function removeSection(index) {
+            sections.splice(index, 1);
+            updateSectionList();
+        }
+        
+        function clearInput() {
+            document.getElementById('sectionName').value = '';
+            document.getElementById('termOutput').value = '';
+        }
+        
+        function clearAll() {
+            if (confirm('Clear all sections?')) {
+                sections = [];
+                updateSectionList();
+                document.getElementById('preview').style.display = 'none';
+            }
+        }
+        
+        function generateDashboard() {
+            if (sections.length === 0) {
+                alert('Please add at least one section');
+                return;
+            }
+            
+            const title = document.getElementById('dashTitle').value || 'Terminal Dashboard';
+            
+            const sectionsHtml = sections.map(section => {
+                const isWide = section.output.split('\n')[0].length > 80;
+                const widthClass = isWide ? 'section full-width' : 'section';
+                
+                return `
+        <div class="${widthClass}">
+            <div class="section-header">
+                <div class="section-title">${escapeHtml(section.name)}</div>
+                <div class="section-meta">Generated: ${section.timestamp}</div>
+            </div>
+            <div class="section-content">
+                <pre>${escapeHtml(section.output)}</pre>
+            </div>
+        </div>`;
+            }).join('\n');
+            
+            generatedHTML = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>${escapeHtml(title)}</title>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.2;
+        }
+        h1 {
+            color: #4ec9b0;
+            border-bottom: 2px solid #4ec9b0;
+            padding-bottom: 10px;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+        }
+        .section {
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .section-header {
+            background: #2d2d30;
+            padding: 10px;
+            border-bottom: 1px solid #3e3e42;
+        }
+        .section-title {
+            color: #4ec9b0;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .section-meta {
+            color: #858585;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+        .section-content {
+            padding: 10px;
+            overflow-x: auto;
+        }
+        pre {
+            margin: 0;
+            white-space: pre;
+            color: #d4d4d4;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            line-height: 1.2;
+            letter-spacing: 0;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        .update-time {
+            color: #858585;
+            text-align: right;
+            padding: 10px;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <h1>${escapeHtml(title)}</h1>
+    <div class="dashboard">
+${sectionsHtml}
+    </div>
+    <div class="update-time">
+        Generated: ${new Date().toLocaleString()}
+    </div>
+</body>
+</html>`;
+            
+            alert('Dashboard generated! Click Preview to see it or Download to save.');
+        }
+        
+        function previewDashboard() {
+            if (!generatedHTML) {
+                alert('Please generate the dashboard first');
+                return;
+            }
+            
+            const preview = document.getElementById('preview');
+            const frame = document.getElementById('previewFrame');
+            
+            preview.style.display = 'block';
+            frame.srcdoc = generatedHTML;
+        }
+        
+        function downloadDashboard() {
+            if (!generatedHTML) {
+                alert('Please generate the dashboard first');
+                return;
+            }
+            
+            const blob = new Blob([generatedHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'dashboard.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Add some example data on load
+        window.onload = function() {
+            document.getElementById('termOutput').placeholder = `Example:
+$ uptime
+ 14:32:01 up 42 days, 3:14, 2 users, load average: 0.15, 0.12, 0.09
+ 
+Or paste output from:
+- curl wttr.in
+- docker ps
+- df -h
+- any terminal command!`;
+        };
+    </script>
+</body>
+</html>
