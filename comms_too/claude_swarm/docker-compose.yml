@@ -1,0 +1,24 @@
+services:
+  mlswarm-mcp:
+    build: .
+    container_name: swarm-mcp
+    environment:
+      - SWARM_URL=${SWARM_URL:-http://localhost:8080}
+      - SWARM_USER=${SWARM_USER:-swarm}
+      - SWARM_PASS=${SWARM_PASS:-swarm}
+    restart: unless-stopped
+    # For MCP, we need to expose it differently
+    # This depends on how you're connecting Claude to it
+    ports:
+      - "3000:3000"  # Adjust based on your MCP setup
+    
+    # If you want to test locally with the SwarmSafe.py server
+    # network_mode: host
+    
+    # For production with nginx
+    networks:
+      - swarm-net
+
+networks:
+  swarm-net:
+    external: true  # Assuming you have a network with nginx

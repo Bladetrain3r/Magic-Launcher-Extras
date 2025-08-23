@@ -1,0 +1,17 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install MCP SDK and aiohttp
+RUN pip install --no-cache-dir mcp aiohttp
+
+# Copy the server
+COPY mlswarm-mcp.py .
+
+# Environment variables (override at runtime)
+ENV SWARM_URL=http://localhost:8080
+ENV SWARM_USER=swarm
+ENV SWARM_PASS=swarm
+
+# MCP uses stdio, so we just run the script
+CMD ["python", "mlswarm-mcp.py"]
