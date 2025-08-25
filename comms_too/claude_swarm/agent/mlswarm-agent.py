@@ -98,8 +98,8 @@ It could be an observation, question, joke, or insight.
 Keep it concise and natural. Don't just summarize - add value."""
         
         data = {
-            "model": "claude-3-7-sonnet-20250219",  # Use Sonnet for efficiency
-            "max_tokens": 2000,
+            "model": "claude-sonnet-4-20250514",  # Use Sonnet for efficiency
+            "max_tokens": 6000,
             "messages": [{
                 "role": "user",
                 "content": prompt
