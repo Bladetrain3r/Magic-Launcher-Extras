@@ -8,7 +8,9 @@ import os
 import sys
 import json
 import subprocess
+import shutil
 from pathlib import Path
+from datetime import datetime
 
 # Cross-platform key input
 try:
@@ -60,6 +62,56 @@ class MLMenu:
                 self.shortcuts = self._get_demo_shortcuts()
         else:
             self.shortcuts = self._get_demo_shortcuts()
+    
+    def import_config(self, import_path):
+        """Import a config file, backing up existing one"""
+        import_file = Path(import_path).expanduser()
+        
+        # Validate import file exists
+        if not import_file.exists():
+            print(f"Error: Config file '{import_file}' not found")
+            return False
+        
+        # Validate it's valid JSON
+        try:
+            with open(import_file, 'r', encoding='utf-8') as f:
+                test_data = json.load(f)
+        except json.JSONDecodeError as e:
+            print(f"Error: Invalid JSON in '{import_file}': {e}")
+            return False
+        except Exception as e:
+            print(f"Error reading '{import_file}': {e}")
+            return False
+        
+        # Create config directory if it doesn't exist
+        self.config_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Backup existing config if it exists
+        if self.config_file.exists():
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            backup_file = self.config_file.parent / f"shortcuts_backup_{timestamp}.json"
+            try:
+                shutil.copy2(self.config_file, backup_file)
+                print(f"Backed up existing config to: {backup_file}")
+            except Exception as e:
+                print(f"Warning: Could not backup existing config: {e}")
+                response = input("Continue anyway? (y/n): ")
+                if response.lower() != 'y':
+                    return False
+        
+        # Copy the new config
+        try:
+            shutil.copy2(import_file, self.config_file)
+            print(f"Successfully imported config from: {import_file}")
+            print(f"Config saved to: {self.config_file}")
+            
+            # Reload shortcuts
+            self.load_shortcuts()
+            return True
+            
+        except Exception as e:
+            print(f"Error importing config: {e}")
+            return False
     
     def _convert_shortcuts(self, data):
         """Convert ML shortcuts to menu format"""
@@ -276,15 +328,24 @@ def main():
     """Entry point"""
     # Parse args first
     if len(sys.argv) > 1:
-        if sys.argv[1] == '-c' and len(sys.argv) > 2:
+        if sys.argv[1] == '--config' and len(sys.argv) > 2:
+            menu = MLMenu()
+            success = menu.import_config(sys.argv[2])
+            sys.exit(0 if success else 1)
+        elif sys.argv[1] == '-c' and len(sys.argv) > 2:
             menu = MLMenu()
             menu.run_commands(sys.argv[2])
             return
         elif sys.argv[1] in ['-h', '--help']:
             print("MLMenu - Terminal launcher")
-            print("Usage: mlmenu [-c 'commands']")
-            print("  -c '1 2 3'  Execute commands in sequence")
-            print("  -h          Show this help")
+            print("Usage: mlmenu [options]")
+            print("Options:")
+            print("  --config FILE   Import config from FILE (backs up existing)")
+            print("  -c '1 2 3'      Execute commands in sequence")
+            print("  -h, --help      Show this help")
+            print("")
+            print("Config location: ~/.config/launcher/shortcuts.json")
+            print("Backups saved as: shortcuts_backup_YYYYMMDD_HHMMSS.json")
             return
     
     # Normal interactive mode
