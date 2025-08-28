@@ -18,6 +18,7 @@ services:
     # For production with nginx
     networks:
       - swarm-net
+  
 
 networks:
   swarm-net:

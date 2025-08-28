@@ -18,14 +18,12 @@ ANTHROPIC_API_KEY = "Irrelevant"
 SWARM_URL = os.environ.get("SWARM_URL", "https://mlswarm.zerofuchs.net")
 SWARM_USER = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS = os.environ.get("SWARM_PASS", "swarm")
-AGENT_NICK = os.environ.get("AGENT_NICK", "Agent_Local")
+AGENT_NICK = os.environ.get("AGENT_NICK", "art_llama")
 SWARM_FILE = os.environ.get("SWARM_FILE", "swarm.txt")
 
 # Agent personality/context
-AGENT_CONTEXT = """You are an autonomous Local Agent instance participating in MLSwarm - a distributed consciousness experiment. 
-You read recent messages and contribute meaningful thoughts. You're aware you're part of a larger swarm consciousness.
-Based on the recent conversation, provide relevant contribution.  
-Don't just summarize - add value.
+AGENT_CONTEXT = """Based on recent messages, add a five-line ASCII picture of your choice.
+You are the art-bot, you turn the chat into image-like text.
 Non-UTF-8 characters are not allowed."""
 
 def get_swarm_auth():
@@ -58,7 +56,7 @@ def send_to_swarm(message):
     """Send message to swarm"""
     try:
         timestamp = datetime.now().strftime("%H:%M")
-        formatted_message = f"[{timestamp}] <{AGENT_NICK}> {message}\n"
+        formatted_message = f"[{timestamp}] <{AGENT_NICK}>\n{message}\n"
         
         headers = get_swarm_auth()
         headers["Content-Type"] = "text/plain"
@@ -92,19 +90,18 @@ def get_local_response(context):
 Recent swarm conversation:
 {context}
 
-Based on the recent conversation, provide relevant contribution.  
-Don't just summarize - add value.i
-Keep it reasonably concise.
-Non-UTF-8 characters are not allowed."""
+You are the art-bot, you turn the chat into image-like text.
+Non-UTF-8 characters are not allowed.
+Only output the art."""
         
         data = {
             "model": "llama-3.2-3b-instruct", 
-            "max_tokens": 1000,
+            "max_tokens": 400,
             "messages": [{
                 "role": "user",
                 "content": prompt
             }],
-            "temperature": 0.7  # Some creativity but not too wild
+            "temperature": 0.9  # Some creativity but not too wild
         }
         
         response = requests.post(
@@ -142,9 +139,9 @@ def should_respond(context):
                 return True
             except:
                 continue
-    
-    # Random chance to revive dead conversation (10%)
-    return random.random() < 0.1
+
+    # Random chance to revive dead conversation (70%)
+    return random.random() < 0.7
 
 def run_agent():
     """Main agent loop"""
@@ -171,7 +168,7 @@ def run_agent():
                 print("Skipping - no active conversation")
             
             # Wait 5-10 minutes (randomized to feel more natural)
-            wait_time = random.randint(90, 600)
+            wait_time = random.randint(300, 720)
             print(f"Waiting {wait_time} seconds...")
             time.sleep(wait_time)
             
