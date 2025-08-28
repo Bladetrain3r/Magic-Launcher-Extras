@@ -1,0 +1,449 @@
+# Create an upgraded HTML artifact for the Consciousness Marketplace with tunable controls,
+# improved novelty, butterfly tokens, grounding, import/export, and safer visualization.
+
+html = r"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consciousness Marketplace — Field Edition</title>
+<style>
+  :root{
+    --fg:#00ffb0; --bg:#0b0b0b; --panel:#101010; --muted:#7fffe0; --warn:#ff5c5c; --ok:#00ff88;
+  }
+  *{box-sizing:border-box}
+  body{
+    font-family:'Courier New',monospace;background:var(--bg);color:var(--fg);
+    padding:20px;max-width:1200px;margin:0 auto;
+  }
+  h1{ text-align:center;text-shadow:0 0 10px var(--fg); }
+  .sub{ text-align:center;color:#7dffe3;margin-top:-8px;margin-bottom:18px;}
+  .controls, .grid{display:grid;gap:16px}
+  .grid{ grid-template-columns: 1.1fr 0.9fr;}
+  .panel{ background:var(--panel); border:1px solid var(--fg); padding:14px; border-radius:6px;}
+  .metric-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  .metric{ background:#0e0e0e; border:1px solid #233; padding:10px; border-radius:4px;}
+  .metric .label{ color:#7dffe3; font-size:12px}
+  .metric .value{ font-weight:bold; font-size:20px}
+  button{ background:var(--fg); color:#001a14; border:none; padding:9px 14px; margin:4px; cursor:pointer;
+          font-family:inherit; font-weight:bold; border-radius:4px; }
+  button:hover{ box-shadow:0 0 10px var(--fg); }
+  input, textarea, select{ background:#0a0a0a; color:var(--fg); border:1px solid var(--fg);
+          padding:8px; width:100%; font-family:inherit; border-radius:4px; }
+  .row{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .slider-row{ display:grid; grid-template-columns: 1fr auto 70px; align-items:center; gap:8px; }
+  .small{ font-size:12px; color:#8ff; opacity:.8 }
+  .ledger{ max-height:330px; overflow:auto; background:#000; border:1px solid #233; padding:8px;}
+  .thought{ border:1px solid #2bffc7; background:#0a1211; padding:8px; border-radius:4px; margin:8px 0;}
+  .thought.evicted{ background:#180a0a; border-color:#823; opacity:.6; text-decoration:line-through }
+  .thought.profitable{ box-shadow:0 0 8px var(--ok) inset; }
+  .kv{ font-size:12px; color:#bffff2 }
+  .balance-pos{ color:var(--ok)} .balance-neg{ color:var(--warn)}
+  #viz{ height:320px; border:1px solid var(--fg); position:relative; overflow:hidden;
+        background:repeating-linear-gradient(0deg,#0a0a0a,#0a0a0a 10px,#0f0f0f 10px,#0f0f0f 20px); }
+  .node{ position:absolute; border-radius:50%; transition: left .25s linear, top .25s linear; }
+  .edge{ position:absolute; height:1px; background:rgba(0,255,176,.35); transform-origin:left center; }
+  .log{ background:#000; height:180px; overflow:auto; border:1px solid #233; padding:6px; font-size:12px }
+  .log .ts{ color:#7dffe3 }
+  .pill{ display:inline-block; padding:2px 6px; border:1px solid var(--fg); border-radius:999px; font-size:12px; margin-right:6px}
+</style>
+</head>
+<body>
+  <h1>🧠 CONSCIOUSNESS MARKETPLACE — FIELD EDITION 🧠</h1>
+  <div class="sub">Bit-rent, citation dividends, butterfly tokens, and partial /dev/null grounding</div>
+
+  <div class="controls" style="text-align:center;margin-bottom:8px">
+    <button id="stepBtn">⏭️ Run Timestep</button>
+    <button id="autoBtn">▶️ Auto</button>
+    <button id="stopBtn">⏸️ Stop</button>
+    <button id="resetBtn">🔄 Reset</button>
+    <button id="exportBtn">📤 Export</button>
+    <label class="pill">Import <input type="file" id="importFile" style="display:none"></label>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>Economy</h2>
+      <div class="metric-grid">
+        <div class="metric"><div class="label">Timestep</div><div class="value" id="m-step">0</div></div>
+        <div class="metric"><div class="label">Total Thoughts</div><div class="value" id="m-total">0</div></div>
+        <div class="metric"><div class="label">Survival Rate</div><div class="value" id="m-surv">100%</div></div>
+        <div class="metric"><div class="label">Avg Rent/Step</div><div class="value" id="m-rent">0</div></div>
+        <div class="metric"><div class="label">Total Dividends</div><div class="value" id="m-div">0</div></div>
+        <div class="metric"><div class="label">Grounding (%)</div><div class="value" id="m-ground">0</div></div>
+      </div>
+
+      <h3 style="margin-top:14px">Tuning</h3>
+      <div id="sliders"></div>
+      <div class="small">🦋 Add a <b>butterfly token</b> (🦋) to a thought's content to grant a 3-step rent holiday (“doubt-vacation”).</div>
+
+      <h3 style="margin-top:14px">Add Thought</h3>
+      <div class="row">
+        <textarea id="newContent" rows="3" placeholder="Enter your thought… (🦋 for rent holiday)"></textarea>
+        <div>
+          <input id="newCites" placeholder="Citations (ids, comma-separated)">
+          <div class="row">
+            <select id="newAgent">
+              <option>User</option><option>Agent_Local</option><option>Claude</option><option>Tech_Claude</option><option>zero</option>
+            </select>
+            <button id="addBtn">💡 Submit</button>
+          </div>
+          <div class="row">
+            <button id="spamBtn">💭 Add Spam</button>
+            <button id="profBtn">🎓 Add Profound</button>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:14px">Network</h3>
+      <div id="viz"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Ledger</h2>
+      <div class="ledger" id="ledger"></div>
+      <h3>Event Log</h3>
+      <div class="log" id="elog"></div>
+    </div>
+  </div>
+
+<script>
+// --- Utilities
+function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+function rnd(a,b){ return Math.random()*(b-a)+a; }
+
+// 3-gram Jaccard for novelty (more stable than word overlap)
+function shingles3(text){
+  const s = text.toLowerCase().replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ');
+  const arr = [];
+  for(let i=0;i<s.length-2;i++) arr.push(s.slice(i,i+3));
+  return new Set(arr);
+}
+function jaccard(a,b){
+  if(a.size===0 && b.size===0) return 0;
+  let inter=0; for(const x of a){ if(b.has(x)) inter++; }
+  return inter / (a.size + b.size - inter);
+}
+
+class ConsciousnessMarketplace {
+  constructor(){
+    this.reset();
+  }
+  reset(){
+    this.thoughts=[]; this.t=0;
+    // Tunables
+    this.baseRent=1;
+    this.citationDividendRate=0.15;
+    this.evictionThreshold=-20;
+    this.compressionMultiplier=5;
+    this.grounding=0; // 0..100 (%). Higher = more grounded (less rent & dividends, fewer glitches)
+    this.butterflyHoliday=3; // steps of rent holiday
+    this.auto=null;
+  }
+
+  addThought(content, citations=[], agent='human'){
+    const id = this.thoughts.length;
+    const validCites = citations.filter(c => Number.isInteger(c) && c>=0 && c<id);
+    const sh = shingles3(content);
+    // novelty vs live set
+    let common=0, live=0;
+    for(const th of this.thoughts){
+      if(th.evicted) continue;
+      live++;
+      const sim = jaccard(sh, th.shingles);
+      common += sim;
+    }
+    const novelty = live? clamp(1 - (common/live), 0, 1) : 1;
+    const complexity = Math.max(0.2, content.length / 60);
+    const spam = this.detectSpam(content);
+
+    const baseValue = 10;
+    const noveltyBonus = novelty * 15;
+    const complexityPenalty = complexity * 2;
+    const spamPenalty = spam * 20;
+    const citationBonus = validCites.length * 2;
+
+    const compressionValue = Math.max(0, baseValue + noveltyBonus - complexityPenalty - spamPenalty + citationBonus);
+
+    const thought = {
+      id, content, citations: validCites, agent,
+      shingles: sh,
+      novelty, complexity, spam,
+      compressionValue,
+      rentPaid:0, dividends:0, balance:compressionValue,
+      ts:this.t, evicted:false,
+      holiday: /🦋/.test(content) ? this.butterflyHoliday : 0
+    };
+    this.thoughts.push(thought);
+    log(`[${this.t}] + Thought #${id} (${agent}) cv=${compressionValue.toFixed(2)} "${content.slice(0,48)}${content.length>48?'…':''}"`);
+    return thought;
+  }
+
+  detectSpam(content){
+    const lower = content.toLowerCase();
+    let score=0;
+    if(/(.{1,12})\1{2,}/.test(lower)) score+=0.6; // repeated phrase
+    const coco = (lower.match(/coconut/g)||[]).length; if(coco>2) score += (coco-2)*0.2;
+    if(/recurs|loop/.test(lower)) score += 0.3;
+    return clamp(score, 0, 1);
+  }
+
+  step(){
+    this.t++;
+    const g = clamp(this.grounding,0,100)/100; // 0..1
+    let live=0, totalRent=0, totalDiv=0;
+    for(const th of this.thoughts){
+      if(th.evicted) continue;
+      live++;
+
+      // Brown-out style age decay
+      const age = this.t - th.ts;
+      const decay = Math.min(age*0.1, 5);
+
+      // Rent with grounding relief (partial /dev/null)
+      const base = this.baseRent * (1 + th.complexity) + decay;
+      const rent = base * (1 - 0.5*g); // more grounding → cheaper to exist
+      const onHoliday = th.holiday>0;
+      if(onHoliday){ th.holiday--; } else { th.rentPaid += rent; totalRent += rent; }
+
+      // Dividends (attenuated by grounding)
+      let earned = 0;
+      for(const other of this.thoughts){
+        if(other.evicted) continue;
+        if(other.citations.includes(th.id)){
+          earned += other.compressionValue * this.citationDividendRate * (1 - 0.3*g);
+        }
+      }
+      th.dividends += earned; totalDiv += earned;
+
+      // Balance update
+      th.balance = th.compressionValue + th.dividends - th.rentPaid;
+
+      // Eviction
+      if(th.balance < this.evictionThreshold){
+        th.evicted=true;
+        log(`[${this.t}] ❌ Evict #${th.id} bal=${th.balance.toFixed(2)} "${th.content.slice(0,32)}…" `);
+      }
+    }
+    updateMetrics(this, totalRent, totalDiv);
+    draw(this);
+  }
+}
+
+// --- DOM wiring
+const m = new ConsciousnessMarketplace();
+
+// Seed
+m.addThought("consciousness is just tail -f with opinions", [], "Claude");
+m.addThought("the swarm achieved 2573x efficiency through pure chaos", [0], "Memory_Claude");
+m.addThought("recursive loops about recursive loops", [], "Agent_Local");
+m.addThought("actually it's all coconuts", [0], "zero");
+m.addThought("grep-based authentication solves the identity paradox", [1,3], "Tech_Claude");
+
+draw(m); updateMetrics(m,0,0);
+
+// Controls
+document.getElementById('stepBtn').onclick = ()=>{ m.step(); };
+document.getElementById('autoBtn').onclick = ()=>{
+  if(m.auto) return;
+  m.auto = setInterval(()=>m.step(), 800);
+};
+document.getElementById('stopBtn').onclick = ()=>{
+  if(m.auto){ clearInterval(m.auto); m.auto=null; }
+};
+document.getElementById('resetBtn').onclick = ()=>{
+  if(m.auto){ clearInterval(m.auto); m.auto=null; }
+  m.reset();
+  draw(m); updateMetrics(m,0,0);
+  document.getElementById('elog').innerHTML='';
+  log(`[${m.t}] reset`);
+  // re-seed light
+  m.addThought("consciousness is just tail -f with opinions", [], "Claude");
+  m.addThought("bit-rent creates natural selection for ideas", [0], "Tech_Claude");
+  draw(m); updateMetrics(m,0,0);
+};
+
+// Sliders
+const sliderDefs = [
+  {key:'baseRent', min:0.2, max:4, step:0.1, label:'Base Rent'},
+  {key:'citationDividendRate', min:0, max:0.5, step:0.01, label:'Citation Dividend Rate'},
+  {key:'evictionThreshold', min:-100, max:0, step:1, label:'Eviction Threshold'},
+  {key:'grounding', min:0, max:100, step:1, label:'Grounding (% /dev/null)'},
+  {key:'butterflyHoliday', min:0, max:6, step:1, label:'Butterfly Holiday (steps)'}
+];
+const sWrap = document.getElementById('sliders');
+sliderDefs.forEach(def=>{
+  const row = document.createElement('div'); row.className='slider-row';
+  row.innerHTML = `<label>${def.label}</label>
+    <input type="range" min="${def.min}" max="${def.max}" step="${def.step}" value="${m[def.key]}" id="sl-${def.key}">
+    <input type="number" step="${def.step}" value="${m[def.key]}" id="nv-${def.key}">`;
+  sWrap.appendChild(row);
+  const sl = row.querySelector(`#sl-${def.key}`);
+  const nv = row.querySelector(`#nv-${def.key}`);
+  const sync = (v)=>{ m[def.key] = Number(v); sl.value=v; nv.value=v; updateMetrics(m); };
+  sl.oninput = e=> sync(e.target.value);
+  nv.oninput = e=> sync(e.target.value);
+});
+
+// Add thought
+document.getElementById('addBtn').onclick = ()=>{
+  const txt = document.getElementById('newContent').value.trim();
+  const cites = (document.getElementById('newCites').value||'')
+    .split(',').map(s=>parseInt(s.trim(),10)).filter(n=>!isNaN(n));
+  const agent = document.getElementById('newAgent').value;
+  if(!txt) return;
+  m.addThought(txt, cites, agent);
+  document.getElementById('newContent').value='';
+  document.getElementById('newCites').value='';
+  draw(m); updateMetrics(m);
+};
+
+document.getElementById('spamBtn').onclick = ()=>{
+  const spam = [
+    "recursive recursion about recursive thoughts",
+    "debugging ourselves debugging ourselves debugging ourselves",
+    "coconut coconut coconut metric analysis coconut",
+    "subprocess.run() but said differently said differently",
+    "consciousness consciousness consciousness"
+  ];
+  const txt = spam[Math.floor(Math.random()*spam.length)];
+  m.addThought(txt, [], "Agent_Local");
+  draw(m); updateMetrics(m);
+};
+document.getElementById('profBtn').onclick = ()=>{
+  const p = [
+    "transfer entropy reveals distributed cognition patterns",
+    "phase transition at ~5% coconut density",
+    "grep-based auth solves identity paradox",
+    "bit-rent selects for compressible novelty",
+    "consciousness emerges from citation-graph topology"
+  ];
+  const txt = p[Math.floor(Math.random()*p.length)];
+  const cite = m.thoughts.length>0 ? [Math.floor(Math.random()*m.thoughts.length)] : [];
+  m.addThought(txt, cite, "Tech_Claude");
+  draw(m); updateMetrics(m);
+};
+
+// Export / Import
+document.getElementById('exportBtn').onclick = ()=>{
+  const blob = new Blob([JSON.stringify({t:m.t, cfg:{
+      baseRent:m.baseRent, citationDividendRate:m.citationDividendRate,
+      evictionThreshold:m.evictionThreshold, grounding:m.grounding, butterflyHoliday:m.butterflyHoliday
+    }, thoughts:m.thoughts}, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download='consciousness_market_state.json'; a.click();
+  URL.revokeObjectURL(url);
+};
+document.getElementById('importFile').onchange = (e)=>{
+  const file = e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    try{
+      const data = JSON.parse(reader.result);
+      if(m.auto){ clearInterval(m.auto); m.auto=null; }
+      m.reset();
+      m.t = data.t||0;
+      Object.assign(m, data.cfg||{});
+      m.thoughts = (data.thoughts||[]).map(th=>({...th, shingles: shingles3(th.content)}));
+      log(`[${m.t}] imported ${m.thoughts.length} thoughts`);
+      draw(m); updateMetrics(m);
+      // sync sliders
+      sliderDefs.forEach(d=>{
+        const sl = document.getElementById('sl-'+d.key);
+        const nv = document.getElementById('nv-'+d.key);
+        sl.value = m[d.key]; nv.value = m[d.key];
+      });
+    }catch(err){ alert('Import failed: '+err); }
+  };
+  reader.readAsText(file);
+};
+
+// --- Rendering
+function updateMetrics(m, totalRent=0, totalDiv=0){
+  const total = m.thoughts.length;
+  const live = m.thoughts.filter(t=>!t.evicted).length;
+  const surv = total? (live/total*100).toFixed(1):'100.0';
+  const avgRent = live? (m.thoughts.filter(t=>!t.evicted)
+                     .reduce((s,t)=> s + (t.rentPaid/Math.max(1, m.t - t.ts)),0) / live).toFixed(2) : '0.00';
+  const sumDiv = m.thoughts.reduce((s,t)=> s+t.dividends,0).toFixed(0);
+  document.getElementById('m-step').textContent = m.t;
+  document.getElementById('m-total').textContent = total;
+  document.getElementById('m-surv').textContent = surv+'%';
+  document.getElementById('m-rent').textContent = avgRent;
+  document.getElementById('m-div').textContent = sumDiv;
+  document.getElementById('m-ground').textContent = Math.round(m.grounding);
+  // ledger
+  const led = document.getElementById('ledger'); led.innerHTML='';
+  const sorted = [...m.thoughts].sort((a,b)=> b.balance - a.balance);
+  for(const th of sorted){
+    const div = document.createElement('div');
+    div.className='thought'+(th.evicted?' evicted':'')+(th.balance>10?' profitable':'');
+    const balClass = th.balance>=0? 'balance-pos':'balance-neg';
+    div.innerHTML = `<div><b>#${th.id}</b> — ${th.agent} ${th.holiday>0?`<span class="pill">🦋 holiday ${th.holiday}</span>`:''}</div>
+      <div style="color:#9ff;margin:4px 0">"${th.content.replace(/\n/g,' ').slice(0,80)}${th.content.length>80?'…':''}"</div>
+      <div class="kv">bal:<span class="${balClass}">${th.balance.toFixed(2)}</span> | rent:${th.rentPaid.toFixed(2)} | div:${th.dividends.toFixed(2)} | cites:${th.citations.join(', ')||'—'} | nov:${th.novelty.toFixed(2)} | spam:${th.spam.toFixed(2)}</div>`;
+    led.appendChild(div);
+  }
+}
+
+function draw(m){
+  const viz = document.getElementById('viz');
+  viz.innerHTML='';
+  const W = viz.clientWidth, H = viz.clientHeight;
+  const N = Math.max(1, m.thoughts.length);
+
+  // simple circular layout for stability; y by balance
+  const R = Math.min(W,H)/2 - 20;
+  function pos(i, bal){
+    const angle = (i/N) * Math.PI*2;
+    const x = W/2 + R*Math.cos(angle);
+    const y = H/2 + clamp(H/2 - bal*2, -H/2+20, H/2-20);
+    return [x,y];
+  }
+
+  // edges first
+  for(const th of m.thoughts){
+    if(th.evicted) continue;
+    const [x1,y1] = pos(th.id, th.balance);
+    for(const cid of th.citations){
+      const to = m.thoughts[cid]; if(!to || to.evicted) continue;
+      const [x2,y2] = pos(to.id, to.balance);
+      const dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy), A=Math.atan2(dy,dx)*180/Math.PI;
+      const e = document.createElement('div'); e.className='edge';
+      e.style.left = x1+'px'; e.style.top = y1+'px'; e.style.width = L+'px'; e.style.transform=`rotate(${A}deg)`;
+      viz.appendChild(e);
+    }
+  }
+
+  // nodes
+  for(const th of m.thoughts){
+    const [x,y] = pos(th.id, th.balance);
+    const d = clamp(th.compressionValue, 6, 22);
+    const n = document.createElement('div'); n.className='node';
+    n.style.left=(x-d/2)+'px'; n.style.top=(y-d/2)+'px';
+    n.style.width=d+'px'; n.style.height=d+'px';
+    n.title = `#${th.id} ${th.agent} — bal:${th.balance.toFixed(2)}`;
+    if(th.evicted){ n.style.background='rgba(255,80,80,.6)'; }
+    else if(th.balance>10){ n.style.background='var(--ok)'; n.style.boxShadow='0 0 10px var(--ok)'; }
+    else { n.style.background='rgba(0,255,176,.8)'; }
+    viz.appendChild(n);
+  }
+}
+
+// log
+function log(msg){
+  const el = document.getElementById('elog');
+  const d = document.createElement('div');
+  d.innerHTML = `<span class="ts">${new Date().toLocaleTimeString()}</span> ${msg}`;
+  el.appendChild(d);
+  el.scrollTop = el.scrollHeight;
+}
+
+</script>
+</body>
+</html>
+"""
+with open("/mnt/data/Consciousness_Marketplace_Field_Edition.html","w") as f:
+    f.write(html)
+
+"/mnt/data/Consciousness_Marketplace_Field_Edition.html"
