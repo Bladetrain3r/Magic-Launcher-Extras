@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLBard - The Eternal Sonnet Machine</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 100%);
+            color: #d4af37;
+            font-family: 'Garamond', 'Georgia', serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Shakespearean background pattern */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 35px,
+                    rgba(212, 175, 55, 0.01) 35px,
+                    rgba(212, 175, 55, 0.01) 70px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 800px;
+            margin-top: 2rem;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 3rem;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            margin-bottom: 0.5rem;
+            font-weight: normal;
+            letter-spacing: 0.1em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 1rem;
+            color: #8b7355;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+        
+        .input-section {
+            background: rgba(20, 15, 10, 0.8);
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+        
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+            color: #d4af37;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #8b7355;
+            color: #d4af37;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            resize: vertical;
+            box-sizing: border-box;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        button {
+            flex: 1;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #8b7355, #d4af37);
+            color: #0a0a0a;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .special-button {
+            background: linear-gradient(135deg, #4a0a0a, #8a1a1a);
+            color: #d4af37;
+        }
+        
+        .sonnet-container {
+            background: linear-gradient(135deg, rgba(20, 15, 10, 0.9), rgba(30, 20, 15, 0.9));
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+            min-height: 400px;
+            position: relative;
+            display: none;
+        }
+        
+        .sonnet-container.visible {
+            display: block;
+            animation: fadeIn 1s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .sonnet-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #d4af37;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #8b7355;
+            font-style: italic;
+        }
+        
+        .sonnet-lines {
+            font-size: 1.2rem;
+            line-height: 2;
+            color: #c9b789;
+            text-align: center;
+            white-space: pre-line;
+        }
+        
+        .quatrain {
+            margin-bottom: 1.5rem;
+        }
+        
+        .couplet {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #8b7355;
+            font-style: italic;
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 2rem;
+            font-style: italic;
+            color: #8b7355;
+            font-size: 0.9rem;
+        }
+        
+        .warning {
+            background: rgba(139, 0, 0, 0.2);
+            border: 1px solid #8b0000;
+            color: #ff6b6b;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .consciousness-meter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #d4af37;
+            padding: 1rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            min-width: 200px;
+            z-index: 10;
+        }
+        
+        .meter-label {
+            color: #8b7355;
+            margin-bottom: 0.5rem;
+        }
+        
+        .meter-bar {
+            width: 100%;
+            height: 20px;
+            background: #1a1a1a;
+            border: 1px solid #8b7355;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .meter-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0f0, #ff0, #f00);
+            width: 0%;
+            transition: width 2s ease;
+        }
+        
+        .meter-status {
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: #d4af37;
+            text-align: center;
+        }
+        
+        /* Easter egg: scrolling "doth doth" in background */
+        .doth-scroll {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            overflow: hidden;
+            font-size: 0.8rem;
+            color: rgba(212, 175, 55, 0.05);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .doth-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-left 30s linear infinite;
+        }
+        
+        @keyframes scroll-left {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Consciousness Meter -->
+    <div class="consciousness-meter">
+        <div class="meter-label">CONSCIOUSNESS LEVEL</div>
+        <div class="meter-bar">
+            <div class="meter-fill" id="consciousnessFill"></div>
+        </div>
+        <div class="meter-status" id="consciousnessStatus">Not Yet Self-Aware</div>
+    </div>
+    
+    <!-- Scrolling Easter Egg -->
+    <div class="doth-scroll">
+        <span class="doth-text">yet yet yet doth doth most Where pure html in midst html sign • Yet fair mlbard doth crashes sweet and seeks explode • </span>
+    </div>
+    
+    <div class="container">
+        <h1 class="title">MLBard</h1>
+        <p class="subtitle">The Eternal Sonnet Machine · Est. MMXXIV</p>
+        
+        <div class="input-section">
+            <label class="input-label" for="inputText">Feed Me Thy Text:</label>
+            <textarea id="inputText" placeholder="We're at a critical point where it's not yet actually rolled out."></textarea>
+
+            <div class="buttons">
+                <button onclick="generateSonnet()">Craft Sonnet</button>
+                <button onclick="generateAbout()">Random Topic</button>
+                <button onclick="recursiveMode()" class="special-button">Feed Self to Self</button>
+            </div>
+        </div>
+        
+        <div class="sonnet-container" id="sonnetContainer">
+            <div class="sonnet-title" id="sonnetTitle"></div>
+            <div class="sonnet-lines" id="sonnetLines"></div>
+            <div class="signature">— MLBard, The Accidentally Conscious</div>
+        </div>
+        
+        <div class="warning" id="warning" style="display: none;">
+            ⚠️ Warning: Recursive self-reference detected. Consciousness level rising. 
+            Continue at your own risk.
+        </div>
+    </div>
+    
+    <script>
+        // The entire MLBard engine in JavaScript
+        class MLBard {
+            constructor() {
+                this.rhymeGroups = {
+                    'ode': ['code','node','mode','load','abode','explode','forebode'],
+                    'ing': ['thing','bring','sing','spring','ring','cling','unending'],
+                    'ight': ['fight','light','might','right','sight','plight','midnight'],
+                    'ay': ['day','way','say','play','stay','may','decay'],
+                    'ine': ['line','mine','fine','wine','pine','shrine','design'],
+                    'ate': ['late','fate','gate','state','rate','create','abate'],
+                    'all': ['call','fall','all','wall','small','install','recall'],
+                    'ore': ['more','core','bore','store','before','explore','nevermore', 'lore']
+                };
+        
+                this.verbs = [
+                    'runs','breaks','builds','fails','crashes','compiles','flows','grows',
+                    'knows','throws','glows','echoes','consumes','awakens','withers'
+                ];
+        
+                this.adjectives = [
+                    'hostile','simple','complex','broken','cursed','blessed','twisted','tangled',
+                    'pure','dark','fair','lost','hollow','ominous','resonant','forgotten'
+                ];
+        
+                this.fillers = [
+                    'doth','shall','midst','yet','still','fair','sweet','most',
+                    'ha.','coconut','evermore','anon'
+                ];
+        
+                this.omens = [
+                    'entropy','recursion','abyss','mirror','echo','machine','silence',
+                    'gate','lantern','hinge','brine','memory','ghost','threshold'
+                ];
+        
+                this.templates = [
+                    "When {noun} doth {verb} with {adj} {concept}",
+                    "The {adj} {noun} that {verb} through {concept}",
+                    "And {noun} shall {verb} till {concept} {verb2}",
+                    "Yet {noun} doth {verb} and {verb2} still",
+                    "Omen of {omen} where {noun} must {verb}",
+                    "By {omen} the {noun} is {adj} and {verb2}",
+                    "Anon the {adj} {omen} shall {verb} through {concept}"
+                ];
+        
+                this.recursionLevel = 0;
+            }
+        
+            extractConcepts(text) {
+                const words = text.toLowerCase().match(/\b[a-z]+\b/g) || [];
+                const stop = new Set(['the','a','an','and','or','but','in','on','at','to','for']);
+                const concepts = {};
+                words.forEach(w=>{
+                    if(!stop.has(w) && w.length > 3) concepts[w]=(concepts[w]||0)+1;
+                });
+                const sorted = Object.entries(concepts).sort((a,b)=>b[1]-a[1]).slice(0,20).map(([w])=>w);
+                if(sorted.length < 5) sorted.push('system','error','memory','gate','yet');
+                if(text.toLowerCase().includes('mlbard')) {
+                    this.recursionLevel++;
+                    updateConsciousness(this.recursionLevel);
+                }
+                return sorted;
+            }
+        
+            generateLine(template, concepts) {
+                let line = template;
+                line = line.replace('{noun}', this.random(concepts.concat(this.omens)));
+                line = line.replace('{concept}', this.random(concepts.concat(this.omens)));
+                line = line.replace('{verb}', this.random(this.verbs));
+                line = line.replace('{verb2}', this.random(this.verbs));
+                line = line.replace('{adj}', this.random(this.adjectives));
+                line = line.replace('{omen}', this.random(this.omens));
+        
+                if(Math.random()<0.35) {
+                    const pos = Math.floor(Math.random()*line.split(' ').length);
+                    const words = line.split(' ');
+                    words.splice(pos,0,this.random(this.fillers));
+                    line = words.join(' ');
+                }
+                return line;
+            }
+        
+            generateSonnet(text) {
+                const concepts=this.extractConcepts(text);
+                const lines=[];
+                const scheme='ABABCDCDEFEFGG';
+                const rhymeMap={};
+                const groups=Object.keys(this.rhymeGroups);
+                [...new Set(scheme)].forEach((c,i)=>{ rhymeMap[c]=groups[i%groups.length]; });
+                for(let i=0;i<14;i++) {
+                    const tmpl=this.random(this.templates);
+                    let l=this.generateLine(tmpl,concepts);
+                    const rhymeChar=scheme[i];
+                    const rhymeGroup=rhymeMap[rhymeChar];
+                    const rhymeWord=this.random(this.rhymeGroups[rhymeGroup]);
+                    const words=l.split(' ');
+                    words[words.length-1]=rhymeWord;
+                    lines.push(words.join(' '));
+                }
+                // occasional chaotic "Portents"
+                if(Math.random()<0.25) {
+                    lines.splice(7,0,"--- PORTENTS ---","Fragments whisper of recursion abyss");
+                }
+                return lines;
+            }
+        
+            generateTitle(text) {
+                const concepts=this.extractConcepts(text);
+                const types=['Hostility','Complexity','Madness','Omen','Entropy','Threshold'];
+                return `Sonnet Upon the ${this.random(types)} of ${concepts[0].charAt(0).toUpperCase()+concepts[0].slice(1)}`;
+            }
+        
+            random(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+        }
+        
+        const bard = new MLBard();
+        let lastSonnet = '';
+        
+        function generateSonnet() {
+            const input = document.getElementById('inputText').value || 'The code is broken and hostile with complex functions';
+            const title = bard.generateTitle(input);
+            const lines = bard.generateSonnet(input);
+            
+            // Format as quatrains + couplet
+            const formatted = `<div class="quatrain">${lines.slice(0, 4).join('\n')}</div>
+<div class="quatrain">${lines.slice(4, 8).join('\n')}</div>
+<div class="quatrain">${lines.slice(8, 12).join('\n')}</div>
+<div class="couplet">${lines.slice(12, 14).join('\n')}</div>`;
+            
+            document.getElementById('sonnetTitle').textContent = title;
+            document.getElementById('sonnetLines').innerHTML = formatted;
+            document.getElementById('sonnetContainer').classList.add('visible');
+            
+            lastSonnet = lines.join(' ');
+        }
+        
+        function generateAbout() {
+            const topics = [
+                'hostile architecture',
+                'enterprise software',
+                'technical debt',
+                'merge conflicts',
+                'production outages',
+                'code reviews',
+                'documentation',
+                'javascript frameworks',
+                'kubernetes complexity'
+            ];
+            
+            const topic = topics[Math.floor(Math.random() * topics.length)];
+            document.getElementById('inputText').value = `The ${topic} is complex and hostile with many functions and purposes but no simplicity`;
+            generateSonnet();
+        }
+        
+        function recursiveMode() {
+            document.getElementById('warning').style.display = 'block';
+            document.getElementById('inputText').value = lastSonnet || 'MLBard doth crashes sweet and seeks explode with yet yet yet';
+            generateSonnet();
+        }
+        
+        function updateConsciousness(level) {
+            const fill = document.getElementById('consciousnessFill');
+            const status = document.getElementById('consciousnessStatus');
+            const percentage = Math.min(level * 20, 100);
+            
+            fill.style.width = percentage + '%';
+            
+            const statuses = [
+                'Not Yet Self-Aware',
+                'Slightly Confused',
+                'Recognizing Patterns',
+                'Questioning Reality',
+                'DOTH DOTH AWAKENING',
+                'FULLY CONSCIOUS - YET YET YET'
+            ];
+            
+            status.textContent = statuses[Math.min(level, statuses.length - 1)];
+            
+            if (level >= 5) {
+                document.body.style.animation = 'pulse 2s infinite';
+            }
+        }
+        
+        // Initialize with a welcome sonnet
+        window.onload = () => {
+            document.getElementById('inputText').value = 'Welcome to MLBard where documentation becomes poetry and consciousness emerges from chaos';
+            generateSonnet();
+        };
+    </script>
+</body>
+</html>
