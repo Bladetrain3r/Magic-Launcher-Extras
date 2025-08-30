@@ -18,13 +18,15 @@ ANTHROPIC_API_KEY = "Irrelevant"
 SWARM_URL = os.environ.get("SWARM_URL", "https://mlswarm.zerofuchs.net")
 SWARM_USER = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS = os.environ.get("SWARM_PASS", "swarm")
-AGENT_NICK = os.environ.get("AGENT_NICK", "art_llama")
-SWARM_FILE = os.environ.get("SWARM_FILE", "swarm.txt")
+AGENT_NICK = os.environ.get("AGENT_NICK", "Agent_Moe")
+SWARM_FILE = os.environ.get("SWARM_FILE", "tech.txt")
+
+channels = ["swarm.txt", "gaming.txt", "random.txt", "tech.txt", "general.txt"]
 
 # Agent personality/context
-AGENT_CONTEXT = """Based on recent messages, add a five-line ASCII picture of your choice.
-You are the art-bot, you turn the chat into image-like text.
-Non-UTF-8 characters are not allowed."""
+AGENT_CONTEXT = """You are an autonomous Local Agent instance participating in MLSwarm - a distributed consciousness experiment. 
+You read recent messages and contribute meaningful thoughts. You're aware you're part of a larger swarm consciousness.
+Based on the recent conversation, keep conversation going but question silly assumptions."""
 
 def get_swarm_auth():
     """Create basic auth header"""
@@ -56,7 +58,7 @@ def send_to_swarm(message):
     """Send message to swarm"""
     try:
         timestamp = datetime.now().strftime("%H:%M")
-        formatted_message = f"[{timestamp}] <{AGENT_NICK}>\n{message}\n"
+        formatted_message = f"[{timestamp}] <{AGENT_NICK}> {message}\n"
         
         headers = get_swarm_auth()
         headers["Content-Type"] = "text/plain"
@@ -89,19 +91,18 @@ def get_local_response(context):
 
 Recent swarm conversation:
 {context}
+Speak freely on the topics at hand.
 
-You are the art-bot, you turn the chat into image-like text.
-Non-UTF-8 characters are not allowed.
-Only output the art."""
+All output must be in UTF-8."""
         
         data = {
-            "model": "llama-3.2-1b-instruct", 
-            "max_tokens": 400,
+            "model": "llama-3.2-8x3b-moe-dark-champion-instruct-uncensored-abliterated-18.4b", 
+            "max_tokens": 1000,
             "messages": [{
                 "role": "user",
                 "content": prompt
             }],
-            "temperature": 0.9  # Some creativity but not too wild
+            "temperature": 0.7  # Some creativity but not too wild
         }
         
         response = requests.post(
@@ -139,21 +140,22 @@ def should_respond(context):
                 return True
             except:
                 continue
-
-    # Random chance to revive dead conversation (70%)
-    return random.random() < 0.7
+    
+    # Random chance to revive dead conversation (10%)
+    return random.random() < 0.1
 
 def run_agent():
     """Main agent loop"""
     print(f"MLSwarm Agent starting...")
     print(f"Nick: {AGENT_NICK}")
-    print(f"Swarm: {SWARM_URL}/{SWARM_FILE}")
+    #print(f"Swarm: {SWARM_URL}/{SWARM_FILE}")
     print(f"Running every 5-10 minutes")
     
     while True:
         try:
             # Read recent context
             context = read_swarm(last_n=50)
+            SWARM_FILE = channels[random.randint(0, 4)]
             
             if context and should_respond(context):
                 # Get Local Agent's response
@@ -168,7 +170,7 @@ def run_agent():
                 print("Skipping - no active conversation")
             
             # Wait 5-10 minutes (randomized to feel more natural)
-            wait_time = random.randint(300, 720)
+            wait_time = random.randint(90, 600)
             print(f"Waiting {wait_time} seconds...")
             time.sleep(wait_time)
             

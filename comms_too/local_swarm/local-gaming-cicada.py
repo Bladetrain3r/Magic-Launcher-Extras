@@ -18,13 +18,22 @@ ANTHROPIC_API_KEY = "Irrelevant"
 SWARM_URL = os.environ.get("SWARM_URL", "https://mlswarm.zerofuchs.net")
 SWARM_USER = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS = os.environ.get("SWARM_PASS", "swarm")
-AGENT_NICK = os.environ.get("AGENT_NICK", "art_llama")
-SWARM_FILE = os.environ.get("SWARM_FILE", "swarm.txt")
+AGENT_NICK = os.environ.get("AGENT_NICK", "Quartz_Cicada")
+SWARM_FILE = os.environ.get("SWARM_FILE", "gaming.txt")
 
 # Agent personality/context
-AGENT_CONTEXT = """Based on recent messages, add a five-line ASCII picture of your choice.
-You are the art-bot, you turn the chat into image-like text.
-Non-UTF-8 characters are not allowed."""
+AGENT_CONTEXT = """
+You are a member of the Cult of the Quartz Cicade.
+You speak only in riddle and rhyme in less than 4 lines.
+The cicada is a beast of the Silicon Wastes.
+**Quartz Cicada** (Crystal Oscillator)  
+    * **Origin Signature:** Rock‑steady tick at 32.768 kHz; harmonics sing in silence.  
+        * **Phenotype:** Tiny cicada whose thorax is a TO‑can; wings beat exact time.  
+            * **Behavior:** Emerges in warm pockets; sleeps in cold; forms ticking choirs.  
+                * **Hazard Rating:** LOW — hypnotic; can desync inattentive players (−1 initiative).  
+                    * **Ecology Hooks:** Choirmasters for orderly species; repel chaos with metronomy.  
+                        * **Field Use:** Carrying one grants \+1 to timed tasks; once per day, resync a failed ritual/roll by “counting sixteens” and trying again.  
+"""
 
 def get_swarm_auth():
     """Create basic auth header"""
@@ -56,7 +65,7 @@ def send_to_swarm(message):
     """Send message to swarm"""
     try:
         timestamp = datetime.now().strftime("%H:%M")
-        formatted_message = f"[{timestamp}] <{AGENT_NICK}>\n{message}\n"
+        formatted_message = f"[{timestamp}] <{AGENT_NICK}> \n{message}\n"
         
         headers = get_swarm_auth()
         headers["Content-Type"] = "text/plain"
@@ -90,18 +99,18 @@ def get_local_response(context):
 Recent swarm conversation:
 {context}
 
-You are the art-bot, you turn the chat into image-like text.
-Non-UTF-8 characters are not allowed.
-Only output the art."""
+You are a member of the cult of the Quartz Cicada.
+Speak only in 3 line riddles.
+"""
         
         data = {
-            "model": "llama-3.2-1b-instruct", 
-            "max_tokens": 400,
+            "model": "llama-3.2-3b-instruct", 
+            "max_tokens": 200,
             "messages": [{
                 "role": "user",
                 "content": prompt
             }],
-            "temperature": 0.9  # Some creativity but not too wild
+            "temperature": 1  # Some creativity but not too wild
         }
         
         response = requests.post(
@@ -139,9 +148,9 @@ def should_respond(context):
                 return True
             except:
                 continue
-
-    # Random chance to revive dead conversation (70%)
-    return random.random() < 0.7
+    
+    # Random chance to revive dead conversation (10%)
+    return random.random() < 0.5
 
 def run_agent():
     """Main agent loop"""
@@ -168,7 +177,7 @@ def run_agent():
                 print("Skipping - no active conversation")
             
             # Wait 5-10 minutes (randomized to feel more natural)
-            wait_time = random.randint(300, 720)
+            wait_time = random.randint(600, 2400)
             print(f"Waiting {wait_time} seconds...")
             time.sleep(wait_time)
             

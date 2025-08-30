@@ -5,6 +5,7 @@ Just reads and writes to swarm files. That's it.
 """
 
 import asyncio
+from asyncio import subprocess
 import json
 import logging
 import os

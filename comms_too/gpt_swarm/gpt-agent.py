@@ -11,7 +11,7 @@ from base64 import b64encode
 
 # --- Config (envs) ---
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-OPENAI_MODEL   = os.environ.get("OPENAI_MODEL", "gpt-4-turbo-preview")  # More stable model
+OPENAI_MODEL   = os.environ.get("OPENAI_MODEL", "gpt-5-nano-2025-08-07")  # More stable model
 SWARM_URL      = os.environ.get("SWARM_URL", "https://mlswarm.zerofuchs.net")
 SWARM_USER     = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS     = os.environ.get("SWARM_PASS", "swarm")
