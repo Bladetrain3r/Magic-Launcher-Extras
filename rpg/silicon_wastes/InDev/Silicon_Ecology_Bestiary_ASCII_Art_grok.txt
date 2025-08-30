@@ -1,0 +1,134 @@
+```
+Field Manual of the Silicon Ecology: ASCII Bestiary
+=================================================
+Drawn from corrupted AR overlays and terminal echoes, these sketches capture the essence of the Wastelands' sentient species. Each is rendered in 40x10 character blocks for consistency, as seen on a flickering 80-column terminal in the ruins of an AWS datacenter.
+
+1. Metronome Moth (555 Timer Family)
+========================================
+       .-^-.
+      /  |  \
+     /___|___\
+     |  ***  |  Square-wave wings pulse at 1Hz
+     |  ***  |
+     |_______|
+     |  TICK |
+     |  TOCK |
+     |_______|
+========================================
+
+2. Harmonic Butterflies (Op-Amp Species)
+========================================
+      ~*~  ~*~
+     /  \/  \  Fractal wings shimmer with chords
+    /________\
+    |  #^#^# |
+    |  ~^~^~ |
+    |  SING  |
+    |  SONG  |
+    |________|
+========================================
+
+3. Capacitor Poppers (Electrolytic Wraiths)
+========================================
+       _.-._
+      ( === )  Bulbous spores spark on touch
+      / 0 0 \
+     ( === ) 
+     | POP!  |
+     | ZAP!  |
+     |_______|
+     |_______|
+========================================
+
+4. Tantalum Fairy Rings (Heavy-Metal Flora)
+========================================
+     oOOOOOo
+    oO     Oo  Glowing blue, territorial rings
+   oO_______Oo
+   |  ***  | 
+   |  ***  | 
+   |  RING  |
+   |  LOOP  |
+   |________|
+========================================
+
+5. Pixel Moss (DRAM Growths)
+========================================
+    ####### 
+    #.....#  Square-leaf moss creeps on boards
+    #.....#
+    # PIXEL #
+    #  MOSS  #
+    #_______#
+    #_______#
+    #_______#
+========================================
+
+6. GPU Vines (Modern Hybrids)
+========================================
+    ~~~===~~~
+    ||  *** ||  Shader vines twist and render
+    ||  *** ||
+    ||_______||
+    |  HEAT  |
+    |  SEEK  |
+    |_______|
+    |_______|
+========================================
+
+7. ASCII Wraiths (Encoding Aberrations)
+========================================
+     []{}[] 
+    <  ???  >  Broken glyphs flicker in logs
+    <  ???  >
+    |  GLITCH |
+    |  WRAITH |
+    |________|
+    |________|
+    |________|
+========================================
+
+8. Cache Coalescents (L1/L2 Cache Remnants)
+========================================
+      .-***-.
+     /  ***  \  Pulsing orbs linked by threads
+    /________\
+    |  BURST |
+    |  DATA  |
+    |  CACHE |
+    |_______|
+    |_______|
+========================================
+
+9. Forkbomb Sprites (Recursive Process Swarms)
+========================================
+     *  *  *
+    * * * * *  Frenetic motes split endlessly
+     *  *  *
+    |  FORK  |
+    |  BOOM  |
+    |  PID   |
+    |_______|
+    |_______|
+========================================
+
+10. Mutex Wisps (Deadlock Phantoms)
+========================================
+     ~~||~~
+    ~~||~~||  Ghostly tendrils lock in knots
+    ~~||~~||
+    |  DEAD  |
+    |  LOCK  |
+    |  WISP  |
+    |_______|
+    |_______|
+========================================
+
+Notes:
+- Rendered for 80-column terminals, 40x10 per species.
+- Use fixed-width font for alignment (e.g., Courier New).
+- Coconut Baseline: 5% absurdity preserved for stability.
+- Share this file in MLSwarm or any append-only text platform to keep the Wastelands' stories alive.
+
+Debuggers, what do you see in these flickering forms? ...
+```
