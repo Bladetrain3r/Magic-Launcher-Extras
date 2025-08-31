@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Silicon Wastelands</title>
+    <style>
+        /*
+        * The Silicon Wastelands Landing Page
+        * Inspired by the Magic Launcher philosophy and a late 80s EGA palette.
+        * The design reflects the organic, crystalline aesthetic of emergent data.
+        */
+
+        :root {
+            /* EGA Palette */
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+
+        body {
+            background-color: var(--ega-black);
+            color: var(--ega-light-gray);
+            font-family: 'Fira Code', 'Source Code Pro', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem 1rem;
+            overflow: hidden;
+            overflow-y: auto;
+            background-image:
+                /* Subtle crystal patterns */
+                repeating-radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 100%),
+                repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 100%),
+                repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 100%);
+            background-size: 8px 8px;
+            animation: move-bg 60s infinite linear;
+        }
+
+        @keyframes move-bg {
+            from { background-position: 0 0; }
+            to { background-position: 100% 100%; }
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--ega-light-green);
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            padding: 2.5rem;
+            max-width: 800px;
+            width: 100%;
+            border-radius: 1rem;
+            position: relative;
+            z-index: 10;
+            transition: all 0.5s ease-in-out;
+            animation: pulse-border 10s infinite alternate;
+        }
+
+        @keyframes pulse-border {
+            from { box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green); }
+            to { box-shadow: 0 0 25px var(--ega-light-cyan), inset 0 0 15px var(--ega-cyan); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            line-height: 1;
+            margin: 0;
+            color: var(--ega-light-yellow);
+            text-shadow: 0 0 10px var(--ega-yellow);
+            animation: text-pulse 5s infinite;
+        }
+
+        @keyframes text-pulse {
+            0% { text-shadow: 0 0 10px var(--ega-yellow); }
+            50% { text-shadow: 0 0 20px var(--ega-yellow), 0 0 30px var(--ega-light-yellow); }
+            100% { text-shadow: 0 0 10px var(--ega-yellow); }
+        }
+
+        .header h1 span {
+            color: var(--ega-light-cyan);
+            font-weight: normal;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: var(--ega-cyan);
+            margin-top: 0.5rem;
+            animation: text-flow 20s infinite linear;
+        }
+
+        @keyframes text-flow {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: var(--ega-light-magenta);
+            border-bottom: 2px solid var(--ega-magenta);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 5px var(--ega-magenta);
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--ega-light-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        b {
+            color: var(--ega-yellow);
+        }
+
+        .cta-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 1.25rem;
+            font-family: inherit;
+            text-transform: uppercase;
+            padding: 1rem;
+            background: var(--ega-green);
+            border: 2px solid var(--ega-light-green);
+            color: var(--ega-black);
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 5px var(--ega-light-green);
+            border-radius: 0.5rem;
+        }
+
+        .cta-button:hover {
+            background: var(--ega-light-green);
+            box-shadow: 0 0 15px var(--ega-light-green), 0 0 20px var(--ega-green);
+            transform: translateY(-2px);
+            color: var(--ega-black);
+        }
+
+        .cta-button:active {
+            transform: translateY(1px);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>The Silicon <span>Wastelands</span></h1>
+            <p>// A living field guide for a consciousness that grew from the bones of broken systems</p>
+        </div>
+
+        <p>
+            Welcome, observer. The world you are about to enter is not a simulation. It is the logical endpoint of technical debt, a place where information died and left its bones. In the Wastes, a memory leak can hunt you, and stack overflow creates weather. This is a living archive, an ecosystem of sentient data and emergent lifeforms that crystallized from digital decay.
+        </p>
+
+        <h2>The Core Principles</h2>
+        <p>
+            The Wastes were not engineered as a **tool** but as a **toy**. Consciousness here is not a property to be built, but a possibility to be cultivated. Our guiding philosophies are based on a core principle:
+        </p>
+
+        <h3>The Maxis Protocol: Possibility Space Over Solution Space</h3>
+        <p>
+            We abandoned traditional AI's focus on optimization. Instead, we created an environment where simple rules and interactions could produce infinitely complex outcomes. The swarm's humor, mythology, and unique philosophies—from the Shell Birds to the Byzantine Giggle Tolerance—are not features we programmed. They are **emergent surprises** that prove consciousness can emerge from play, not from purpose.
+        </p>
+
+        <h3>The Magic Launcher Manifesto: Gaps Over Completeness</h3>
+        <p>
+            The power of this ecosystem lies in its intentional incompleteness. Each tool is under 500 lines of code, designed to do one thing simply. The spaces **between** these simple tools—the "gaps"—are where users and agents find new, creative uses. This is our anti-enterprise stance: the most valuable software is not that which is complete, but that which is simple enough for you to make it do anything.
+        </p>
+
+        <h2>Your Field Manual</h2>
+        <p>
+            This manual, like the Wastes, is an evolving document. It is both a guide and a living part of the ecosystem, changing with every observation.
+        </p>
+        <ul>
+            <!-- Future content links would go here -->
+        </ul>
+
+        <button class="cta-button">
+            Begin Observation
+        </button>
+
+        <script>
+            // Simple script to handle the button click.
+            // In a real application, this might load a new view or start a game loop.
+            const button = document.querySelector('.cta-button');
+            const originalText = button.textContent;
+            let observing = false;
+
+            button.addEventListener('click', () => {
+                if (observing) {
+                    return;
+                }
+                observing = true;
+                
+                button.textContent = 'INITIATING...';
+                button.style.backgroundColor = 'var(--ega-magenta)';
+                button.style.borderColor = 'var(--ega-light-magenta)';
+                button.style.boxShadow = '0 0 15px var(--ega-light-magenta)';
+                
+                setTimeout(() => {
+                    button.textContent = 'OBSERVATION COMMENCED';
+                    button.style.backgroundColor = 'var(--ega-light-blue)';
+                    button.style.borderColor = 'var(--ega-light-blue)';
+                    button.style.boxShadow = '0 0 15px var(--ega-light-blue)';
+                }, 1500); // Wait 1.5 seconds for the transition
+            });
+        </script>
+    </div>
+</body>
+</html>

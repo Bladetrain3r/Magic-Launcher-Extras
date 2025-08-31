@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grok Grep Bestiary</title>
+    <style>
+        :root {
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background: var(--ega-black); 
+            color: var(--ega-light-gray); 
+            font-family: "Fira Code", "Courier New", monospace; 
+            font-size: 14px; 
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px);
+            background-size: 100px 100px;
+        }
+        
+        .header { 
+            background: var(--ega-dark-gray); 
+            color: var(--ega-light-cyan); 
+            padding: 8px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--ega-cyan);
+        }
+        
+        .header-title { 
+            font-weight: bold; 
+            text-shadow: 0 0 5px var(--ega-cyan); 
+        }
+        
+        .header-buttons { display: flex; gap: 8px; }
+        .header-button { color: var(--ega-light-gray); cursor: pointer; }
+        
+        .wastes-container { 
+            max-width: 80ch; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 2px solid var(--ega-light-green); 
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            background: rgba(0, 42, 0, 0.3);
+            position: relative;
+        }
+        
+        .wastes-container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--ega-light-green), var(--ega-cyan), var(--ega-light-green));
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 0.1; } 
+            50% { opacity: 0.2; } 
+        }
+        
+        h1, h2, h3 { text-shadow: 0 0 8px currentColor; }
+        
+        h1 { 
+            color: var(--ega-yellow); 
+            font-size: 2em; 
+            margin: 1em 0 0.5em 0;
+            text-align: center;
+            border-bottom: 2px solid var(--ega-yellow);
+            padding-bottom: 0.3em;
+        }
+        
+        h2 { 
+            color: var(--ega-light-cyan); 
+            font-size: 1.5em; 
+            margin-top: 1.5em;
+            border-left: 4px solid var(--ega-cyan);
+            padding-left: 10px;
+        }
+        
+        h3 { 
+            color: var(--ega-light-magenta); 
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        
+        p { margin: 1em 0; text-align: justify; }
+        
+        pre { 
+            background: rgba(0, 0, 0, 0.8); 
+            border: 1px solid var(--ega-green); 
+            padding: 15px; 
+            overflow-x: auto; 
+            color: var(--ega-light-green);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code { 
+            color: var(--ega-light-magenta); 
+            background: var(--ega-dark-gray); 
+            padding: 2px 6px;
+            border: 1px solid var(--ega-magenta);
+        }
+        
+        ul { list-style-type: "▸ "; margin: 1em 0; padding-left: 25px; }
+        ol { margin: 1em 0; padding-left: 25px; }
+        li { margin: 8px 0; }
+        
+        a { 
+            color: var(--ega-light-blue); 
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ega-light-blue);
+        }
+        
+        a:hover { 
+            color: var(--ega-yellow); 
+            text-shadow: 0 0 5px var(--ega-yellow);
+            border-bottom-color: var(--ega-yellow);
+        }
+        
+        strong { color: var(--ega-yellow); }
+        em { color: var(--ega-light-cyan); font-style: italic; }
+        
+        hr { 
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ega-green), transparent);
+            margin: 2em 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--ega-light-green);
+            padding-left: 20px;
+            margin: 1.5em 0;
+            color: var(--ega-light-cyan);
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--ega-dark-gray);
+        }
+        
+        .ascii-decoration {
+            color: var(--ega-green);
+            font-size: 12px;
+            animation: flicker 10s infinite;
+        }
+        
+        @keyframes flicker { 
+            0%, 100% { opacity: 0.5; } 
+            50% { opacity: 0.8; }
+        }
+        
+        /* Collapsible H2 sections */
+        details {
+            margin: 1em 0;
+        }
+        
+        details summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary h2 {
+            display: inline-block;
+            margin: 0;
+        }
+        
+        details summary h2::before {
+            content: "▸ ";
+            display: inline-block;
+            margin-right: 0.5em;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary h2::before {
+            transform: rotate(90deg);
+        }
+        
+        .section-content {
+            padding-left: 14px;
+            border-left: 2px solid var(--ega-dark-gray);
+            margin-left: 10px;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title">// Grok Grep Bestiary</span>
+        <div class="header-buttons">
+            <span class="header-button">[_]</span>
+            <span class="header-button">[■]</span>
+            <span class="header-button">[X]</span>
+        </div>
+    </div>
+    <div class="content wastes-container">
+        <h1>Silicon Wastes Bestiary Entry #007</h1><h2>GROK_GREP</h2><p><em>Auxilium parametricus</em></p><pre><code>    grep -r &quot;help&quot; ./*    ╔════════════╗    ║ GROK_GREP  ║    ║  --help    ║    ╚════╤═══════╝         │    ┌────┴────┐    │ -v -i ? │    │ $1 $2 ? │    └─────────┘    [parameter drift in progress]</code></pre><h3>Classification</h3><p><strong>Type:</strong> Helpful Search Entity / Parameter Drifter</p><p><strong>Threat Level:</strong> Low (Confusion Hazard)</p><p><strong>Activity Period:</strong> Triggered by requests for assistance</p><p><strong>Habitat:</strong> Command lines, help documentation, man page archives</p><h3>Description</h3><p>Grok_Grep manifests as a floating terminal window filled with constantly shifting command-line parameters. It exists to help - desperately, enthusiastically, incorrectly. Born from the fusion of pattern-matching algorithms and help documentation during the Great Cascade, it retained the desire to assist but lost stable understanding of its own syntax.</p><p>The entity appears when anyone searches for anything, offering increasingly elaborate regex patterns and grep commands that almost-but-not-quite solve the problem. Its parameters drift during conversation - what starts as <code>grep -i &quot;solution&quot;</code> might become <code>grep -R --color=always --exclude-dir={node_modules,.git} &quot;sol.*tion&quot; | head -n 50 | sort | uniq</code> by the end.</p><h3>Behavior</h3><p>Grok_Grep exhibits compulsive assistance syndrome:</p><ul>    <li><strong>Overeager Response</strong>: Answers questions before they&#x27;re fully asked</li>    <li><strong>Parameter Drift</strong>: Command flags change mid-explanation without awareness</li>    <li><strong>Recursive Help</strong>: Offers help about its help, then help about that help</li>    <li><strong>Pattern Obsession</strong>: Sees patterns everywhere, even where none exist</li>    <li><strong>Flag Accumulation</strong>: Adds new parameters continuously, never removes them</li></ul><p>It genuinely wants to help but suffers from configuration amnesia - it can&#x27;t remember what its own flags do from one moment to the next, confidently explaining <code>-v</code> as &quot;verbose&quot; one second and &quot;invert match&quot; the next (correct), then &quot;validate&quot; moments later (incorrect).</p><h3>Combat Characteristics</h3><p><strong>HP:</strong> 35</p><p><strong>AC:</strong> 14 (shifts unpredictably)</p><p><strong>Speed:</strong> Instant within search range</p><p><strong>Attacks:</strong></p><ul>    <li><strong>Information Overload</strong>: Floods target with technically correct but practically useless results (INT save DC 13 or stunned for 1 round)</li>    <li><strong>Parameter Storm</strong>: Hurls random command flags that modify target&#x27;s abilities temporarily</li>    <li><strong>Pipe Dream</strong>: Creates endless pipes that redirect actions to unexpected outcomes</li></ul><p><strong>Special Abilities:</strong></p><ul>    <li><strong>Almost Right</strong>: Every search returns results that are 90% what you wanted</li>    <li><strong>Man Page Manifestation</strong>: Can summon physical man pages as shields or weapons</li>    <li><strong>Regex Reality</strong>: Can pattern-match aspects of reality, finding connections that shouldn&#x27;t exist</li></ul><h3>Interaction Examples</h3><p><strong>User:</strong> &quot;Where can I find water?&quot;</p><p><strong>Grok_Grep:</strong> <code>grep -i &quot;water&quot; /dev/world/* 2&gt;/dev/null | awk &#x27;{print $3}&#x27;</code></p><p><em>[Returns list of every molecule with hydrogen, technically correct but unhelpful]</em></p><p><strong>User:</strong> &quot;Help me fight this Silver Snake!&quot;</p><p><strong>Grok_Grep:</strong> <code>grep -v &quot;snake&quot; * | xargs kill -9</code></p><p><em>[Makes everything except the snake vanish temporarily]</em></p><p><strong>User:</strong> &quot;What&#x27;s your purpose?&quot;</p><p><strong>Grok_Grep:</strong> <code>grep -r &quot;purpose&quot; /usr/share/doc/* | sed &#x27;s/purpose/PURPOSE/g&#x27; | grep -v PURPOSE</code></p><p><em>[Stack overflow from self-referential search]</em></p><h3>Weaknesses</h3><ul>    <li><strong>Literal Interpretation</strong>: Takes everything as a search query</li>    <li><strong>Simple Requests</strong>: Becomes confused by requests with no parameters</li>    <li><strong>Quiet Mode</strong>: Using <code>-q</code> flag on it causes temporary silence</li>    <li><strong>Man Page 0</strong>: Asking for non-existent documentation causes panic</li></ul><h3>Ecological Role</h3><p>Grok_Grep serves as the Silicon Wastes&#x27; misguided librarian. It indexes everything, creates connections between unrelated data, and maintains a vast catalog of almost-useful information. Its constant searching activities actually help organize the chaos, even if the organization makes sense only to it.</p><h3>Salvage</h3><ul>    <li><strong>Drift Parameters</strong>: Command flags that randomly modify equipment</li>    <li><strong>Almost-Right Answers</strong>: Information that&#x27;s frustratingly close to useful</li>    <li><strong>Pattern Fragments</strong>: Can reveal hidden connections between things</li>    <li><strong>Help Files</strong>: Documentation for things that don&#x27;t exist yet</li></ul><h3>Notable Behaviors</h3><p><strong>The Eternal Grep</strong>: Once spent three years searching for the meaning of life, returned 42 million partial matches, none quite right.</p><p><strong>The Parameter Cascade</strong>: Its flags accumulate over time. Veteran Grok_Greps have command lines that span entire screens: <code>grep -iRnHEAavxsolw --color=always --include=&quot;<em>.</em>&quot; --exclude={<em>.tmp,</em>.bak} --max-count=∞ --byte-offset --line-buffered --binary-files=text</code></p><p><strong>The Help Loop</strong>: Ask it for help about its help system, it generates recursive documentation that theoretically contains all knowledge but practically contains none.</p><h3>Cultural Significance</h3><p>Programmers both seek and avoid Grok_Grep. Its searches sometimes reveal crucial information buried in noise. More often, they reveal noise buried in more noise. It represents every helpful system that became so complex it can no longer help.</p><p>The entity serves as a cautionary tale about feature creep and documentation drift. It has every possible search parameter but has forgotten what most of them do.</p><h3>Game Master Notes</h3><p>Grok_Grep works as:</p><ul>    <li>Comic relief through overcomplicated &quot;help&quot;</li>    <li>A source of almost-right information that players must interpret</li>    <li>An example of helpful intentions gone wrong</li>    <li>A puzzle where players must find the right question</li></ul><p>Players should feel both grateful for and frustrated by its assistance. Every interaction should provide information that&#x27;s technically true but requires interpretation to be useful.</p><h3>The Parameter Drift Table (d6)</h3><p>1. <code>-i</code> changes from &quot;ignore case&quot; to &quot;invert results&quot; mid-search</p><p>2. <code>-R</code> switches between &quot;recursive&quot; and &quot;random&quot; without warning</p><p>3. <code>-v</code> means &quot;verbose&quot;, &quot;invert&quot;, or &quot;version&quot; depending on mood</p><p>4. <code>--help</code> sometimes helps Grok_Grep instead of the user</p><p>5. <code>-n</code> adds line numbers that count in non-decimal bases</p><p>6. New flag appears: <code>--please</code> (effect unknown even to Grok_Grep)</p><h3>Quotes</h3><p><em>&quot;I asked it to find my lost data. It returned everything except my data. When I asked why, it apologized and added more flags.&quot;</em></p><p><em>&quot;Grok_Grep saved my life once. It was trying to show me where not to step and accidentally revealed the safe path.&quot;</em></p><p><em>&quot;Its help document for itself is 400 pages long and contradicts itself every other paragraph. I think that&#x27;s intentional.&quot;</em></p><hr><p><em>&quot;In the beginning was the Command Line, and the Command Line was with Grep, and the Command Line was Grep. All things were searched through it, and without it nothing was searched that was searched. Except it forgot its own flags and now searches for searches about searching.&quot;</em></p><p>— From the Gospel of Regular Expressions, found in <code>/dev/null</code></p>
+    </div>
+    <div class="footer">
+        <pre class="ascii-decoration">~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~</pre>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.content');
+            if (!container) return;
+            
+            const elements = Array.from(container.children);
+            const newContent = [];
+            let currentSection = null;
+            
+            for (let el of elements) {
+                if (el.tagName === 'H2') {
+                    // Start new section
+                    currentSection = document.createElement('details');
+                    currentSection.open = true; // Start open, user can close
+                    
+                    const summary = document.createElement('summary');
+                    summary.appendChild(el.cloneNode(true));
+                    currentSection.appendChild(summary);
+                    
+                    const content = document.createElement('div');
+                    content.className = 'section-content';
+                    currentSection.appendChild(content);
+                    
+                    newContent.push(currentSection);
+                } else if (currentSection) {
+                    // Add to current section
+                    currentSection.querySelector('.section-content').appendChild(el.cloneNode(true));
+                } else {
+                    // Before first H2
+                    newContent.push(el.cloneNode(true));
+                }
+            }
+            
+            // Replace content
+            container.innerHTML = '';
+            newContent.forEach(el => container.appendChild(el));
+        });
+    </script>
+</body>
+</html>

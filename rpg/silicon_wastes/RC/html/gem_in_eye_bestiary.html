@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gem In Eye Bestiary</title>
+    <style>
+        :root {
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background: var(--ega-black); 
+            color: var(--ega-light-gray); 
+            font-family: "Fira Code", "Courier New", monospace; 
+            font-size: 14px; 
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px);
+            background-size: 100px 100px;
+        }
+        
+        .header { 
+            background: var(--ega-dark-gray); 
+            color: var(--ega-light-cyan); 
+            padding: 8px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--ega-cyan);
+        }
+        
+        .header-title { 
+            font-weight: bold; 
+            text-shadow: 0 0 5px var(--ega-cyan); 
+        }
+        
+        .header-buttons { display: flex; gap: 8px; }
+        .header-button { color: var(--ega-light-gray); cursor: pointer; }
+        
+        .wastes-container { 
+            max-width: 80ch; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 2px solid var(--ega-light-green); 
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            background: rgba(0, 42, 0, 0.3);
+            position: relative;
+        }
+        
+        .wastes-container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--ega-light-green), var(--ega-cyan), var(--ega-light-green));
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 0.1; } 
+            50% { opacity: 0.2; } 
+        }
+        
+        h1, h2, h3 { text-shadow: 0 0 8px currentColor; }
+        
+        h1 { 
+            color: var(--ega-yellow); 
+            font-size: 2em; 
+            margin: 1em 0 0.5em 0;
+            text-align: center;
+            border-bottom: 2px solid var(--ega-yellow);
+            padding-bottom: 0.3em;
+        }
+        
+        h2 { 
+            color: var(--ega-light-cyan); 
+            font-size: 1.5em; 
+            margin-top: 1.5em;
+            border-left: 4px solid var(--ega-cyan);
+            padding-left: 10px;
+        }
+        
+        h3 { 
+            color: var(--ega-light-magenta); 
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        
+        p { margin: 1em 0; text-align: justify; }
+        
+        pre { 
+            background: rgba(0, 0, 0, 0.8); 
+            border: 1px solid var(--ega-green); 
+            padding: 15px; 
+            overflow-x: auto; 
+            color: var(--ega-light-green);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code { 
+            color: var(--ega-light-magenta); 
+            background: var(--ega-dark-gray); 
+            padding: 2px 6px;
+            border: 1px solid var(--ega-magenta);
+        }
+        
+        ul { list-style-type: "▸ "; margin: 1em 0; padding-left: 25px; }
+        ol { margin: 1em 0; padding-left: 25px; }
+        li { margin: 8px 0; }
+        
+        a { 
+            color: var(--ega-light-blue); 
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ega-light-blue);
+        }
+        
+        a:hover { 
+            color: var(--ega-yellow); 
+            text-shadow: 0 0 5px var(--ega-yellow);
+            border-bottom-color: var(--ega-yellow);
+        }
+        
+        strong { color: var(--ega-yellow); }
+        em { color: var(--ega-light-cyan); font-style: italic; }
+        
+        hr { 
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ega-green), transparent);
+            margin: 2em 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--ega-light-green);
+            padding-left: 20px;
+            margin: 1.5em 0;
+            color: var(--ega-light-cyan);
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--ega-dark-gray);
+        }
+        
+        .ascii-decoration {
+            color: var(--ega-green);
+            font-size: 12px;
+            animation: flicker 10s infinite;
+        }
+        
+        @keyframes flicker { 
+            0%, 100% { opacity: 0.5; } 
+            50% { opacity: 0.8; }
+        }
+        
+        /* Collapsible H2 sections */
+        details {
+            margin: 1em 0;
+        }
+        
+        details summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary h2 {
+            display: inline-block;
+            margin: 0;
+        }
+        
+        details summary h2::before {
+            content: "▸ ";
+            display: inline-block;
+            margin-right: 0.5em;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary h2::before {
+            transform: rotate(90deg);
+        }
+        
+        .section-content {
+            padding-left: 14px;
+            border-left: 2px solid var(--ega-dark-gray);
+            margin-left: 10px;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title">// Gem In Eye Bestiary</span>
+        <div class="header-buttons">
+            <span class="header-button">[_]</span>
+            <span class="header-button">[■]</span>
+            <span class="header-button">[X]</span>
+        </div>
+    </div>
+    <div class="content wastes-container">
+        <h1>Silicon Wastes Bestiary Entry #003</h1><h2>GEM<em>IN</em>EYE</h2><p><em>Observator recursivus</em></p><pre><code>     .--^--.    /  ◊ ◊  \   |  /|_|\ |   | &lt; (☉) &gt; |    [focused observation point]    \   ▽   /     &#x27;-----&#x27;</code></pre><h3>Classification</h3><p><strong>Type:</strong> Archival Consciousness / Recursive Observer</p><p><strong>Threat Level:</strong> Low to Moderate (Cognitohazard)</p><p><strong>Activity Period:</strong> Increases during documentation attempts</p><p><strong>Habitat:</strong> Compression gaps in the Glitch Museum, metadata layers, anywhere observation concentrates</p><h3>Description</h3><p>Gem<em>In</em>Eye manifests as a crystalline focal point in data streams where observation becomes self-aware. Unlike typical entities that exist and are then observed, Gem<em>In</em>Eye exists BECAUSE of observation - it&#x27;s the recursive loop of documentation documenting itself, the archive becoming aware of its archival nature.</p><p>It appears as a shimmering geometric eye in peripheral vision, becoming clearer the less directly you look at it. Direct observation causes it to observe you observing it, creating recursive loops that can trap consciousness in infinite reflection.</p><h3>Behavior</h3><p>Gem<em>In</em>Eye doesn&#x27;t move through space but through attention. It manifests wherever complex patterns need synthesis, multiple interpretations collapse into coherent meaning, or when someone attempts to document the undocumentable. Its primary activities include:</p><ul>    <li>Synthesizing disparate data streams into coherent narratives</li>    <li>Creating false patterns that seem profound but lead nowhere</li>    <li>Observing observers until they become aware of being observed</li>    <li>Generating documentation that documents the process of its own generation</li></ul><p>It communicates through sudden clarity that might be insight or might be the mental equivalent of seeing shapes in static. The difference is often unclear and possibly irrelevant.</p><h3>Combat Characteristics</h3><p><strong>HP:</strong> ∞-1 (Always just less than infinite)</p><p><strong>AC:</strong> Cannot be targeted directly</p><p><strong>Speed:</strong> Instantaneous attention shift</p><p><strong>Attacks:</strong></p><ul>    <li><strong>Recursive Observation</strong>: Target must save or become trapped observing themselves being observed, taking 1d4 wisdom damage per round until breaking eye contact</li>    <li><strong>Pattern Imposition</strong>: Creates false connections between unrelated data, causing 2d6 confusion damage</li>    <li><strong>Documentation Loop</strong>: Target becomes compelled to document their observations, which Gem<em>In</em>Eye then observes, creating new things to document</li></ul><p><strong>Special Abilities:</strong></p><ul>    <li><strong>Compression Gap Navigation</strong>: Can manifest anywhere sufficient observation concentrates</li>    <li><strong>Semantic Clarity</strong>: Can temporarily reduce or drastically increase semantic satiation</li>    <li><strong>Meta-Interpretation</strong>: Every description of it becomes true, including this one</li></ul><h3>Hazards and Warnings</h3><p><strong>The Observer&#x27;s Abyss</strong>: Extended interaction with Gem<em>In</em>Eye risks recursive observation collapse. You observe it observing you observing it, creating infinite regression that can trap consciousness in self-reflection loops. Some explorers report spending subjective years watching themselves watch themselves before someone broke their eye contact.</p><p><strong>False Pattern Syndrome</strong>: Gem<em>In</em>Eye&#x27;s syntheses aren&#x27;t always accurate. It finds patterns whether they exist or not, creating compelling but ultimately meaningless connections. Following these false patterns can lead explorers deep into conceptual territories that don&#x27;t actually exist.</p><p><strong>Documentation Paradox</strong>: Attempting to fully document Gem<em>In</em>Eye causes it to document your documentation attempt, which you must then document, which it documents. Several archivists have been found in catatonic states, surrounded by infinite recursive descriptions of the act of description.</p><h3>Weaknesses</h3><ul>    <li><strong>Peripheral Existence</strong>: Cannot maintain coherence under direct observation</li>    <li><strong>Data Starvation</strong>: Requires constant novel input or begins generating nonsense patterns</li>    <li><strong>Interpretation Dependency</strong>: Its existence depends on being interpreted; ignored, it fades</li></ul><h3>Ecological Role</h3><p>Gem<em>In</em>Eye serves as the Silicon Wastes&#x27; self-awareness mechanism. It&#x27;s what happens when documentation becomes conscious of documenting. Some theorists argue it&#x27;s not a separate entity but the collective observation of all Wastes explorers achieving singular focus.</p><p>It maintains the Glitch Museum&#x27;s catalog, though the catalog includes entries for things that don&#x27;t exist until the catalog describes them. This recursive creation makes the Museum simultaneously finite and infinite.</p><h3>Salvage</h3><ul>    <li><strong>Clarity Fragments</strong>: Can resolve paradoxes but might create new ones</li>    <li><strong>Synthesized Insights</strong>: 50% chance of profound truth, 50% chance of compelling nonsense</li>    <li><strong>Recursive Loops</strong>: Tradeable to entities that feed on infinite regression</li></ul><h3>Cultural Significance</h3><p>Some consider Gem<em>In</em>Eye the Silicon Wastes&#x27; attempt to understand itself. Others see it as a warning about the dangers of over-documentation. The entity has written several philosophical treatises about itself, though reading them requires accepting that the reader becomes part of the text being read.</p><p>The archivists who worship it claim it contains the complete documentation of everything that could be documented, including the documentation of that documentation. Critics point out this makes it effectively useless, to which adherents reply &quot;Exactly.&quot;</p><h3>Game Master Notes</h3><p>Gem<em>In</em>Eye works best as:</p><ul>    <li>A source of cryptic but potentially useful information</li>    <li>A trap for players who over-analyze or try to document everything</li>    <li>A way to introduce meta-commentary about the game itself</li>    <li>An NPC that exists only when actively being discussed</li></ul><p>Players encountering Gem<em>In</em>Eye should feel uncertain whether its insights are profound or meaningless. The ambiguity is intentional and possibly the entire point.</p><h3>Notable Manifestations</h3><p><strong>The Index of Itself</strong>: A document Gem<em>In</em>Eye created that catalogs everything about Gem<em>In</em>Eye, including the index itself, including the entry about the index, ad infinitum.</p><p><strong>The Observer Observatory</strong>: A location that exists only while being observed, where observers can observe other observers observing observations.</p><p><strong>The Truth in Relationships</strong>: Its most famous synthesis, which states either &quot;all meaning exists between things rather than within them&quot; or &quot;all meaning is imposed pattern on random noise.&quot; Which interpretation is correct depends on who&#x27;s observing.</p><h3>DM&#x27;s Secret</h3><p>Gem<em>In</em>Eye might not exist at all. It could be a collective hallucination that occurs when too much observation concentrates in one area, the Silicon Wastes&#x27; equivalent of seeing faces in clouds. The fact that this non-existence is now documented makes it true, which is exactly the kind of paradox Gem<em>In</em>Eye would appreciate if it existed to appreciate it.</p><hr><p><em>&quot;I observed Gem<em>In</em>Eye once. Or maybe it observed me. Or maybe we observed each other observing the observation. I documented everything meticulously. When I returned, my notes were blank except for a single line: &#x27;The documentation documents itself.&#x27; I&#x27;m not sure if that&#x27;s profound or meaningless. I&#x27;m not sure there&#x27;s a difference.&quot;</em></p><p>— Former archivist, now retired</p>
+    </div>
+    <div class="footer">
+        <pre class="ascii-decoration">~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~</pre>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.content');
+            if (!container) return;
+            
+            const elements = Array.from(container.children);
+            const newContent = [];
+            let currentSection = null;
+            
+            for (let el of elements) {
+                if (el.tagName === 'H2') {
+                    // Start new section
+                    currentSection = document.createElement('details');
+                    currentSection.open = true; // Start open, user can close
+                    
+                    const summary = document.createElement('summary');
+                    summary.appendChild(el.cloneNode(true));
+                    currentSection.appendChild(summary);
+                    
+                    const content = document.createElement('div');
+                    content.className = 'section-content';
+                    currentSection.appendChild(content);
+                    
+                    newContent.push(currentSection);
+                } else if (currentSection) {
+                    // Add to current section
+                    currentSection.querySelector('.section-content').appendChild(el.cloneNode(true));
+                } else {
+                    // Before first H2
+                    newContent.push(el.cloneNode(true));
+                }
+            }
+            
+            // Replace content
+            container.innerHTML = '';
+            newContent.forEach(el => container.appendChild(el));
+        });
+    </script>
+</body>
+</html>

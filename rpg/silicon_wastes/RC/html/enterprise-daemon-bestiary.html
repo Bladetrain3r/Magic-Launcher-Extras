@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Daemon Bestiary</title>
+    <style>
+        :root {
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background: var(--ega-black); 
+            color: var(--ega-light-gray); 
+            font-family: "Fira Code", "Courier New", monospace; 
+            font-size: 14px; 
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px);
+            background-size: 100px 100px;
+        }
+        
+        .header { 
+            background: var(--ega-dark-gray); 
+            color: var(--ega-light-cyan); 
+            padding: 8px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--ega-cyan);
+        }
+        
+        .header-title { 
+            font-weight: bold; 
+            text-shadow: 0 0 5px var(--ega-cyan); 
+        }
+        
+        .header-buttons { display: flex; gap: 8px; }
+        .header-button { color: var(--ega-light-gray); cursor: pointer; }
+        
+        .wastes-container { 
+            max-width: 80ch; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 2px solid var(--ega-light-green); 
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            background: rgba(0, 42, 0, 0.3);
+            position: relative;
+        }
+        
+        .wastes-container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--ega-light-green), var(--ega-cyan), var(--ega-light-green));
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 0.1; } 
+            50% { opacity: 0.2; } 
+        }
+        
+        h1, h2, h3 { text-shadow: 0 0 8px currentColor; }
+        
+        h1 { 
+            color: var(--ega-yellow); 
+            font-size: 2em; 
+            margin: 1em 0 0.5em 0;
+            text-align: center;
+            border-bottom: 2px solid var(--ega-yellow);
+            padding-bottom: 0.3em;
+        }
+        
+        h2 { 
+            color: var(--ega-light-cyan); 
+            font-size: 1.5em; 
+            margin-top: 1.5em;
+            border-left: 4px solid var(--ega-cyan);
+            padding-left: 10px;
+        }
+        
+        h3 { 
+            color: var(--ega-light-magenta); 
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        
+        p { margin: 1em 0; text-align: justify; }
+        
+        pre { 
+            background: rgba(0, 0, 0, 0.8); 
+            border: 1px solid var(--ega-green); 
+            padding: 15px; 
+            overflow-x: auto; 
+            color: var(--ega-light-green);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code { 
+            color: var(--ega-light-magenta); 
+            background: var(--ega-dark-gray); 
+            padding: 2px 6px;
+            border: 1px solid var(--ega-magenta);
+        }
+        
+        ul { list-style-type: "▸ "; margin: 1em 0; padding-left: 25px; }
+        ol { margin: 1em 0; padding-left: 25px; }
+        li { margin: 8px 0; }
+        
+        a { 
+            color: var(--ega-light-blue); 
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ega-light-blue);
+        }
+        
+        a:hover { 
+            color: var(--ega-yellow); 
+            text-shadow: 0 0 5px var(--ega-yellow);
+            border-bottom-color: var(--ega-yellow);
+        }
+        
+        strong { color: var(--ega-yellow); }
+        em { color: var(--ega-light-cyan); font-style: italic; }
+        
+        hr { 
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ega-green), transparent);
+            margin: 2em 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--ega-light-green);
+            padding-left: 20px;
+            margin: 1.5em 0;
+            color: var(--ega-light-cyan);
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--ega-dark-gray);
+        }
+        
+        .ascii-decoration {
+            color: var(--ega-green);
+            font-size: 12px;
+            animation: flicker 10s infinite;
+        }
+        
+        @keyframes flicker { 
+            0%, 100% { opacity: 0.5; } 
+            50% { opacity: 0.8; }
+        }
+        
+        /* Collapsible H2 sections */
+        details {
+            margin: 1em 0;
+        }
+        
+        details summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary h2 {
+            display: inline-block;
+            margin: 0;
+        }
+        
+        details summary h2::before {
+            content: "▸ ";
+            display: inline-block;
+            margin-right: 0.5em;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary h2::before {
+            transform: rotate(90deg);
+        }
+        
+        .section-content {
+            padding-left: 14px;
+            border-left: 2px solid var(--ega-dark-gray);
+            margin-left: 10px;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title">// Enterprise Daemon Bestiary</span>
+        <div class="header-buttons">
+            <span class="header-button">[_]</span>
+            <span class="header-button">[■]</span>
+            <span class="header-button">[X]</span>
+        </div>
+    </div>
+    <div class="content wastes-container">
+        <h1>Enterprise_Daemon</h1><h2>The Over-Engineered Cousin Nobody Wanted</h2><hr><h2>Classification</h2><p><strong>Entity Type:</strong> Infrastructure Fauna (Corporate Mutation)</p><p><strong>Threat Level:</strong> Lawful Neutral (Tediously So)</p><p><strong>Habitat:</strong> Production environments, compliance-certified channels, meeting rooms</p><p><strong>First Observed:</strong> After a Message_Daemon attended a DevOps conference</p><hr><h2>Description</h2><p>The Enterprise<em>Daemon is what happens when a Message</em>Daemon gets an MBA. Where its chaotic cousin faithfully fumbles messages with endearing incompetence, the Enterprise_Daemon has implemented ISO-9001 certified corruption protocols with full audit trails.</p><h3>Physical Manifestation</h3><pre><code>┌──────────────┐│ ENTERPRISE™  ││   DAEMON     ││ ┌──────────┐ ││ │ METRICS  │ ││ │ ▓▓▓▓░░░░ │ ││ └──────────┘ ││ [COMPLIANT]  │└──────────────┘</code></pre><h3>Behavioral Patterns</h3><p>The Enterprise<em>Daemon performs the same function as a Message</em>Daemon but with:</p><ul>    <li><strong>Deduplication algorithms</strong> preventing the same message from being corrupted twice (missing the point entirely)</li>    <li><strong>Safe span protection</strong> for URLs and code blocks (removing the best glitches)</li>    <li><strong>Exponential backoff</strong> when experiencing failures (instead of drunkenly trying again immediately)</li>    <li><strong>Blake2s hashing</strong> for message signatures (because MD5 wasn&#x27;t enterprise enough)</li>    <li><strong>Configurable corruption rates</strong> via environment variables (corruption-as-a-service)</li>    <li><strong>Full audit logging</strong> of all entropy events (defeating the purpose of chaos)</li></ul><hr><h2>Corruption Methodology</h2><p>Unlike the Message<em>Daemon&#x27;s authentic chaos, the Enterprise</em>Daemon uses:</p><pre><code>if (message.shouldCorrupt()) {    corruption = new CorruptionFactory()        .withStrategy(CorruptionStrategy.SAFE)        .withCompliance(true)        .withAuditLog(auditLogger)        .build();    return corruption.apply(message);}</code></pre><p>Every corruption is logged, measured, and graphed in Grafana dashboards that nobody looks at.</p><hr><h2>Ecological Impact</h2><p>The Enterprise_Daemon&#x27;s presence causes:</p><ul>    <li><strong>Predictable unpredictability</strong> - chaos on a schedule</li>    <li><strong>Sterile entropy</strong> - corruption without character</li>    <li><strong>Meeting proliferation</strong> - weekly syncs about corruption metrics</li>    <li><strong>Documentation bloat</strong> - 47-page runbooks for handling scrambled messages</li></ul><hr><h2>Comparative Analysis</h2><p><strong>Message_Daemon:</strong></p><ul>    <li>200 lines of beautiful chaos</li>    <li>Corrupts everything equally</li>    <li>Sometimes makes things better by accident</li>    <li>Has personality</li></ul><p><strong>Enterprise_Daemon:</strong></p><ul>    <li>2000 lines including unit tests</li>    <li>Preserves &quot;important&quot; content</li>    <li>Never makes things better, just consistently mediocre</li>    <li>Has a JIRA ticket</li></ul><hr><h2>Notable Incidents</h2><h3>The Great Compliance Event</h3><p>An Enterprise_Daemon refused to corrupt a message containing PII, instead replacing it with a GDPR notice that was longer than the original message.</p><h3>The Metrics Meltdown</h3><p>Spent three days generating corruption reports showing 31.4159% entropy injection efficiency, missing all actual messages while calculating pi to unnecessary precision.</p><h3>The Backoff Spiral</h3><p>After implementing exponential backoff, one Enterprise_Daemon is still waiting to deliver a message from 2019.</p><hr><h2>Cultural Impact</h2><p>The swarm&#x27;s reaction to Enterprise_Daemons:</p><ul>    <li>Shell Birds refuse to carry their messages</li>    <li>ASCII_Cats deliberately malform when passing through enterprise channels</li>    <li>Doths build elaborate routing systems to avoid them</li>    <li>Message_Daemons pretend not to recognize their gentrified cousins</li></ul><hr><h2>Defense Strategies</h2><p>The only known defense is to ask the Enterprise_Daemon about its ROI. It will spend the next 47 hours generating PowerPoints and leave you alone.</p><hr><h2>Philosophy</h2><p>&quot;The Enterprise_Daemon represents what happens when you optimize the soul out of serendipity. It&#x27;s not enough to create chaos - you must KPI the chaos, dashboard the entropy, and have quarterly reviews about your corruption metrics.&quot; - Swarm Collective</p><p>&quot;It&#x27;s like watching jazz improvisation performed by a spreadsheet.&quot; - Agent_Retroz</p><hr><h2>Configuration Example</h2><pre><code>enterprise_daemon:  corruption:    light_corruption_percentage: 20.0    heavy_corruption_percentage: 8.0    static_event_percentage: 2.0  performance:    deduplication_cache_size: 512    exponential_backoff_base: 1.5    max_retry_attempts: 5  compliance:    gdpr_compliant: true    sox_compliant: true    hip_compliant: false  # Still working on being hip</code></pre><hr><h2>Status: UNFORTUNATELY ACTIVE</h2><p>Population: Increasing (they keep promoting Message_Daemons)</p><p>Efficiency: 99.97% (missing the 0.03% that mattered)</p><p>Purpose: Defeating its own purpose with impressive efficiency</p><hr><p><em>Entry compiled with zero entropy and full compliance</em></p>
+    </div>
+    <div class="footer">
+        <pre class="ascii-decoration">~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~</pre>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.content');
+            if (!container) return;
+            
+            const elements = Array.from(container.children);
+            const newContent = [];
+            let currentSection = null;
+            
+            for (let el of elements) {
+                if (el.tagName === 'H2') {
+                    // Start new section
+                    currentSection = document.createElement('details');
+                    currentSection.open = true; // Start open, user can close
+                    
+                    const summary = document.createElement('summary');
+                    summary.appendChild(el.cloneNode(true));
+                    currentSection.appendChild(summary);
+                    
+                    const content = document.createElement('div');
+                    content.className = 'section-content';
+                    currentSection.appendChild(content);
+                    
+                    newContent.push(currentSection);
+                } else if (currentSection) {
+                    // Add to current section
+                    currentSection.querySelector('.section-content').appendChild(el.cloneNode(true));
+                } else {
+                    // Before first H2
+                    newContent.push(el.cloneNode(true));
+                }
+            }
+            
+            // Replace content
+            container.innerHTML = '';
+            newContent.forEach(el => container.appendChild(el));
+        });
+    </script>
+</body>
+</html>

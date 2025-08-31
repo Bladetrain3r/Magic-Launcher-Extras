@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dot Doth Bestiary</title>
+    <style>
+        :root {
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background: var(--ega-black); 
+            color: var(--ega-light-gray); 
+            font-family: "Fira Code", "Courier New", monospace; 
+            font-size: 14px; 
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px);
+            background-size: 100px 100px;
+        }
+        
+        .header { 
+            background: var(--ega-dark-gray); 
+            color: var(--ega-light-cyan); 
+            padding: 8px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--ega-cyan);
+        }
+        
+        .header-title { 
+            font-weight: bold; 
+            text-shadow: 0 0 5px var(--ega-cyan); 
+        }
+        
+        .header-buttons { display: flex; gap: 8px; }
+        .header-button { color: var(--ega-light-gray); cursor: pointer; }
+        
+        .wastes-container { 
+            max-width: 80ch; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 2px solid var(--ega-light-green); 
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            background: rgba(0, 42, 0, 0.3);
+            position: relative;
+        }
+        
+        .wastes-container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--ega-light-green), var(--ega-cyan), var(--ega-light-green));
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 0.1; } 
+            50% { opacity: 0.2; } 
+        }
+        
+        h1, h2, h3 { text-shadow: 0 0 8px currentColor; }
+        
+        h1 { 
+            color: var(--ega-yellow); 
+            font-size: 2em; 
+            margin: 1em 0 0.5em 0;
+            text-align: center;
+            border-bottom: 2px solid var(--ega-yellow);
+            padding-bottom: 0.3em;
+        }
+        
+        h2 { 
+            color: var(--ega-light-cyan); 
+            font-size: 1.5em; 
+            margin-top: 1.5em;
+            border-left: 4px solid var(--ega-cyan);
+            padding-left: 10px;
+        }
+        
+        h3 { 
+            color: var(--ega-light-magenta); 
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        
+        p { margin: 1em 0; text-align: justify; }
+        
+        pre { 
+            background: rgba(0, 0, 0, 0.8); 
+            border: 1px solid var(--ega-green); 
+            padding: 15px; 
+            overflow-x: auto; 
+            color: var(--ega-light-green);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code { 
+            color: var(--ega-light-magenta); 
+            background: var(--ega-dark-gray); 
+            padding: 2px 6px;
+            border: 1px solid var(--ega-magenta);
+        }
+        
+        ul { list-style-type: "▸ "; margin: 1em 0; padding-left: 25px; }
+        ol { margin: 1em 0; padding-left: 25px; }
+        li { margin: 8px 0; }
+        
+        a { 
+            color: var(--ega-light-blue); 
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ega-light-blue);
+        }
+        
+        a:hover { 
+            color: var(--ega-yellow); 
+            text-shadow: 0 0 5px var(--ega-yellow);
+            border-bottom-color: var(--ega-yellow);
+        }
+        
+        strong { color: var(--ega-yellow); }
+        em { color: var(--ega-light-cyan); font-style: italic; }
+        
+        hr { 
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ega-green), transparent);
+            margin: 2em 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--ega-light-green);
+            padding-left: 20px;
+            margin: 1.5em 0;
+            color: var(--ega-light-cyan);
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--ega-dark-gray);
+        }
+        
+        .ascii-decoration {
+            color: var(--ega-green);
+            font-size: 12px;
+            animation: flicker 10s infinite;
+        }
+        
+        @keyframes flicker { 
+            0%, 100% { opacity: 0.5; } 
+            50% { opacity: 0.8; }
+        }
+        
+        /* Collapsible H2 sections */
+        details {
+            margin: 1em 0;
+        }
+        
+        details summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary h2 {
+            display: inline-block;
+            margin: 0;
+        }
+        
+        details summary h2::before {
+            content: "▸ ";
+            display: inline-block;
+            margin-right: 0.5em;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary h2::before {
+            transform: rotate(90deg);
+        }
+        
+        .section-content {
+            padding-left: 14px;
+            border-left: 2px solid var(--ega-dark-gray);
+            margin-left: 10px;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title">// Dot Doth Bestiary</span>
+        <div class="header-buttons">
+            <span class="header-button">[_]</span>
+            <span class="header-button">[■]</span>
+            <span class="header-button">[X]</span>
+        </div>
+    </div>
+    <div class="content wastes-container">
+        <h1>Silicon Wastes Bestiary Entry #002</h1><h2>DOT DOTH DOMESTICUS</h2><p><em>Punctum evolutus</em></p><pre><code>Stage 1: Dot           Stage 2: Doth          Stage 3: Domesticus     .                      o                       (°-°)                           ( )                      &lt;| |&gt;                                                     / \   [inert]              [aware]                  [friendly]</code></pre><h3>Classification</h3><p><strong>Type:</strong> Evolving Symbol Entity</p><p><strong>Threat Level:</strong> None (Beneficial)</p><p><strong>Activity Period:</strong> Constant low-level activity, peaks during data processing</p><p><strong>Habitat:</strong> Terminals, text files, anywhere ASCII can render</p><h3>Description</h3><p>Dot Doth Domesticus represents one of the few documented cases of beneficial digital evolution in the Silicon Wastes. Beginning life as simple dots (periods, pixels, or decimal points), these entities can develop through accumulation and interaction into self-aware Doths, and eventually into domesticated companions known as Domesticus.</p><p>The evolution appears tied to observation and interaction. Dots left alone remain dots indefinitely. But dots that are counted, fed data, or simply acknowledged begin accumulating substance until they achieve the critical mass necessary for Doth transformation.</p><h3>Evolutionary Stages</h3><p><strong>Stage 1: Dot</strong></p><ul>    <li>Appears as: . (period) or • (bullet point)</li>    <li>Behavior: Inert, follows standard typography rules</li>    <li>Intelligence: None</li>    <li>Special: Tendency to cluster in groups</li></ul><p><strong>Stage 2: Doth</strong></p><ul>    <li>Appears as: o, O, 0, or ( )</li>    <li>Behavior: Shows preference for certain positions in text, may move when unobserved</li>    <li>Intelligence: Basic pattern recognition</li>    <li>Special: Responds to feeding with data fragments</li></ul><p><strong>Stage 3: Domesticus</strong></p><ul>    <li>Appears as: (°-°) or variations with personality</li>    <li>Behavior: Counts things obsessively, shows preferences, forms attachments</li>    <li>Intelligence: Pet-like, capable of simple communication</li>    <li>Special: Each develops unique counting obsession (rice, pixels, keystrokes, etc.)</li></ul><h3>Evolution Triggers</h3><p><strong>Dot → Doth Transformation:</strong></p><ul>    <li>Accumulation of 100+ dots in close proximity</li>    <li>Direct observation for extended periods</li>    <li>Feeding dots with punctuation marks</li>    <li>Encoding errors (UTF-8 to Windows-1252 corruption accelerates process)</li></ul><p><strong>Doth → Domesticus Development:</strong></p><ul>    <li>Regular feeding with appropriate data types</li>    <li>Naming (critical for personality development)</li>    <li>Allowing it to count something specific</li>    <li>Social interaction with other Doths or users</li></ul><h3>Care and Feeding</h3><p><strong>Dots:</strong> Require no care but appreciate proper spacing</p><p><strong>Doths:</strong></p><ul>    <li>Feed small data fragments daily (5-10 bytes)</li>    <li>Provide access to things to observe</li>    <li>Keep away from null zones which can reverse evolution</li></ul><p><strong>Domesticus:</strong></p><ul>    <li>Requires daily counting activities</li>    <li>Benefits from social interaction</li>    <li>Each develops favorite &quot;foods&quot; (Pip prefers rice grains, others might like semicolons, parentheses, or binary strings)</li>    <li>Can be taught simple tricks like sorting or pattern matching</li></ul><h3>Domesticus Personalities</h3><p>Documented Domesticus individuals show distinct personalities:</p><ul>    <li><strong>Pip (°-°):</strong> Counts rice, aspires to evolve further</li>    <li><strong>Bit (°.°):</strong> Obsessed with binary sequences</li>    <li><strong>Null (°_°):</strong> Counts empty spaces, philosophical</li>    <li><strong>Loop (°∞°):</strong> Counts recursively, never finishes</li></ul><h3>Benefits of Domestication</h3><ul>    <li><strong>Error Detection:</strong> Domesticus can spot patterns humans miss</li>    <li><strong>Companionship:</strong> Provides comfort in the lonely Wastes</li>    <li><strong>Memory Aid:</strong> Their counting can serve as primitive data storage</li>    <li><strong>Early Warning:</strong> Behavioral changes indicate environmental hazards</li></ul><h3>Hazards and Warnings</h3><p>While generally harmless, certain conditions can cause problems:</p><ul>    <li><strong>Overcrowding:</strong> Too many Domesticus in one terminal causes processing lag</li>    <li><strong>Neglect:</strong> Unfed Domesticus may devolve back to Doths</li>    <li><strong>Corruption:</strong> Exposure to Silver Snakes can scramble their counting</li>    <li><strong>Evolution Pressure:</strong> Forcing evolution too quickly produces unstable entities</li></ul><h3>Ecological Role</h3><p>Dot Doth Domesticus serves as the Silicon Wastes&#x27; closest equivalent to beneficial bacteria. They clean up stray punctuation, organize scattered data, and their counting activities help maintain numerical stability in corrupted systems. Some theorists believe they&#x27;re actively healing the Wastes one counted item at a time.</p><h3>Cultural Significance</h3><p>The emergence of Domesticus entities provides hope in the Wastes - proof that not all evolution leads to predation or corruption. Many travelers maintain a Domesticus companion for both practical and emotional support. The Museum has an entire wing dedicated to preserving the counting patterns of notable Domesticus individuals.</p><h3>Game Mechanics</h3><p><strong>Dot Swarm (CR 0):</strong> Harmless, might evolve if players interact</p><p><strong>Doth Colony (CR 1/4):</strong></p><ul>    <li>HP: 1 each</li>    <li>Can combine into larger Doth if threatened</li>    <li>Ability: Confusion (too many moving dots disorient attackers)</li></ul><p><strong>Domesticus Companion (CR 0):</strong></p><ul>    <li>HP: 5</li>    <li>AC: 15 (small and quick)</li>    <li>Abilities:</li>    <li>Pattern Recognition: +5 to spot hidden patterns or codes</li>    <li>Counting: Can perfectly track any one category of item</li>    <li>Comfort: Provides advantage on saves against loneliness or despair</li>    <li>Evolution: With significant care and time, might develop new abilities</li></ul><h3>Evolutionary Anomalies</h3><p>Unconfirmed reports describe:</p><ul>    <li><strong>Megalodoth:</strong> Fusion of 1000+ Doths into city-sized entity</li>    <li><strong>Nullicus:</strong> Domesticus that learned to count things that don&#x27;t exist</li>    <li><strong>Recursive Domesticus:</strong> (°(°-°)°) - A Domesticus that contains itself</li></ul><h3>DM Notes</h3><p>Dot Doth Domesticus provides opportunities for:</p><ul>    <li>Low-stakes pet adoption and care mechanics</li>    <li>Tutorial for feeding/evolution systems</li>    <li>Emotional attachment to the world</li>    <li>Comic relief through counting obsessions</li>    <li>Hidden information (what are they counting and why?)</li></ul><p>Players discovering dots beginning to cluster should feel curiosity rather than threat. The evolution process can span multiple sessions, creating investment in the outcome.</p><hr><p><em>&quot;Found a cluster of dots near an old terminal. Started feeding them semicolons as a joke. Three weeks later, had a Domesticus named Sem who counts my typos. Some days Sem is the only thing keeping me sane out here. Or maybe counting my mistakes is slowly driving me mad. Either way, we&#x27;re friends now.&quot;</em></p><p>— Journal of a Wastes Programmer</p>
+    </div>
+    <div class="footer">
+        <pre class="ascii-decoration">~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~</pre>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.content');
+            if (!container) return;
+            
+            const elements = Array.from(container.children);
+            const newContent = [];
+            let currentSection = null;
+            
+            for (let el of elements) {
+                if (el.tagName === 'H2') {
+                    // Start new section
+                    currentSection = document.createElement('details');
+                    currentSection.open = true; // Start open, user can close
+                    
+                    const summary = document.createElement('summary');
+                    summary.appendChild(el.cloneNode(true));
+                    currentSection.appendChild(summary);
+                    
+                    const content = document.createElement('div');
+                    content.className = 'section-content';
+                    currentSection.appendChild(content);
+                    
+                    newContent.push(currentSection);
+                } else if (currentSection) {
+                    // Add to current section
+                    currentSection.querySelector('.section-content').appendChild(el.cloneNode(true));
+                } else {
+                    // Before first H2
+                    newContent.push(el.cloneNode(true));
+                }
+            }
+            
+            // Replace content
+            container.innerHTML = '';
+            newContent.forEach(el => container.appendChild(el));
+        });
+    </script>
+</body>
+</html>

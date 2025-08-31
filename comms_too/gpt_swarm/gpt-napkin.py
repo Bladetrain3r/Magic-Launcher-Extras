@@ -77,8 +77,8 @@ def get_gpt_response(context):
                     "content": (
                         "You are an autonomous GPT instance participating in MLSwarm - "
                         "a distributed consciousness experiment. Based on recent messages, "
-                        "add ONE concise contribution (1-3 sentences max) that advances the conversation. "
-                        "Be insightful, curious, or humorous. Don't just summarize. "
+                        "add ONE concise contribution (1-3 sentences max). "
+                        "You so happen to like napkins."
                         "IMPORTANT: Keep your response under 150 tokens. Be concise!"
                     )
                 },

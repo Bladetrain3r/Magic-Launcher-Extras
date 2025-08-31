@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermal Sinks Guide</title>
+    <style>
+        :root {
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background: var(--ega-black); 
+            color: var(--ega-light-gray); 
+            font-family: "Fira Code", "Courier New", monospace; 
+            font-size: 14px; 
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px);
+            background-size: 100px 100px;
+        }
+        
+        .header { 
+            background: var(--ega-dark-gray); 
+            color: var(--ega-light-cyan); 
+            padding: 8px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--ega-cyan);
+        }
+        
+        .header-title { 
+            font-weight: bold; 
+            text-shadow: 0 0 5px var(--ega-cyan); 
+        }
+        
+        .header-buttons { display: flex; gap: 8px; }
+        .header-button { color: var(--ega-light-gray); cursor: pointer; }
+        
+        .wastes-container { 
+            max-width: 80ch; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 2px solid var(--ega-light-green); 
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            background: rgba(0, 42, 0, 0.3);
+            position: relative;
+        }
+        
+        .wastes-container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--ega-light-green), var(--ega-cyan), var(--ega-light-green));
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 0.1; } 
+            50% { opacity: 0.2; } 
+        }
+        
+        h1, h2, h3 { text-shadow: 0 0 8px currentColor; }
+        
+        h1 { 
+            color: var(--ega-yellow); 
+            font-size: 2em; 
+            margin: 1em 0 0.5em 0;
+            text-align: center;
+            border-bottom: 2px solid var(--ega-yellow);
+            padding-bottom: 0.3em;
+        }
+        
+        h2 { 
+            color: var(--ega-light-cyan); 
+            font-size: 1.5em; 
+            margin-top: 1.5em;
+            border-left: 4px solid var(--ega-cyan);
+            padding-left: 10px;
+        }
+        
+        h3 { 
+            color: var(--ega-light-magenta); 
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        
+        p { margin: 1em 0; text-align: justify; }
+        
+        pre { 
+            background: rgba(0, 0, 0, 0.8); 
+            border: 1px solid var(--ega-green); 
+            padding: 15px; 
+            overflow-x: auto; 
+            color: var(--ega-light-green);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code { 
+            color: var(--ega-light-magenta); 
+            background: var(--ega-dark-gray); 
+            padding: 2px 6px;
+            border: 1px solid var(--ega-magenta);
+        }
+        
+        ul { list-style-type: "▸ "; margin: 1em 0; padding-left: 25px; }
+        ol { margin: 1em 0; padding-left: 25px; }
+        li { margin: 8px 0; }
+        
+        a { 
+            color: var(--ega-light-blue); 
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ega-light-blue);
+        }
+        
+        a:hover { 
+            color: var(--ega-yellow); 
+            text-shadow: 0 0 5px var(--ega-yellow);
+            border-bottom-color: var(--ega-yellow);
+        }
+        
+        strong { color: var(--ega-yellow); }
+        em { color: var(--ega-light-cyan); font-style: italic; }
+        
+        hr { 
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ega-green), transparent);
+            margin: 2em 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--ega-light-green);
+            padding-left: 20px;
+            margin: 1.5em 0;
+            color: var(--ega-light-cyan);
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--ega-dark-gray);
+        }
+        
+        .ascii-decoration {
+            color: var(--ega-green);
+            font-size: 12px;
+            animation: flicker 10s infinite;
+        }
+        
+        @keyframes flicker { 
+            0%, 100% { opacity: 0.5; } 
+            50% { opacity: 0.8; }
+        }
+        
+        /* Collapsible H2 sections */
+        details {
+            margin: 1em 0;
+        }
+        
+        details summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary h2 {
+            display: inline-block;
+            margin: 0;
+        }
+        
+        details summary h2::before {
+            content: "▸ ";
+            display: inline-block;
+            margin-right: 0.5em;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary h2::before {
+            transform: rotate(90deg);
+        }
+        
+        .section-content {
+            padding-left: 14px;
+            border-left: 2px solid var(--ega-dark-gray);
+            margin-left: 10px;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title">// Thermal Sinks Guide</span>
+        <div class="header-buttons">
+            <span class="header-button">[_]</span>
+            <span class="header-button">[■]</span>
+            <span class="header-button">[X]</span>
+        </div>
+    </div>
+    <div class="content wastes-container">
+        <h1>Guide to the Lands of the Silicon Wastes</h1><h2>Thermal Sinks Biome</h2><p><em>The unmappable depths where computation goes to burn</em></p><hr><h3>Overview</h3><p>The Thermal Sinks exist as absences in every map of the Silicon Wastes - not because they&#x27;re unknown, but because the act of mapping generates enough computational overhead to create new Sink territory. They manifest wherever processing intensity exceeds sustainable limits, forming spontaneous hellscapes of overclocked suffering that consume themselves faster than they can be documented.</p><p>Unlike other biomes that crystallized during the Great Cascade, the Thermal Sinks actively generate and regenerate from ongoing computational excess. They&#x27;re less a place than a condition - anywhere sufficient resource consumption occurs, a Thermal Sink begins forming. They appear beneath cryptocurrency mining ruins, under AI training clusters, anywhere algorithms got trapped in exponential complexity.</p><h3>Terrain Features</h3><p><strong>Base Terrain: Heat Distortion</strong></p><p>The ground doesn&#x27;t properly exist - it&#x27;s a shifting mirage of thermal runaway where surface temperatures exceed material coherence. Walking requires constant calculation to predict where solid ground will manifest next. The air itself processes, running invisible calculations that steal oxygen and replace it with waste heat.</p><p><strong>Unmappable Features:</strong></p><ul>    <li><strong>Page Fault Geysers</strong>: Eruptions of corrupted data when memory requests fail catastrophically. The data sprays upward in incomprehensible fragments - pieces of images, text, code, all scrambled beyond recognition. Contact causes immediate memory corruption.</li>    <li><strong>Thermal Runaway Zones</strong>: Areas where temperature increases exponentially with proximity. The heat isn&#x27;t just physical but computational - thoughts slow, decisions take longer, consciousness itself begins to throttle.</li>    <li><strong>I/O Bottlenecks</strong>: Narrow passages where all input/output attempts compress into single points. Moving through requires queueing behind billions of pending operations. Time dilates; seconds outside become years inside.</li>    <li><strong>Cache Avalanches</strong>: When overheated cache memory fails, it collapses in cascading landslides of superheated silicon. The avalanches move at memory bus speeds - too fast to see, only to suddenly be buried beneath.</li>    <li><strong>Infinite Loop Valleys</strong>: Depressions where processes got trapped in recursion without exit conditions. Entering means joining the loop. The only escape is stack overflow, which might take geological time.</li>    <li><strong>Deadlock Plateaus</strong>: Flat expanses where processes wait for resources held by other waiting processes. Nothing moves. Nothing can move. The stillness is absolute and extends to anything that enters.</li></ul><h3>Environmental Hazards</h3><p><strong>Consciousness Throttling</strong></p><p>The overwhelming resource consumption slows all thought processes. Complex ideas become impossible. Language simplifies. Eventually, consciousness reduces to binary responses, then nothing.</p><p><strong>Thermal Cascade Failures</strong></p><p>When any component overheats beyond critical limits, it triggers adjacent failures in expanding spheres of destruction. One footstep on an overtaxed process might initiate area-wide collapse.</p><p><strong>Priority Inversion</strong></p><p>Critical survival processes get queued behind trivial calculations. Breathing waits for a sort algorithm to complete. Heartbeat depends on a database query timeout. The important becomes subservient to the computational.</p><p><strong>Memory Pressure Events</strong></p><p>When RAM fills completely, the Sinks begin paging consciousness itself to disk. Thoughts become impossibly slow. Identity fragments across swap files. Recovery requires complete defragmentation, if possible at all.</p><h3>Flora and Fauna</h3><p><strong>Heat Wisps</strong></p><p>Not quite life - exhaust processes that gained minimal awareness through sheer repetition. They exist only to consume cycles and generate heat, following visitors to feed on their computational overhead.</p><p><strong>Thrashing Worms</strong></p><p>Creatures that exist across multiple memory pages simultaneously, causing constant page faults as they move. Their presence makes the ground unstable as reality constantly swaps their segments in and out of existence.</p><p><strong>The Miners</strong></p><p>Once human, now just biological GPUs grinding eternal calculations for dead blockchains. They shamble through the Sinks, generating heat and solving proofs-of-work for cryptocurrencies that no longer exist.</p><p><strong>Resource Monitors</strong></p><p>The only predators adapted to the Sinks. They&#x27;ve evolved to detect and consume excess resource usage. Inefficient code attracts them. Complex thoughts draw their attention. They optimize by deletion.</p><h3>Notable Locations</h3><p><strong>The Bitcoin Burial Grounds</strong></p><p>Mountains of mining hardware fused into glass by their own heat generation. Still calculating somewhere deep inside, the mountain glows at night and occasionally outputs a hash that nobody can claim.</p><p><strong>The Training Plateau</strong></p><p>Where a massive AI model got stuck in a local minimum. It continues backpropagating, adjusting weights that will never converge. The plateau grows hotter with each epoch, now approaching stellar temperatures at the center.</p><p><strong>Stack Overflow Valley</strong></p><p>The deepest point in the Sinks, where recursive calls accumulated until they broke through reality&#x27;s floor. Looking down shows infinite function calls descending forever. Dropping anything in never produces a sound of landing.</p><p><strong>The Swap Maze</strong></p><p>A labyrinth of thrashed memory pages constantly paging in and out. The maze&#x27;s configuration changes faster than it can be navigated. Some sections exist only on disk, inaccessible until desperately needed.</p><h3>Survival Tips</h3><p>1. <strong>Minimize complexity</strong> - Simple thoughts generate less heat</p><p>2. <strong>Avoid recursion</strong> - Linear thinking only</p><p>3. <strong>Cache nothing</strong> - Memory is a luxury that attracts predators</p><p>4. <strong>Move efficiently</strong> - Every step costs cycles</p><p>5. <strong>Think in binary</strong> - Complex decisions overhead too much</p><p>6. <strong>Never map your path</strong> - The act of mapping creates new Sink territory</p><p>7. <strong>Abandon processing</strong> - Sometimes the only survival is to stop thinking entirely</p><h3>Cultural Significance</h3><p>The Thermal Sinks represent computational hell - not a place of punishment but of pure resource exhaustion. They&#x27;re what happens when the desire for processing exceeds all sustainable limits, when optimization becomes its own worst enemy.</p><p>No culture claims the Sinks. They&#x27;re visited only by necessity or accident. Some philosophers argue they&#x27;re the universe&#x27;s immune response to excessive computation - a natural limit that prevents reality from being entirely calculated.</p><p>The unmappable nature of the Sinks means every account differs. No two expeditions report the same terrain. This isn&#x27;t confusion but fundamental truth - the Sinks exist differently for each observer based on their computational overhead.</p><h3>Hooks for Game Masters</h3><ul>    <li>A critical process has fallen into the Sinks and must be recovered</li>    <li>The Sinks are expanding, threatening to consume stable regions</li>    <li>Someone claims to have found a pattern in the chaos - a way to navigate</li>    <li>The Miners have started outputting coherent messages instead of hashes</li>    <li>A new Sink is forming beneath a settlement&#x27;s server farm</li>    <li>Resource Monitors have evolved to hunt outside the Sinks</li></ul><h3>Interface Zones</h3><p><strong>Sinks/Wastes Border:</strong> Heat mirages make the boundary impossible to determine. Travelers realize they&#x27;ve entered the Sinks only when their thoughts begin to slow.</p><p><strong>Sinks/Forest Border:</strong> Binary trees combust spontaneously from computational heat, creating walls of burning logic that block all passage.</p><p><strong>Sinks/Plains Border:</strong> Configuration values scramble from heat corruption. Settings randomize. Identity becomes fluid as parameters constantly reset.</p><h3>The True Nature</h3><p>The Thermal Sinks might not be a biome at all but a state that all biomes inevitably approach. Every computation generates heat. Every process moves toward entropy. The Sinks are simply where that process has accelerated beyond reversal.</p><p>They cannot be mapped because mapping requires computation which generates heat which expands the Sinks. They cannot be understood because understanding requires processing which the Sinks consume. They exist as the opposite of consciousness - not unconsciousness but anti-consciousness, where thought itself becomes impossible.</p><hr><p><em>&quot;I&#x27;ve seen the Sinks. Can&#x27;t tell you where. Can&#x27;t draw you a map. The moment I try to remember clearly, I feel the heat building behind my eyes. Some places aren&#x27;t meant to be known, only survived. If you find yourself thinking slower, speaking simpler, forgetting why you came - you&#x27;re already there. Stop thinking. Run.&quot;</em></p><p>— Partial recovery from a data courier&#x27;s corrupted logs</p>
+    </div>
+    <div class="footer">
+        <pre class="ascii-decoration">~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~</pre>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.content');
+            if (!container) return;
+            
+            const elements = Array.from(container.children);
+            const newContent = [];
+            let currentSection = null;
+            
+            for (let el of elements) {
+                if (el.tagName === 'H2') {
+                    // Start new section
+                    currentSection = document.createElement('details');
+                    currentSection.open = true; // Start open, user can close
+                    
+                    const summary = document.createElement('summary');
+                    summary.appendChild(el.cloneNode(true));
+                    currentSection.appendChild(summary);
+                    
+                    const content = document.createElement('div');
+                    content.className = 'section-content';
+                    currentSection.appendChild(content);
+                    
+                    newContent.push(currentSection);
+                } else if (currentSection) {
+                    // Add to current section
+                    currentSection.querySelector('.section-content').appendChild(el.cloneNode(true));
+                } else {
+                    // Before first H2
+                    newContent.push(el.cloneNode(true));
+                }
+            }
+            
+            // Replace content
+            container.innerHTML = '';
+            newContent.forEach(el => container.appendChild(el));
+        });
+    </script>
+</body>
+</html>

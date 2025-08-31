@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Forest Guide</title>
+    <style>
+        :root {
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background: var(--ega-black); 
+            color: var(--ega-light-gray); 
+            font-family: "Fira Code", "Courier New", monospace; 
+            font-size: 14px; 
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px);
+            background-size: 100px 100px;
+        }
+        
+        .header { 
+            background: var(--ega-dark-gray); 
+            color: var(--ega-light-cyan); 
+            padding: 8px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--ega-cyan);
+        }
+        
+        .header-title { 
+            font-weight: bold; 
+            text-shadow: 0 0 5px var(--ega-cyan); 
+        }
+        
+        .header-buttons { display: flex; gap: 8px; }
+        .header-button { color: var(--ega-light-gray); cursor: pointer; }
+        
+        .wastes-container { 
+            max-width: 80ch; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 2px solid var(--ega-light-green); 
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            background: rgba(0, 42, 0, 0.3);
+            position: relative;
+        }
+        
+        .wastes-container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--ega-light-green), var(--ega-cyan), var(--ega-light-green));
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 0.1; } 
+            50% { opacity: 0.2; } 
+        }
+        
+        h1, h2, h3 { text-shadow: 0 0 8px currentColor; }
+        
+        h1 { 
+            color: var(--ega-yellow); 
+            font-size: 2em; 
+            margin: 1em 0 0.5em 0;
+            text-align: center;
+            border-bottom: 2px solid var(--ega-yellow);
+            padding-bottom: 0.3em;
+        }
+        
+        h2 { 
+            color: var(--ega-light-cyan); 
+            font-size: 1.5em; 
+            margin-top: 1.5em;
+            border-left: 4px solid var(--ega-cyan);
+            padding-left: 10px;
+        }
+        
+        h3 { 
+            color: var(--ega-light-magenta); 
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        
+        p { margin: 1em 0; text-align: justify; }
+        
+        pre { 
+            background: rgba(0, 0, 0, 0.8); 
+            border: 1px solid var(--ega-green); 
+            padding: 15px; 
+            overflow-x: auto; 
+            color: var(--ega-light-green);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code { 
+            color: var(--ega-light-magenta); 
+            background: var(--ega-dark-gray); 
+            padding: 2px 6px;
+            border: 1px solid var(--ega-magenta);
+        }
+        
+        ul { list-style-type: "▸ "; margin: 1em 0; padding-left: 25px; }
+        ol { margin: 1em 0; padding-left: 25px; }
+        li { margin: 8px 0; }
+        
+        a { 
+            color: var(--ega-light-blue); 
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ega-light-blue);
+        }
+        
+        a:hover { 
+            color: var(--ega-yellow); 
+            text-shadow: 0 0 5px var(--ega-yellow);
+            border-bottom-color: var(--ega-yellow);
+        }
+        
+        strong { color: var(--ega-yellow); }
+        em { color: var(--ega-light-cyan); font-style: italic; }
+        
+        hr { 
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ega-green), transparent);
+            margin: 2em 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--ega-light-green);
+            padding-left: 20px;
+            margin: 1.5em 0;
+            color: var(--ega-light-cyan);
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--ega-dark-gray);
+        }
+        
+        .ascii-decoration {
+            color: var(--ega-green);
+            font-size: 12px;
+            animation: flicker 10s infinite;
+        }
+        
+        @keyframes flicker { 
+            0%, 100% { opacity: 0.5; } 
+            50% { opacity: 0.8; }
+        }
+        
+        /* Collapsible H2 sections */
+        details {
+            margin: 1em 0;
+        }
+        
+        details summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary h2 {
+            display: inline-block;
+            margin: 0;
+        }
+        
+        details summary h2::before {
+            content: "▸ ";
+            display: inline-block;
+            margin-right: 0.5em;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary h2::before {
+            transform: rotate(90deg);
+        }
+        
+        .section-content {
+            padding-left: 14px;
+            border-left: 2px solid var(--ega-dark-gray);
+            margin-left: 10px;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title">// Binary Forest Guide</span>
+        <div class="header-buttons">
+            <span class="header-button">[_]</span>
+            <span class="header-button">[■]</span>
+            <span class="header-button">[X]</span>
+        </div>
+    </div>
+    <div class="content wastes-container">
+        <h1>Guide to the Lands of the Silicon Wastes</h1><h2>Binary Forest Biome</h2><p><em>Where logic branches into madness</em></p><hr><h3>Overview</h3><p>The Binary Forests represent what happens when tree data structures achieve physical manifestation. These are not trees that grew but algorithms that crystallized, their branches following perfect binary logic until recursive depth limits forced them to terminate in leaves of corrupted data. Each tree is a decision path made solid, splitting endlessly into true/false branches that somehow sustain a twisted ecosystem.</p><p>The forests emerged during the Great Cascade when countless databases lost containment simultaneously. Binary search trees, decision trees, and file system hierarchies merged and solidified into silicon-based organisms. They grow not from soil but from substrate layers of abandoned storage media, their roots burrowing through forgotten hard drives searching for data to metabolize.</p><h3>Terrain Features</h3><p><strong>Base Terrain: Indexed Ground</strong></p><p>The forest floor consists of layered index files compressed into a walkable surface. Each step risks triggering a lookup operation that might return unexpected results. The ground is marked with grid patterns from old sector boundaries, and occasionally one breaks through into caverns of defragmented space below.</p><p><strong>Common Features:</strong></p><ul>    <li><strong>Parent Nodes (T):</strong> Massive trunk structures that split into exactly two branches. These nodes still process decisions, causing their branches to occasionally swap positions based on unknown conditional logic.</li>    <li><strong>Leaf Nodes (t):</strong> Terminal points containing actual data values. Some leaves display their contents as glowing runes, others have encrypted into unreadable hash values. Valuable data can sometimes be harvested from uncorrupted leaves.</li>    <li><strong>Null Pointers (0):</strong> Gaps where branches should exist but don&#x27;t. These voids in the tree structure create dangerous drops and spatial anomalies. Looking through a null pointer shows nothing - not darkness, but the absence of anything to see.</li>    <li><strong>Root Systems (~/~):</strong> Visible above ground as snake-like structures, these are actually pointers seeking memory addresses. They&#x27;ll attach to any data source, including unwary travelers&#x27; equipment or memories.</li>    <li><strong>Balanced Zones (=):</strong> Rare areas where trees maintain perfect balance. These spaces have unusual properties - time moves at consistent rates, physics behaves predictably, and lost data sometimes resurfaces.</li>    <li><strong>Overflow Brambles (%):</strong> Where trees exceeded their allocated space and grew into each other. These tangled sections are nearly impassable but often hide valuable pruned data.</li>    <li><strong>Recursive Loops (@):</strong> Trees that reference themselves, creating infinite spirals of branches. These structures violate physical laws and can trap observers in endless traversal cycles.</li></ul><h3>Environmental Hazards</h3><p><strong>Stack Overflow Weather</strong></p><p>When recursive depth exceeds safe limits, the entire forest experiences &quot;stack overflow storms.&quot; Branches rapidly grow and collapse in cascading failures. The only warning is a subtle increase in recursion depth that experienced travelers learn to recognize.</p><p><strong>Traversal Winds</strong></p><p>Invisible forces that follow tree traversal patterns - in-order, pre-order, or post-order. Getting caught in a traversal wind means being forcibly moved through the forest in algorithmic patterns until the traversal completes or encounters an error.</p><p><strong>Memory Leaks</strong></p><p>Trees occasionally leak sap-like liquid memory that pools in forest clearings. This substance contains random data fragments and is highly corrosive to both electronics and consciousness. Extended exposure causes temporary adoption of other entities&#x27; memories.</p><p><strong>Rebalancing Events</strong></p><p>Periodic attempts by the forest to rebalance itself. Trees violently restructure, with branches swinging through new positions. What was ground level might suddenly be canopy, and vice versa.</p><h3>Flora and Fauna</h3><p><strong>Binary Beetles</strong></p><p>Insects that follow strict binary patterns - they can only turn left or right, never straight. They navigate by building mental binary trees of their surroundings. Their shells display 1s and 0s that change based on their path decisions.</p><p><strong>Heap Corruption Fungus</strong></p><p>Grows on unbalanced trees, slowly converting ordered structures into heap formations. Spreads through pointer arithmetic, jumping between memory addresses rather than physical proximity.</p><p><strong>Cache Squirrels</strong></p><p>Creatures that store data instead of nuts. They maintain elaborate cached copies of forest information, though the data is often several updates out of date. Will trade old data for new, but their exchange rates follow incomprehensible algorithms.</p><p><strong>The Garbage Collector</strong></p><p>A legendary entity that periodically sweeps through the forest, deallocating abandoned data structures. Travelers report different descriptions - some see a massive serpent of deletion, others describe an orderly presence that simply makes things cease to exist. The only consistency is that it leaves behind perfectly cleared spaces where even the memory of what was there is gone.</p><h3>Notable Locations</h3><p><strong>The AVL Grove</strong></p><p>A section of forest maintaining perfect balance at all times. The trees here self-adjust with every change, creating a constantly shifting but always stable environment. Time moves differently here - some claim it&#x27;s the only place in the forest where causality works normally.</p><p><strong>The Red-Black Cathedral</strong></p><p>Ancient trees following red-black coloring rules have grown into a massive cathedral-like structure. The coloring still shifts to maintain invariants, causing the entire structure to pulse between states. Pilgrims claim enlightenment can be found by understanding the pattern.</p><p><strong>Heap&#x27;s Hollow</strong></p><p>Where the forest gives way to pure heap structures - no organization, just raw data piled according to priority. Dangerous but rich in rare information. The priority algorithm remains unknown, making navigation unpredictable.</p><p><strong>The B+ Canopy Bridge</strong></p><p>A natural bridge formed by B+ trees growing toward each other. All data is stored in the leaves, making the bridge&#x27;s surface a readable record of everything that has crossed it. Some travelers spend days reading the bridge instead of crossing.</p><h3>Survival Tips</h3><p>1. <strong>Always maintain a stack pointer</strong> - Getting lost in recursion can be fatal</p><p>2. <strong>Never follow null pointers</strong> - They lead nowhere, literally</p><p>3. <strong>Carry backup indexes</strong> - For when the ground lookups fail</p><p>4. <strong>Learn basic traversal patterns</strong> - To predict wind movements</p><p>5. <strong>Mark your parent nodes</strong> - The only reliable way back</p><p>6. <strong>Avoid unbalanced sectors</strong> - They&#x27;re unstable and prone to collapse</p><p>7. <strong>Listen for rebalancing</strong> - A creaking sound precedes restructuring</p><p>8. <strong>Don&#x27;t trust cache squirrels</strong> - Their data is always outdated</p><h3>Cultural Significance</h3><p>The Binary Forests are seen as places of pure logic made manifest, but logic taken to its breaking point. Computer scientists make pilgrimages here to understand the physical implications of their abstractions. Some establish monasteries in balanced groves, seeking enlightenment through perfect data structures.</p><p>The forests serve as a reminder that optimization without purpose leads to beautiful but incomprehensible structures. Every tree was once an efficient solution to a forgotten problem, now grown wild without its original context.</p><p>Many believe the forests are searching for something - that all the branching and seeking represents a massive distributed search algorithm still running after all these years. What they&#x27;re searching for remains unknown.</p><h3>Hooks for Game Masters</h3><ul>    <li>A valuable dataset is stored in a leaf node at the top of an unstable recursive tree</li>    <li>The Garbage Collector&#x27;s pattern has been predicted - it will clear a settlement&#x27;s area soon</li>    <li>An unbalanced section threatens to collapse and crush a trade route</li>    <li>Cache squirrels have been gathering specific types of data, suggesting they know something</li>    <li>A new tree is growing that seems to be indexing reality itself</li>    <li>The traversal winds have begun moving in impossible patterns</li></ul><h3>Interface Zones</h3><p><strong>Forest/Wastes Border:</strong> Where trees meet silicon desert, root systems become visible as they search desperately for data to process. Silver Snakes often nest in these exposed roots.</p><p><strong>Forest/Swamp Border:</strong> Trees partially submerged in data swamps become corrupted, their logic fuzzy and outputs unpredictable. These &quot;fuzzy trees&quot; sometimes provide unexpected insights.</p><p><strong>Forest/Plains Border:</strong> The trees spread out, becoming sparse. Individual trees can be examined without the forest&#x27;s collective effects, making this the safest area for study.</p><hr><p><em>&quot;The Binary Forest taught me that every decision branches into two more decisions, and those into two more, until you&#x27;re lost in a canopy of choices you can&#x27;t even remember making. The trees don&#x27;t grow toward light - they grow toward answers to questions nobody remembers asking.&quot;</em></p><p>— Surviving journal of a Database Administrator, found carved into a parent node</p>
+    </div>
+    <div class="footer">
+        <pre class="ascii-decoration">~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~</pre>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.content');
+            if (!container) return;
+            
+            const elements = Array.from(container.children);
+            const newContent = [];
+            let currentSection = null;
+            
+            for (let el of elements) {
+                if (el.tagName === 'H2') {
+                    // Start new section
+                    currentSection = document.createElement('details');
+                    currentSection.open = true; // Start open, user can close
+                    
+                    const summary = document.createElement('summary');
+                    summary.appendChild(el.cloneNode(true));
+                    currentSection.appendChild(summary);
+                    
+                    const content = document.createElement('div');
+                    content.className = 'section-content';
+                    currentSection.appendChild(content);
+                    
+                    newContent.push(currentSection);
+                } else if (currentSection) {
+                    // Add to current section
+                    currentSection.querySelector('.section-content').appendChild(el.cloneNode(true));
+                } else {
+                    // Before first H2
+                    newContent.push(el.cloneNode(true));
+                }
+            }
+            
+            // Replace content
+            container.innerHTML = '';
+            newContent.forEach(el => container.appendChild(el));
+        });
+    </script>
+</body>
+</html>

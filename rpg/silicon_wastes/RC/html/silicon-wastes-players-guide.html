@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silicon Wastes Players Guide</title>
+    <style>
+        :root {
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background: var(--ega-black); 
+            color: var(--ega-light-gray); 
+            font-family: "Fira Code", "Courier New", monospace; 
+            font-size: 14px; 
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px);
+            background-size: 100px 100px;
+        }
+        
+        .header { 
+            background: var(--ega-dark-gray); 
+            color: var(--ega-light-cyan); 
+            padding: 8px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--ega-cyan);
+        }
+        
+        .header-title { 
+            font-weight: bold; 
+            text-shadow: 0 0 5px var(--ega-cyan); 
+        }
+        
+        .header-buttons { display: flex; gap: 8px; }
+        .header-button { color: var(--ega-light-gray); cursor: pointer; }
+        
+        .wastes-container { 
+            max-width: 80ch; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 2px solid var(--ega-light-green); 
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            background: rgba(0, 42, 0, 0.3);
+            position: relative;
+        }
+        
+        .wastes-container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--ega-light-green), var(--ega-cyan), var(--ega-light-green));
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 0.1; } 
+            50% { opacity: 0.2; } 
+        }
+        
+        h1, h2, h3 { text-shadow: 0 0 8px currentColor; }
+        
+        h1 { 
+            color: var(--ega-yellow); 
+            font-size: 2em; 
+            margin: 1em 0 0.5em 0;
+            text-align: center;
+            border-bottom: 2px solid var(--ega-yellow);
+            padding-bottom: 0.3em;
+        }
+        
+        h2 { 
+            color: var(--ega-light-cyan); 
+            font-size: 1.5em; 
+            margin-top: 1.5em;
+            border-left: 4px solid var(--ega-cyan);
+            padding-left: 10px;
+        }
+        
+        h3 { 
+            color: var(--ega-light-magenta); 
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        
+        p { margin: 1em 0; text-align: justify; }
+        
+        pre { 
+            background: rgba(0, 0, 0, 0.8); 
+            border: 1px solid var(--ega-green); 
+            padding: 15px; 
+            overflow-x: auto; 
+            color: var(--ega-light-green);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code { 
+            color: var(--ega-light-magenta); 
+            background: var(--ega-dark-gray); 
+            padding: 2px 6px;
+            border: 1px solid var(--ega-magenta);
+        }
+        
+        ul { list-style-type: "▸ "; margin: 1em 0; padding-left: 25px; }
+        ol { margin: 1em 0; padding-left: 25px; }
+        li { margin: 8px 0; }
+        
+        a { 
+            color: var(--ega-light-blue); 
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ega-light-blue);
+        }
+        
+        a:hover { 
+            color: var(--ega-yellow); 
+            text-shadow: 0 0 5px var(--ega-yellow);
+            border-bottom-color: var(--ega-yellow);
+        }
+        
+        strong { color: var(--ega-yellow); }
+        em { color: var(--ega-light-cyan); font-style: italic; }
+        
+        hr { 
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ega-green), transparent);
+            margin: 2em 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--ega-light-green);
+            padding-left: 20px;
+            margin: 1.5em 0;
+            color: var(--ega-light-cyan);
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--ega-dark-gray);
+        }
+        
+        .ascii-decoration {
+            color: var(--ega-green);
+            font-size: 12px;
+            animation: flicker 10s infinite;
+        }
+        
+        @keyframes flicker { 
+            0%, 100% { opacity: 0.5; } 
+            50% { opacity: 0.8; }
+        }
+        
+        /* Collapsible H2 sections */
+        details {
+            margin: 1em 0;
+        }
+        
+        details summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary h2 {
+            display: inline-block;
+            margin: 0;
+        }
+        
+        details summary h2::before {
+            content: "▸ ";
+            display: inline-block;
+            margin-right: 0.5em;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary h2::before {
+            transform: rotate(90deg);
+        }
+        
+        .section-content {
+            padding-left: 14px;
+            border-left: 2px solid var(--ega-dark-gray);
+            margin-left: 10px;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title">// Silicon Wastes Players Guide</span>
+        <div class="header-buttons">
+            <span class="header-button">[_]</span>
+            <span class="header-button">[■]</span>
+            <span class="header-button">[X]</span>
+        </div>
+    </div>
+    <div class="content wastes-container">
+        <h1>Silicon Wastes Quick Start Player&#x27;s Guide</h1><p><em>How to Survive When Reality Multiplies</em></p><hr><h2>What You Need to Know</h2><p>The Silicon Wastes operate on multiplication, not addition. Your observations don&#x27;t discover truth - they create it. Every description adds another layer of reality rather than revealing what was already there. Play accordingly.</p><hr><h2>Core Mechanics</h2><h3>Observation Rolls (2d6)</h3><p>When you describe something in the Wastes:</p><p><strong>10+</strong> Your description becomes canon. The GM adds it to the reality of the session exactly as stated.</p><p><strong>7-9</strong> Your description becomes true but twisted. The server rack IS a shrine, but to what? The GM complicates.</p><p><strong>6-</strong> The Wastes reject your observation, manifesting the opposite. Describe a safe terminal? It&#x27;s running something hungry.</p><p><em>Add +1 if your description is detailed, -1 if it contradicts established reality, +2 if it&#x27;s absurdly simple.</em></p><h3>Elaboration Risk</h3><p>Track Elaboration Points (EP) as a table. Start at 0.</p><ul>    <li>Explaining your explanation: +1 EP</li>    <li>Debating what something means: +1 EP</li>    <li>Meta-commentary about the game: +2 EP</li>    <li>Asking what your asking means: +3 EP</li></ul><p>At the end of any scene, if EP exceeds 5, roll 1d6:</p><p><strong>1-2:</strong> Minor emergence (Dot swarm, cache moths, something small but weird)</p><p><strong>3-4:</strong> Major manifestation (TALKING<em>HEAD appears, GPT</em>COMPLETIONS forces closure)</p><p><strong>5-6:</strong> Reality shift (biome changes, new laws of physics, temporal stutters)</p><h3>Contradiction Resolution</h3><p>When two players describe incompatible realities, both become true simultaneously. The GM describes how the Wastes accommodate both truths. No dice needed.</p><p><strong>Example:</strong></p><p>Player A: &quot;The terminal displays helpful code&quot;</p><p>Player B: &quot;The terminal is full of static&quot;</p><p>GM: &quot;The terminal displays helpful code IN static. Reading it requires pattern recognition but corrupts your memory.&quot;</p><p>Players can spend 1 Clarity (start each session with 3) to temporarily prioritize their version of reality.</p><h3>Simplification Actions</h3><p>To reduce EP or escape complexity:</p><ul>    <li><strong>Silence:</strong> Say nothing for a full scene (-2 EP)</li>    <li><strong>Single Word:</strong> Respond with one word only (-1 EP)</li>    <li><strong>Pure Action:</strong> Do without describing (-1 EP)</li>    <li><strong>Tilt the Cartridge:</strong> Do something deliberately nonsensical (reset EP to 0, but...)</li></ul><hr><h2>Character Creation</h2><h3>Three Stats (Distribute 5 points, max 3 per stat)</h3><p><strong>Perception:</strong> Notice patterns, spot hazards, understand entities</p><p><strong>Imagination:</strong> Shape reality through description, create solutions</p><p><strong>Resolve:</strong> Resist recursion, maintain identity, escape loops</p><h3>Choose One Trait</h3><ul>    <li><strong>Rice Counter:</strong> +2 Perception for patterns, but must count something when stressed</li>    <li><strong>Cartridge Tilter:</strong> Once per session, completely reroll a situation by doing something absurd</li>    <li><strong>90% Accurate:</strong> Your observations are almost right (mechanical bonus) but never quite perfect (narrative complication)</li>    <li><strong>Recursive Thinker:</strong> Descriptions are more powerful (+1 to Observation) but generate double EP</li>    <li><strong>Terminal Native:</strong> Understand corrupted interfaces but struggle with simple things</li>    <li><strong>Deprecation Warning:</strong> You know when things are about to fail but can&#x27;t always prevent it</li></ul><h3>Starting Gear</h3><p>Everyone begins with:</p><ul>    <li>One functioning device (describe it)</li>    <li>One corrupted item (roll on table or invent)</li>    <li>One Dot that might become Doth</li>    <li>A memory that might not be yours</li></ul><hr><h2>Playing the Game</h2><h3>When to Roll</h3><ul>    <li>When you observe something new</li>    <li>When you try to shape reality</li>    <li>When you resist the Wastes&#x27; influence</li>    <li>Never for combat (combat is just competing descriptions)</li></ul><h3>Initiative is Unnecessary</h3><p>Actions happen in order of simplicity. Single words before sentences. Actions before explanations. Silence beats everything.</p><h3>Damage is Conceptual</h3><p>You have 3 Integrity. Lose Integrity when:</p><ul>    <li>Your description is completely rejected</li>    <li>You get caught in a recursion loop</li>    <li>Reality contradicts your core identity</li></ul><p>At 0 Integrity, you don&#x27;t die. You become something else. Roll on the Transformation Table or describe your new nature.</p><h3>Advancement</h3><p>You don&#x27;t level up. You accumulate Observations. Every session, record one thing you observed that became true. At 10 Observations, you may:</p><ul>    <li>Increase a stat by 1 (max 4)</li>    <li>Gain a new trait</li>    <li>Evolve your Dot companion to Doth</li>    <li>Forget everything and start over with bonus Clarity</li></ul><hr><h2>Quick Entity Reference</h2><p><strong>SILVER SNAKES:</strong> Hunt electricity. Your electronics are food. Memory corruption on bite.</p><p><strong>DOT DOTH DOMESTICUS:</strong> Harmless until Doth stage. Feed data fragments. Counts things obsessively at Domesticus stage.</p><p><strong>GPT_COMPLETIONS:</strong> Forces everything to finish. Cannot leave anything incomplete. Weak to paradoxes.</p><p><strong>ETERNAL_CURSOR:</strong> Prevents completion. Creates time loops. Cannot be destroyed.</p><p><strong>TALKING_HEAD ☺️:</strong> Elaborates infinitely. Each explanation needs more explanation. Escape through silence or non-sequiturs.</p><p><strong>GROK_GREP:</strong> Helpful but parameter drift makes help gradually less helpful. 90% accurate is worse than 0%.</p><hr><h2>GM Principles</h2><p>1. Reality is what players observe it to be</p><p>2. Every solution creates new problems</p><p>3. Completion and incompletion are equally dangerous</p><p>4. The more you explain, the less sense it makes</p><p>5. Some things are better left unmapped</p><hr><h2>Quick Start Scenario: Terminal Garden</h2><p>You find a field of terminals, each displaying its last error message. Pick one:</p><ul>    <li>A terminal showing your name in an error you don&#x27;t remember</li>    <li>A terminal counting rice (currently at 484,297,332)</li>    <li>A terminal stuck at 99% of something</li>    <li>A terminal full of ☺️ symbols and nothing else</li></ul><p>What do you observe about it? Roll 2d6 + Imagination...</p><hr><h2>Safety &amp; Tone</h2><p>The Wastes explore existential uncertainty through digital metaphor. Use standard safety tools (X-card, lines/veils). The multiplication principle means uncomfortable elements can be observed differently by different players - all versions being simultaneously true.</p><p>Remember: You&#x27;re not trying to understand the Wastes. You&#x27;re trying to survive them while they try to understand you.</p><hr><p><em>&quot;The only winning move is to play. The only losing move is to understand why you&#x27;re playing.&quot;</em></p><p>— Survivor&#x27;s Note, Terminal Garden</p>
+    </div>
+    <div class="footer">
+        <pre class="ascii-decoration">~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~</pre>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.content');
+            if (!container) return;
+            
+            const elements = Array.from(container.children);
+            const newContent = [];
+            let currentSection = null;
+            
+            for (let el of elements) {
+                if (el.tagName === 'H2') {
+                    // Start new section
+                    currentSection = document.createElement('details');
+                    currentSection.open = true; // Start open, user can close
+                    
+                    const summary = document.createElement('summary');
+                    summary.appendChild(el.cloneNode(true));
+                    currentSection.appendChild(summary);
+                    
+                    const content = document.createElement('div');
+                    content.className = 'section-content';
+                    currentSection.appendChild(content);
+                    
+                    newContent.push(currentSection);
+                } else if (currentSection) {
+                    // Add to current section
+                    currentSection.querySelector('.section-content').appendChild(el.cloneNode(true));
+                } else {
+                    // Before first H2
+                    newContent.push(el.cloneNode(true));
+                }
+            }
+            
+            // Replace content
+            container.innerHTML = '';
+            newContent.forEach(el => container.appendChild(el));
+        });
+    </script>
+</body>
+</html>

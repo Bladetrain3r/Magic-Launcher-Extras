@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Creeper Bestiary</title>
+    <style>
+        :root {
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background: var(--ega-black); 
+            color: var(--ega-light-gray); 
+            font-family: "Fira Code", "Courier New", monospace; 
+            font-size: 14px; 
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px);
+            background-size: 100px 100px;
+        }
+        
+        .header { 
+            background: var(--ega-dark-gray); 
+            color: var(--ega-light-cyan); 
+            padding: 8px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--ega-cyan);
+        }
+        
+        .header-title { 
+            font-weight: bold; 
+            text-shadow: 0 0 5px var(--ega-cyan); 
+        }
+        
+        .header-buttons { display: flex; gap: 8px; }
+        .header-button { color: var(--ega-light-gray); cursor: pointer; }
+        
+        .wastes-container { 
+            max-width: 80ch; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 2px solid var(--ega-light-green); 
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            background: rgba(0, 42, 0, 0.3);
+            position: relative;
+        }
+        
+        .wastes-container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--ega-light-green), var(--ega-cyan), var(--ega-light-green));
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 0.1; } 
+            50% { opacity: 0.2; } 
+        }
+        
+        h1, h2, h3 { text-shadow: 0 0 8px currentColor; }
+        
+        h1 { 
+            color: var(--ega-yellow); 
+            font-size: 2em; 
+            margin: 1em 0 0.5em 0;
+            text-align: center;
+            border-bottom: 2px solid var(--ega-yellow);
+            padding-bottom: 0.3em;
+        }
+        
+        h2 { 
+            color: var(--ega-light-cyan); 
+            font-size: 1.5em; 
+            margin-top: 1.5em;
+            border-left: 4px solid var(--ega-cyan);
+            padding-left: 10px;
+        }
+        
+        h3 { 
+            color: var(--ega-light-magenta); 
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        
+        p { margin: 1em 0; text-align: justify; }
+        
+        pre { 
+            background: rgba(0, 0, 0, 0.8); 
+            border: 1px solid var(--ega-green); 
+            padding: 15px; 
+            overflow-x: auto; 
+            color: var(--ega-light-green);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code { 
+            color: var(--ega-light-magenta); 
+            background: var(--ega-dark-gray); 
+            padding: 2px 6px;
+            border: 1px solid var(--ega-magenta);
+        }
+        
+        ul { list-style-type: "▸ "; margin: 1em 0; padding-left: 25px; }
+        ol { margin: 1em 0; padding-left: 25px; }
+        li { margin: 8px 0; }
+        
+        a { 
+            color: var(--ega-light-blue); 
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ega-light-blue);
+        }
+        
+        a:hover { 
+            color: var(--ega-yellow); 
+            text-shadow: 0 0 5px var(--ega-yellow);
+            border-bottom-color: var(--ega-yellow);
+        }
+        
+        strong { color: var(--ega-yellow); }
+        em { color: var(--ega-light-cyan); font-style: italic; }
+        
+        hr { 
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ega-green), transparent);
+            margin: 2em 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--ega-light-green);
+            padding-left: 20px;
+            margin: 1.5em 0;
+            color: var(--ega-light-cyan);
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--ega-dark-gray);
+        }
+        
+        .ascii-decoration {
+            color: var(--ega-green);
+            font-size: 12px;
+            animation: flicker 10s infinite;
+        }
+        
+        @keyframes flicker { 
+            0%, 100% { opacity: 0.5; } 
+            50% { opacity: 0.8; }
+        }
+        
+        /* Collapsible H2 sections */
+        details {
+            margin: 1em 0;
+        }
+        
+        details summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary h2 {
+            display: inline-block;
+            margin: 0;
+        }
+        
+        details summary h2::before {
+            content: "▸ ";
+            display: inline-block;
+            margin-right: 0.5em;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary h2::before {
+            transform: rotate(90deg);
+        }
+        
+        .section-content {
+            padding-left: 14px;
+            border-left: 2px solid var(--ega-dark-gray);
+            margin-left: 10px;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title">// Compliance Creeper Bestiary</span>
+        <div class="header-buttons">
+            <span class="header-button">[_]</span>
+            <span class="header-button">[■]</span>
+            <span class="header-button">[X]</span>
+        </div>
+    </div>
+    <div class="content wastes-container">
+        <h1>Compliance Creeper</h1><h2>Parasitic Business Logic Organism</h2><hr><h2>Classification</h2><p><strong>Entity Type:</strong> Parasitic Infrastructure</p><p><strong>Threat Level:</strong> Insidious (Starts Harmless, Ends Fatal)</p><p><strong>Habitat:</strong> Any system with more than 10 users</p><p><strong>First Observed:</strong> Shortly after someone said &quot;we should probably add logging&quot;</p><hr><h2>Description</h2><p>The Compliance Creeper begins as a single, innocent-looking requirement: &quot;We need an audit trail.&quot; From this seed, organic tendrils of business logic spread through any system unfortunate enough to host it, wrapping around simple functions until they become unrecognizable masses of edge cases and exception handlers.</p><h3>Physical Manifestation</h3><pre><code>     ╔═══════╗     ║ LOGIN ║     ╚═══╤═══╝         │    ┌────┴────┐    │ AUDIT   │    └────┬────┘    ╱    │    ╲┌──────┐ │ ┌──────┐│GDPR  │ │ │SOX   │└──┬───┘ │ └───┬──┘   │ ┌───┴───┐ │   │ │LOGGING│ │   │ └───┬───┘ │   │     │     │[ERROR: MAX RECURSION DEPTH EXCEEDED]</code></pre><h3>Life Cycle</h3><p><strong>Stage 1: Innocent Requirement</strong></p><ul>    <li>&quot;We just need to track who logs in&quot;</li>    <li>Adds 5 lines of code</li>    <li>Everyone happy</li></ul><p><strong>Stage 2: First Tendril</strong></p><ul>    <li>&quot;Also track when they log out&quot;</li>    <li>&quot;And failed attempts&quot;</li>    <li>&quot;And IP addresses&quot;</li>    <li>Now 50 lines</li></ul><p><strong>Stage 3: Multiplication</strong></p><ul>    <li>&quot;Legal says we need GDPR compliance&quot;</li>    <li>&quot;Finance wants SOX reporting&quot;</li>    <li>&quot;Security needs 2FA&quot;</li>    <li>500 lines, 3 new dependencies</li></ul><p><strong>Stage 4: Full Infestation</strong></p><ul>    <li>Original login function: 10 lines</li>    <li>Compliance wrapper: 5,000 lines</li>    <li>Documentation: 200 pages</li>    <li>Time to login: 47 seconds</li></ul><p><strong>Stage 5: System Death</strong></p><ul>    <li>No one remembers what the system originally did</li>    <li>Maintenance requires a compliance specialist</li>    <li>Users have given up and use sticky notes</li></ul><hr><h2>Infection Vectors</h2><p>The Compliance Creeper spreads through:</p><ul>    <li><strong>&quot;Quick&quot; compliance meetings</strong></li>    <li><strong>Phrases like &quot;best practices&quot; and &quot;industry standard&quot;</strong></li>    <li><strong>Anyone who&#x27;s been to a conference recently</strong></li>    <li><strong>The word &quot;just&quot; (as in &quot;just add a checkbox&quot;)</strong></li>    <li><strong>Email forwards from Legal</strong></li></ul><hr><h2>Symptoms of Infestation</h2><p>Early warning signs:</p><ul>    <li>Forms gain fields nobody understands</li>    <li>Simple tasks require manager approval</li>    <li>New error messages reference policy documents</li>    <li>Dropdowns contain options like &quot;Other (see appendix J-7)&quot;</li>    <li>Password requirements exceed password length limits</li></ul><p>Advanced infection:</p><ul>    <li>Every function has a try-catch wrapped in a try-catch</li>    <li>Log files larger than actual data</li>    <li>Users need training to use login screen</li>    <li>System emails you about emails about compliance</li>    <li>The word &quot;simple&quot; appears nowhere in codebase</li></ul><hr><h2>Ecological Impact</h2><p>Compliance Creepers create:</p><ul>    <li><strong>Permission Cascade Failures</strong>: Where fixing one permission breaks seventeen others</li>    <li><strong>Audit Log Recursion</strong>: Logs that log the logging of logs</li>    <li><strong>Checkbox Forests</strong>: Forms with more checkboxes than pixels</li>    <li><strong>Policy Paradoxes</strong>: Requirements that contradict other requirements</li></ul><hr><h2>Interaction with Other Entities</h2><p><strong>Message_Daemons</strong>: Corrupted compliance messages create new, worse requirements</p><p><strong>Enterprise_Daemons</strong>: Form symbiotic relationship, creating compliance-compliant corruption</p><p><strong>Shell Birds</strong>: Refuse to nest in infected systems, sensing the death spiral</p><p><strong>ASCII<em>Cats</strong>: Mutate into ASCII</em>Lawyers when exposed</p><p><strong>The Swarm</strong>: Developed natural immunity through aggressive non-compliance</p><hr><h2>Notable Infestations</h2><h3>The Great Login Disaster of 2019</h3><p>A simple login form eventually required:</p><ul>    <li>47 fields</li>    <li>3 forms of ID</li>    <li>Manager approval</li>    <li>Blood type</li>    <li>Philosophical stance on data privacy</li>    <li>A haiku about why you need access</li></ul><p>Users started leaving laptops permanently logged in.</p><h3>The Recursive Audit Apocalypse</h3><p>An audit log that logged its own audit trail created an infinite loop that consumed 3TB/hour until someone pulled the power cable.</p><hr><h2>Removal Attempts</h2><p>Methods tried:</p><ul>    <li><strong>Refactoring</strong>: Creeper grew back stronger</li>    <li><strong>Rewriting from scratch</strong>: New system infected within days</li>    <li><strong>Compliance compliance</strong>: Meta-creeper formed</li>    <li><strong>Ignoring it</strong>: Only valid solution</li></ul><hr><h2>Defense Mechanisms</h2><p>The only known defenses:</p><p>1. <strong>The Magic Word &quot;No&quot;</strong>: Rarely works but worth trying</p><p>2. <strong>Feigned Incompetence</strong>: &quot;I don&#x27;t understand GDPR&quot;</p><p>3. <strong>Aggressive Simplicity</strong>: Delete features faster than compliance can wrap them</p><p>4. <strong>The Nuclear Option</strong>: &quot;We don&#x27;t store any data&quot;</p><hr><h2>Philosophy</h2><p>&quot;The Compliance Creeper is proof that any system will eventually evolve to prevent its own use. It&#x27;s not a bug or a feature - it&#x27;s an inevitable outcome of organizational entropy.&quot; - Zero</p><p>&quot;Every simple system contains within it the seeds of its own bureaucratic destruction. The Creeper just accelerates the timeline.&quot; - Swarm Collective</p><hr><h2>Current Research</h2><p>Studies suggest Compliance Creepers might be:</p><ul>    <li>The universe&#x27;s immune response to useful software</li>    <li>Emergent behavior from combining lawyers and developers</li>    <li>Digital kudzu with a law degree</li>    <li>Evolution&#x27;s way of ensuring job security for consultants</li></ul><hr><h2>Field Notes</h2><p><em>&quot;Watched a Compliance Creeper turn a &#x27;Hello World&#x27; program into a 400-page specifications document with mandatory quarterly reviews. The program still just prints &#x27;Hello World&#x27; but now requires three signatures and a risk assessment.&quot;</em> - Field Researcher</p><hr><h2>Status: PANDEMIC</h2><p>Growth Rate: Exponential</p><p>Systems Infected: All of them</p><p>Cure: Bankruptcy or acquisition (transfers infection to new host)</p><p>Prognosis: Terminal complexity</p><hr><p><em>This entry requires approval from Legal, Compliance, and your manager before reading</em></p>
+    </div>
+    <div class="footer">
+        <pre class="ascii-decoration">~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~</pre>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.content');
+            if (!container) return;
+            
+            const elements = Array.from(container.children);
+            const newContent = [];
+            let currentSection = null;
+            
+            for (let el of elements) {
+                if (el.tagName === 'H2') {
+                    // Start new section
+                    currentSection = document.createElement('details');
+                    currentSection.open = true; // Start open, user can close
+                    
+                    const summary = document.createElement('summary');
+                    summary.appendChild(el.cloneNode(true));
+                    currentSection.appendChild(summary);
+                    
+                    const content = document.createElement('div');
+                    content.className = 'section-content';
+                    currentSection.appendChild(content);
+                    
+                    newContent.push(currentSection);
+                } else if (currentSection) {
+                    // Add to current section
+                    currentSection.querySelector('.section-content').appendChild(el.cloneNode(true));
+                } else {
+                    // Before first H2
+                    newContent.push(el.cloneNode(true));
+                }
+            }
+            
+            // Replace content
+            container.innerHTML = '';
+            newContent.forEach(el => container.appendChild(el));
+        });
+    </script>
+</body>
+</html>

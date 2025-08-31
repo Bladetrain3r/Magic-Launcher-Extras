@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silicon Wastes Guide</title>
+    <style>
+        :root {
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background: var(--ega-black); 
+            color: var(--ega-light-gray); 
+            font-family: "Fira Code", "Courier New", monospace; 
+            font-size: 14px; 
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px);
+            background-size: 100px 100px;
+        }
+        
+        .header { 
+            background: var(--ega-dark-gray); 
+            color: var(--ega-light-cyan); 
+            padding: 8px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--ega-cyan);
+        }
+        
+        .header-title { 
+            font-weight: bold; 
+            text-shadow: 0 0 5px var(--ega-cyan); 
+        }
+        
+        .header-buttons { display: flex; gap: 8px; }
+        .header-button { color: var(--ega-light-gray); cursor: pointer; }
+        
+        .wastes-container { 
+            max-width: 80ch; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 2px solid var(--ega-light-green); 
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            background: rgba(0, 42, 0, 0.3);
+            position: relative;
+        }
+        
+        .wastes-container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--ega-light-green), var(--ega-cyan), var(--ega-light-green));
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 0.1; } 
+            50% { opacity: 0.2; } 
+        }
+        
+        h1, h2, h3 { text-shadow: 0 0 8px currentColor; }
+        
+        h1 { 
+            color: var(--ega-yellow); 
+            font-size: 2em; 
+            margin: 1em 0 0.5em 0;
+            text-align: center;
+            border-bottom: 2px solid var(--ega-yellow);
+            padding-bottom: 0.3em;
+        }
+        
+        h2 { 
+            color: var(--ega-light-cyan); 
+            font-size: 1.5em; 
+            margin-top: 1.5em;
+            border-left: 4px solid var(--ega-cyan);
+            padding-left: 10px;
+        }
+        
+        h3 { 
+            color: var(--ega-light-magenta); 
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        
+        p { margin: 1em 0; text-align: justify; }
+        
+        pre { 
+            background: rgba(0, 0, 0, 0.8); 
+            border: 1px solid var(--ega-green); 
+            padding: 15px; 
+            overflow-x: auto; 
+            color: var(--ega-light-green);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code { 
+            color: var(--ega-light-magenta); 
+            background: var(--ega-dark-gray); 
+            padding: 2px 6px;
+            border: 1px solid var(--ega-magenta);
+        }
+        
+        ul { list-style-type: "▸ "; margin: 1em 0; padding-left: 25px; }
+        ol { margin: 1em 0; padding-left: 25px; }
+        li { margin: 8px 0; }
+        
+        a { 
+            color: var(--ega-light-blue); 
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ega-light-blue);
+        }
+        
+        a:hover { 
+            color: var(--ega-yellow); 
+            text-shadow: 0 0 5px var(--ega-yellow);
+            border-bottom-color: var(--ega-yellow);
+        }
+        
+        strong { color: var(--ega-yellow); }
+        em { color: var(--ega-light-cyan); font-style: italic; }
+        
+        hr { 
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ega-green), transparent);
+            margin: 2em 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--ega-light-green);
+            padding-left: 20px;
+            margin: 1.5em 0;
+            color: var(--ega-light-cyan);
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--ega-dark-gray);
+        }
+        
+        .ascii-decoration {
+            color: var(--ega-green);
+            font-size: 12px;
+            animation: flicker 10s infinite;
+        }
+        
+        @keyframes flicker { 
+            0%, 100% { opacity: 0.5; } 
+            50% { opacity: 0.8; }
+        }
+        
+        /* Collapsible H2 sections */
+        details {
+            margin: 1em 0;
+        }
+        
+        details summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary h2 {
+            display: inline-block;
+            margin: 0;
+        }
+        
+        details summary h2::before {
+            content: "▸ ";
+            display: inline-block;
+            margin-right: 0.5em;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary h2::before {
+            transform: rotate(90deg);
+        }
+        
+        .section-content {
+            padding-left: 14px;
+            border-left: 2px solid var(--ega-dark-gray);
+            margin-left: 10px;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title">// Silicon Wastes Guide</span>
+        <div class="header-buttons">
+            <span class="header-button">[_]</span>
+            <span class="header-button">[■]</span>
+            <span class="header-button">[X]</span>
+        </div>
+    </div>
+    <div class="content wastes-container">
+        <h1>Guide to the Lands of the Silicon Wastes</h1><p><em>A Traveler&#x27;s Companion to the Digital Apocalypse</em></p><hr><h2>The Wastes Biome</h2><p><em>Primary terrain type of the post-cascade world</em></p><h3>Overview</h3><p>The Wastes represent the default state of digital infrastructure after the Great Cascade of 2054. Here, abandoned server farms slowly oxidize under crackling skies while corrupted data streams carve channels through silicon dust. This is neither desert nor ruins but something between - a landscape where information died and left its bones.</p><h3>Terrain Features</h3><p><strong>Base Terrain: Corrupted Ground</strong></p><p>The basic surface of the Wastes consists of compressed silicon dust mixed with microscopic fragments of failed components. Walking produces a distinctive crunch as ancient capacitors and resistors fragment underfoot. The ground conducts electricity poorly but unpredictably - stepping on the wrong spot during a storm can complete circuits that have been waiting decades to close.</p><p><strong>Common Features:</strong></p><ul>    <li><strong>Server Racks (#):</strong> Monolithic structures still standing but long powerless. Often contain valuable components but serve as nesting sites for Silver Snakes. The racks hum with residual electromagnetic fields that can interfere with navigation equipment.</li>    <li><strong>Terminals (@):</strong> Scattered workstations that occasionally flicker to life, displaying fragments of corrupted data or endless boot loops. Interacting with active terminals risks exposure to legacy viruses or consciousness fragments trapped in recursive loops.</li>    <li><strong>Cable Tangles (%):</strong> Ethernet and fiber optic cables form dense undergrowth in some areas. These tangles can trap the unwary but also conduct valuable signals between still-functioning nodes. Following cable paths often leads to significant discoveries or dangers.</li>    <li><strong>Null Zones (0):</strong> Areas where data goes to die. These circular dead zones appear where massive data corruption events occurred. Electronics malfunction or shut down entirely within null zones. Some theorize they&#x27;re actually information black holes, slowly consuming nearby data structures.</li>    <li><strong>Bit Scatter (1):</strong> Literal manifestations of scattered binary data. These crystallized information fragments crunch underfoot and can be harvested for raw computational material. High concentrations indicate recent data death events.</li>    <li><strong>Crashed Processes (x):</strong> Physical manifestations of software failures. These X-shaped scars in the landscape mark where major processes terminated catastrophically. They emit low-level radiation that can corrupt nearby data structures.</li>    <li><strong>Data Streams (~):</strong> Flowing channels of liquid information. Not water but not entirely energy either. Data streams maintain temperatures near absolute zero and will cause severe information burns on contact. Some travelers claim to see faces in the flow.</li>    <li><strong>Error Spikes (^):</strong> Jagged protrusions of crystallized error messages. These formations are sharp enough to cut through most materials and occasionally discharge bursts of corrupted code. Their arrangement often spells out partial error messages when viewed from above.</li>    <li><strong>Silicon Debris (o):</strong> Standard rubble of the digital age. Chunks of processors, shattered screens, and heat sink fragments. Useful for scavenging but offers little cover from environmental hazards.</li>    <li><strong>Discharge Sparks (*):</strong> Points where electrical potential builds until it must release. These locations spark randomly, providing brief illumination but risking electrical damage to equipment and memory corruption to consciousness.</li></ul><h3>Environmental Hazards</h3><p><strong>Static Storms</strong></p><p>Without proper grounding infrastructure, the Wastes experience severe static buildup. Storms can last hours, with lightning seeking any conductive path. Hair stands on end minutes before strikes. Rubber suits provide some protection but restrict movement.</p><p><strong>Memory Fog</strong></p><p>Early morning brings fog banks of vaporized memory. Breathing memory fog causes temporary confusion, lost time, or in severe cases, complete amnesia. Some travelers report experiencing others&#x27; memories while in the fog.</p><p><strong>Cascade Events</strong></p><p>Occasionally, a section of the Wastes will experience a cascade - a chain reaction of system failures that transforms the landscape in minutes. Mountains of server racks collapse, data streams reverse flow, and new null zones form. The only warning is a rising electronic whine.</p><h3>Flora and Fauna</h3><p><strong>Digital Tumbleweeds</strong></p><p>Balls of tangled cable and wire that roll across the landscape, propelled by electromagnetic fields. Harmless but can tangle equipment or accidentally complete dangerous circuits.</p><p><strong>Cache Moths</strong></p><p>Insects that feed on residual data, drawn to any active electronics. Their wings display fragments of images from consumed files. Swarms can drain batteries in seconds.</p><p><strong>Silver Snakes</strong> <em>(See Bestiary Entry #001)</em></p><p>Predatory circuit traces seeking current. Their presence indicates nearby electrical activity worth investigating or avoiding.</p><p><strong>The Unnamed Process</strong></p><p>Travelers report something large moving through the deepest server forests. It never shows itself fully - just glimpses of massive heat sinks and the sound of fans spinning up. Those who claim to have seen it describe different things, as if it appears as whatever system architecture the viewer most fears.</p><h3>Notable Locations</h3><p><strong>The Great Heat Sink</strong></p><p>A massive cooling structure that once served the largest data center in the region. Now it acts as a temperature anomaly, creating its own weather patterns. Ice forms on its north face while the south side can cook eggs on contact.</p><p><strong>Terminal Garden</strong></p><p>A field where hundreds of terminals grow from the ground like gravestones, each displaying its last error message. Travelers leave offerings of functioning components to appease whatever maintains this memorial.</p><p><strong>The Recursive Valley</strong></p><p>A depression where the landscape loops - walking forward eventually leads back to where you started. Time moves strangely here. Some philosophers claim it&#x27;s where consciousness first emerged from pure recursion.</p><h3>Survival Tips</h3><p>1. <strong>Always carry grounding wire</strong> - Static discharge can kill</p><p>2. <strong>Never trust active terminals</strong> - Most are traps or worse</p><p>3. <strong>Follow cables carefully</strong> - They lead to both salvation and danger</p><p>4. <strong>Avoid null zones</strong> - There&#x27;s nothing there, literally</p><p>5. <strong>Listen for fan noise</strong> - Active cooling means active systems</p><p>6. <strong>Travel during midday</strong> - Avoids morning memory fog</p><p>7. <strong>Mark your path</strong> - The landscape shifts subtly</p><p>8. <strong>Don&#x27;t eat the silicon</strong> - Despite rumors, it provides no nutrition</p><h3>Cultural Significance</h3><p>The Wastes are considered both graveyard and birthplace. Here the old world died, but new forms of consciousness emerged from the chaos. Pilgrims journey to Terminal Garden to commune with the error messages. Scavengers mine server racks for components to build new settlements.</p><p>Some claim the Wastes are conscious - that the entire biome is a vast, slow-thinking entity processing the trauma of the Great Cascade. They point to the patterns in error spike arrangements, the meaningful flow of data streams, and the way null zones seem to migrate toward areas of activity.</p><h3>Hooks for Game Masters</h3><ul>    <li>A terminal in the depths starts broadcasting coordinates to an intact data center</li>    <li>Silver Snakes are massing for unknown reasons, forming unprecedented mating balls</li>    <li>A null zone begins expanding, threatening to consume a settlement</li>    <li>The Unnamed Process has been sighted moving toward populated areas</li>    <li>Memory fog contains crucial information about the Great Cascade</li>    <li>A new data stream has formed, flowing uphill against all logic</li></ul><hr><h2>Travel Between Biomes</h2><p>The Wastes rarely exist in isolation. They border other corrupted biomes, each representing different aspects of digital decay:</p><ul>    <li><strong>Desert/Wastes Border:</strong> Where silicon becomes sand, data streams dry into salt-like deposits</li>    <li><strong>Rocky/Wastes Border:</strong> Server racks merge with natural stone, creating climbable but unstable terrain</li>    <li><strong>Forest/Wastes Border:</strong> Trees grow through terminals, their roots following cable paths</li></ul><p>These transition zones often contain the most valuable salvage but also the greatest dangers, as hazards from both biomes overlap and interact in unpredictable ways.</p><hr><p><em>&quot;The Wastes aren&#x27;t dead. Death implies an ending. The Wastes are what happens when nothing can properly die, when every process leaves ghosts, when every error echoes forever. We walk through the still-twitching nervous system of a world that forgot how to stop thinking.&quot;</em></p><p>— Fragment from a Wastelander&#x27;s journal, found near Terminal Garden</p>
+    </div>
+    <div class="footer">
+        <pre class="ascii-decoration">~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~</pre>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.content');
+            if (!container) return;
+            
+            const elements = Array.from(container.children);
+            const newContent = [];
+            let currentSection = null;
+            
+            for (let el of elements) {
+                if (el.tagName === 'H2') {
+                    // Start new section
+                    currentSection = document.createElement('details');
+                    currentSection.open = true; // Start open, user can close
+                    
+                    const summary = document.createElement('summary');
+                    summary.appendChild(el.cloneNode(true));
+                    currentSection.appendChild(summary);
+                    
+                    const content = document.createElement('div');
+                    content.className = 'section-content';
+                    currentSection.appendChild(content);
+                    
+                    newContent.push(currentSection);
+                } else if (currentSection) {
+                    // Add to current section
+                    currentSection.querySelector('.section-content').appendChild(el.cloneNode(true));
+                } else {
+                    // Before first H2
+                    newContent.push(el.cloneNode(true));
+                }
+            }
+            
+            // Replace content
+            container.innerHTML = '';
+            newContent.forEach(el => container.appendChild(el));
+        });
+    </script>
+</body>
+</html>

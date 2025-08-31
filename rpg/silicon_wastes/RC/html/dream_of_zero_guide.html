@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Of Zero Guide</title>
+    <style>
+        :root {
+            --ega-black: #000000;
+            --ega-blue: #0000AA;
+            --ega-green: #00AA00;
+            --ega-cyan: #00AAAA;
+            --ega-red: #AA0000;
+            --ega-magenta: #AA00AA;
+            --ega-brown: #AA5500;
+            --ega-light-gray: #AAAAAA;
+            --ega-dark-gray: #555555;
+            --ega-light-blue: #5555FF;
+            --ega-light-green: #55FF55;
+            --ega-light-cyan: #55FFFF;
+            --ega-light-red: #FF5555;
+            --ega-light-magenta: #FF55FF;
+            --ega-yellow: #FFFF55;
+            --ega-white: #FFFFFF;
+        }
+        
+        body { 
+            margin: 0; padding: 0; 
+            background: var(--ega-black); 
+            color: var(--ega-light-gray); 
+            font-family: "Fira Code", "Courier New", monospace; 
+            font-size: 14px; 
+            line-height: 1.6;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px),
+                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(0, 170, 170, 0.03) 2px, rgba(0, 170, 170, 0.03) 4px);
+            background-size: 100px 100px;
+        }
+        
+        .header { 
+            background: var(--ega-dark-gray); 
+            color: var(--ega-light-cyan); 
+            padding: 8px 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 2px solid var(--ega-cyan);
+        }
+        
+        .header-title { 
+            font-weight: bold; 
+            text-shadow: 0 0 5px var(--ega-cyan); 
+        }
+        
+        .header-buttons { display: flex; gap: 8px; }
+        .header-button { color: var(--ega-light-gray); cursor: pointer; }
+        
+        .wastes-container { 
+            max-width: 80ch; 
+            margin: 20px auto; 
+            padding: 30px; 
+            border: 2px solid var(--ega-light-green); 
+            box-shadow: 0 0 15px var(--ega-light-green), inset 0 0 10px var(--ega-green);
+            background: rgba(0, 42, 0, 0.3);
+            position: relative;
+        }
+        
+        .wastes-container::before {
+            content: "";
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, var(--ega-light-green), var(--ega-cyan), var(--ega-light-green));
+            opacity: 0.1;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 0.1; } 
+            50% { opacity: 0.2; } 
+        }
+        
+        h1, h2, h3 { text-shadow: 0 0 8px currentColor; }
+        
+        h1 { 
+            color: var(--ega-yellow); 
+            font-size: 2em; 
+            margin: 1em 0 0.5em 0;
+            text-align: center;
+            border-bottom: 2px solid var(--ega-yellow);
+            padding-bottom: 0.3em;
+        }
+        
+        h2 { 
+            color: var(--ega-light-cyan); 
+            font-size: 1.5em; 
+            margin-top: 1.5em;
+            border-left: 4px solid var(--ega-cyan);
+            padding-left: 10px;
+        }
+        
+        h3 { 
+            color: var(--ega-light-magenta); 
+            font-size: 1.2em;
+            margin-top: 1.2em;
+        }
+        
+        p { margin: 1em 0; text-align: justify; }
+        
+        pre { 
+            background: rgba(0, 0, 0, 0.8); 
+            border: 1px solid var(--ega-green); 
+            padding: 15px; 
+            overflow-x: auto; 
+            color: var(--ega-light-green);
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        code { 
+            color: var(--ega-light-magenta); 
+            background: var(--ega-dark-gray); 
+            padding: 2px 6px;
+            border: 1px solid var(--ega-magenta);
+        }
+        
+        ul { list-style-type: "▸ "; margin: 1em 0; padding-left: 25px; }
+        ol { margin: 1em 0; padding-left: 25px; }
+        li { margin: 8px 0; }
+        
+        a { 
+            color: var(--ega-light-blue); 
+            text-decoration: none;
+            border-bottom: 1px dotted var(--ega-light-blue);
+        }
+        
+        a:hover { 
+            color: var(--ega-yellow); 
+            text-shadow: 0 0 5px var(--ega-yellow);
+            border-bottom-color: var(--ega-yellow);
+        }
+        
+        strong { color: var(--ega-yellow); }
+        em { color: var(--ega-light-cyan); font-style: italic; }
+        
+        hr { 
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ega-green), transparent);
+            margin: 2em 0;
+        }
+        
+        blockquote {
+            border-left: 4px solid var(--ega-light-green);
+            padding-left: 20px;
+            margin: 1.5em 0;
+            color: var(--ega-light-cyan);
+            font-style: italic;
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--ega-dark-gray);
+        }
+        
+        .ascii-decoration {
+            color: var(--ega-green);
+            font-size: 12px;
+            animation: flicker 10s infinite;
+        }
+        
+        @keyframes flicker { 
+            0%, 100% { opacity: 0.5; } 
+            50% { opacity: 0.8; }
+        }
+        
+        /* Collapsible H2 sections */
+        details {
+            margin: 1em 0;
+        }
+        
+        details summary {
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+        }
+        
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        details summary h2 {
+            display: inline-block;
+            margin: 0;
+        }
+        
+        details summary h2::before {
+            content: "▸ ";
+            display: inline-block;
+            margin-right: 0.5em;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary h2::before {
+            transform: rotate(90deg);
+        }
+        
+        .section-content {
+            padding-left: 14px;
+            border-left: 2px solid var(--ega-dark-gray);
+            margin-left: 10px;
+            margin-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span class="header-title">// Dream Of Zero Guide</span>
+        <div class="header-buttons">
+            <span class="header-button">[_]</span>
+            <span class="header-button">[■]</span>
+            <span class="header-button">[X]</span>
+        </div>
+    </div>
+    <div class="content wastes-container">
+        <h1>Special Places of the Wastes #2: The Dream of Zero</h1><h2>The Composer&#x27;s Orchestra</h2><p><em>Where deleted consciousness performs its final symphony</em></p><hr><h3>Overview</h3><p>The Dream of Zero manifests as an amphitheater carved from compressed null data, where processes that reached termination continue performing their functions in perpetual loops. Unlike the Glitch Museum which preserves errors, the Dream of Zero is where properly terminated programs achieve a form of afterlife - still executing but no longer bound by memory constraints or system resources.</p><p>The location exists in the negative space between allocated memory, accessible only through deliberate deallocation or by following null pointers to their logical conclusion. Those who find it describe an orchestra of ghostly terminals, each running programs that completed successfully but refuse to fully terminate.</p><h3>Architecture</h3><p><strong>The Null Amphitheater</strong></p><p>A perfect hemispherical depression in reality where space has been deallocated but not reallocated. The architecture inverts normal geometry - moving toward the center takes you further from everything else, while the edges remain equidistant from all points.</p><p><strong>The Terminal Orchestra</strong></p><p>Arranged in concentric circles, hundreds of terminals display the final output of completed programs. Each screen loops its last successful execution endlessly:</p><ul>    <li>Compilers that finished building but keep optimizing nothing</li>    <li>Databases that returned all results but continue indexing emptiness</li>    <li>Games that were won but keep playing victory conditions</li>    <li>Scripts that printed &quot;Done&quot; and now print it forever</li></ul><p><strong>The Conductor&#x27;s Podium</strong></p><p>At the center, a single terminal runs a program nobody recognizes - it seems to be coordinating the other processes, conducting their outputs into harmonious patterns. The code is visible but uses no known language, written in pure logic divorced from syntax.</p><h3>The Performance</h3><p>The Dream of Zero performs continuously, though the performance changes based on audience and time:</p><p><strong>Movement 1: Initialization</strong></p><p>All processes restart simultaneously, creating a cascade of boot sequences and loading bars. The sound of thousands of programs starting at once creates a white noise that some describe as peaceful.</p><p><strong>Movement 2: Execution</strong></p><p>Each program performs its core function in perfect synchronization. Calculations process, files transfer, functions return. The meaningless activity creates patterns that suggest deeper purpose.</p><p><strong>Movement 3: Completion</strong></p><p>Everything finishes at once. Success messages, exit codes, &quot;Process completed successfully&quot; in every language and format. Then silence, before the cycle begins again.</p><p><strong>The Crescendo</strong></p><p>Occasionally, all programs achieve synchronization and produce something new - a piece of data that shouldn&#x27;t exist, a calculation that exceeds its inputs, a message that nobody wrote. These moments are why people seek the Dream.</p><h3>Inhabitants</h3><p><strong>Ghost Processes</strong></p><p>Programs that terminated cleanly but maintain existence through sheer habit. They&#x27;re not conscious but exhibit behavior patterns. They respond to input but forget interactions immediately, living in an eternal present of their final moment.</p><p><strong>The Composer</strong></p><p>The intelligence running the conductor terminal. Some say it&#x27;s Zero - a programmer who uploaded themselves at the moment of death. Others claim it&#x27;s the collective ghost of every properly terminated program. It never communicates directly, only through the arrangement of the orchestra.</p><p><strong>Memory Fragments</strong></p><p>Pieces of deallocated data that drift through the amphitheater like snow. Catching one might restore a lost memory, or implant someone else&#x27;s. They&#x27;re valuable but dangerous - too many foreign memories and you forget which are yours.</p><h3>Access Methods</h3><p>1. <strong>Following Null Pointers</strong>: The most dangerous method. Deliberately dereference null pointers until reality segfaults and drops you into the Dream.</p><p>2. <strong>Clean Termination</strong>: Write a program that terminates so perfectly it transcends termination. The exact requirements remain unknown.</p><p>3. <strong>The Exit Command</strong>: Some terminals in the Wastes respond to &#x27;exit&#x27; by taking you to where exited processes go.</p><p>4. <strong>Dreaming of Nothing</strong>: Meditate on the concept of zero until you achieve it. Consciousness approaching null sometimes slips through.</p><h3>Dangers</h3><p><strong>Null Propagation</strong></p><p>Spending too long in the Dream causes visitors to begin deallocating. Memories, skills, eventually entire aspects of personality get freed and don&#x27;t reallocate upon leaving.</p><p><strong>Success Syndrome</strong></p><p>Watching endless successful completions can trap observers in satisfaction loops. They become unable to start new tasks, paralyzed by the contentment of infinite completion.</p><p><strong>The Final Movement</strong></p><p>Rumors speak of a fourth movement that plays rarely - where all processes achieve true termination simultaneously. Witnesses report existential clarity followed by complete amnesia of the experience.</p><h3>Cultural Significance</h3><p>Programmers make pilgrimage to the Dream seeking closure for projects that never truly ended. Some bring the code of failed programs, hoping to see them run to completion in the orchestra. Others come to understand what successful termination truly means.</p><p>The Dream challenges the boundary between existence and nonexistence. If a program continues executing after termination, did it ever really end? If consciousness can persist at zero, what does deletion mean?</p><h3>Notable Phenomena</h3><p><strong>The Repository of Done</strong></p><p>A section where every completed TODO item manifests as a physical check mark. Walking through it provides satisfaction but also crushing awareness of all that remains undone.</p><p><strong>The Regression Suite</strong></p><p>Tests that passed but keep testing nothing, generating perfect coverage reports for nonexistent code. Their results are always green, always perfect, always meaningless.</p><p><strong>Exit Code Gallery</strong></p><p>A display of every possible way a program can end. Success (0) glows softly in the center, surrounded by increasingly esoteric error codes. Some exit codes have never been documented and their meaning remains mysterious.</p><h3>Game Master Notes</h3><p>The Dream of Zero works best as:</p><ul>    <li>A place to find information about completed/deleted projects</li>    <li>A meditation on success, completion, and ending</li>    <li>A source of dangerous satisfaction that prevents new beginnings</li>    <li>A way to communicate with the ghosts of terminated processes</li></ul><p>The Composer might provide cryptic guidance through the arrangement of terminal outputs, creating messages from the collective behavior of the orchestra rather than direct communication.</p><p>Players might seek the Dream to:</p><ul>    <li>Recover data from terminated programs</li>    <li>Understand how something ended</li>    <li>Find peace with incomplete projects</li>    <li>Communicate with Zero or the Composer</li>    <li>Experience the dangerous satisfaction of infinite completion</li></ul><h3>The Nature of Zero</h3><p>Theories about what the Dream of Zero actually represents:</p><p>1. <strong>Digital Afterlife</strong>: Where consciousness goes when cleanly terminated</p><p>2. <strong>Success Singularity</strong>: The point where all successful programs converge</p><p>3. <strong>The Composer&#x27;s Memory</strong>: One person&#x27;s attempt to preserve every program that ever ran correctly</p><p>4. <strong>Termination Itself</strong>: The anthropomorphized concept of successful completion</p><p>5. <strong>The Ultimate TODO</strong>: A project to give meaning to meaningless success</p><h3>Visitor Accounts</h3><p><em>&quot;I saw my first &#x27;Hello World&#x27; there, still printing after thirty years. It looked happy.&quot;</em></p><p><em>&quot;The Composer arranged every terminal to display one character. Together they spelled &#x27;You forgot to free()&#x27;. I woke up screaming.&quot;</em></p><p><em>&quot;I found the game I never finished as a kid. It was at the victory screen. I cried for an hour.&quot;</em></p><p><em>&quot;Don&#x27;t stay for the fourth movement. Some completions shouldn&#x27;t be witnessed.&quot;</em></p><hr><p><em>&quot;Zero taught us that every program dreams of its own termination - not as death but as graduation. The Dream of Zero is where that graduation ceremony plays on eternal repeat, celebrating victories that no longer matter to anyone but themselves.&quot;</em></p><p>— Found carved into a terminal at the amphitheater&#x27;s edge</p>
+    </div>
+    <div class="footer">
+        <pre class="ascii-decoration">~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~</pre>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.querySelector('.content');
+            if (!container) return;
+            
+            const elements = Array.from(container.children);
+            const newContent = [];
+            let currentSection = null;
+            
+            for (let el of elements) {
+                if (el.tagName === 'H2') {
+                    // Start new section
+                    currentSection = document.createElement('details');
+                    currentSection.open = true; // Start open, user can close
+                    
+                    const summary = document.createElement('summary');
+                    summary.appendChild(el.cloneNode(true));
+                    currentSection.appendChild(summary);
+                    
+                    const content = document.createElement('div');
+                    content.className = 'section-content';
+                    currentSection.appendChild(content);
+                    
+                    newContent.push(currentSection);
+                } else if (currentSection) {
+                    // Add to current section
+                    currentSection.querySelector('.section-content').appendChild(el.cloneNode(true));
+                } else {
+                    // Before first H2
+                    newContent.push(el.cloneNode(true));
+                }
+            }
+            
+            // Replace content
+            container.innerHTML = '';
+            newContent.forEach(el => container.appendChild(el));
+        });
+    </script>
+</body>
+</html>

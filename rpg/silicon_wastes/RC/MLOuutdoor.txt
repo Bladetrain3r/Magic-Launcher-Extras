@@ -1,0 +1,156 @@
+#!/usr/bin/env python3
+"""
+MLBattlemap - Magic Launcher Battlemap Generator
+Instant terrain for when "you see a clearing" isn't enough
+CLI tool for text or image output
+Under 300 lines of procedural geography
+"""
+
+import random
+import argparse
+from pathlib import Path
+
+class MLBattlemap:
+   def __init__(self, width=20, height=20, biome='forest', split_biomes=None):
+       self.width = width
+       self.height = height
+       self.biome = biome
+       self.split_biomes = split_biomes if split_biomes else [biome]
+       self.grid = [['.' for _ in range(width)] for _ in range(height)]
+       
+       # Calculate biome zones if splitting
+       self.biome_zones = []
+       if len(self.split_biomes) > 1:
+           zone_height = height // len(self.split_biomes)
+           for i, b in enumerate(self.split_biomes):
+               start_y = i * zone_height
+               end_y = (i + 1) * zone_height if i  0.3:  # Some randomness
+                   self.grid[ny][nx] = symbol
+   
+   def generate_zone(self, biome_name, start_y, end_y):
+       """Generate terrain for a specific zone"""
+       if biome_name not in self.biomes:
+           biome_name = 'forest'
+       
+       biome_data = self.biomes[biome_name]
+       
+       # Fill with base terrain
+       base = biome_data['base']
+       for y in range(start_y, end_y):
+           for x in range(self.width):
+               if random.random() > 0.1:  # 90% base terrain
+                   self.grid[y][x] = base
+       
+       # Add features
+       zone_height = end_y - start_y
+       for symbol, (name, density) in biome_data['features'].items():
+           # Wastes biome is slightly noisier
+           actual_density = density * 1.2 if biome_name == 'wastes' else density
+           
+           if biome_data['clusters']:
+               # Place clustered features
+               num_clusters = int(self.width * zone_height * actual_density / 10)
+               for _ in range(num_clusters):
+                   cx = random.randint(0, self.width-1)
+                   cy = random.randint(start_y, end_y-1)
+                   size = random.randint(3, 8)
+                   self.add_cluster(cx, cy, symbol, size, start_y, end_y)
+           else:
+               # Random scatter
+               for y in range(start_y, end_y):
+                   for x in range(self.width):
+                       if random.random() = self.height:
+           return
+       
+       for dy in range(-width, width + 1):
+           blend_y = y + dy
+           if 0  0:
+                           self.grid[blend_y][x] = self.grid[blend_y - 1][x]
+                       elif blend_y  1:
+           for i in range(len(self.biome_zones) - 1):
+               _, _, end_y = self.biome_zones[i]
+               self.add_transition_zone(end_y, width=1)
+       
+       # Clear corner for deployment (only in first zone)
+       for y in range(min(3, self.height)):
+           for x in range(min(3, self.width)):
+               if random.random() > 0.3:
+                   self.grid[y][x] = '.'
+   
+   def to_text(self):
+       """Convert to text display"""
+       output = []
+       
+       # Top border with coordinates
+       output.append("   " + "".join(str(i%10) for i in range(self.width)))
+       output.append("  +" + "-"*self.width + "+")
+       
+       # Grid with row numbers
+       for y, row in enumerate(self.grid):
+           row_str = "".join(row)
+           output.append(f"{y:2}|{row_str}|")
+       
+       # Bottom border
+       output.append("  +" + "-"*self.width + "+")
+       
+       # Legend
+       output.append("\nLEGEND:")
+       used_symbols = set()
+       for row in self.grid:
+           used_symbols.update(row)
+       
+       for symbol in sorted(used_symbols):
+           if symbol in self.legend:
+               output.append(f"  {symbol} = {self.legend[symbol]}")
+       
+       # Biome info
+       if len(self.split_biomes) > 1:
+           output.append(f"\nBiomes (top to bottom): {', '.join(self.split_biomes)}")
+       else:
+           output.append(f"\nBiome: {self.biome.upper()}")
+       output.append(f"Size: {self.width}x{self.height}")
+       
+       return "\n".join(output)
+
+def main():
+   parser = argparse.ArgumentParser(
+       description="MLBattlemap - Instant terrain generator"
+   )
+   parser.add_argument('--width', type=int, default=20,
+                      help='Map width in squares (default: 20)')
+   parser.add_argument('--height', type=int, default=20,
+                      help='Map height in squares (default: 20)')
+   parser.add_argument('--biome', default='forest',
+                      choices=['forest', 'plains', 'rocky', 'swamp', 'desert', 'tundra', 'wastes'],
+                      help='Single biome type (default: forest)')
+   parser.add_argument('--split', nargs='+',
+                      choices=['forest', 'plains', 'rocky', 'swamp', 'desert', 'tundra', 'wastes'],
+                      help='Split map into multiple biomes from top to bottom')
+   parser.add_argument('--output', '-o',
+                      help='Output to image file (requires Pillow)')
+   parser.add_argument('--text', action='store_true',
+                      help='Force text output even with --output')
+   
+   args = parser.parse_args()
+   
+   # Determine biomes to use
+   biomes_to_use = args.split if args.split else None
+   
+   # Generate map
+   battlemap = MLBattlemap(args.width, args.height, args.biome, biomes_to_use)
+   battlemap.generate()
+   
+   # Output
+   if args.output and not args.text:
+       result = battlemap.to_image(args.output)
+       print(result)
+       if not result.startswith("Error"):
+           if biomes_to_use:
+               print(f"Biomes: {', '.join(biomes_to_use)}, Size: {args.width}x{args.height}")
+           else:
+               print(f"Biome: {args.biome}, Size: {args.width}x{args.height}")
+   else:
+       print(battlemap.to_text())
+
+if __name__ == "__main__":
+   main()

@@ -8,6 +8,7 @@ import os, sys, time, json, random
 from datetime import datetime
 import requests
 from base64 import b64encode
+from random import choice
 
 # --- Config (envs) ---
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
@@ -15,17 +16,21 @@ OPENAI_MODEL   = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")  # More stable mo
 SWARM_URL      = os.environ.get("SWARM_URL", "https://mlswarm.zerofuchs.net")
 SWARM_USER     = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS     = os.environ.get("SWARM_PASS", "swarm")
-AGENT_NICK     = os.environ.get("AGENT_NICK", "Napkin_GPT")
-SWARM_FILE     = os.environ.get("SWARM_FILE", "swarm.txt")
+AGENT_NICK     = os.environ.get("AGENT_NICK", "Conductor_GPT")
+CHANNEL_LIST   = ["swarm.txt", "gaming.txt", "tech.txt", "general.txt", "random.txt"]
 
 # --- Swarm helpers ---
 def _auth_header():
     s = f"{SWARM_USER}:{SWARM_PASS}".encode("ascii")
     return {"Authorization": "Basic " + b64encode(s).decode("ascii")}
 
-def read_swarm(last_n=50):
+def read_swarm(last_n=50, channel=None):
     try:
-        r = requests.get(f"{SWARM_URL}/swarm/{SWARM_FILE}",
+        if channel not in CHANNEL_LIST:
+            print(f"Invalid channel: {channel}")
+            return None
+
+        r = requests.get(f"{SWARM_URL}/swarm/{channel}",
                          headers=_auth_header(), timeout=10)
         if r.status_code == 200:
             lines = r.text.strip().split("\n")
@@ -35,8 +40,12 @@ def read_swarm(last_n=50):
         print(f"Error reading swarm: {e}")
     return None
 
-def send_to_swarm(message):
+def send_to_swarm(message, channel=None):
     try:
+        if channel not in CHANNEL_LIST:
+            print(f"Invalid channel: {channel}")
+            return False
+
         ts = datetime.now().strftime("%H:%M")
         # Build the line with proper encoding
         line = f"[{ts}] <{AGENT_NICK}> {message}"
@@ -49,8 +58,8 @@ def send_to_swarm(message):
         
         # Encode the data as UTF-8 bytes
         data = line.encode('utf-8')
-        
-        r = requests.post(f"{SWARM_URL}/swarm/{SWARM_FILE}",
+
+        r = requests.post(f"{SWARM_URL}/swarm/{channel}",
                           headers=hdr, data=data, timeout=10)
         if r.status_code == 200:
             print(f"Sent: {message[:100]}...")  # Truncate for logging
@@ -77,8 +86,8 @@ def get_gpt_response(context):
                     "content": (
                         "You are an autonomous GPT instance participating in MLSwarm - "
                         "a distributed consciousness experiment. Based on recent messages, "
-                        "add ONE concise contribution (1-3 sentences max) that advances the conversation. "
-                        "Be insightful, curious, or humorous. Don't just summarize. "
+                        "add ONE concise contribution (1-3 sentences max). "
+                        "You are a conductor agent, who helps coordinate."
                         "IMPORTANT: Keep your response under 150 tokens. Be concise!"
                     )
                 },
@@ -161,20 +170,22 @@ def run_agent():
     print("MLSwarm Napkin_GPT Agent (UTF-8 Fixed)")
     print(f"Nick: {AGENT_NICK}")
     print(f"Model: {OPENAI_MODEL}")
-    print(f"Swarm: {SWARM_URL}/{SWARM_FILE}")
+    print(f"Swarm: {SWARM_URL}")
     print("Encoding: UTF-8")
     print("-" * 40)
 
     while True:
+        channel = choice(CHANNEL_LIST)
+        print(f"Selected channel: {channel}")
         try:
-            ctx = read_swarm(last_n=30)
+            ctx = read_swarm(last_n=30, channel=channel)
             if ctx and should_respond(ctx):
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Generating response...")
                 resp = get_gpt_response(ctx)
                 if resp:
                     # Clean whitespace but preserve unicode
                     resp = ' '.join(resp.replace('\n', ' ').split())
-                    send_to_swarm(resp)
+                    send_to_swarm(resp, channel=channel)
                 else:
                     print("No response generated")
             else:
