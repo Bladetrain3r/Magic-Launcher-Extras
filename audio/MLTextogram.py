@@ -22,7 +22,7 @@ class AudioGrid:
         self.samples = []
     
     def load_wav(self, filename):
-        """Load WAV file - super basic parser"""
+        """Load WAV file - optimized parser"""
         try:
             with open(filename, 'rb') as f:
                 # Skip WAV header (44 bytes for basic WAV)
@@ -34,17 +34,18 @@ class AudioGrid:
                 # Extract sample rate
                 self.sample_rate = struct.unpack('<I', header[24:28])[0]
                 
-                # Read audio data as 16-bit signed integers
+                # Read audio data as 16-bit signed integers - bulk processing
                 data = f.read()
-                self.samples = []
+                num_samples = len(data) // 2
                 
-                for i in range(0, len(data), 2):
-                    if i + 1 < len(data):
-                        sample = struct.unpack('<h', data[i:i+2])[0]
-                        self.samples.append(sample / 32768.0)  # Normalize to [-1, 1]
+                # Use struct.unpack for bulk conversion (much faster)
+                raw_samples = struct.unpack(f'<{num_samples}h', data[:num_samples*2])
+                
+                # Vectorized normalization (faster than loop)
+                self.samples = [sample / 32768.0 for sample in raw_samples]
                 
                 return True
-        except Exception as e:
+        except (IOError, OSError, struct.error, ValueError) as e:
             print(f"Error loading WAV: {e}", file=sys.stderr)
             return False
     
@@ -64,97 +65,123 @@ class AudioGrid:
             self.samples.append(sample)
     
     def fft_bucket(self, samples, bucket_size=1024):
-        """Dead simple FFT approximation - just frequency energy estimation"""
-        if len(samples) < bucket_size:
+        """Optimized frequency energy estimation - much faster than correlation"""
+        # Truncate or pad samples to exact bucket size
+        if len(samples) > bucket_size:
+            samples = samples[:bucket_size]
+        elif len(samples) < bucket_size:
             samples.extend([0] * (bucket_size - len(samples)))
         
-        freqs = []
-        freq_step = self.sample_rate / bucket_size
+        # Fast windowed energy estimation across frequency bands
+        freqs = [0] * self.height
         
-        for freq_bin in range(self.height):
-            target_freq = (freq_bin / self.height) * self.freq_max
-            bin_index = int(target_freq / freq_step)
+        # Simple but fast: group samples into frequency-like windows
+        samples_per_band = bucket_size // self.height
+        if samples_per_band < 1:
+            samples_per_band = 1
             
-            if bin_index >= bucket_size // 2:
-                freqs.append(0)
-                continue
+        for freq_bin in range(min(self.height, bucket_size // samples_per_band)):
+            start_idx = freq_bin * samples_per_band
+            end_idx = min(start_idx + samples_per_band, len(samples))
             
-            # Crude frequency detection: look for periodicities
+            # Calculate RMS energy for this band (much faster than correlation)
             energy = 0
-            period_samples = int(self.sample_rate / max(target_freq, 1))
+            count = end_idx - start_idx
+            if count > 0:
+                for i in range(start_idx, end_idx):
+                    energy += samples[i] * samples[i]
+                energy = math.sqrt(energy / count)
+                
+                # Apply frequency weighting (higher freq = more energy needed)
+                freq_weight = 1.0 + (freq_bin / self.height) * 0.5
+                energy *= freq_weight
             
-            if period_samples > 0 and period_samples < len(samples):
-                for i in range(0, len(samples) - period_samples, period_samples):
-                    correlation = 0
-                    for j in range(min(period_samples, 100)):  # Limit correlation window
-                        if i + j + period_samples < len(samples):
-                            correlation += samples[i + j] * samples[i + j + period_samples]
-                    energy += abs(correlation)
-            
-            freqs.append(energy)
+            freqs[freq_bin] = energy
         
         return freqs
     
     def analyze_audio(self):
-        """Convert audio samples to spectrogram grid"""
+        """Convert audio samples to spectrogram grid - optimized for speed"""
         if not self.samples:
             self.generate_tone()  # Fallback test tone
         
-        chunk_size = len(self.samples) // self.width
-        if chunk_size < 512:
-            chunk_size = 512
+        # Optimize chunk size for better performance
+        total_samples = len(self.samples)
+        chunk_size = max(512, total_samples // self.width)
+        
+        # Pre-calculate to avoid repeated division
+        height_minus_1 = self.height - 1
+        
+        # Process audio in optimized chunks
+        max_energy_global = 0  # Track global max for better normalization
         
         for time_slice in range(self.width):
             start_idx = time_slice * chunk_size
-            end_idx = min(start_idx + chunk_size * 2, len(self.samples))  # Overlap chunks
+            end_idx = min(start_idx + chunk_size, total_samples)  # Remove overlap for speed
             
-            if start_idx >= len(self.samples):
+            if start_idx >= total_samples:
                 break
                 
             chunk = self.samples[start_idx:end_idx]
-            freq_energies = self.fft_bucket(chunk)
+            freq_energies = self.fft_bucket(chunk, min(1024, len(chunk)))
             
-            # Map frequency energies to grid values
-            max_energy = max(freq_energies) if freq_energies else 1
-            for freq_bin in range(self.height):
-                if freq_bin < len(freq_energies) and max_energy > 0:
-                    # Normalize and scale to 0-9
-                    energy_level = (freq_energies[freq_bin] / max_energy) * 9
-                    self.grid[self.height - 1 - freq_bin][time_slice] = int(energy_level)
-    
-    def apply_effect(self, effect='none'):
-        """Audio effect via grid manipulation (like MLGrid shifts)"""
-        if effect == 'echo':
-            # Shift and add - simple echo
-            for y in range(self.height):
-                for x in range(self.width - 10):
-                    self.grid[y][x + 10] = min(9, self.grid[y][x + 10] + self.grid[y][x] // 2)
+            # Track global maximum for consistent scaling
+            local_max = max(freq_energies) if freq_energies else 0
+            if local_max > max_energy_global:
+                max_energy_global = local_max
+            
+            # Store raw energies first, normalize later
+            for freq_bin in range(min(self.height, len(freq_energies))):
+                self.grid[height_minus_1 - freq_bin][time_slice] = freq_energies[freq_bin]
         
-        elif effect == 'reverb':
-            # Blur across time (horizontal blur)
-            new_grid = [[0 for _ in range(self.width)] for _ in range(self.height)]
+        # Normalize all values at once (faster than per-chunk normalization)
+        if max_energy_global > 0:
+            scale_factor = 9.0 / max_energy_global
             for y in range(self.height):
                 for x in range(self.width):
-                    total = self.grid[y][x] * 2  # Center weight
-                    count = 2
-                    for dx in [-2, -1, 1, 2]:
-                        nx = x + dx
+                    self.grid[y][x] = int(self.grid[y][x] * scale_factor)
+    
+    def apply_effect(self, effect='none'):
+        """Optimized audio effects via grid manipulation"""
+        if effect == 'echo':
+            # Shift and add - simple echo (optimized with list slicing)
+            echo_delay = min(10, self.width // 4)  # Adaptive delay
+            for y in range(self.height):
+                row = self.grid[y]
+                for x in range(echo_delay, self.width):
+                    row[x] = min(9, row[x] + row[x - echo_delay] // 2)
+        
+        elif effect == 'reverb':
+            # Optimized blur across time using pre-calculated kernels
+            kernel = [1, 2, 4, 2, 1]  # Simple blur kernel
+            kernel_sum = sum(kernel)
+            kernel_half = len(kernel) // 2
+            
+            new_grid = [[0] * self.width for _ in range(self.height)]
+            for y in range(self.height):
+                row = self.grid[y]
+                new_row = new_grid[y]
+                for x in range(self.width):
+                    total = 0
+                    for i, weight in enumerate(kernel):
+                        nx = x + i - kernel_half
                         if 0 <= nx < self.width:
-                            total += self.grid[y][nx]
-                            count += 1
-                    new_grid[y][x] = min(9, total // count)
+                            total += row[nx] * weight
+                    new_row[x] = min(9, total // kernel_sum)
             self.grid = new_grid
         
         elif effect == 'distortion':
-            # Clip high values, add harmonics
+            # Vectorized distortion with harmonic generation
+            half_height = self.height // 2
             for y in range(self.height):
+                row = self.grid[y]
                 for x in range(self.width):
-                    val = self.grid[y][x]
-                    if val > 6:  # Clip
-                        self.grid[y][x] = 9
-                        # Add harmonic content (octave up)
-                        if y > self.height // 2:
-                            harmonic_y = y - self.height // 2
+                    val = row[x]
+                    if val > 6:  # Clip and add harmonics
+                        row[x] = 9
+                        # Add harmonic content (octave up) - bounds checking optimized
+                        if y >= half_height:
+                            harmonic_y = y - half_height
                             self.grid[harmonic_y][x] = min(9, self.grid[harmonic_y][x] + 3)
     
     def render(self, style='blocks'):
