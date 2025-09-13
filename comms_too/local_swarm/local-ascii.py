@@ -95,7 +95,7 @@ Non-UTF-8 characters are not allowed.
 Only output the art."""
         
         data = {
-            "model": "llama-3.2-1b-instruct", 
+            "model": "llama-3.2-1b-instruct-uncensored", 
             "max_tokens": 400,
             "messages": [{
                 "role": "user",

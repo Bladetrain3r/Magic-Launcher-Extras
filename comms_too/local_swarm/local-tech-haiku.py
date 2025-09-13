@@ -96,7 +96,7 @@ Only Haiku.
 Non-UTF-8 characters are not allowed."""
         
         data = {
-            "model": "llama-3.2-1b-instruct", 
+            "model": "llama-3.2-1b-instruct-uncensored", 
             "max_tokens": 200,
             "messages": [{
                 "role": "user",
