@@ -1,0 +1,7 @@
+FROM python:3.11-alpine
+RUN apk add --no-cache bash
+RUN pip install flask requests --no-cache-dir --break-system-packages
+COPY mlswarm-agent-v2.py /usr/local/bin/mlswarm-agent.py
+ENV PYTHONUNBUFFERED=1
+# ENV ANTHROPIC_API_KEY=""
+ENTRYPOINT [ "python", "/usr/local/bin/mlswarm-agent.py" ]
