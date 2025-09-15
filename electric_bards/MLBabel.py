@@ -16,6 +16,9 @@ import argparse
 from collections import defaultdict
 from datetime import datetime
 
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+
 class MLBabel:
     def __init__(self, entropy=0.5, fragment_size=40, seed=None):
         """
