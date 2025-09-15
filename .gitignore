@@ -206,3 +206,4 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 napkin_norns/shakespeare.txt
+napkin_norns/swarm.sh
