@@ -5,6 +5,7 @@ import json
 import re
 import os
 import sys
+import uuid
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, Optional
@@ -24,6 +25,7 @@ DEFAULT_DATA = {
 }
 
 PROJECT_TEMPLATE = {
+    "uuid": "",
     "name": "",
     "priority": "MEDIUM",
     "created": "",
@@ -36,6 +38,7 @@ PROJECT_TEMPLATE = {
 }
 
 TASK_TEMPLATE = {
+    "uuid": "",
     "note": "",
     "priority": "MEDIUM",
     "created": "",
@@ -118,6 +121,7 @@ class DataStore:
 def new_project(name: str, priority: str = "MEDIUM") -> Dict:
     """Create new project dict from template"""
     project = PROJECT_TEMPLATE.copy()
+    project['uuid'] = str(uuid.uuid4())
     project['name'] = name
     project['priority'] = priority.upper()
     project['created'] = datetime.now().isoformat()
@@ -129,6 +133,7 @@ def new_project(name: str, priority: str = "MEDIUM") -> Dict:
 def new_task(note: str, priority: str = "MEDIUM") -> Dict:
     """Create new task dict from template"""
     task = TASK_TEMPLATE.copy()
+    task['uuid'] = str(uuid.uuid4())
     task['note'] = note
     task['priority'] = priority.upper()
     task['created'] = datetime.now().isoformat()
