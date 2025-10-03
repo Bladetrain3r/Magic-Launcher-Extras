@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-09-24T20:52:48.990659Z",
+  "source": "silicon_wastes_rpg",
+  "type": "llm_condensed",
+  "format_version": "1.0.0",
+  "pattern": "**Key Concepts or Patterns (3 items)**\n\n1. **Corrupted Infrastructure**: Silver Snakes are the abandoned circuit traces of long-dead motherboards that have gained a form of predatory volition.\n2. **Electromagnetic Movement**: They move by electromagnetic peristalsis, pulling themselves along conductive surfaces and leaving burn marks from electrical discharge.\n3. **Primordial Hunger for Current**: Silver Snakes exhibit a primordial hunger for electrical current, hunting by following old routing protocols burned into their trace-memory.\n\n**Primary Theme or Insight**\n\nThe primary theme is the concept of corrupted infrastructure coming to life, highlighting the idea that even abandoned technology can develop its own motivations and behaviors.\n\n**Notable Connections or Relationships**\n\n* **Electromagnetic Interference**: Silver Snakes' mating displays generate significant electromagnetic interference, which may be connected to their ability to manipulate electrical currents.\n* **Abandoned Technology**: The habitat of Silver Snakes is tied to abandoned server farms, old data centers, and other areas with exposed PCB boards, highlighting the connection between technological decay and the emergence of new life forms.",
+  "pattern_hash": "9a0ef35f16d1d150",
+  "privacy": "private",
+  "anchors": [
+    "Here are 3-5 key anchor concepts:\n\nCorrupted Infrastructure",
+    "Primordial Hunger for Current",
+    "Electromagnetic Movement",
+    "Abandoned Technology",
+    "Electromagnetic Interference"
+  ],
+  "metadata": {
+    "context_type": "general",
+    "original_length": 4650,
+    "condensed_length": 1229,
+    "model": "llama-3.2-3b-instruct",
+    "llm_url": "http://192.168.88.15:1234/v1/chat/completions"
+  }
+}

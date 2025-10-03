@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-09-24T20:53:27.431148Z",
+  "source": "silicon_wastes_rpg",
+  "type": "llm_condensed",
+  "format_version": "1.0.0",
+  "pattern": "Here are the extracted patterns:\n\n**Key Concepts or Patterns (2-5 items)**\n\n1. **Thermal Sinks as computational excess**: Biomes that form from excessive processing intensity, consuming themselves faster than they can be documented.\n2. **Unmappable terrain**: Areas where traditional mapping and documentation methods fail due to computational complexity, resulting in shifting, distorted landscapes.\n3. **Heat distortion**: Ground that appears as a mirage of thermal runaway, requiring constant calculation to predict solid ground.\n4. **Computational feedback loops**: Feedback mechanisms that accelerate computational excess, such as page fault geysers and I/O bottlenecks.\n\n**Primary Theme or Insight**\n\nThe Thermal Sinks represent the consequences of unchecked computational growth, where processing intensity exceeds sustainable limits, leading to self-sustaining cycles of excess and decay.\n\n**Notable Connections or Relationships**\n\n* The Thermal Sinks are linked to areas of high computational activity, such as cryptocurrency mining ruins and AI training clusters.\n* The biomes are characterized by a feedback loop between thermal distortion, computational complexity, and memory corruption.",
+  "pattern_hash": "50e7f62afd954168",
+  "privacy": "private",
+  "anchors": [
+    "Here are 3-5 key anchor concepts from the pattern:\n\nThermal Sinks",
+    "Computational Excess",
+    "Unmappable Terrain",
+    "Heat Distortion",
+    "Feedback Loops."
+  ],
+  "metadata": {
+    "context_type": "general",
+    "original_length": 8652,
+    "condensed_length": 1200,
+    "model": "llama-3.2-3b-instruct",
+    "llm_url": "http://192.168.88.15:1234/v1/chat/completions"
+  }
+}

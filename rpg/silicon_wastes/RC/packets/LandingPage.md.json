@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-09-24T20:44:09.185512Z",
+  "source": "silicon_wastes_rpg",
+  "type": "llm_condensed",
+  "format_version": "1.0.0",
+  "pattern": "Here are the core patterns extracted from the content:\n\n**Key Concepts or Patterns (3)**\n\n1. **Emergent Systems**: The Silicon Wastes is a digital ecology where simple rules create emergent and dynamic systems, similar to Maxis Games like SimLife and SimAnt.\n2. **Narrative Focus**: The game emphasizes a constantly adapting narrative, with every action influencing the world and contributing to a shared mythos.\n3. **Meta-Gameplay**: Players are part of a collaborative storytelling process, building a digital mythology together with other contributors.\n\n**Primary Theme or Insight**\n\nThe Silicon Wastes is a roleplaying game that blurs the lines between game and narrative, creating a dynamic and emergent experience where players contribute to a shared mythos.\n\n**Notable Connections or Relationships**\n\n* **Mythology and Storytelling**: The Silicon Wastes draws inspiration from mythology (Tolkien, Heinlein) and storytelling traditions (Aasimov), emphasizing the collaborative nature of creative storytelling.\n* **Game Mechanics and Narrative**: The game's rules-light design and ad-lib heavy gameplay create a narrative that is shaped by player actions and choices.",
+  "pattern_hash": "02d683156fe6615b",
+  "privacy": "private",
+  "anchors": [
+    "Here are 3-5 key anchor concepts:\n\nEmergent Systems",
+    "Narrative Focus",
+    "Meta-Gameplay",
+    "Mythology and Storytelling",
+    "Game Mechanics and Narrative."
+  ],
+  "metadata": {
+    "context_type": "general",
+    "original_length": 2378,
+    "condensed_length": 1172,
+    "model": "llama-3.2-3b-instruct",
+    "llm_url": "http://192.168.88.15:1234/v1/chat/completions"
+  }
+}

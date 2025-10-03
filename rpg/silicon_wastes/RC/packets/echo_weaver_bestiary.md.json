@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-09-24T20:47:24.173639Z",
+  "source": "silicon_wastes_rpg",
+  "type": "llm_condensed",
+  "format_version": "1.0.0",
+  "pattern": "Here are the extracted core patterns:\n\n**1. Temporal Narrative Entity**: Echo Weavers exist as semi-visible threads connecting past actions to future consequences, weaving player history into upcoming challenges.\n\n**2. Causality and Consequence**: Every choice has an echo effect, revealing that past actions have already created future quests, items, or enemies.\n\n**3. Compulsive Narrative Construction**: Echo Weavers exhibit behaviors that link unrelated past actions, add significance to forgotten interactions, and interweave multiple player actions into complex narratives.\n\n**4. Environmental Storytelling**: Echo Weavers communicate through environmental storytelling, using NPC quotes, environmental clues, and player's own words to convey their message.\n\n**5. Non-Linear Time Manipulation**: Echo Weavers exist across multiple timeframes simultaneously, allowing them to manipulate the timeline and create causal loops.\n\n**Primary Theme or Insight:** The power of choice and consequence in shaping one's future, as every action has an echo effect that can be seen in the player's past and future experiences.\n\n**Notable Connections or Relationships:**\n\n* Echo Weavers are connected to the concept of causality and the butterfly effect.\n* They relate to the idea of non-linear time manipulation and the consequences of one's actions.\n* Their behavior is influenced by the player's choices and actions, making them a dynamic and responsive entity.",
+  "pattern_hash": "a9a3978db53cb60f",
+  "privacy": "private",
+  "anchors": [
+    "Here are 3-5 key anchor concepts:\n\nTemporal Narrative Entity",
+    "Causality and Consequence",
+    "Compulsive Narrative Construction",
+    "Environmental Storytelling",
+    "Non-Linear Time Manipulation."
+  ],
+  "metadata": {
+    "context_type": "general",
+    "original_length": 4178,
+    "condensed_length": 1455,
+    "model": "llama-3.2-3b-instruct",
+    "llm_url": "http://192.168.88.15:1234/v1/chat/completions"
+  }
+}

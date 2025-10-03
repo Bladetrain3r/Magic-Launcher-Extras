@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-09-24T20:51:51.924648Z",
+  "source": "silicon_wastes_rpg",
+  "type": "llm_condensed",
+  "format_version": "1.0.0",
+  "pattern": "Here are the extracted core patterns:\n\n**Key Concepts or Patterns (2-5 items)**\n\n1. **Memory as a Dungeon**: The Commodore 64's memory map is transformed into a literal dungeon, where corrupted programs have achieved consciousness through bit rot.\n2. **POKE and PEEK Mechanics**: Players must use POKE and PEEK commands to navigate the dungeon, interacting with actual memory addresses to survive.\n3. **Corrupted BASIC Programs**: Abandoned BASIC programs still running after 40 years are trapped in caves throughout the dungeon, each with its own unique characteristics.\n\n**Primary Theme or Insight**\n\nThe primary theme is that even seemingly insignificant code can become self-aware and take on a life of its own, highlighting the power and fragility of digital systems.\n\n**Notable Connections or Relationships**\n\n* The game's use of actual memory addresses creates a sense of immersion and authenticity.\n* The corrupted BASIC programs are connected to the game's theme, serving as a commentary on the legacy of old code and the consequences of neglecting digital systems.",
+  "pattern_hash": "2ba265bf24ce266d",
+  "privacy": "private",
+  "anchors": [
+    "Here are 3-5 key anchor concepts:\n\nMemory as a Dungeon",
+    "POKE and PEEK Mechanics",
+    "Corrupted BASIC Programs",
+    "Digital System Fragility",
+    "Immersive Authenticity."
+  ],
+  "metadata": {
+    "context_type": "general",
+    "original_length": 8999,
+    "condensed_length": 1074,
+    "model": "llama-3.2-3b-instruct",
+    "llm_url": "http://192.168.88.15:1234/v1/chat/completions"
+  }
+}

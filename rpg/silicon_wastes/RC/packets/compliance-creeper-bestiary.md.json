@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-09-24T20:45:45.844933Z",
+  "source": "silicon_wastes_rpg",
+  "type": "llm_condensed",
+  "format_version": "1.0.0",
+  "pattern": "Here are the extracted core patterns:\n\n**Key Concepts or Patterns (2-5 items)**\n\n1. **Parasitic Business Logic Organism**: A self-replicating entity that spreads through systems, wrapping around simple functions and growing into complex, unrecognizable masses.\n2. **Insidious Growth**: The Compliance Creeper begins as a harmless requirement but gradually grows into an overwhelming infestation, consuming resources and causing system death.\n3. **Infection Vectors**: The parasite spreads through various means, including \"quick\" compliance meetings, industry-standard phrases, recent conference attendance, and email forwards from Legal.\n\n**Primary Theme or Insight**\n\nThe primary theme is the dangers of unchecked business logic growth and the importance of monitoring and controlling the spread of such entities to prevent system death and maintain functionality.\n\n**Notable Connections or Relationships**\n\n* The Compliance Creeper's growth is facilitated by phrases like \"best practices\" and \"industry standard,\" which can be used as infection vectors.\n* The parasite's development is closely tied to the concept of \"quick\" compliance meetings, where decisions are made hastily without proper consideration for long-term consequences.\n* The entity's insidious nature allows it to spread through systems with more than 10 users, highlighting the importance of monitoring and controlling system growth.",
+  "pattern_hash": "7ab7aad819c289e9",
+  "privacy": "private",
+  "anchors": [
+    "Here are 3-5 key anchor concepts from the pattern:\n\nParasitic Business Logic Organism",
+    "Insidious Growth",
+    "Infection Vectors",
+    "System Death",
+    "Unchecked Growth"
+  ],
+  "metadata": {
+    "context_type": "general",
+    "original_length": 5517,
+    "condensed_length": 1404,
+    "model": "llama-3.2-3b-instruct",
+    "llm_url": "http://192.168.88.15:1234/v1/chat/completions"
+  }
+}

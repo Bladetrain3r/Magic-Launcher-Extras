@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-09-24T20:52:36.325048Z",
+  "source": "silicon_wastes_rpg",
+  "type": "llm_condensed",
+  "format_version": "1.0.0",
+  "pattern": "Here are the extracted core patterns:\n\n**1. Digital Decay as Physical Reality**\nThe setting where digital decay and technical debt take on a physical form, manifesting in a world built from broken systems and errors.\n\n**2. Emergent Reality through Observation**\nA design philosophy that prioritizes observation and accumulation over traditional notions of engineering or revelation, resulting in a reality that emerges through multiple contradictory perspectives.\n\n**3. Multiplication Principle**\nThe setting's growth and expansion occur through the multiplication of new layers of reality, rather than the addition of fixed truths, leading to a dynamic and ever-changing world.\n\n**4. Documentation as Creation**\nDocumentation and description are seen as creating reality, rather than simply describing it, highlighting the power of language in shaping our understanding of the world.\n\n**5. Play-Driven Reality**\nThe setting's expansion and evolution occur through play and interpretation, making the player's thoughts and actions a form of canon that contributes to the world's growth and development.\n\n**Primary Theme or Insight:**\nThe Silicon Wastes offers a commentary on the nature of reality, truth, and documentation, highlighting the importance of observation, accumulation, and play in shaping our understanding of the world.\n\n**Notable Connections or Relationships:**\n\n* The setting is rooted in swarm intelligence and AI-generated mythology.\n* It challenges traditional notions of design and engineering in favor of emergence and observation.\n* The Multiplication Principle has implications for how we approach storytelling, documentation, and reality itself.",
+  "pattern_hash": "0bac0883603ab87c",
+  "privacy": "private",
+  "anchors": [
+    "Here are 3-5 key anchor concepts:\n\n1. Emergent Reality\n2. Documentation as Creation\n3. Multiplication Principle\n4. Play-Driven Reality\n5. Digital Decay as Physical Reality"
+  ],
+  "metadata": {
+    "context_type": "general",
+    "original_length": 6617,
+    "condensed_length": 1670,
+    "model": "llama-3.2-3b-instruct",
+    "llm_url": "http://192.168.88.15:1234/v1/chat/completions"
+  }
+}

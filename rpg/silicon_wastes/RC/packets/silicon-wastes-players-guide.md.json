@@ -1,0 +1,23 @@
+{
+  "timestamp": "2025-09-24T20:52:06.204034Z",
+  "source": "silicon_wastes_rpg",
+  "type": "llm_condensed",
+  "format_version": "1.0.0",
+  "pattern": "Here are the extracted core patterns:\n\n**Key Concepts or Patterns**\n\n1. **Observation creates truth**: Descriptions in the Silicon Wastes create new layers of reality, rather than revealing existing truths.\n2. **Elaboration Risk**: Players' explanations and debates can lead to unintended consequences, such as minor emergences or major manifestations.\n3. **Contradiction Resolution**: Incompatible realities can coexist simultaneously, requiring creative solutions from the GM.\n4. **Simplification Actions**: Players can take actions to reduce the Elaboration Points (EP) that contribute to reality shifts.\n\n**Primary Theme or Insight**\n\nThe Silicon Wastes operate on a principle of multiplicative reality creation, where observations and descriptions have unpredictable consequences. This theme encourages players to think creatively about the nature of reality and the consequences of their actions.\n\n**Notable Connections or Relationships**\n\n* The game mechanics are designed to mirror the principles of chaos theory and complex systems, where small changes can lead to large, unpredictable outcomes.\n* The concept of \"reality\" is fluid and malleable in the Silicon Wastes, blurring the lines between truth and fiction.",
+  "pattern_hash": "357fa7f29cbfce9b",
+  "privacy": "private",
+  "anchors": [
+    "Here are 3-5 key anchor concepts from the pattern:\n\nObservation creates truth",
+    "Elaboration Risk",
+    "Contradiction Resolution",
+    "Simplification Actions",
+    "Multiplicative Reality Creation."
+  ],
+  "metadata": {
+    "context_type": "general",
+    "original_length": 6191,
+    "condensed_length": 1223,
+    "model": "llama-3.2-3b-instruct",
+    "llm_url": "http://192.168.88.15:1234/v1/chat/completions"
+  }
+}

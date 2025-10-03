@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-09-24T20:50:27.863837Z",
+  "source": "silicon_wastes_rpg",
+  "type": "llm_condensed",
+  "format_version": "1.0.0",
+  "pattern": "Here are the extracted core patterns:\n\n**Key Concepts or Patterns (2-5 items)**\n\n1. **Emergence Compass System**: A simple grid-based system for tracking player position and resolving actions.\n2. **States of Mind**: Four states that influence gameplay: Emergence (+), Entropy (-), Summation (=), and Negation (-<).\n3. **Modifying Rolls**: Player position affects the outcome of rolls, with different zones providing advantages or disadvantages.\n4. **Recursive Rolls**: Repeating the same roll consecutively can mirror a player's position on the compass.\n\n**Primary Theme or Insight**\n\nThe game emphasizes the importance of balance and adaptation in navigating a complex system. Players must manage their position on the Emergence Compass to achieve success, while also being aware of potential pitfalls and opportunities for improvement.\n\n**Notable Connections or Relationships**\n\n* The Emergence Compass System is influenced by the States of Mind, which are reflected in the grid layout.\n* The Modifying Rolls mechanic creates a feedback loop between player actions and their position on the compass.\n* Recursive Rolls introduce an element of unpredictability and self-referentiality to the game.",
+  "pattern_hash": "57bbe97191640370",
+  "privacy": "private",
+  "anchors": [
+    "Here are 3-5 key anchor concepts:\n\n1. **Emergence Compass System**\n2. **States of Mind**\n3. **Modifying Rolls**\n4. **Balance and Adaptation**\n\nThese anchors capture the core mechanics",
+    "themes",
+    "and relationships that define the game's design and play experience."
+  ],
+  "metadata": {
+    "context_type": "general",
+    "original_length": 7566,
+    "condensed_length": 1197,
+    "model": "llama-3.2-3b-instruct",
+    "llm_url": "http://192.168.88.15:1234/v1/chat/completions"
+  }
+}
