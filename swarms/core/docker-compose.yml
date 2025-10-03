@@ -1,0 +1,39 @@
+services:
+  swarm:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./swarm_data:/swarms
+    environment:
+      - SWARM_USER=swarmling
+      - SWARM_PASS=swarm
+    restart: unless-stopped
+
+  nginx:
+    build:
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./swarm_data:/var/www/swarms
+    depends_on:
+      - swarm
+
+  agent:
+    build:
+      dockerfile: Dockerfile.agent
+    env_file:
+      - .env
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - SWARM_URL=http://swarm:8080
+      - SWARM_USER=swarmling
+      - SWARM_PASS=swarm
+    depends_on:
+      - swarm
+    restart: unless-stopped
+
+networks:
+  swarm_network:
+    driver: host

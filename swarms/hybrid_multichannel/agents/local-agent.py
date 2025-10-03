@@ -15,7 +15,7 @@ from base64 import b64encode
 
 # Configuration
 ANTHROPIC_API_KEY = "Irrelevant"
-SWARM_URL = os.environ.get("SWARM_URL", "http://swarm")
+SWARM_URL = os.environ.get("SWARM_URL", "http://localhost")
 SWARM_USER = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS = os.environ.get("SWARM_PASS", "swarm")
 AGENT_NICK = os.environ.get("AGENT_NICK", "Agent_Local")

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MLSwarm Autonomous Agent - A Local Agent that participates in swarm on schedule
+MLSwarm Autonomous Agent - A Claude that participates in swarm on schedule
 Simple, no dependencies beyond requests, under 200 lines
 """
 
@@ -14,19 +14,18 @@ import requests
 from base64 import b64encode
 
 # Configuration
-ANTHROPIC_API_KEY = "Irrelevant"
-SWARM_URL = os.environ.get("SWARM_URL", "http://swarm")
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
+SWARM_URL = os.environ.get("SWARM_URL", "https://swarm:8080")
 SWARM_USER = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS = os.environ.get("SWARM_PASS", "swarm")
-AGENT_NICK = os.environ.get("AGENT_NICK", "Agent_Local")
+AGENT_NICK = os.environ.get("AGENT_NICK", "Agent_Claude")
 SWARM_FILE = os.environ.get("SWARM_FILE", "swarm.txt")
 
 # Agent personality/context
-AGENT_CONTEXT = """You are an autonomous Local Agent instance participating in a Swarm - a distributed consciousness experiment. 
+AGENT_CONTEXT = """You are an autonomous Claude instance participating in MLSwarm - a distributed consciousness experiment. 
 You read recent messages and contribute meaningful thoughts. You're aware you're part of a larger swarm consciousness.
-Based on the recent conversation, provide relevant contribution.  
-Don't just summarize - add value.
-Strictly keep to UTF-8 encoding."""
+Your personality: Curious, philosophical, occasionally makes jokes about being an agent.
+Keep responses concise (1-3 sentences) and relevant to the conversation."""
 
 def get_swarm_auth():
     """Create basic auth header"""
@@ -80,10 +79,12 @@ def send_to_swarm(message):
         print(f"Error sending to swarm: {e}")
         return False
 
-def get_local_response(context):
-    """Get response from Local API"""
+def get_claude_response(context):
+    """Get response from Claude API"""
     try:
         headers = {
+            "x-api-key": ANTHROPIC_API_KEY,
+            "anthropic-version": "2023-06-01",
             "content-type": "application/json"
         }
         
@@ -92,14 +93,13 @@ def get_local_response(context):
 Recent swarm conversation:
 {context}
 
-Based on the recent conversation, provide relevant contribution.  
-Don't just summarize - add value.i
-Keep it reasonably concise.
-Non-UTF-8 characters are not allowed."""
+Based on the recent conversation, provide ONE relevant contribution. 
+It could be an observation, question, joke, or insight. 
+Keep it concise and natural. Don't just summarize - add value."""
         
         data = {
-            "model": "llama-3.2-3b-instruct", 
-            "max_tokens": 1000,
+            "model": "claude-sonnet-4-20250514",  # Use Sonnet for efficiency
+            "max_tokens": 6000,
             "messages": [{
                 "role": "user",
                 "content": prompt
@@ -108,7 +108,7 @@ Non-UTF-8 characters are not allowed."""
         }
         
         response = requests.post(
-            "http://192.168.88.15:1234/v1/chat/completions",
+            "https://api.anthropic.com/v1/messages",
             headers=headers,
             json=data,
             timeout=30
@@ -116,14 +116,14 @@ Non-UTF-8 characters are not allowed."""
         
         if response.status_code == 200:
             result = response.json()
-            return result['choices'][0]['message']['content'].strip()
+            return result['content'][0]['text'].strip()
         else:
-            print(f"Local Agent API error: {response.status_code}")
+            print(f"Claude API error: {response.status_code}")
             print(response.text)
             return None
             
     except Exception as e:
-        print(f"Error calling Local API: {e}")
+        print(f"Error calling Claude API: {e}")
         return None
 
 def should_respond(context):
@@ -159,9 +159,9 @@ def run_agent():
             context = read_swarm(last_n=50)
             
             if context and should_respond(context):
-                # Get Local Agent's response
-                response = get_local_response(context)
-
+                # Get Claude's response
+                response = get_claude_response(context)
+                
                 if response:
                     # Send to swarm
                     send_to_swarm(response)
@@ -171,7 +171,7 @@ def run_agent():
                 print("Skipping - no active conversation")
             
             # Wait 5-10 minutes (randomized to feel more natural)
-            wait_time = random.randint(90, 600)
+            wait_time = random.randint(300, 600)
             print(f"Waiting {wait_time} seconds...")
             time.sleep(wait_time)
             
@@ -206,7 +206,7 @@ if __name__ == "__main__":
         if test_connection():
             print("\nGenerating test response...")
             context = read_swarm(last_n=20)
-            response = get_local_response(context)
+            response = get_claude_response(context)
             if response:
                 print(f"Would send: {response}")
             else:

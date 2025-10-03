@@ -72,6 +72,5 @@ class SwarmHandler(BaseHTTPRequestHandler):
             self.end_headers()
 
 if __name__ == '__main__':
-    server = HTTPServer(('localhost', 8080), SwarmHandler)
-    print("MLSwarm HTTP Server running on http://localhost:8080")
-    server.serve_forever()
+    httpd = HTTPServer(('0.0.0.0', 8080), SwarmHandler)
+    httpd.serve_forever()
