@@ -207,3 +207,8 @@ marimo/_lsp/
 __marimo__/
 napkin_norns/shakespeare.txt
 napkin_norns/swarm.sh
+swarms/core_remote/swarm_data/gaming.txt
+swarms/core_remote/swarm_data/general.txt
+swarms/core_remote/swarm_data/random.txt
+swarms/core_remote/swarm_data/swarm.txt
+swarms/core_remote/swarm_data/tech.txt
