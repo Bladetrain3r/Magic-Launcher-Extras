@@ -14,16 +14,17 @@ class TerminalInterface:
         subparsers = parser.add_subparsers(dest='command')
 
         # Add subcommands
-        subparsers.add_parser('list', help='List all projects')
-        
+        list_parser = subparsers.add_parser('list', help='List all projects')
+        list_parser.add_argument('--show-frozen', action='store_true', help='Show frozen projects')
+
         spark_parser = subparsers.add_parser('spark', help='Spark a project')
         spark_parser.add_argument('project', type=str, help='Project name')
         spark_parser.add_argument('note', type=str, help='Task note')
         spark_parser.add_argument('--priority', type=str, default='MEDIUM', help='Task priority')
 
-        status_parser = subparsers.add_parser('status', help='Show project status')
-        status_parser.add_argument('--limit', type=int, help='Limit number of projects shown')
-        status_parser.add_argument('--include-frozen', action='store_true', help='Include frozen projects')
+        status_parser = subparsers.add_parser('status', help='Show detailed status for a specific project')
+        status_parser.add_argument('project', type=str, help='Project name')
+        status_parser.add_argument('--show-tasks', action='store_true', help='Show all tasks for the project')
 
         complete_parser = subparsers.add_parser('complete', help='Complete a task')
         complete_parser.add_argument('project', type=str, help='Project name')
@@ -49,27 +50,39 @@ class TerminalInterface:
         
         if args.command == 'list':
             # Use status() method to get formatted project list
-            projects = self.controller.status(include_frozen=True)
-            for project in projects:
-                task_count = project.get('active_tasks', 0)
-                print(f"{project['name']} - {project['state']} - {task_count} tasks")
+            projects = self.controller.status(include_frozen=args.show_frozen)
+            if not projects:
+                print("No projects found.")
+            else:
+                for project in projects:
+                    task_count = project.get('active_tasks', 0)
+                    print(f"{project['name']} - {project['state']} - {task_count} tasks")
         
         elif args.command == 'spark':
             project = self.controller.spark(args.project, args.note, args.priority)
             print(f"Sparked project '{args.project}' with task: {args.note}")
         
         elif args.command == 'status':
-            projects = self.controller.status(
-                limit=args.limit, 
-                include_frozen=args.include_frozen
-            )
-            for project in projects:
+            project = self.controller.get_project_status(args.project)
+            if project:
                 active_tasks = project.get('active_tasks', 0)
                 completed_tasks = project.get('completed_tasks', 0)
                 heat_score = project.get('heat_score', 0)
                 print(f"{project['name']}: {project['state']} "
                       f"({active_tasks} active, {completed_tasks} done) "
                       f"heat: {heat_score:.1f}")
+                
+                if args.show_tasks:
+                    tasks = project.get('tasks', [])
+                    if tasks:
+                        print("Tasks:")
+                        for task in tasks:
+                            status = "✓" if task.get('completed') else "○"
+                            print(f"  {status} {task['note']} [{task.get('priority', 'MEDIUM')}]")
+                    else:
+                        print("No tasks found.")
+            else:
+                print(f"Project '{args.project}' not found")
         
         elif args.command == 'complete':
             task = self.controller.complete_task(args.project, args.task_note)

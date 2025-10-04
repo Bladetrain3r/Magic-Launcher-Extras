@@ -211,6 +211,28 @@ class ProjectController:
         self.datastore.save(data)
         return project
 
+    def get_project_status(self, project_name: str) -> Optional[Dict]:
+        """
+        Get detailed status for a specific project including tasks
+        """
+        data = self.load_data()
+        project_id = sanitize_project_id(project_name)
+        
+        if project_id not in data['projects']:
+            return None
+        
+        project = data['projects'][project_id].copy()
+        
+        # Add computed fields
+        project['active_tasks'] = self._count_active_tasks(project['tasks'])
+        project['completed_tasks'] = self._count_completed_tasks(project['tasks'])
+        project['heat_score'] = self._get_heat_score(project['record_modified'])
+        
+        # Convert tasks dict to list for easier iteration in terminal
+        project['tasks'] = list(project['tasks'].values())
+        
+        return project
+
     def unfreeze_project(self, project_name: str) -> Dict:
         """Bring project back from frozen state"""
         data = self.load_data()
