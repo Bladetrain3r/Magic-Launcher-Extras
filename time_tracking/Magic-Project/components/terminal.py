@@ -29,6 +29,7 @@ class TerminalInterface:
         complete_parser = subparsers.add_parser('complete', help='Complete a task')
         complete_parser.add_argument('project', type=str, help='Project name')
         complete_parser.add_argument('task_note', type=str, help='Task note (partial match allowed)')
+        complete_parser.add_argument('--declined', action='store_true', help='Mark the task as declined')
 
         add_task_parser = subparsers.add_parser('add_task', help='Add a task to a project')
         add_task_parser.add_argument('project', type=str, help='Project name')
@@ -77,7 +78,12 @@ class TerminalInterface:
                     if tasks:
                         print("Tasks:")
                         for task in tasks:
-                            status = "✓" if task.get('completed') else "○"
+                            if task.get('state') == 'completed':
+                                status = "✓"
+                            elif task.get('state') == 'declined':
+                                status = "✗"
+                            else:
+                                status = "○"
                             print(f"  {status} {task['note']} [{task.get('priority', 'MEDIUM')}]")
                     else:
                         print("No tasks found.")
@@ -85,7 +91,7 @@ class TerminalInterface:
                 print(f"Project '{args.project}' not found")
         
         elif args.command == 'complete':
-            task = self.controller.complete_task(args.project, args.task_note)
+            task = self.controller.complete_task(args.project, args.task_note, args.declined)
             print(f"Completed task in project '{args.project}': {task['note']}")
         
         elif args.command == 'add_task':

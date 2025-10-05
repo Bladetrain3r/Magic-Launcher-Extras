@@ -133,7 +133,7 @@ class ProjectController:
         
         return result
 
-    def complete_task(self, project_name: str, task_partial: str) -> Dict:
+    def complete_task(self, project_name: str, task_partial: str, declined=False) -> Dict:
         """
         Mark task as completed by partial text match
         Updates project heat when task completed
@@ -161,8 +161,12 @@ class ProjectController:
         task_id, task = matching_tasks[0]  # Fixed: unpack the tuple properly
         
         # Complete the task
-        task['completed'] = datetime.now().isoformat()
-        task['state'] = 'completed'
+        task['completed'] = datetime.now().isoformat()        
+        if declined:
+            task['state'] = 'declined'
+            task['note'] = f"[DECLINED] {task['note']}"
+        else:
+            task['state'] = 'completed'
         
         # Update project heat
         project['record_modified'] = datetime.now().isoformat()
