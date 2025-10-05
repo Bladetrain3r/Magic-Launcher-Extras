@@ -66,7 +66,19 @@ class ProjectController:
         """Load and refresh project states"""
         data = self.datastore.load()
         self._recalculate_all_states(data)
-        return data    
+        return data
+
+    def get_project_by_index(self, index: int) -> str:
+        """Get project name by stack position (0-based index)"""
+        data = self.load_data()
+        stack = data.get('stack', [])
+        
+        if 0 <= index < len(stack):
+            project_id = stack[index]
+            if project_id in data['projects']:
+                return data['projects'][project_id]['name']
+        
+        raise IndexError(f"Index {index} out of range (0-{len(stack)-1})")    
     
     def spark(self, project_name: str, task_note: str = "", priority: str = "MEDIUM") -> Dict:
         """

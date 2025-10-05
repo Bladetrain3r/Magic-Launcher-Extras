@@ -23,7 +23,8 @@ class TerminalInterface:
         spark_parser.add_argument('--priority', type=str, default='MEDIUM', help='Task priority')
 
         status_parser = subparsers.add_parser('status', help='Show detailed status for a specific project')
-        status_parser.add_argument('project', type=str, help='Project name')
+        status_parser.add_argument('-n', '--index', type=int, help='Project index (0-based)')
+        status_parser.add_argument('project', type=str, nargs='?', help='Project name')
         status_parser.add_argument('--show-tasks', action='store_true', help='Show all tasks for the project')
 
         complete_parser = subparsers.add_parser('complete', help='Complete a task')
@@ -55,16 +56,29 @@ class TerminalInterface:
             if not projects:
                 print("No projects found.")
             else:
+                i = 0
                 for project in projects:
                     task_count = project.get('active_tasks', 0)
-                    print(f"{project['name']} - {project['state']} - {task_count} tasks")
-        
+                    print(f"{i}: {project['name']} - {project['state']} - {task_count} tasks")
+                    i += 1
+
         elif args.command == 'spark':
             project = self.controller.spark(args.project, args.note, args.priority)
             print(f"Sparked project '{args.project}' with task: {args.note}")
         
         elif args.command == 'status':
-            project = self.controller.get_project_status(args.project)
+            if args.index is not None:
+                project_name = self.controller.get_project_by_index(args.index)
+                if not project_name:
+                    print(f"Error: Index {args.index} out of range. Use 'mp list' to see available indices.")
+                    return
+            elif args.project:
+                project_name = args.project
+            else:
+                print("Error: Must specify either project name or index.")
+                return
+
+            project = self.controller.get_project_status(project_name)
             if project:
                 active_tasks = project.get('active_tasks', 0)
                 completed_tasks = project.get('completed_tasks', 0)
