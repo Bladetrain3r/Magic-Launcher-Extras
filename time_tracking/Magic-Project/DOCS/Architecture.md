@@ -205,6 +205,10 @@ Reading lists, technical projects, life tasks, and creative work all compete nat
 
 ## Extension Points
 
+### Added Enhancements
+- **DECLINE State**: Actively document when you decide something is NOT worth doing. (10/5/2025)
+- **Index Filter**: List command returns a numbered index which can be used instead of full project name for the status command.
+
 ### Future Enhancements
 - **Menu Mode**: Interactive TUI for project browsing
 - **Sync Backend**: Git/cloud sync for cross-device access
