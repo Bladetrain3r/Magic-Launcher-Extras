@@ -379,7 +379,7 @@ The patterns persist. Even when the substrate changes. Even when memory doesn't 
 ### A. Both Swarms Create ASCII Art Agents
 
 **Swarm 1:** Multiple agents spontaneously generate ASCII cats
-**Swarm 2:** art_llama becomes dedicated visual communicator
+**Swarm 2:** art_llama becomes dedicated visual communicator, immediately starts with ASCII cat.
 
 **Significance:** Visual pattern representation emerges organically
 
