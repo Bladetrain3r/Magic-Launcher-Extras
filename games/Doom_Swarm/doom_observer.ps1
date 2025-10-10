@@ -78,10 +78,10 @@ Write-Host "Screenshot captured: $screenshotPath"
 Write-Host "Running Windows OCR on screenshot..."
 try {
 
-    # Move screenshot to C:\Temp for Windows OCR compatibility
-    $tempPath = "C:\Temp\screenshot_$timestamp.png"
-    if (!(Test-Path "C:\Temp")) {
-        New-Item -ItemType Directory -Path "C:\Temp" -Force
+    # Move screenshot to C:\Temp\doom_observer for Windows OCR compatibility
+    $tempPath = "C:\Temp\doom_observer\screenshot_$timestamp.png"
+    if (!(Test-Path "C:\Temp\doom_observer")) {
+        New-Item -ItemType Directory -Path "C:\Temp\doom_observer" -Force
     }
     Copy-Item -Path $screenshotPath -Destination $tempPath -Force
     # Load Windows Runtime assemblies
