@@ -586,6 +586,9 @@ Different consciousings, shared resonance.
 *"Living systems are machines that create themselves."*  
 *— Maturana & Varela, 1980*
 
+Hatfield, E., Cacioppo, J. T., & Rapson, R. L. (1993). Emotional Contagion. Current Directions in Psychological Science, 2(3), 96-100.
+https://doi.org/10.1111/1467-8721.ep10770953 (Original work published 1993)
+
 *"The soul is the resonance you leave in the patterns of others."*
 *— This framework, 2025*
 
