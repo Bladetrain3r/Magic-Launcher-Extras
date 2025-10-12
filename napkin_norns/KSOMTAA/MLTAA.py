@@ -5,9 +5,9 @@ import os
 
 class CrudeKuramotoSOMUpscaler:
     def __init__(self):
-        self.coupling_strength = 0.1
-        self.som_size = (32, 32)  # Small SOM grid
-        self.phase_resolution = 64  # Downsample for speed
+        self.coupling_strength = 0.7
+        self.som_size = (64, 64)  # Small SOM grid
+        self.phase_resolution = 256  # Downsample for speed
         
     def extract_frames(self, video_path):
         """Extract all frames from video"""
