@@ -98,13 +98,13 @@ class KSTI:
     """
     def __init__(
         self,
-        base_coupling: float = 0.3,
-        grad_scale: float = 2.0,
-        motion_scale: float = 2.0,
-        clamp_rad: float = 0.5,
-        ema_beta: float = 0.05,
-        iters: int = 5,
-        kernel_edge: int = 3,
+        base_coupling: float = 0.3, # Affects smoothness vs detail
+        grad_scale: float = 2.0, # How much edges reduce coupling
+        motion_scale: float = 2.0, # How much motion reduces coupling
+        clamp_rad: float = 0.5, # Clamp radius for phase wrapping
+        ema_beta: float = 0.05, # EMA decay factor
+        iters: int = 5, # Iterations for coupling refinement
+        kernel_edge: int = 3, # Edge size for local gain normalization
         local_gain_k: int = 9
     ):
         self.K0 = base_coupling
@@ -203,6 +203,19 @@ class KSTI:
 
         # Map back to luminance
         y_mid = phase_to_intensity(th_mid)
+
+        global_target = (ya.mean() + yb.mean()) / 2
+        global_current = y_mid.mean()
+        global_scale = global_target / (global_current + 1e-6)
+        global_scale = np.clip(global_scale, 0.85, 1.15)
+        y_mid = y_mid * global_scale
+        
+        # Stage 2: Local contrast preservation (your existing code)
+        target_mean = box_filter((ya + yb) * 0.5, self.gain_k)
+        y_mean = box_filter(y_mid, self.gain_k)
+        eps = 1e-5
+        gain = target_mean / (y_mean + eps)
+        y_mid = np.clip(y_mid * gain, 0.0, 1.0)
 
         # Local gain normalization toward mean of source luminances
         target_mean = box_filter((ya + yb) * 0.5, self.gain_k)
