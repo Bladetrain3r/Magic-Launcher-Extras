@@ -43,12 +43,12 @@ TAU = 2*np.pi
 
 def intensity_to_phase(y: np.ndarray) -> np.ndarray:
     """Map luminance [0,1] to phase θ ∈ [0, 2π)."""
-    return (np.clip(y,0,1) * TAU).astype(np.float32)
+    return np.arccos(2 * np.clip(y, 0, 1) - 1).astype(np.float32)
 
 def phase_to_intensity(theta: np.ndarray) -> np.ndarray:
     """Map phase θ back to luminance [0,1]."""
     # Invert linear mapping (note: many-to-one; acceptable for prototype)
-    y = (theta % TAU) / TAU
+    y = (np.cos(theta) + 1) / 2
     return np.clip(y, 0.0, 1.0).astype(np.float32)
 
 def complex_from_phase(theta: np.ndarray) -> np.ndarray:
@@ -179,7 +179,7 @@ class KSTI:
             thS = np.pad(th[:-1,:], ((0,1),(0,0)), mode='edge')
             thW = np.pad(th[:,1:], ((0,0),(1,0)), mode='edge')
             thE = np.pad(th[:,:-1], ((0,0),(0,1)), mode='edge')
-
+        
             delta = (
                 n * np.sin(thN - th) +
                 s * np.sin(thS - th) +
@@ -190,6 +190,9 @@ class KSTI:
             # Clamp to avoid overshoot
             dtheta = np.clip(dtheta, -self.tau, self.tau)
             th_mid = (th + dtheta).astype(np.float32)
+            
+            # FIX: Ensure proper phase wrapping
+            th_mid = np.mod(th_mid, TAU)
 
         # Optional temporal EMA to reduce flicker across a sequence
         if ema_across_calls:
@@ -210,11 +213,44 @@ class KSTI:
 
         # Simple colorization: guide RGB channels by ratio to luminance (preserve chroma)
         # Compute chroma from source 'a' and 'b' and average
-        def chroma(rgb_lin, y):
-            y_safe = np.maximum(y[...,None], 1e-4)
-            return rgb_lin / y_safe
-        chroma_avg = 0.5 * (chroma(a_lin, ya) + chroma(b_lin, yb))
-        rgb_mid_lin = np.clip(chroma_avg * y_mid[...,None], 0.0, 1.0)
+        def interpolate_color_yuv(
+            a_lin: np.ndarray,
+            b_lin: np.ndarray,
+            y_mid: np.ndarray
+        ) -> np.ndarray:
+            """
+            Interpolate color using YUV space to avoid chroma division artifacts.
+            
+            Args:
+                a_lin: First frame in linear RGB [0,1]
+                b_lin: Second frame in linear RGB [0,1]
+                y_mid: Interpolated luminance [0,1] from phase dynamics
+                
+            Returns:
+                rgb_mid_lin: Interpolated frame in linear RGB [0,1]
+            """
+            # Convert linear RGB to uint8 for OpenCV
+            a_uint8 = (np.clip(a_lin, 0, 1) * 255).astype(np.uint8)
+            b_uint8 = (np.clip(b_lin, 0, 1) * 255).astype(np.uint8)
+            
+            # Convert to YUV color space
+            yuv_a = cv2.cvtColor(a_uint8, cv2.COLOR_RGB2YUV).astype(np.float32) / 255.0
+            yuv_b = cv2.cvtColor(b_uint8, cv2.COLOR_RGB2YUV).astype(np.float32) / 255.0
+            
+            # Interpolate chroma channels (U and V) - simple average for t=0.5
+            u_mid = (yuv_a[..., 1] + yuv_b[..., 1]) * 0.5
+            v_mid = (yuv_a[..., 2] + yuv_b[..., 2]) * 0.5
+            
+            # Combine: Y from phase dynamics, UV from interpolation
+            yuv_mid = np.stack([y_mid, u_mid, v_mid], axis=-1)
+            
+            # Convert back to linear RGB
+            yuv_mid_uint8 = (np.clip(yuv_mid, 0, 1) * 255).astype(np.uint8)
+            rgb_mid_lin = cv2.cvtColor(yuv_mid_uint8, cv2.COLOR_YUV2RGB).astype(np.float32) / 255.0
+            
+            return rgb_mid_lin
+
+        rgb_mid_lin = interpolate_color_yuv(a_lin, b_lin, y_mid)
 
         # Back to sRGB uint8, RGB->BGR
         rgb_mid = linear_to_srgb(rgb_mid_lin)
