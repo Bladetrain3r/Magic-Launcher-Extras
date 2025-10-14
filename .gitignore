@@ -8,6 +8,7 @@ __pycache__/
 *.mp4
 *.m4a
 *.ogg
+*.sfk
 
 # Distribution / packaging
 .Python
@@ -216,3 +217,4 @@ swarms/core_remote/swarm_data/random.txt
 swarms/core_remote/swarm_data/swarm.txt
 swarms/core_remote/swarm_data/tech.txt
 DOCS/swarm/Anatomy_of_an_Emergence (1).mp4
+DOCS/swarm/trax/Ethereal_Bioluminescent_Seaweed_Loop.mp4.sfk
