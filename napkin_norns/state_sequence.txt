@@ -1,0 +1,1453 @@
+These outputs represent MLWastes architecture in action, converting text input to a semantic grid that updates over time.
+Each input is a full python script, compressed into symbolic representation.
+This is one of the steps performed for Napkin Norns
+
+Initial perturbations were seeded with quantum physics concepts, then code was fed in sequentially.
+
+Perturbation #5 | EP: 0/5 | Map hash: -1458051238206888321
+Processed: #!/usr/bin/env python3
+"""
+KuramotoSOMNorn - Rhyth...
+=== COMPRESSED REPRESENTATION ===
+..@...%.@.x^T.^...........%....=.T....x^o~.#.=.@.x.x........
+..................xx.T..x.....x^~........~=.#.....o....@@...
+xxoT.T....0..T.o....o%....=^....%%T......x...%....~.@...o...
+^.~%.x...^....=%...^...0.......0....@1.~...........~.......0
+^...........@1...1.%%.0.%....0...1..ψx..~...1.......#.......
+....0..~.0x..^~....@0...ψo0.=..^1=^~...x~.%..=..0~....x....~
+x.....^.....oψ.λψ%....ψ..@.T....ψ1.%#.λ...0%....~.1.*%..#%..
+.......o......TTλ^.T.1%0.=x.=.x..Δ%λ.~~~.=..0.......%.o.....
+.~..*...%o.~%S..~λ.^^xx@λ#...0...λ^~..x%...#..x.x..xS..=^^.~
+.o....0.~.....Δ1^0%1.λ@1.x@...%~.Δ.λ.1#...%S=.....x~o...@.@.
+....@.o....^...0%.ψ#.%o.=#.......Δ.ψo......x%0...o.*.%.0..o%
+.......@...x.^.T..~1.xxxψ0~.1.0..@^*.....^S=^=.x.*||=....@~.
+...........~@.%.0Δλo.%.1%0^o.T.^...=.....S#~..^=....^...o.0T
+%....@....0.^@.^oΔ.~^.0^1.ψ...0.~.0.x....o.x=.....=T@.0...x.
+....oλ^.o@...^...λ.^^λ11T0....o..@...o~...@%^.o.....%%.x...S
+0x=.%~Δ#~.o...%.T..~.%.ψλ^....*.%....T....o0o....xTTx.%.00@.
+.0.o1ψ##o~....^.....0..1.#0T...^......T.....^....=.~%^x%....
+@0~..xΔ01oT...%.^............~.x..o..o...x........~.Δ1Δ=0=.%
+.....λ~x.x1...%..o%x....0....^.*...~.@*o...........0~=T~~~.x
+@.@x...ψ^S.0....#..@...%.x0TS..x....x..^^@^...#.o%.#.x.#~..@
+....0~x*0.......Δ^λ.........^.o%.%|...xS^........@.%.01%^.@.
+..%...~.^.0.^.1%.#@0%.#%.o=.*x%..~~%T.x.00^.....x.*.1#1.....
+...0@..To..o^^x.~~~.....x.01..x1=1%.~=S..To..o.o.0.0Δ.Δλ0x..
+...~.1^...%@..0..ψx.ψ..1^.0ψ1~.^#.1^oo%o.......^....%%.#..o.
+.#^..x00..0%.λ0.Δ^.Δλ...^.λψ.1@..0~=*10..@.*......^o..0^....
+..........x0..T#....0Δ^0%...^#.^^..x...S.........~.^.....x..
+..x..0......T0%TΔ*.....%..~.^0.~^.1^*...T........o.....%....
+.....=.1.......0%~........#%.T....x.%.^.S%.....%^.1....=x...
+.......=#.x~..=~......T..o...*0%~...........x~.~..x.....~.~.
+...0.^..@............=.@.0...~.....x.%.o@.x..xT...=.........
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 1096, density: 0.609)
+@: ['terminal', 'screen', 'display'] (freq: 44, density: 0.024)
+%: ['tangle', 'bramble', 'overflow'] (freq: 78, density: 0.043)
+x: ['crash', 'error', 'fail'] (freq: 76, density: 0.042)
+^: ['spike', 'peak', 'sharp'] (freq: 79, density: 0.044)
+T: ['tree', 'binary', 'node'] (freq: 35, density: 0.019)
+=: ['balanced', 'stable', 'calm'] (freq: 36, density: 0.02)
+o: ['debris', 'rubble', 'junk'] (freq: 54, density: 0.03)
+~: ['stream', 'data', 'flow'] (freq: 72, density: 0.04)
+#: ['server', 'rack', 'hardware'] (freq: 29, density: 0.016)
+0: ['null', 'void', 'empty'] (freq: 76, density: 0.042)
+1: ['bit', 'binary', 'one'] (freq: 40, density: 0.022)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 17, density: 0.009)
+λ: ['function', 'lambda', 'method'] (freq: 20, density: 0.011)
+*: ['spark', 'flash', 'bright'] (freq: 16, density: 0.009)
+Δ: ['change', 'delta', 'difference'] (freq: 17, density: 0.009)
+S: ['snake', 'silver', 'circuit'] (freq: 12, density: 0.007)
+|: ['flag', 'pole', 'vertical'] (freq: 3, density: 0.002)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 10.30 chars/cell
+Original: 18538 chars
+Perturbation #6 | EP: 0/5 | Map hash: -6980017989576970448
+Processed: #!/usr/bin/env python3
+"""
+MLBabel - Terminal El...
+=== COMPRESSED REPRESENTATION ===
+..@...%...x.T....T.............=.......^...#.=.@^x.x......o.
+...%.~......0@.......o..x......^~........~.~#...x.o....^@...
+xx~0xT....=.0..~.~..o.0T...^....%%T......T...%....@.~.0.o...
+..~.0@..@.o.~..=.....@@...=....0....@1.~......=....o....T..0
+^∞.λ@=....%.1%....~%.^..%....0...%..=...~@..1.......#o..o~..
+..∞.0~λ.~.x~=%...λ.@.....o..@..^1=^T....~.%.....0.....x..=.~
+Tx.=^=1^0.x^^=.=.%....~=..x......0.........~...0%.1.*%..#...
+...xx^.x~...~..x^..=@^~@.0x∞.~0..@.....~T...0...~.....o.....
+.∃~0*0..%o.T%S........*1∞λ@=λ.%...=...~∃%0.^*@x1@*^xS..=^..~
+.o...λ0...@.....^%.==%*∃01∃%0*%..T........%~=.1∃∞∞x~@...~...
+.=..=~o........o..o%.1~=.#.^0..^%*..o..x...1%0.*0@.0...0..o%
+.%..∃..%.%...@....~.*=x^ψ0=λ*00x%%^*..0..^0=~=.~x*~|=%...@~.
+.......=...~@.T.....^~^@1.ψ....0~..=@0000S#~*0==.x=%....~.0.
+%....@...=...@.^o..@x=^%λ∞ψ...0.~x00000000.=*^x.*.=0@.0...x.
+......^.o~..........0^10T.x.@.o..^.0000000.0.0.*....*0.x...T
+.x...~.=~.@...%o........^..0..*.%..0000000.@o.*.^1TTx@%..0..
+.0..1#.#o~............^1..0~...^.^000=000o.=x.~.@=@~%^x%....
+@..o.|xx|oT.x%~.^^%..........~.~=.o0000000....=...~.==%10=.%
+.....*~@.x1..o%..o%x........*..*.%.000000x.λλ.......~=^.x...
+T.@x.o.@0S.S...ox0.....1.x0T∞1.#...0000000....#.o**#%x.#...@
+...~0=%*0....%.0@^...........^λ..%|.~0000x∃^..=.*@@%.o~%..@.
+..%..T~∞T.0^@.0.^#@o..#.~o..*x%.%~~@T.xT*@..%λ.0..*.00...=..
+..^0@~...~.o.%10%%%.~.......%.x1=1%.~%x1..o*1o∞=.∃.0....0~..
+...~11o0..~@..=.0@..o.....=^1..^#@1^oo%x...^..@^.=o....~....
+=#^.∞xx=..0...................@.T0o=*1=.@@.*@.0........^....
+.........oo%..T.....0..0%....#.^^..x~o.S....∞.%..~T.........
+..%..0.......x.=0*.......=..=..~^=1%*..@..1x.∞...o.%...T....
+.....=.1.T.......~......^@...T....x.~...~.....~%..1....1x...
+.^.....=#..~.T.^............@*0%~...x.........T.........o^~^
+....@^.......0.........@.0...~.....x..x.@%x..xT.............
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 1025, density: 0.569)
+@: ['terminal', 'screen', 'display'] (freq: 66, density: 0.037)
+%: ['tangle', 'bramble', 'overflow'] (freq: 76, density: 0.042)
+x: ['crash', 'error', 'fail'] (freq: 65, density: 0.036)
+T: ['tree', 'binary', 'node'] (freq: 33, density: 0.018)
+=: ['balanced', 'stable', 'calm'] (freq: 68, density: 0.038)
+^: ['spike', 'peak', 'sharp'] (freq: 64, density: 0.036)
+#: ['server', 'rack', 'hardware'] (freq: 18, density: 0.01)
+o: ['debris', 'rubble', 'junk'] (freq: 50, density: 0.028)
+~: ['stream', 'data', 'flow'] (freq: 85, density: 0.047)
+0: ['null', 'void', 'empty'] (freq: 132, density: 0.073)
+1: ['bit', 'binary', 'one'] (freq: 36, density: 0.02)
+∞: ['infinite', 'unlimited', 'endless'] (freq: 13, density: 0.007)
+λ: ['function', 'lambda', 'method'] (freq: 12, density: 0.007)
+*: ['spark', 'flash', 'bright'] (freq: 36, density: 0.02)
+∃: ['exists', 'some', 'there_is'] (freq: 8, density: 0.004)
+S: ['snake', 'silver', 'circuit'] (freq: 6, density: 0.003)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 3, density: 0.002)
+|: ['flag', 'pole', 'vertical'] (freq: 4, density: 0.002)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 7.52 chars/cell
+Original: 13540 chars
+Perturbation #7 | EP: 0/5 | Map hash: 7784071111464814047
+Processed: #!/usr/bin/env python3
+"""
+MLBard - Turn any tex...
+=== COMPRESSED REPRESENTATION ===
+..@...%...x.T..................=.......^...#.=.@.x.x........
+.....................T..x..x...^~........~..#.....o.....@...
+xxo..T....%....o....o.0....^o...%%T..........%....@.~...o...
+..~............%.....@~........0....@1.~...................0
+^...........T1.....%.^..T~.^~1...%...^..~...1.......#.......
+....0.....x..T.....@.....o..1^1^1=^%%T.S~.oS~1..0.....x....~
+x...........*....%....~=.~x.o....0...o.....%....%.1.*%..#...
+.......o.......T^..=@^~@.^x.%...........x.S.^∃........o.....
+.~..*...%o.T%S..~~~~~.*11#0o......^...^~..*T1x....1xS..=^..~
+.o...10%*%o...~~^..%=~~~01@.^^%..S.λ...^~.%~*.S...x~@.......
+...%@~ψ*.T..~~.o..o%.0~=~~~.....%∃..o.~~~.o1%x..0..^...0..o%
+....~~~~~~~~.@....~.~.x^ψ0~~~~~~~~~~~~.*.~~~~~~~~~~~~%..~@~~
+...~1..ψ...~@.SS....~~%*1.ψo~%SS~..=ψ0*00S#~*0==.x=%.~~~~~~.
+~~~..@..~ψ...^.^S...1^1%ψ.ψ.....~.000000001x*^x.*.=ψ@.0...x.
+....*.^.o~..S^~ψ....0^11x.....T*.@.0000000.T...*..S.*0.x...S
+.x...~**~.@.*ψ%∃x.......T.....*.%..000000^.xT.o.SSTλx@%..0..
+.0..1#.#o~..%.ψ1...o..^1..0....^..000000%^.=x.λT@∃ψ∃%λ∃%....
+@....|xx|oT.x.~.^.1..........~.x...00000Sx.T..oo..~.=1%10=.%
+.....*~@.x1...%.*o%x.0......1..*...0000000x..T1*ψo.T.=^.x...
+@.@x...S0S.S...1xT.00000.x0λS..#...000000x....*.^%*~%x.#...@
+....0~%*0...1%SST.0x00000..λ^o...%|.00000.....^.~@.**0~%..@.
+..%...~.1.0.ψ.*ψ1#00100000..*x%..~~%T.x.*@....T~x1*.00......
+...0@......o.%1STo010~00001.%.x1=1%.~%x1..o..o.o...0....0x..
+...~.1^....@..∃11.λ00%00.∃∃^1..^#.1^oo^x.......^.......~....
+.#^..x.0..*..1%^T~0T0.00λ0.x..@..0x=*1o..@.*...........^....
+..........o%..T^S.0~**T0o0.S.#.^^..x.0.S.........~..........
+..x..0........^λλ*00*λ00∃0SS...~^.1%*............o.....%....
+.....=.1.........~.^000000...T....x.%...S......%..1....1x...
+.......=#..~..^^..0000000....*0%~.......................~.~.
+.....^.............00000.0...~.....x....@.x..xT.............
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 1023, density: 0.568)
+@: ['terminal', 'screen', 'display'] (freq: 34, density: 0.019)
+%: ['tangle', 'bramble', 'overflow'] (freq: 64, density: 0.036)
+x: ['crash', 'error', 'fail'] (freq: 61, density: 0.034)
+T: ['tree', 'binary', 'node'] (freq: 33, density: 0.018)
+=: ['balanced', 'stable', 'calm'] (freq: 21, density: 0.012)
+^: ['spike', 'peak', 'sharp'] (freq: 57, density: 0.032)
+#: ['server', 'rack', 'hardware'] (freq: 15, density: 0.008)
+~: ['stream', 'data', 'flow'] (freq: 127, density: 0.071)
+o: ['debris', 'rubble', 'junk'] (freq: 43, density: 0.024)
+0: ['null', 'void', 'empty'] (freq: 151, density: 0.084)
+1: ['bit', 'binary', 'one'] (freq: 55, density: 0.031)
+S: ['snake', 'silver', 'circuit'] (freq: 32, density: 0.018)
+*: ['spark', 'flash', 'bright'] (freq: 44, density: 0.024)
+∃: ['exists', 'some', 'there_is'] (freq: 10, density: 0.006)
+λ: ['function', 'lambda', 'method'] (freq: 11, density: 0.006)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 16, density: 0.009)
+|: ['flag', 'pole', 'vertical'] (freq: 3, density: 0.002)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 6.21 chars/cell
+Original: 11187 chars
+Perturbation #8 | EP: 0/5 | Map hash: -5929158563334559064
+Processed: #!/usr/bin/env python3
+"""
+mlgrid - It's a grid....
+=== COMPRESSED REPRESENTATION ===
+..@...%...x.T..................=.o....T^...#.=.@ox~x......T.
+....~..o....~........T..x..x...^~.......@~.@#.....x1....@..^
+xxo..T....%..o.o....o.0....^o..@x^T......x0..%....@.~.o.o...
+..~..0.@.......%.=...@~........~....@1~~.....^....~%.%.....0
+^...........T1.....%.^..T~.^~1...%......~.x.10..x.x.#~......
+....0.....x..T.....%..@..o..%^1^1=^.....~.0x....0x.xx.x%.S.~
+x.T.........*....%....~=.~x.o....0...........~0x%.^.xx..#...
+...~.~To.......T^..=@^~=x^..%..............xxx....11..o...o.
+.~..~.1.%o.T@S........x10.~o.....T^....T~.0^*.x0x.1~S..=1..0
+.o..~1..........x.1x1=*~.1..^^x..1..T...0x%x0...~.=~@..x.1..
+....@...=....@.o.~~%.0~=.~S~....%*..o...0~.1%0..0..^...~..~~
+.....1~@.00..@...0~.~.x^ψ0~1~@0.%%^*..0...x=^=.~%*~|=%.~.~~.
+.....=~@..%x@.T@..x.~~%o~~1xxoSS~..=00T00S~~*0==.x=%...0x.00
+%....@.x.~~x.@.^oS0.1^1%ψ~1~....~.0000000~0~*^x.*.=0@.0...0.
+^.....1.@~x......~..0^110=...TT*.@.00000x0.T...*..~x*1x....S
+.x..%~.10~@10.%.........T.1...*.%..00000~^.xo.^.^1T1.1=.x0..
+.0..o#.0o1....~S...o..^1..0%...^T.000000%^.=x.~T@=@x~^x~....
+@....|xx|10.x.~.^.1..........~.x...0000oSx.T......~0=~%1~=.%
+.^...*~@.x1@.x%.*o%x.0.........*...0x00000x..T1....~.=^.~...
+@.@x...T0S0S1..1xx.000@0.x0TS..#...000000x.T..*.^%*~%x.#...@
+....0~%*0..^.%.ST.0=00000...^.~..%|.00000.....^.~@.~.00T..@.
+..%.x.~.1.0.~.0.~#0^000000..*x%..=~%T.x.*@....T~x.*.x0....x.
+...0x.00x..oT%10%%=00T0%00.x%1x1=1%.~%x1..0..o.o...0..^.Tx..
+...~.1~.0.x@..=1T.00000000~.1~.^#.1^oo@x.o^....^...T...~....
+.#^=0x00111...~.*000000000.~..~..0x=o1o..@o*...........^.x..
+.....x0....%T0~.1.00000000...~.^^..x.0.S.........~........~.
+T..1.0..0...1x0.0*000000000....~^.1%*...%..x....xo.....%....
+....1T01.........~00000000~..T..^.x0%...S......%..1....1x..~
+..^.@1.=#..~o..^..0000000....*0%~..T...x......^........~~=~.
+.....^.......=.....0T000.~..^~.....x....0.x=.xT..........=..
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 959, density: 0.533)
+@: ['terminal', 'screen', 'display'] (freq: 44, density: 0.024)
+%: ['tangle', 'bramble', 'overflow'] (freq: 59, density: 0.033)
+x: ['crash', 'error', 'fail'] (freq: 102, density: 0.057)
+T: ['tree', 'binary', 'node'] (freq: 46, density: 0.026)
+=: ['balanced', 'stable', 'calm'] (freq: 40, density: 0.022)
+o: ['debris', 'rubble', 'junk'] (freq: 40, density: 0.022)
+^: ['spike', 'peak', 'sharp'] (freq: 60, density: 0.033)
+#: ['server', 'rack', 'hardware'] (freq: 11, density: 0.006)
+~: ['stream', 'data', 'flow'] (freq: 119, density: 0.066)
+1: ['bit', 'binary', 'one'] (freq: 68, density: 0.038)
+0: ['null', 'void', 'empty'] (freq: 202, density: 0.112)
+S: ['snake', 'silver', 'circuit'] (freq: 17, density: 0.009)
+*: ['spark', 'flash', 'bright'] (freq: 27, density: 0.015)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 2, density: 0.001)
+|: ['flag', 'pole', 'vertical'] (freq: 4, density: 0.002)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 2.62 chars/cell
+Original: 4717 chars
+Perturbation #9 | EP: 0/5 | Map hash: -963432067869167887
+Processed: #!/usr/bin/env python3
+"""
+MLWastesSwarm - Silic...
+=== COMPRESSED REPRESENTATION ===
+..@...%...x.T..................=.o....T^...#.=.@ox~x......T.
+....~..o....~........T..x..x...^~.......@=.@#.....x1....@..^
+xxo..T....%..o.o....o.0....^o.o@x^T.....Sx=..%....@.~.o.o...
+..~..0.@.......%.=...@~....%..#~0...@1@∃.0S..^....~%.%.....0
+^...........T1.....%.^.λT~.^=#.λ.%...∃||~^0∞S...x.x.#~......
+....0.x...x..T...#.%..@..o.∃%o1^1=^..*o^@λ=∃x...0x.xx.x%...~
+x.T.........*...∞%.∃..~∃1%.To#@@.**....x1λ1%.x..%.^.xx..#...
+...~..TS=S#....0^o.→@^~∃Δoψ^~|.λT.......1%%.~.....11..o...o.
+.~..~.1T||xT0000000.x∞^1*.~@~ψ1^.Δψ..$.*1x.**.x.~~~~~~.=1..0
+.o..~%.#o@T000000000=*S1T#∃.^1ψ=.1..T..=@#x*~~~~~.=~S.~x.1.~
+....0..@=#.000000000.0Sψ=#*.Sx.o%*..o.....~∃%0λ.0..^...~~~~~
+...^.=x~|*|000000000x.x^ψ0∃.~@0o%%^*~~~~~~0||0.S%*~|=%.~.~~.
+.....=x~1x0000000000~~%o1oψo%x~%~~~~00TS0^~#o0==.x=%...0x.00
+%....@@x.~S0000000001%#%~0.%ψS→.~.000000001~0oxx*.=0@.0...0.
+~~~~~~..10%000000000~~~~xo.∃T→T*o@.=∞0000~.~.~.*.→~x*1x....S
+.x..%~~~~~~000000000....T....@*T%..00000@^|xo.∞.^1T1.1=.x0..
+.0..o#.#o~..0000000o..^1..011..^Δ.000000%^.*x.oT@=@x~^x~....
+@....|xx1o0#0.~.^.1.........0~.xx.Δ|→00oSx.T......~0=~%1~=.%
+.^...*~@.x1#.^%.*o%x.0.........λ.→x0x00000x..T1....~.=^.~...
+@.@x...T0S.S...1xx.000@0.x0TS.S*o..000000x.T..*.^%*~%x.#...@
+....0~%*01.^.%~ST.0=00000...^.~..$|.00000.....^.~@.~.00T..@.
+..%.x.~.1.0o~.S.~#%|000000..*x@.@=o%@@→.*@....T~x.*.x0....x.
+...0x......oT%~*%%=*0S0%00..%.xT^11.~∃~1..0..o.o...0..^.Tx..
+...~.1~...x@x.=1T.00*00000..1..^#@#^o→=x.o^....^...T...~....
+.#^=0xx0..0~..~.~~00|S0000....S*^S%=o1o..@o*...........^.x..
+.....x....o%T0~.1.10000000...*=^^S.x.0.S.........~........~.
+T..1.0x.....1x0.0*000x0000..=..~^.1%*...%..x....xo.....%....
+....1T01.........~00000000~..T|.^.x0%...S......%..1....1x..~
+..^.@1.=#..~o..^..00|0000....*0%~..T...x......^........~~=~.
+.....^.......=.....01000.~..^~.....x....0.x=.xT..........=..
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 807, density: 0.448)
+@: ['terminal', 'screen', 'display'] (freq: 46, density: 0.026)
+%: ['tangle', 'bramble', 'overflow'] (freq: 61, density: 0.034)
+x: ['crash', 'error', 'fail'] (freq: 94, density: 0.052)
+T: ['tree', 'binary', 'node'] (freq: 44, density: 0.024)
+=: ['balanced', 'stable', 'calm'] (freq: 43, density: 0.024)
+o: ['debris', 'rubble', 'junk'] (freq: 53, density: 0.029)
+^: ['spike', 'peak', 'sharp'] (freq: 57, density: 0.032)
+#: ['server', 'rack', 'hardware'] (freq: 26, density: 0.014)
+~: ['stream', 'data', 'flow'] (freq: 133, density: 0.074)
+1: ['bit', 'binary', 'one'] (freq: 58, density: 0.032)
+0: ['null', 'void', 'empty'] (freq: 247, density: 0.137)
+S: ['snake', 'silver', 'circuit'] (freq: 28, density: 0.016)
+∃: ['exists', 'some', 'there_is'] (freq: 12, density: 0.007)
+λ: ['function', 'lambda', 'method'] (freq: 7, density: 0.004)
+|: ['flag', 'pole', 'vertical'] (freq: 18, density: 0.01)
+∞: ['infinite', 'unlimited', 'endless'] (freq: 5, density: 0.003)
+*: ['spark', 'flash', 'bright'] (freq: 39, density: 0.022)
+→: ['implies', 'leads_to', 'causes'] (freq: 8, density: 0.004)
+Δ: ['change', 'delta', 'difference'] (freq: 4, density: 0.002)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 8, density: 0.004)
+$: ['money', 'cost', 'profit'] (freq: 2, density: 0.001)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 9.87 chars/cell
+Original: 17761 chars
+Perturbation #10 | EP: 0/5 | Map hash: 2906674437008527004
+Processed: #!/usr/bin/env python3
+"""
+MLNonul.py - Forces U...
+=== COMPRESSED REPRESENTATION ===
+..@...%0@.o.T...........o......=.o....T^...#.=.@ox~x......T.
+....~..o....~........T..x..x...T~.......@~.@#...o.x1....@^.^
+xxo%.T....%..o.o....o.0....1o..@x^T......x0..%....@.~=o.o...
+..~=.0.@....o..%.T...@~.^~~....~....@1~~...~0^@...~%.%.0...0
+^...........T1.....%.^0.T0.~~o.%.%......~x1~x~..x.x.0~~T~...
+....0.xx..x.0T.....%..@T.oT.%^1^1@^...o.~.=001.10x.xx.x1~..=
+x.x.........1.x..%....~~0~T01....0.......*~%.~x.%.1~xx~x1..o
+...~..TS=.....1T^..=@%00000.^............%%T~~..xxo11.o.x.o.
+.~x.~.1T0~xTT1....=...00000o.=...T^....*1x^**xxx~1~~1^01x..0
+.o..0%.#0@.~..~.^..%x000000.^^x..1..T..S.#x*~~~~~~~0S.^~.1.~
+....0..~TT...@.o..o%.000000.....%*..o.....~~%0.x11x^...x~~~~
+...^.=%~x10..@..~.~=1.00000^~@0.%%^*~~~~~~@||=.~~*01~%.~.~~.
+...%.=x~xT%|@.TT..xT0~T0Toψo~~~~~~~x00TS0^~#*0@=.x@%...0x.00
+%=...@@x.~Sx.~~^T.0Tx1#0~~~~.%..~.000000001~*^0.*.=0@^=...0.
+~~~~~~..10%.~x.T~~.~0x01x=...TT*.@.000000~.....*..=x*1x....S
+~x%.%~~~0~~~..%.x~~1Tox.T.....*.%x.00000@^|xo.^=^1T1.1=.x0..
+.o..o#.#o~...x0ST0xxT~11..0%...^00000@00%^.xx.=T@=@x=^x~.o%.
+@..~0|Tx1o0%01~~^.~x.........~0x..=xx00oSx.TT.....~00~%1~=T%
+.^...Tx0.T1#.^%~~T~~.0.x..1~~..*...0x0@0x0T.~T1....~~=^.~...
+@.@xT.~~1~.Sx..1~xT000@0.0~xS.S#...0000T00.1x.*.x%*~%x.#...@
+....0T~~T1x^.%~ST.ox000=0TTTT.~..%|.000Tx...~.^.~@.~.00T..@.
+..%TxT~x~.xT~.S.~Tx|0000000.T0@.@=o%T.~.*@T1..x~x.*.x0....x.
+...0Tx~....1T%%*%T~*0%0=~~1.%.xT^11.~%x1.~x.~o.o@..00.^@Tx@.
+o..~.11.T1x@x.=1T.00*00000.01..^#@#^oo@x~0^....x...T...^....
+.#x=0xx~..0~..~.~~00|S00x~xx.%S*^S0=o1~..0o01..........^.x..
+....@x...0ooo0~.1.100000~0...x=^^S.x.0.S.0x......~........~.
+T..1.0@..@.01x0.x*0=0x0000..=..~^.1%*...%..x....xo.....%.^..
+....1T01........o~000T00T0~T.T|.^.%0%...S...~..%..1..o.1x.^~
+=.0.@1.=#..~o..0..00|0000....*0%~..T...x......%..=.....~==~.
+..T..^.~.....=.....01000.~..^~.....x....0.x=.xT..........=..
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 768, density: 0.427)
+@: ['terminal', 'screen', 'display'] (freq: 52, density: 0.029)
+%: ['tangle', 'bramble', 'overflow'] (freq: 65, density: 0.036)
+0: ['null', 'void', 'empty'] (freq: 212, density: 0.118)
+o: ['debris', 'rubble', 'junk'] (freq: 52, density: 0.029)
+T: ['tree', 'binary', 'node'] (freq: 88, density: 0.049)
+=: ['balanced', 'stable', 'calm'] (freq: 45, density: 0.025)
+^: ['spike', 'peak', 'sharp'] (freq: 56, density: 0.031)
+#: ['server', 'rack', 'hardware'] (freq: 15, density: 0.008)
+x: ['crash', 'error', 'fail'] (freq: 129, density: 0.072)
+~: ['stream', 'data', 'flow'] (freq: 186, density: 0.103)
+1: ['bit', 'binary', 'one'] (freq: 75, density: 0.042)
+*: ['spark', 'flash', 'bright'] (freq: 27, density: 0.015)
+S: ['snake', 'silver', 'circuit'] (freq: 19, density: 0.011)
+|: ['flag', 'pole', 'vertical'] (freq: 10, density: 0.006)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 1, density: 0.001)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 1.40 chars/cell
+Original: 2523 chars
+Perturbation #11 | EP: 0/5 | Map hash: 8756672186161070375
+Processed: #!/usr/bin/env python3
+"""
+MLWastesSwarm - Silic...
+=== COMPRESSED REPRESENTATION ===
+..@...%0@.o.T...........o......=.o....T^...#.=.@ox~x......T.
+....~..o....~........T..x..x...T~.......@~.@#...o.x1....@^.^
+xxo%.TT...%..o.o....o.0....1o..@x^T......x0..%...%@..=o.o...
+.@~=xx.@.Δ..o..%.T...@~.^~~....~....@1~~.....^@..T~%.%.0...0
+^.*S...o....T1.....%.^0.T0.~SoΔ%^%......~.0.1...x.x#0~~T~...
+....Δ^xx0.x.0T.....%..@T.oT.ψ^111@^@S.o.~.=.|...%x=~x.%1~..=
+x.x..ψ......1.x..%....~~~~T01S.ψ.0..@....*1%.x..%.1~0o~x1..o
+.~.~~%ψS=.....1T^..=1%~=1^..1|*^.x.*#....%%T~....Δ1#%.o.x.o.
+.~x.~ψ1T|.xTT1....=T..^101~%.1oSo0.~#..*1x^**.x.~~∃~1^01x..0
+.o..0%.#o∃@~..~.^..ψ*0S~11~TxSx..1~x0.xS.#x*~~~~~~~0S.^~.1.~
+....0..@=....@.o..o%||~o.xx.#.T.%%.T%.=...~~%0..0xx^...x~~~~
+...^.=%~*%~S.@..|.~#1.^~ψ0~.x@0@|%^|1~~~~~@|%=.~%*0|~%.~.~~.
+...%.x=1@xT|@.@~.x@#.~#0ToψoS~~1~~~xx%%ST^x0.0@=.x@%...0x.00
+%=...@1x.xS@.~~^Tx00S1x0~~~%.%..~.#00∃∃0|ΔΔ=S^0.*.=0@^=...0.
+~~~~~*~.10%.~x.TT#.~oo01x=..#TT*.@S#S#T0∃10∃0*.*..=x*1x....S
+~x%.%~TS~~~~..#%1~oΔTox.T..x..*.%0∃ψo~0ψ~1x*=.^=^1T1.1=.x0..
+~~~~~#*To~..^x0ST0xx#~1#~~~~~~.^0x*T∃^T%*^*xx.Δ1@=@x=^x~.o%.
+@....~~%1o0%~1=~^.o~~~~~.....~~~..xψx00~Tx.*@.....~00~%1~=T%
+.^...*~~~~~~~~~x~~~1S∃^Δ^#..0..*~~~~~~~~0xx.ΔT1.0.*~~=^.~...
+@.@x...T0S.S=..1~x#=^0@^.xTTΔ.S#...0.000~~~~~~~~~~~~~~~~~~~~
+....0~~*01.^.%~ST.%|00S~~x.~^.~..%|ψ00~00.@=.0000000.00T..@.
+..%.x.~.1.0x~.S.~|%|ψ#@00~0.%0@.@=o%T.~.*@...0000000x0....x.
+...0o......oT%%*%%=*o%0%~11.%.xT^11.~%x1..0..00000000%^@Tx@.
+o..~.1~...x@x.=1T.00@000T^.01..^#@#^oo@x.o^..0000000|%.^....
+.#x=0xx0..0~..~.~~00|S00x~~x.%S*^S0=o1~..@o*.0000000S..^.x..
+....@x....ooo0~.1.100000~0...x=^^S.x.0.S.....0000000......~.
+T..1.0@..@.01x0.x*0=0x0000..=..~^.1%*...%..x.0000000...%.^..
+....1T01........o~000T00T0~T.T|.^.%0%...S...~.00000..o.1x.^~
+=.0.@1.=#..~o..0..00|0000....*0%~..T...x......%..=.....~==~.
+..T..^.~.....=.....01000.~..^~.....x....0.x=.xT..........=..
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 682, density: 0.379)
+@: ['terminal', 'screen', 'display'] (freq: 58, density: 0.032)
+%: ['tangle', 'bramble', 'overflow'] (freq: 78, density: 0.043)
+0: ['null', 'void', 'empty'] (freq: 195, density: 0.108)
+o: ['debris', 'rubble', 'junk'] (freq: 56, density: 0.031)
+T: ['tree', 'binary', 'node'] (freq: 66, density: 0.037)
+=: ['balanced', 'stable', 'calm'] (freq: 50, density: 0.028)
+^: ['spike', 'peak', 'sharp'] (freq: 61, density: 0.034)
+#: ['server', 'rack', 'hardware'] (freq: 29, density: 0.016)
+x: ['crash', 'error', 'fail'] (freq: 108, density: 0.06)
+~: ['stream', 'data', 'flow'] (freq: 218, density: 0.121)
+1: ['bit', 'binary', 'one'] (freq: 75, density: 0.042)
+Δ: ['change', 'delta', 'difference'] (freq: 11, density: 0.006)
+*: ['spark', 'flash', 'bright'] (freq: 36, density: 0.02)
+S: ['snake', 'silver', 'circuit'] (freq: 35, density: 0.019)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 13, density: 0.007)
+|: ['flag', 'pole', 'vertical'] (freq: 20, density: 0.011)
+∃: ['exists', 'some', 'there_is'] (freq: 9, density: 0.005)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 6.21 chars/cell
+Original: 11171 chars
+Perturbation #12 | EP: 0/5 | Map hash: 3178195866836662763
+Processed: #!/usr/bin/env python3
+# NapNorn - Enhanced Napki...
+=== COMPRESSED REPRESENTATION ===
+..@..^%0@.o.~....~......o......x.o..=.T^...^.=.@Tx~x......%.
+....~T.o....~....o...T..x..o...T~...0...@~.@#...o.x1...~@o.^
+xxT@.T.~~.~..o.o....o.0....x%..@x^T....^.x0..%....@.~0o.o...
+..~=.0.T#o..o..%.T...@~.^%~....~....@1~~.....^@...~%.%.0...0
+^.....~..=.%T1.....%.^0@T0.=~o.%.%..^^..~.=.1...x.xo%~1.~λ..
+....0.xx~To=~T....0%..@T.0T.%^1^1@^@S.o.~.=.|...01Tψo..λ∃..=
+x.x......x*.=.=..%..o.~~~~x01....0..@....x1%.x..%%1~λx~xo0.o
+~..~..TS%~0..^1^^..=@%~=1^.^~~~..x.*#x.=.%%T=...@.o11.=%@=oo
+^~~0~.1T=T.~T1...^=..~~~~~~%.1.~~~~~#..*1%^**.x.~~x~%^o*x.T%
+.o.~0~.=~ψ~o%~~~~~~~~0S~.~~T%Sx..1^x~~~~~~x@@~0~~~~0S.x~=.1o
+....~.~~~.∃*.@.o..o%..#o.xx.#.T.%%.T%...^.~~~^~~~~~~~~T~~1%~
+...@.=%@|1|..@..|.~o~=x^ψ0~.x@0@|%^|~~~~~~@|%=o~%~0x~%^~~~~~
+...%#==ψ~xT~@.@~..xT0~T0Toψoxx~1~~~x00TS0^.0.o~.ox@%...0x.00
+%=.%xx1ψ.%*~.~~^T~0Tx1#0~~~%.%..~.000000001~*o0#*1=0@^%*..0.
+~~~#∃∃=**λ1x.xTTT#.~ox^@x=..#TT*.@.000000~%%λS.*.#=x*1x%...S
+~x%.%~TS~x~~ψ.#%1~o1T0x.T..x..*.%xx00000#1#*|@ψxx*#o.11.%0..
+.o.@o#*Toψ..^x0ST0@x#~11..0%T.===0000000*#=xxx*o=x%x~^x~.o%%
+@....|~^^o0~~1=ψ^.%1ψ......%.~0x.==xx00oSx.=1~~.%T~00~%%~=T%
+.^...*~@=T1#.|=∃oT~x#..%....o.^*...0x%@000x..T%10.*~~=^.~...
+@.@x...T0λ.S=.T1~xo=0~ψ0.x0TS.S#...0000000.Tx=00.0~S%x0#...@
+....0~~*01.^.T~So.%.o0x=0T..^.~..%|.0T^00....T000=00.=0T.=@.
+..%.x.~.1o0x~.S.~#oo.x∃010#.T^@.@=o%T.~~~=0..0∃00000x*..#.x.
+...0o.%....o~%%~%~x=~%o∃~λ1@%@xT^x*.~%x1..*..^00000T0**@#x@.
+o..~.1~∃x.=@~.=1T#@.∃00100.01^.^#@#^oo@o.o^..00o0000|%.~%@..
+.#x=0λo~x.0x..~^~~00∃S*0x~xx.%S*^S#*11~..@o*.000000oS.=1=λ..
+...~@λ=%..ooo0=.1.10T0λ0~0..~x=^^=.x=0xST....0T0000~0.x~..~.
+T..1xo#ψλ@.01x0.x*0=0x00x0.o=.@~^.%%*...%..x.0000o0~...x.^..
+@...1T01.......%T~000T00T0~T.T|.^.%0%...S..@~.T0000..ox1x.^~
+=.0.01T=#0.~o.@0..00|0000....*0%~..T...x......%~.=.....o==%.
+^.T..^.~.....=.^...0@000@~%.^~.....x....0.x=.xT..........=..
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 605, density: 0.336)
+@: ['terminal', 'screen', 'display'] (freq: 65, density: 0.036)
+^: ['spike', 'peak', 'sharp'] (freq: 64, density: 0.036)
+%: ['tangle', 'bramble', 'overflow'] (freq: 95, density: 0.053)
+0: ['null', 'void', 'empty'] (freq: 201, density: 0.112)
+o: ['debris', 'rubble', 'junk'] (freq: 80, density: 0.044)
+~: ['stream', 'data', 'flow'] (freq: 213, density: 0.118)
+x: ['crash', 'error', 'fail'] (freq: 115, density: 0.064)
+=: ['balanced', 'stable', 'calm'] (freq: 74, density: 0.041)
+T: ['tree', 'binary', 'node'] (freq: 79, density: 0.044)
+#: ['server', 'rack', 'hardware'] (freq: 35, density: 0.019)
+1: ['bit', 'binary', 'one'] (freq: 63, density: 0.035)
+λ: ['function', 'lambda', 'method'] (freq: 12, density: 0.007)
+S: ['snake', 'silver', 'circuit'] (freq: 23, density: 0.013)
+|: ['flag', 'pole', 'vertical'] (freq: 14, density: 0.008)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 13, density: 0.007)
+∃: ['exists', 'some', 'there_is'] (freq: 11, density: 0.006)
+*: ['spark', 'flash', 'bright'] (freq: 38, density: 0.021)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 14.64 chars/cell
+Original: 26347 chars
+Perturbation #13 | EP: 0/5 | Map hash: -8973799379452542387
+Processed: #!/usr/bin/env python3
+# NapNorn - Enhanced Napki...
+=== COMPRESSED REPRESENTATION ===
+00T...%@@.o.T....TT.....o.....0=.o...^T^..~#.=.@ox~x~^....@.
+....T..o....~........T..x..x...x~...To..@~^@#..%o.x=0...@^.^
+x=o%.~=~~.%..@To..0.o%0....1o..x^^x..%...x0..%....@.~=o.o..@
+@.~=.x.~#...o..%.....@~.^^~....~..^.x1~x...*=%~...~%.%.0...0
+^.....~@.=.%T1.#...%.^0.T0.~~oo..%....%.~.~ψ1.^.x.=.0~~.~=.x
+....%.xx~.o.0~.=1x.~..@T.oT.%%0~1@^@@To.~~@#=∃.~0x.0x.x1~.@=
+x0x......%*.1.^*......x~~~~@1%.~.0..@..~==*#*#..%.1~xx~xo..o
+~..~..T@o.....@T^.x=@x~=1^.~%~#..1.*^1x~~.*T*#.~T~o1@.o%*.o.
+.~%.~.1%|ox%T1%.=x=%.~~~~~~%#1@~ψ~~~x..1x=1~=.x.=~x~%T0ox.#^
+.o.~^^.To~~~~0~λ%ψ#~%xS~.1~Tx1*ox1~1*~oψλ~#*~#~~~~~0S.x~..1o
+....~.~~~#...@.^.~%*.0~o.xx.x*x=%%.x%.~.ψ1λ1ψ@~~~~~~~%~~~1%~
+x..=.=%~|*|..@^=|=∃==~0^ψ0~xx#.1~%λ|0#%1x~#|%=.~%*T|~%x~x%~~
+...%#==T~TT|@=∃~1^xT0λT0Toψx.#~#~~ox%*o%∃x%0~0@.ox@%0..0x.00
+x=.%xx1x.~S@.~~^T0=*xo#~∃#~%~%x1%.0%0λ#~=%.~*^0.*1=0@%%*.xo.
+~~=#~#..10x.oxx∃~~oψ0x0λx=.~@T.*..∃~000=ψ=0o.S.o.#=x*1^....S
+~x%@%~~So~~~%=#~1~T1Tox.T.λ=..*.**o000o%^%1%|.==*o#%.=1.^0..
+.o0.o#*Too=.=x#ST0xx^~1xψ∃0~...^T00~0~0λ*#=%~*ψ1=ψ%~=^=~.o%.
+@x.o.|~%1^0%%=~*^.%0#.o=.o...~0x..=oxλ0oS..T*.#.@∃#0o~*10=T^
+.^...~.o.T11~0~~*xx=#0x%....o@~*.^.0.ψ@*o~%..T1@=.0~~=^.~.T.
+x.@x..oT0SxS=xT#=xo=o%1..x0Tx.S#...^0xψ=*x.T..#ψ∃00Sψx.#x..@
+....0~~x11.^.~%#T.%=%@1=0T..^.~..%|.*.∃0λ....00∃o%=0.00T..@.
+..x.x.~.=.0x^%Sx~^~*%===000.T0@T@=o%T~*%ψoψ.=00ooox#10....x^
+...0~.x%.x*oT%=*=%=*1@01~11x%.xT^%*x∃%∃#∃o*0.0~0.0∃00%^@Tx@.
+o..1.1%~x.x@x.^1T.0x~0*o0@.010.^#@#^xoλx.o^o.T00%000|%.^~...
+.#%=0xx0..0~..0.~~00|%00x~xx.%S*^S#*^#~~.@~*.~00~00@=.*1ox..
+....@x^T#.ooo0~.o.100x00~0...0^^@=.x=0.S..T..0000000..x=..~.
+T..1~0@..@.01x0.o*0=000000..=..~^.~%*.0.%..%.00000=%0..x.^..
+....1TT1..x.....ox00T^00T0~T.T^.^.%0%0..S..~~T00000.~ox1x.~~
+@T0.@1.=#..~@x.0..00|0000....*0%~.@T...x=..oT.%..=....^^=o~=
+.0T..^.~.o..T~.x.o.00000.o..^~.....xx...0.T=.xT..o.......=0@
+
+=== LEGEND ===
+0: ['null', 'void', 'empty'] (freq: 178, density: 0.099)
+T: ['tree', 'binary', 'node'] (freq: 74, density: 0.041)
+.: ['ground', 'empty', 'clear'] (freq: 542, density: 0.301)
+%: ['tangle', 'bramble', 'overflow'] (freq: 105, density: 0.058)
+@: ['terminal', 'screen', 'display'] (freq: 64, density: 0.036)
+o: ['debris', 'rubble', 'junk'] (freq: 92, density: 0.051)
+=: ['balanced', 'stable', 'calm'] (freq: 92, density: 0.051)
+^: ['spike', 'peak', 'sharp'] (freq: 67, density: 0.037)
+~: ['stream', 'data', 'flow'] (freq: 203, density: 0.113)
+#: ['server', 'rack', 'hardware'] (freq: 50, density: 0.028)
+x: ['crash', 'error', 'fail'] (freq: 135, density: 0.075)
+1: ['bit', 'binary', 'one'] (freq: 67, density: 0.037)
+*: ['spark', 'flash', 'bright'] (freq: 53, density: 0.029)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 19, density: 0.011)
+∃: ['exists', 'some', 'there_is'] (freq: 16, density: 0.009)
+|: ['flag', 'pole', 'vertical'] (freq: 14, density: 0.008)
+λ: ['function', 'lambda', 'method'] (freq: 12, density: 0.007)
+S: ['snake', 'silver', 'circuit'] (freq: 17, density: 0.009)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 14.89 chars/cell
+Original: 26799 chars
+Perturbation #14 | EP: 0/5 | Map hash: 6295412271486619721
+Processed: #!/usr/bin/env python3
+import json
+
+try:
+    p...
+=== COMPRESSED REPRESENTATION ===
+.0T...%@@.o.T....@T.....o......=.o....T^...#.=.@ox~x.^....@.
+....~..o....~.......~x..x..x...x~...T...@~^@#...o.x=0...@^.^
+xxo%.~=~~.%..@.o..x.x%0....1o..@x^x..%...x0..%....@.~=o.o..@
+..~=.x.@#...o..%....xx~~^~~....~....@1~~.....%@...~%.%.0...0
+^.....~@.=~%T1.#...~.^0xT0.~~oo..%......~.0.1...x.x.0~~.~...
+....%.xx~.x.0~.oxx~xx.x~~~T.%^1^1@^@Sx~~~.x.x...0x.xx.x1~..=
+x0x......~*~1~~x~.xxx.x~~~T01..~.0..@...x*1%~x..%.1~xx~xo..o
+~..~..TSo.~~.x1~~~~~~~~~x00000#..1.*x~.x.%~x~~...~o11.o%*.o.
+.~~.~.1o|xxxT~%.=.xx.~~~000000.~~~~~#.x01x~^x.x.~~x~%T0ox.#%
+.o.~0~.#o~~~~~~~~~~x%0~~000000*ox1~x~~~x~~xx~x~~~~~0S.x~..1o
+....~.~~~#...@x^xxo%.000000000x=#%.T%...@x#x~@~~~~~~~~~~~1%~
+...=.=%~|*|..@..|.~=1000000000.@x%^|~~~~*~@~x=x~x*T|~%x~x~~~
+...%#==T~TT|@.@~.^xT0000000000~#~~~x00xS1x~0~0xxox@%0.~0~.00
+x=.%xx1x.~S@.~~^T~0x0000000000x1~.0=00^#o%~~*~~.*~=0@x~xx.o.
+~~~#~#..10x.ox.~T#~~0000000000.*.@.000x~0=0o.S~*~~=x*1x~...S
+~x%.%~TS~~~x%xx~x~~1T000000000*.%x.000ox~1#%|.#x~o#%.1~.x0..
+.o..o#*To~=.=~x~~xxx^~00000%...^000~0@0~*#=~~.x1=#%x=^=~.o%.
+@x.o.|~%1o0%%x~~~~x0#~ox~....~0x..=xx00oS~xTx.^.~1~0o~*11=T%
+.^...*.o.T11.~xxxx~=#0x~.~..o@.*...0x0@0o%x~~T11~.*~~=^.~...
+x.@x..oT0SxS=x~x~xo=ox~xxx0xS.S#...000000xx~..00.00S%x.#...@
+....0~~x11.^.~x#Tx%~o@1=xx..^.~..%|.0000x.xx~000..00.00T..@.
+..%.x.~.=.0x^%xx~#o*%~=~0x0xT0@.@=o%T.~.*x%.=0000o00x0....x.
+...0#.x%.x*oTx%*=%=*1x~1~~x~x.xT^%*.~%~1..*0.00@00=00%^@Tx@.
+o..1.1%~..x@xx^xT.0~~0~oxx.x1..^#@#^oo@x~x^..T00%000|%.^....
+.#%=0xx0..0~.~~~~~00|%00x~xx~%S*^S#*11~~.@~*.~0000#0=.*1=x..
+....@x.T#.ooo0~.x.100x00~0~..x~^@=.x=0.S.....0000000..x~..~.
+T..1~0@..@.01x0.x*0=000000x.=..~^.~%*...%..x.000000%0..x.^..
+....1TT1........ox000^00~0~T.T|.^.%0%0..S...~T00000..ox1x.^~
+@.0.@1.=#..~@x.0..00|0000....*0%~.@T...x....T.%..=....^~==~.
+.0T..^.~.....~.x...00000.~..^~.....x....0.T=.xT..o.......=.@
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 553, density: 0.307)
+0: ['null', 'void', 'empty'] (freq: 259, density: 0.144)
+T: ['tree', 'binary', 'node'] (freq: 49, density: 0.027)
+%: ['tangle', 'bramble', 'overflow'] (freq: 74, density: 0.041)
+@: ['terminal', 'screen', 'display'] (freq: 57, density: 0.032)
+o: ['debris', 'rubble', 'junk'] (freq: 65, density: 0.036)
+=: ['balanced', 'stable', 'calm'] (freq: 54, density: 0.03)
+^: ['spike', 'peak', 'sharp'] (freq: 44, density: 0.024)
+#: ['server', 'rack', 'hardware'] (freq: 37, density: 0.021)
+x: ['crash', 'error', 'fail'] (freq: 208, density: 0.116)
+~: ['stream', 'data', 'flow'] (freq: 277, density: 0.154)
+1: ['bit', 'binary', 'one'] (freq: 57, density: 0.032)
+S: ['snake', 'silver', 'circuit'] (freq: 18, density: 0.01)
+*: ['spark', 'flash', 'bright'] (freq: 34, density: 0.019)
+|: ['flag', 'pole', 'vertical'] (freq: 14, density: 0.008)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 0.32 chars/cell
+Original: 567 chars
+Perturbation #15 | EP: 0/5 | Map hash: -2515405550273278514
+Processed: #!/usr/bin/env python3
+# NapkinNorns - Complete W...
+=== COMPRESSED REPRESENTATION ===
+.0T...%@@.o.T....@T.....ox.....~.o....T^@..#.=.@xx~x.x....@.
+....~..o....~%...T...T..x..x...x~...T.~.@~^@#...o.x=0..=@^.^
+xxo%.~=x~.%0.@.o....o%0....1o..@x^x..o...x0..%0..@@.~=o.o..@
+%.~=.xo@=...o..%.....@~.#~0...^~.%..@1~~.0...o@...%%.%.0...0
+^.....~@.=~%T1%#...%.^0^T1#1~o=.o%......~.0.1...=.x.0~~.~...
+....%.xx~.x.0~.o1x^%..@=.oT.%^10~@^@Sx~~~.=.|.=.0x.xx.x1~..=
+x0x......x*~1.x*......~~~.=~1~%1.0o.@...x*1%@x..%.1~xx~xo..o
+~..~..TSo.~~..1T^.x=@x~=00#00%~~11.*x~.x.%%T~~..ψ~o11.o#*.oT
+.~~.~.1o|xxxT1%.=.=..~~~oo000#~~~~~~~.x01x^^*.11o1x~%T0#x.#%
+.o.~0~.#o=ψ~~~~01~~~%0S~00x000Tox1xx~~~x~~o1~~~~o~0.~.0....o
+....~.~~~#..00.^01o%.0~o00=0000=o00T%...@o#~~~ψ∃ψ~=#~1~=00=~
+T..=o==~|1|~=0.λ|.~=1.000^00%0~1x∃~λ~~@~*ox|0=.^x*0|#%o1x~~~
+...%#=^TxT∃x0.@~#=0T0~T00T000λo~o~~x00xS1xo0~0x0ox0#0.00~.00
+x=.%xx1xλ=S@∃~~oT.0=xo#0000000x#~@0=00^#o%#oo~%.*~λ0@xxxx.o.
+~~~#~#x.1.oo.x==λ1x~0x0@00000~o*o..00~x~000o.S~*~~=x*10#%=.S
+~x%.%~TS~.~∃%===ψ..0∃o^.00x00^*.%x.000ox~1#%|.#x~o#%.1..x0..
+.o..o#*To~o.=x#ψ11~0^~11..~%...^000~#@0~@#=x~.x1=#%x=^=~.o%.
+@x.o.|~%To0%%=∃*0~~#0~ox~....=0^..=xxλ0oS..T*.^.~100o~*1o=T%
+.^...ψ.=.T11.0~~o0000000.~..o@.*...0x0@∃∃%x..T11~.o~~=^.~...
+x.@x.#oT0SxS=o*0000000000x0x~.S#Tλ#00=~0=x.T.=0ψ.=10%1.#...@
+...o0λψx1#.^.~%#000000000x..^.~..%∃.0ψ000.0.~0~o.#0T.00T..@.
+..%.1.~0∃o0T^%Sx000000000x0xT0@.o=ooλ.~.λx%.=1#0λo#0......x.
+%..ψ%0o%.x*oT%%0000000000~x~x.0T^%oψ~x~#..*0.ψ%=ψo∃10o^@Tx@.
+o..1.~%...x@x.^1000000000x.x1..^#.#0oo@x~x^...0#==00|%.^~^..
+.#%=~xT0..0~..~.000000000~@xλ%S*1S#*##~~o@~*.~00=0=#=.*1=x..
+....@x.T#.ooo0~.0000000000~@.1~^@#..=@.S.^...0%o10~#..x~..~.
+T..1~0@..@.01T0.x000000000x.=^.~∃λ~%*...0..x.00o==oT0..x.^..
+.~..1TT1........ox0T0^00~0~T.T|.~.#0%0..~...~T00#0=..ox~x.^~
+@.0T@^.=#..~@x.0..00|0000....*0%~.@o0..x....T.%.@=....^~==~.
+.0T..^.~.@...~.x...00000.~..^~...1.x....0.T=.xT..o00.....=.@
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 525, density: 0.292)
+0: ['null', 'void', 'empty'] (freq: 285, density: 0.158)
+T: ['tree', 'binary', 'node'] (freq: 58, density: 0.032)
+%: ['tangle', 'bramble', 'overflow'] (freq: 74, density: 0.041)
+@: ['terminal', 'screen', 'display'] (freq: 60, density: 0.033)
+o: ['debris', 'rubble', 'junk'] (freq: 103, density: 0.057)
+x: ['crash', 'error', 'fail'] (freq: 135, density: 0.075)
+~: ['stream', 'data', 'flow'] (freq: 206, density: 0.114)
+^: ['spike', 'peak', 'sharp'] (freq: 49, density: 0.027)
+#: ['server', 'rack', 'hardware'] (freq: 58, density: 0.032)
+=: ['balanced', 'stable', 'calm'] (freq: 81, density: 0.045)
+1: ['bit', 'binary', 'one'] (freq: 70, density: 0.039)
+S: ['snake', 'silver', 'circuit'] (freq: 16, density: 0.009)
+|: ['flag', 'pole', 'vertical'] (freq: 12, density: 0.007)
+*: ['spark', 'flash', 'bright'] (freq: 27, density: 0.015)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 14, density: 0.008)
+∃: ['exists', 'some', 'there_is'] (freq: 13, density: 0.007)
+λ: ['function', 'lambda', 'method'] (freq: 14, density: 0.008)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 6.69 chars/cell
+Original: 12035 chars
+Perturbation #16 | EP: 0/5 | Map hash: -100388897867387636
+Processed: # NapkinNorns Architecture - Under 500 lines of co...
+=== COMPRESSED REPRESENTATION ===
+.0T...%@@.o.T....@=.....ox..0..~.o....T^@..#.^.@xx^x.x....=.
+....~.@o....~%...T...T..x..x...x~@..T.~.@~^@#.=.o.x=0..=@^.^
+^0o%.~=x~.%0o@.o....o%0....1o..@x^x..o...x0.~%~..@@.~=o.o.~@
+%=~o.xo@=...o..=....0o%.#~0...^~.=..01~~.0...o@..o%%.%.0.~.0
+^.....~@.=~%T1%#...%.^0^T1#1~o=.o%.~T..o~.0=1.ψo=~x.0~~.~...
+....%.^x~.x.0~.o1x=%.~~~~~~~~~~~~~~@~~~~~.=o|oψ.0x.xx.o1~..=
+~~~~~~~~~~~~~~~~~~~~~.~~~.=~1~%1.0o.~...~~~=@x~.%.oox.xx1..o
+~..~..TSo.^~=.1T0.x=@x~=~0#00%~~11.*x~.x.%%~~~ψ..^o1=.o=o.oT
+~~~.~~1ooxxxT1%.=.=.=1oooo000#~~~~~~~.x01x^~*~~~~~~~~~0o~.#~
+.o.~0ψ.#.^~~~~~0~~~~%0=~o0x00TTox1xx~~~x~~~o~~.~0^00oo~~~~~o
+~..o~0~=.0..~o.^..o~00~o0==000x=#%.T%...@oψ==~~~1~===.~=00=~
+T..=o11~|=|..@..|.~=1.000^00%0.@x%^|~~@~*~x.~=.^x=ψ.~%o1x~~~
+...0#=ψ0xTTx@.~~.=xT0~To0T0o.0~#~~~x01oS1xo0~0xxo@ψ%0.00~.00
+x=.%xx0x%0S@.~~~T.0T%1#0.00.ooxo~@0=0ψo#o%#ooT~.*~=0@xx^x.o.
+~~~#~#x.1ox%Tx.=%1x~0x^@000000o@.@.00~x~000o.S~*~~ψx*10#%=.S
+~x%.%~TS~~~x%x#o%%o0~0.ψ0~x.=^*.Tx.000@x=^#%|.#x~0o%.1..^0T.
+.o..o#*To~=.=x#.11~010.00.o.1..^000~0@0~@#=x~~x1=1=T=^=~.o%.
+@x.o.|~%T00%%=%*%o~0ψ~ox~.o.~=%o@.===00oS..T*.=^~o00ox*1o=T%
+.^...*.=.=0..0~~o#~=#0x~.~.~o@.*...~o0@0o%x..T~.~1o~~=^.~^..
+x.^x..oT0.xS=o*0==~o==ox1x0~1.S#T^.0.0000=.T..0.~=oo%11#ox.@
+.%.=0~~x11.^.~@#1=.oo@=%x0..^=~..%~.00000.0.~0o0.#0T.00To.@.
+..%.x.~.=.0T^%Sx0==.0~=o0x0xT0@.@o1%=.~.*x%.=0#0.o10..o...x.
+%..0%ψ.0TxooT%%*=.==^x~1~~x~x.0T@oo.~=~1..*0.0%o~o=10o^=Tx0.
+o..1..%0..x@x.^1T.0~~0~oxx.x1..^#1#^oo@x~x^..T~0%000ψ~.~~1..
+.#%=~x=0..00..~.^~00|%00x~@x~%S*^S.~11~~o%~*.10To0=o=.oo=x..
+....@x.T#.ooo0~.1.100x00~T~@.xo^^=.==@.S.~..^00o.0~#..10.o~.
+T..1~^@..@T%1T0.x*0=000000xo=^.~^.~=*..^0..x.00o.=o~0..ψψx..
+.~x.1TTo........ox%T0^00~0~T.T|.^.%0%0@.~...~T00#00..T~=1.1~
+@T0T@^.=#..~@x.0..00|0000....*0%~.@T0..x....@.%0@=....^.==~.
+.oT..^.~T^...~=x...00000.~..^~0....~....0.T=.xT..o00.....=.@
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 481, density: 0.267)
+0: ['null', 'void', 'empty'] (freq: 223, density: 0.124)
+T: ['tree', 'binary', 'node'] (freq: 68, density: 0.038)
+%: ['tangle', 'bramble', 'overflow'] (freq: 78, density: 0.043)
+@: ['terminal', 'screen', 'display'] (freq: 63, density: 0.035)
+o: ['debris', 'rubble', 'junk'] (freq: 139, density: 0.077)
+=: ['balanced', 'stable', 'calm'] (freq: 115, density: 0.064)
+x: ['crash', 'error', 'fail'] (freq: 124, density: 0.069)
+~: ['stream', 'data', 'flow'] (freq: 282, density: 0.157)
+^: ['spike', 'peak', 'sharp'] (freq: 60, density: 0.033)
+#: ['server', 'rack', 'hardware'] (freq: 38, density: 0.021)
+1: ['bit', 'binary', 'one'] (freq: 68, density: 0.038)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 16, density: 0.009)
+|: ['flag', 'pole', 'vertical'] (freq: 10, density: 0.006)
+S: ['snake', 'silver', 'circuit'] (freq: 13, density: 0.007)
+*: ['spark', 'flash', 'bright'] (freq: 22, density: 0.012)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 3.22 chars/cell
+Original: 5793 chars
+Perturbation #17 | EP: 0/5 | Map hash: 1364685883137771484
+Processed: #!/usr/bin/env python3
+"""
+KuramotoSOMNorn - Rhyth...
+=== COMPRESSED REPRESENTATION ===
+.0T...%@@.o.T....@=.....ox..0..~.o....T^@..#.^.@xx^x.x....=.
+....~.@o....~%..~T...T..x..x...x~@..T.~.@~^@#...o.x=0..=@^.^
+^0o%.~=x~.%0o@.o....o%0....1o..@x^x..o...x0.~%~..@@.~=o.o.~@
+%=~o.xo@=...o..=....0o%.#~0.^.^~.=..01~~.0...o@...%%.%.0.~.0
+^.....~@.=~%T1%%%0.%^^0^T1.1%o=.o%..T..o~.0.1.=.=.x.0~~.~...
+....%.^xx.x.0~.x1%=0..~=.o...^10~~x@Sx~~~.=.|.=.~x.xx.00~..=
+x0x......x*~1.x*x^%%..~~~.=%1~%1.0oλ....x*@%@x..%.1λψ.0x1..o
+~..~..TSo.^~=.1Tx.x=^x~=~0#01%~~1^.*x~.x.%%T~~~..^.11ψ%01.oT
+~~~.~.1o|xxxT1%1#.0.11o^oo000~~0x~x~~.x01x^^*.x.~~%=0~^0~.#%
+.o.~0~.#o^~~~~~0~~%x%#=~o0x00T.%x1xx~λ~x~~o1~~~~ψ^~.xo0.~@.o
+~..o~.~~~0..~o.^^.o~0%^o0==001x=#%ψ~~~~~~o#~~~~~~~=0=.~=00=~
+T..=o==~|T|..@..|.~=1.0^0^00%0.@x%~~.~#~*~~~~~.^x*oox%o1x~~~
+...0#=^TxTTx@.~~.=xT0#To0T0o~~~~~~1Δ.1xS1xo0~0~~~~~~~~~~~~~0
+~~~%xx0x%0S@~~~~T.0T%1#00~~~ooxo~@0~00^#o%#ooT~.*~=0.^x^x.o~
+~~~~~~~~~~~~Tx~~~~~~~~~~~00000o@.~.00.x~000o.S~*~~=1^%%#%=.S
+~x%.~~TψxψxΔ%x#o%%o0x.0.0~x.%1%.T0%0ψψ@#=^#%|.#x~o#1.1..^0T.
+.o..o#*To^00=x#.11~0o111..o%.~.^000~0@1ψ@#^x#~x1=1%.1xψ~.o%.
+@x.o.|~%ψ0λ%%=%*%o~00~^x~...10.1@.===~0oS.#Tλ.=^~o1#ox*1o=T%
+.^...*.=.λx..0~~o#^=#0x~.~.1^^.*...~o1#0o%x..T~.~1o%#=^.Δ^..
+x.^x..oT0.xS=o*0==~..0~xxx0x1.1#T^.0λ0000=.T..0.~=o.λ1.#00.@
+.%.=0~~x11.^.~@#1=x0~0=%xx..^=~~.%~.00000.0.~0o0.#ψT~ψ0T~.@.
+..%.x.~.=.0T^%Sx0==.^~^o0x0xT0@.0~1%=x~.*x%.~~~~~~~~~λ~~~~~~
+%..0%.x%TxooT%%*=.=#xx~~~~x^λ~~.ΔΔ0ψ~~x~~~.~.0%o~o=10o^@Tx@.
+~~~1.1%~..x@x.^1T.0%.%~#xx.1.ψλ%#ψ~λxx#x^x~x.T~0%000=%.^~^..
+.#%~~xT0..00..~.^~%~~~~~~~^x~%λ~^0#~0ψ~~oΔ0^.10To0=o=.o1=x..
+....~~~~~~~~o0~.1λ1%0x00~T~@^~o.1#^x=@%S.~..^00o.0~#..x~..~.
+T..1~^@..@T%~~~~~~1#000000xo=^λ~x.~^*..λ1..x.00o.=o~0..x.x..
+.~x.1TTo........ox%T0%00~0~T.T..^.%0%0@.~...~T00#00..Tx@x.^~
+@T0T@^.=#..~@x.0..00|0000....*0%~.@T0..x....@.%0@=....^~==~.
+.oT..^.~T^...~=x...00000.~..^~0....~....0.T=.xT..o00.....=.@
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 470, density: 0.261)
+0: ['null', 'void', 'empty'] (freq: 195, density: 0.108)
+T: ['tree', 'binary', 'node'] (freq: 65, density: 0.036)
+%: ['tangle', 'bramble', 'overflow'] (freq: 98, density: 0.054)
+@: ['terminal', 'screen', 'display'] (freq: 53, density: 0.029)
+o: ['debris', 'rubble', 'junk'] (freq: 100, density: 0.056)
+=: ['balanced', 'stable', 'calm'] (freq: 83, density: 0.046)
+x: ['crash', 'error', 'fail'] (freq: 139, density: 0.077)
+~: ['stream', 'data', 'flow'] (freq: 318, density: 0.177)
+^: ['spike', 'peak', 'sharp'] (freq: 81, density: 0.045)
+#: ['server', 'rack', 'hardware'] (freq: 47, density: 0.026)
+1: ['bit', 'binary', 'one'] (freq: 75, density: 0.042)
+S: ['snake', 'silver', 'circuit'] (freq: 10, density: 0.006)
+|: ['flag', 'pole', 'vertical'] (freq: 8, density: 0.004)
+*: ['spark', 'flash', 'bright'] (freq: 19, density: 0.011)
+λ: ['function', 'lambda', 'method'] (freq: 16, density: 0.009)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 17, density: 0.009)
+Δ: ['change', 'delta', 'difference'] (freq: 6, density: 0.003)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 10.30 chars/cell
+Original: 18538 chars
+Perturbation #18 | EP: 0/5 | Map hash: -2657323018511167582
+Processed: #!/usr/bin/env python3
+"""
+MLBabel - Terminal El...
+=== COMPRESSED REPRESENTATION ===
+~@=...o@@.o.T....@=...%.ox.^0..~.o.^..T^@..#.^.@xx^x.x..~.=.
+....~.@oo...~%..~T..0T..x..xo..x~@..T.~.@~^@#...o.x=0..=@^.^
+^0o%.~=x~.%0o@.o..%.o%0....1o..@x^x..o...x0.~%~..x@.~=o.o.~@
+%T~o.xoT=...o..=...~0o%~#~0.^.^~.=..01~~.0...o@..=%%.%.0.~.0
+^%..x.~@.=~%T1%%%0.%^^0^=^.1%o=~o%..T..o~.0.1.=~x.~.0~~.~...
+x~..%.^xx.x.^~=x1%=0..~=.o...^x%~@x@Sx~~~0000==1.^.xx.10~..=
+x0x^.....x*~1.x*x^%0=~~~~.=%1~%1x0o.T...x=000x~%%.1=^.0x1..o
+~..~..TSo.^ox.1=x.=@0@%=~0#01%0~00.xxo.x0=0~0~~^∃^x11.%#o.oT
+~~~.~.1∃^=xxT1%=1.0∞.@0^@o^00~~0~^~~~0x010000.x.0*x=o=00~.#x
+.o.~0~.o0^~~~~x0^∃=@0@~.o0*00T.10^x*~~~x~000T~~~~^~T=o0.~@.o
+T..o^1x~*0@.~o.*0.@λ0%~o~=^^01x@0..1%..0@o#~~~~~~0=0=.~=00=~
+T.%=oλ*@0T|..@..^o%.@%~^0λ00%0@@*.^@~~@~*ox|0=.^x*oo^%o1x~~~
+...0#0^TxTTx@.~@.=xT00∞o0=0o.0@#~0~x0T*T1xo0~0xxo@@@0.00~.=0
+xx.%x~0x00S@.~~~~x0T%.#0@0~@ooxo~@0=0@=*o%#ooT=.@~=^.^x^x.o.
+~~~#~#x.1ox%Txx=%∞~~x*^@0~@01∞o@^@.0=~=~00∞o.S~~^~=x^*0#%=0S
+~x%.%~TS~~~x%x#o@=o0%.0o01%.%.%%Tx.*~∃λ∞=^#%|.#xxo#==1..^0T.
+.o.0o#*0o~=.=x@^1011o101.=0x.^*^00*~x∞^=*#=x~~x1%1@1x^=~.o%.
+@o.oo|~%T00^%=%x%o00x~^x~.0*1∃~=∞.===00oS..T*.=^~o~0o~*1o=T%
+.^...*.=.=0.o0~%o#%=#0x~.@*^^~0.%.*=o.@0o%x..T~.~@o*1.^.~^..
+x.@x.@oT0.xS=o*~0∃^λ.*~xxxλ@0=@0x^~0.^000=.T..~*~=oo%1^#0x.@
+.%.=0~~x11.^o~@#==@^@0=%xT..%*λ..T~.00λ00.0.~0~^.#0T.0%T~.@x
+x.xxx.~.=.0T^%Sx0==~^~^o0x@~λ@λ.x~@%=.~.=x%.~~~∃~~~~~~~~~~~~
+%..0%.x%TxooT%%*=.=#xx^~~0@∞x@1*.o^~~~~~~~~~.0%=.o=10o^@Tx@%
+~~~o.1%~*.x@x.^1T.0~.%~#xx%~1λ.10=%^oo@x~x*..x0%@000λ%.^~^.%
+.#%~~xT~=.00..@o^~~~~~~~~~xx∃%@*^x.~11~~o%∞*=1x=o^===.o1=x..
+@...~~~%~~~~o0~.1.1~0x00~T*^@xo^^λ^==@.S~~..T*∞o%^x#..x~x.~.
+T..1~^%.^@T%@@~~~~~=00000Txo=%.1^T~=*..^0..xTλ∞o.=ox0..x^x..
+.~x.1TTo....@.%.ox%T0%0%~0~T.0@.%.%0%0@.~...~T=x#.0.^Tx@x=^~
+^TxT@^.=#.T~%x.0..00|=000..o.*0%T.@T0..x....@.%0@=....^~==T.
+.oT%.^.~T^...~=x...00000.~o.^~0....~....=oT=.xT..T00.....~.@
+
+=== LEGEND ===
+~: ['stream', 'data', 'flow'] (freq: 253, density: 0.141)
+@: ['terminal', 'screen', 'display'] (freq: 96, density: 0.053)
+=: ['balanced', 'stable', 'calm'] (freq: 116, density: 0.064)
+.: ['ground', 'empty', 'clear'] (freq: 402, density: 0.223)
+o: ['debris', 'rubble', 'junk'] (freq: 115, density: 0.064)
+T: ['tree', 'binary', 'node'] (freq: 71, density: 0.039)
+%: ['tangle', 'bramble', 'overflow'] (freq: 106, density: 0.059)
+x: ['crash', 'error', 'fail'] (freq: 152, density: 0.084)
+^: ['spike', 'peak', 'sharp'] (freq: 104, density: 0.058)
+0: ['null', 'void', 'empty'] (freq: 204, density: 0.113)
+#: ['server', 'rack', 'hardware'] (freq: 31, density: 0.017)
+1: ['bit', 'binary', 'one'] (freq: 60, density: 0.033)
+S: ['snake', 'silver', 'circuit'] (freq: 10, density: 0.006)
+*: ['spark', 'flash', 'bright'] (freq: 41, density: 0.023)
+∃: ['exists', 'some', 'there_is'] (freq: 8, density: 0.004)
+∞: ['infinite', 'unlimited', 'endless'] (freq: 12, density: 0.007)
+λ: ['function', 'lambda', 'method'] (freq: 14, density: 0.008)
+|: ['flag', 'pole', 'vertical'] (freq: 5, density: 0.003)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 7.52 chars/cell
+Original: 13540 chars
+Perturbation #19 | EP: 0/5 | Map hash: -1373821522921734635
+Processed: #!/usr/bin/env python3
+"""
+MLBard - Turn any tex...
+=== COMPRESSED REPRESENTATION ===
+.0T...%@@.o.T....@=.....ox..0..~.o....T^@..#.^.@xx^x.x....=.
+....~.@o....~%..~T...T..x..x...x~@..T.~.@~^@#...o.x=0..=@^.^
+^0o%.~=x~.%0o@.o..∃.o%0....1o..@x^x..o...x0.~%~..@@.~=o.o.~@
+%=~o.xo@=...o..=....So%.#~0.^.^~.=..01~~.0...o@...%%.%.0.~.0
+^.....~@.=~%T1%%%λ^%^^0^T1.1%o=.o%..T..o~.0.1.=~x.~.0~~.~...
+....%.^xx.x.0~.x1∃=x..~=.o...^x%~@x@Sx~~~0000.=1.^.xx.10~..=
+x0x......x*~1Sxoxψx...~~~.=%1~S1*%o.~...x0000x..%.1~x.0x1..o
+~..~..TSo.^~=.1T1.^=^x~=~S*o1^S~%oxxx~.x00000~~0.^*11.%#o.oT
+~~~.~.1o|xxxT1%=1.0.11o^oo.0*T~0.~~~~.x010000.x.0*x=o=00~.#%
+.o.~0~.#o^~~~~~0^x%x^#=~T0.^0TS1~Tx*~~~x~0000∃~~x^~.=o0.~@.o
+~..o~.~~~0..~o.*0oψ~0%^oo==xo1x@0..1%...@o#~~~~~~~=~=.~=00=~
+T..=o==~|T|..@..^%~=1.0^0^^xo0~@x.^@~~@~*ox|0=.^λ*1o~%o1x~~~
+...0#=^TxTT1oT~~.=xT0#TS0%xS~0@#~~.x00xS1xo0~0xx.@.%0.00~.00
+x=.%xx0x%0%.%~~~T.0T%1#S@0~@..xo~@0=00^#o%#ooT~^^~=^.^x^x.o.
+~~~S~#xx1oST%x.=%xx~x~^1o1*010o@.@oψ0ψx~000o.Tλ~T^∃.^*0#%=.S
+~x^.ψ~TS~~%S%x#o%.oxx...T1%.T1%.λx.0S0@x=^#%|.xS1S1==1..^0T.
+.ox.o^xψo~=.Sx#.11~0S%o.Tx0x.~.^*00~0@0ψ@#=x~~%^=%o1=^=~.o%.
+@x.%∃|~%T00%%=%*%%S0.~^ox1%.11ψ=S1.*=T0oS..T*1TS%~∃0o~*1o=T%
+.^o.~*^^.=0..0~^T.^=#%x~.@*1^^0.%.ψ~o0@0o%x..TT.oψ~o1.^.~^..
+x.^x..o10.xS.~*0=1*1*x~xT*^~1.%#x^~..0000=.T..0oT*.*%1.#0x.@
+.%.=0~~S11λT1.T~ooT1~0=%TxT.^=~..λ~000000.0.~0o0%#0T.00T~.@.
+..%.S~~~~~^λS^Tx~~~~.~^~~~~~~~~~~~~~~0000x%.~~~~~T~~~~~~~~~~
+~~~~~ox%.~~~~~~~%...~~~~~~x~~~%*x%%00~~00~~~.0%o~o=10o^@T~~~
+~~~λx1%~o.x*^oT~x.01^%~#xx.~1..^#100000~~~~~~~~0T000=%~~~^..
+.#%~~%o1o.1*1.^~1x~~~~~~~~~x~%S*^T0000000%~*.1~~~~~~~~o1=x..
+....~S~.λ~~~o0~.1.1~0x00~T~@.xo^^=0000000~..^00o.0~#..x~..~.
+T..1~^@.x@T%~~~~~~~=000000xo=^.~^.0000000..x.00o.=o~0..x.x..
+.~x.1TTo.......o^x%T0%00~0~T.T|.^.0000000...~T00#00..Tx@x.^~
+@T0T@^.=#..~@x.0..00|0000....*0%~.@00000....@.%0@=....^~==~.
+.oT..^.~T^...~=x...00000.~..^~0....~....0.T=.xT..o00.....=.@
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 439, density: 0.244)
+0: ['null', 'void', 'empty'] (freq: 227, density: 0.126)
+T: ['tree', 'binary', 'node'] (freq: 76, density: 0.042)
+%: ['tangle', 'bramble', 'overflow'] (freq: 91, density: 0.051)
+@: ['terminal', 'screen', 'display'] (freq: 54, density: 0.03)
+o: ['debris', 'rubble', 'junk'] (freq: 104, density: 0.058)
+=: ['balanced', 'stable', 'calm'] (freq: 77, density: 0.043)
+x: ['crash', 'error', 'fail'] (freq: 132, density: 0.073)
+~: ['stream', 'data', 'flow'] (freq: 305, density: 0.169)
+^: ['spike', 'peak', 'sharp'] (freq: 91, density: 0.051)
+#: ['server', 'rack', 'hardware'] (freq: 30, density: 0.017)
+∃: ['exists', 'some', 'there_is'] (freq: 6, density: 0.003)
+1: ['bit', 'binary', 'one'] (freq: 78, density: 0.043)
+S: ['snake', 'silver', 'circuit'] (freq: 32, density: 0.018)
+λ: ['function', 'lambda', 'method'] (freq: 9, density: 0.005)
+*: ['spark', 'flash', 'bright'] (freq: 31, density: 0.017)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 10, density: 0.006)
+|: ['flag', 'pole', 'vertical'] (freq: 8, density: 0.004)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 6.21 chars/cell
+Original: 11187 chars
+Perturbation #20 | EP: 0/5 | Map hash: 1986406093820194683
+Processed: #!/usr/bin/env python3
+"""
+mlgrid - It's a grid....
+=== COMPRESSED REPRESENTATION ===
+.0T.@.%@@.o.T..^.@=x...~ox..0..~.o..T.T^@..#.^.%xx^%.xx...=.
+....~.@o....~o..~T...T..x..x...x~@..T.~.@~^@T0..o.x@0..=@0.^
+^0o%.~=x~.%01@0o^...o%0....1o..@x^x..^o.Tx0o~%~..@@.=oo.o.~@
+%=~T.xo%=...ox.0....0o%.#~0.^.0~.=..@1~~.x...o@...%%.%.0.~.0
+%....=^0.T~%01%%%0%%^^0^1.T1%o=.o%..T..o~.%.1.=~x.~.0~~.~..0
+....x.^xx%x001xox%=0o.~=.=~^.^x%~@^@Sx~x^00o0.=1.T.x@^.0~x.=
+x0x.....@x*~1~x0xo%%.%=~~..%x~S10%^.~...00000x.x%.1xx~xx1.^o
+~..~..TSo%^~=.xTx.x=^x~=x~=o1^S~%oxxx~.x00000~~1~^*110%~o~~~
+^~~.~.1o|x~^111=100.%1o1o..~~~~0.~~~~.xT10000.x1~*x.0=0x~..%
+~~~~0~.#ox1xx~~0^=%x%#=~T~o^~T~1~Tx*~~~x~0000=~~~1~~~~~.01.o
+x..~~~~~~~0.x~~~~^o~0%^o~=xoo1x~~~~~%..~~~~~~~..~0=0..1=00=~
+T..=o==~|^|x~1..^.~~~~~T00~xo~~Tx.^@~~@~*ox|0~~~x*oo~~o10~~~
+%..0==^TTTT%oT~~.=xx00TS0%xS~0@#~~~x00xS1xo0~0xxo@@@0.00~.00
+x=.%xx0x%%%.%~~~T.0T%1#S@00@..xo~@0=00^#o%#ooT~.@~=^.^x^x.o.
+~~~#~#x.1o0@%x.=%xx~x~^11.*010o@.~.o0~x~0001.00~^~=x^*0#%=.S
+~x=.%~T~~~%S%x#o%.oxx..x^.~xT1%.To.0o0Tx=^#~|0#xxo#==1..%0TT
+.o..o#=T0~x.Sx#.11~0S%o.ox.x.~.^.10~0@00@#=^~~x~01@1=@o~%o%.
+@x.o.o~1T000%=%*%%S0.~^ox0o110.=1.=@~00oS.1.~1@.x*~0o~*1o=T%
+.^...*1=.=...0~^T.^o#%x~.=x~^x00%.*.o0@0T~000^.x.1~o1.^.~^..
+x.^x..~^1.xS.%*0=1*1*x~xT0.11~^x0.~0..000~o0.x0oT1.*%@.#0x.@
+.%.=0~~x11x^~.~~ooT1~T=%.10.T~~...~10000~.0.~xo0%#0T.00T..@.
+..%.x.~.0~0To^Tx1.=o.~^o0x~x~011o1000.0010.~%~~~x11~~~~~~~~~
+%..0~.x%TxooTS.*%.o.x0~~~%x~~x~~x0~xx~%0~..~.0%o~.010^^@Tx@.
+~~~1.1%~*.x@SoT~x.01^%~#xxx~x..^#.0x11000x101x~0Tx1~xx0^~^..
+.#%~~xT0=.00..^~1x~~~~~^~~~1.%S*^0~00x~00%1*.10Tx.1~=11x=x..
+~...~@~@~~~xo0~T1.1~xx00=T~@.xo^^=00~x0T1~..^0To10~#1.1.x~1x
+T..1~^@..@T%~~~~@~~=000000xo=x.~^^0000~.~0.x.0^o.=~%0~0xx00.
+.~^.1TTo.....~.o^x%T0x00~0oT.T|T^.0~~o000...~T0x#0=~.T1xx.^~
+@T0T@^x=#..~@x.0..00|0000....*0%~.@00~@~0...@.%0@=^....~==x.
+.oT..^.^T^.0.~=xx..00000.~..^~0....~....0.T=.xT..o00.@...=.@
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 399, density: 0.222)
+0: ['null', 'void', 'empty'] (freq: 240, density: 0.133)
+T: ['tree', 'binary', 'node'] (freq: 79, density: 0.044)
+@: ['terminal', 'screen', 'display'] (freq: 63, density: 0.035)
+%: ['tangle', 'bramble', 'overflow'] (freq: 93, density: 0.052)
+o: ['debris', 'rubble', 'junk'] (freq: 104, density: 0.058)
+^: ['spike', 'peak', 'sharp'] (freq: 88, density: 0.049)
+=: ['balanced', 'stable', 'calm'] (freq: 76, density: 0.042)
+x: ['crash', 'error', 'fail'] (freq: 179, density: 0.099)
+~: ['stream', 'data', 'flow'] (freq: 303, density: 0.168)
+#: ['server', 'rack', 'hardware'] (freq: 27, density: 0.015)
+1: ['bit', 'binary', 'one'] (freq: 102, density: 0.057)
+S: ['snake', 'silver', 'circuit'] (freq: 18, density: 0.01)
+*: ['spark', 'flash', 'bright'] (freq: 22, density: 0.012)
+|: ['flag', 'pole', 'vertical'] (freq: 7, density: 0.004)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 2.62 chars/cell
+Original: 4717 chars
+Perturbation #21 | EP: 0/5 | Map hash: 395239759294623745
+Processed: #!/usr/bin/env python3
+"""
+MLWastesSwarm - Silic...
+=== COMPRESSED REPRESENTATION ===
+.0T...o@@.o.T.x..@=.o...ox..0..~.o....T^@..#.^.@xx^x.x.%..=@
+....~.@o.0..~@..x=...T..x..x.~.x~@.%T.~.@~^@#x.@o.x=0..=@^.^
+^0o%.~=x~.%0oo1*S...o%0....1o.T@xox..o...x0.~%~..@@.~^o.o.~@
+%=~o.xo@=...o..=0S#@0o%.#~0.^=^~.=..01~~.0...o@..^%%.%.0.~.T
+^..%..~@.=~xT1%@#@.%^^0^1..1%o=~o%..T~.o~.0.1.=~x.~.0~~.~...
+....%.^xx.x.0|*|^%1~..~=To~.o0x%~xxxT~~~~x000.=1^^.xx..0~..=
+x0x......x*~1.x*xT%%.=~x~.S01SS0*%oS~%..x0000x..%S1x.~xx1..o
+~..~..TSo.^~=.1Tx.x=^x~=xT*01S#~%o|x%o.x^0000^~0.0*→T0%~o~~~
+~~T.~.1o|xxxT1@Sxx0.11o1~..→ψ~~0.|1#..x01=0o0oS.0@λ.000~~..%
+~~~~0~.#o^~~~~~0^=%x%#=~T~~Δ$x~1Δ.x%^~~x~000ψψψ~~0~~.*~.x1.~
+~..~~~~~~~..~@~x~~o^0%@o~=xx=10→~~~~#..~~~~x~*∃|~~ψ0*x==00=~
+T..=oT=~|T|..@..^.~~~~~~00~x0o*@λΔ^@xx#~*ox00~~~x*o@$~T10~~~
+...00=@TTTx1^@~~.=xT0#TS0%xS^@@ψx*~x00xS∃#o→ψ0%xo@o∞^~=0T.00
+x=.%xx0x%0%.@~~@T.0T%1#S@0~@..~%=@0=00.*#0*1oT~.@~.|oT|^x.oo
+~~~#~%xS1oS.S~o=%xx%xT01@.*010∃S.$=00~0@000=#So~^~=x**0#0=.S
+Tx%.%~T~~~o@%1#%%.=x#...~.~0T1%.^x.000|T*1→∃ψ.#x→@#==1..^0T.
+.oT.o#*T0~o.=#o.11~~o=ox1xox.~.^000~|$x~@∞=x~∃~*=1@1=^=~.T%.
+@x.o.|~1T00~%.@*%%S%.T^ox0.1*0T=1.==%0#TSS.|x1xSo*~0o~*1o=T=
+.^...*1=.=...0~^T.~=#%x~0Sx0S^0.%.*~oSΔ^o%#$.T~.01~o1.^.~^T.
+x.^x..~T1.xS.~*0=1*1*^~x0#.^1~%#=^~@x0∞0%=.λ.@0oS*0*%1.#0x.@
+.%.=0o~x11x^~.T~ooTox0=%.010|=~..%~0$.ψψ0.@.~0o~*#0T=00T..@.
+.@%.x.0.0~0To^Tx1.=o1~^o0x~x101.@~000S0^0x%.~~~~~T*^T~|~T~~~
+%..%%.x%TxooTS~*%...xx~~~~x~~~~*xo00~∞TT@~~~.|%%^xΔ#0.^@Tx@.
+~~~1.1%~%.x@SoT~x.0x^%~#xxx~1..^#10#010=0x^..^==T~λT→.^^1^..
+0#%~~xT0=.00..^~ox~o~~~~~~~x~%x*^0000x%00%~*.1#To%.T$o1x=x..
+...%~~~~~~~~~o~.|S1|~Tx#~T~@.xo^^=00~x001~..^00o.~~#%.1.x~1.
+T..x~^@..@T%~~~~~|10000000xo=^.~^~0@00~.0o.x.00o.=o~0~0xx00.
+.~x.1TToo......o^x=~0%T0~0~T.T|.^.0010000...~T0%#0@..T1xx.^~
+@TTT@^.=#..~@x.0.=01|0000....00%~.@00~0~0...@x%0@=.....~==~.
+0oT..^.~T^...~=x...0=000.~..^~0..0.~....0.T=.xT..o00....==.=
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 391, density: 0.217)
+0: ['null', 'void', 'empty'] (freq: 215, density: 0.119)
+T: ['tree', 'binary', 'node'] (freq: 89, density: 0.049)
+o: ['debris', 'rubble', 'junk'] (freq: 98, density: 0.054)
+@: ['terminal', 'screen', 'display'] (freq: 72, density: 0.04)
+x: ['crash', 'error', 'fail'] (freq: 152, density: 0.084)
+=: ['balanced', 'stable', 'calm'] (freq: 87, density: 0.048)
+~: ['stream', 'data', 'flow'] (freq: 275, density: 0.153)
+^: ['spike', 'peak', 'sharp'] (freq: 78, density: 0.043)
+#: ['server', 'rack', 'hardware'] (freq: 41, density: 0.023)
+%: ['tangle', 'bramble', 'overflow'] (freq: 87, density: 0.048)
+1: ['bit', 'binary', 'one'] (freq: 78, density: 0.043)
+*: ['spark', 'flash', 'bright'] (freq: 39, density: 0.022)
+S: ['snake', 'silver', 'circuit'] (freq: 34, density: 0.019)
+|: ['flag', 'pole', 'vertical'] (freq: 22, density: 0.012)
+→: ['implies', 'leads_to', 'causes'] (freq: 7, density: 0.004)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 10, density: 0.006)
+λ: ['function', 'lambda', 'method'] (freq: 4, density: 0.002)
+Δ: ['change', 'delta', 'difference'] (freq: 5, density: 0.003)
+$: ['money', 'cost', 'profit'] (freq: 7, density: 0.004)
+∃: ['exists', 'some', 'there_is'] (freq: 5, density: 0.003)
+∞: ['infinite', 'unlimited', 'endless'] (freq: 4, density: 0.002)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 9.87 chars/cell
+Original: 17761 chars
+Perturbation #22 | EP: 0/5 | Map hash: 5197643919653610037
+Processed: #!/usr/bin/env python3
+"""
+MLNonul.py - Forces U...
+=== COMPRESSED REPRESENTATION ===
+.0T...o@@.o.T.x..@=.o...ox..0..~.o....T^@..#.^.@xx^x.x.%..=@
+....~.@o.0..~@..x=...T..x..x.~.x~@.%T.~.@~^@#x.@o.x=0..=@^.^
+^0o%.~=x~.%0oo1*S...o%0....1o.T@xox..o...x0.~%~..@@.~^o.o.~@
+%=~o.xo@=...o..=0S#@0o%.#~0.^=^~.=..01~~.0...o@..^%%.%.0.~.T
+^..%..~@.=~xT1%@#@.%^^0^1..1%o=~o%..T~.o~.0.1.=~x.~.0~~.~...
+....%.^xx.x.0|*|^%1~..~=To~.o0x%~xxx~~~~~x00~~~~~~~~~~~0~..=
+x0x......x*~1.x*xT%%.=~x~.S%1SS0*%~~~%.~~~~~0x..%.1xx~x~~~~~
+~..~..TSo.^~=.1Tx.x=^x~=x~*01T#~~~|x%o.x^0000^~~.^*1~0%~o~~~
+~~T.~.1o|xxxT1@Sxx0.11o1~..~0~~~.|1#..x01=0o0ox10*xxTT0~~..%
+~~~~~~.#o^~~~~~0^=%x%#=~T~~x~~~1~Tx0^~~x~0000~~T~~~x^1~.x1.~
+~.~~~~~~~~..1@~~~~o~~~~~~~~~~10~~~x0#..~~~~~~~.1~x10%.%=00=~
+~~.=oT=~|T|.x1..~~~~~~~~000x00~@x.^@xx#~*ox|0~~~x*1T1~T10~~~
+...00=@TTTx0^~~~.=xT0#TS0%xS^0@#~T~x00xS1xo0T0xxo@xT~T=0T.00
+x=.%xx0x00%.~~xTT.0T%1#S@0~@..xo~@0=00.#o%#oo0~.@~0|oT|^x.oo
+~~~#~%x.1~x.~~0x%xx%xT01@.*010oT.@.00000000o.0~~^~=0**0#0=.S
+Tx%.%~T~~~0~%1111xTx#..1T.~0T1%.Tx0T10010^xx|.#xxo#==1..^0T.
+.oT.o#*T00oxx1o011x~o=o01xox.~.1TTT~T00~01T1~~x*=1@1=^=~.T%.
+@x.o.1~1T000~~~011T%.T~xxT11*01=0x~1TxTx0..xx1x~o*~0o~*1o=T=
+.^...*1=11~.TT~1T.1=#~x000x0S^0x~x1xx~~~0~xxxTT.01~o1.^.~^T.
+x.^x..~T1TxT~1*0~T11*^~1110^1~%#~Txx~0~10=.11.0oS*0*%1.#0x.@
+.%.=0~~xT10~0.0~1o0oxT=%1010|=x..10001T~0.@.~0o~*#0T=00T..@.
+.T%.x.0xT~0TT~101.=~1~^o1x~x101.@T1000~11x%.T~~~~T1~~~T~T~~~
+%.1%0.~1xxxoTS~*%..0xx~~~~x~~~~~x1T00x1~~~~~.|%%^x@10o^@Tx@.
+~~~1.1~T%.x@SoT~0.Tx0%~#xxx~1..T~x0xT1010T~.~T==T~0o%x^^1^..
+0#%1xxT0=T00..1~ox~1~~~~~~~x~%T*^0111xT00%~01~#To%.@=11x=x..
+...%T~~~~~~~~o~.xx1~~Tx#~T~@.xx^0~xx~x001~.1^00o.~~#%.1.x~1.
+T..x~^T..@T%~~~~~x00000000xo0^.~1~0@00~.0o.x0T0o.=o~0~0xx00.
+.~x.1TToo......o^x=~0%T0~0~T.T0.^00010000...~T0%#0@..T1xx.^~
+@TTT@^.=#..~@x.0.=01|0000....00%~T@00~0~0...@x%0@=.....~==~.
+0oT..^.~T^...~=x...0=000.~..^~0.x0.~....0.T=.xT..o00....==.=
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 350, density: 0.194)
+0: ['null', 'void', 'empty'] (freq: 232, density: 0.129)
+T: ['tree', 'binary', 'node'] (freq: 127, density: 0.071)
+o: ['debris', 'rubble', 'junk'] (freq: 83, density: 0.046)
+@: ['terminal', 'screen', 'display'] (freq: 57, density: 0.032)
+x: ['crash', 'error', 'fail'] (freq: 184, density: 0.102)
+=: ['balanced', 'stable', 'calm'] (freq: 69, density: 0.038)
+~: ['stream', 'data', 'flow'] (freq: 347, density: 0.193)
+^: ['spike', 'peak', 'sharp'] (freq: 59, density: 0.033)
+#: ['server', 'rack', 'hardware'] (freq: 33, density: 0.018)
+%: ['tangle', 'bramble', 'overflow'] (freq: 71, density: 0.039)
+1: ['bit', 'binary', 'one'] (freq: 132, density: 0.073)
+*: ['spark', 'flash', 'bright'] (freq: 26, density: 0.014)
+S: ['snake', 'silver', 'circuit'] (freq: 16, density: 0.009)
+|: ['flag', 'pole', 'vertical'] (freq: 14, density: 0.008)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 1.40 chars/cell
+Original: 2523 chars
+Perturbation #23 | EP: 0/5 | Map hash: -7197109210490658589
+Processed: #!/usr/bin/env python3
+"""
+MLWastesSwarm - Silic...
+=== COMPRESSED REPRESENTATION ===
+.0T...~@@.o.T.x..@=.T...ox..0..%.o....T^@..#.^0@xx^x.=.%..=@
+....~.@o.0..~@..x=...T..x..x.~Tx~@.%T.~.=~^@#x.@o.xx0..=@^.^
+^0o%.~=|~1%01o1*S...|%0....1o.T@xo0..oo..x^.~=~..@@@~^o.o.~@
+%=~o.xo@=ψ1.o..%0Sx^0∃~.T.0.^=^~.=..0~~~.0..0o@@.^%%.%.0.~%T
+^..%...|@|SxΔ1%@#@1|^*0%*..1%o=~o%..T~.o~.00000xx.~.0~~.~...
+.~.T%T∃%*Δ1*0#*^^@^o00~~1o~.o0x%~xxxT~~~~0000000^^.xx..0~..=
+x0xo@..#1#o~1@.*x|.o0=~S~.S%1SS0=%oS~%@.x0000000%.1~x|ox1..o
+~..~..TToψT~=1*@x.x1@@~=xx*01T#~%o|x%o.x00000000=o*T~∃%~=T~~
+~~T.~.1o~%^=T11S~x0011~1~..~0~%0.|o#..x0100000000|1x#oo~~..%
+~~~~0~.#∃=S~=~=0^=%0o^x~T~~x~x~1~TT0T~~x~0000000~~oT1x~.#1.~
+~..~~~~~%~..~@~x%~o^0%@T~=1xo10~~~x0#..~~~00000T=x10Δ.%~00=~
+T..=oT=~|T|.x@..^.~~~~~~x0^x00~@x.^@xx#~*oxoT~~~%=@.1*#o0~~~
+...00@@TTT%1^@~~.=xT0#T@0%xS^0@#~T~xo0xS1=o0T0xxo^xT#T=0T.00
+x=.%xx0x%0%.@~~%T.0T%1#S@0~@..x0~@0%T0.^o%#oo0~.@~Δ|oT|^x.oo
+~~~#~%x.1~S.S~o=%xx%xT01@.*010o@.@.T000x000o.0~@^~=0**=#0=.S
+T^^.%~T~~~o~%1#%%.=x#..1T.x0T1%.Tx0000x00^xx|.#.xo#1=~..T0T.
+.oT.o#*TS0o0=#o.11~~o%o^1xox*~.^0000000001T1~~x~=1#==@=~.T%.
+@x.o.|~1=o#0%.x0%%S%.o~x0T.Δ~0|*1.0000000..xx1x^o*10S~*=^=T=
+.^...*1=o1~..T~^T.~=#~x00x%S∃.ψ.%00000000~xxxT@.0^~o^o^.~^T.
+x.^x..~T1TxT~1*0=0@1*^~x0#S^1~ψ.@^0000000=.11.0o~10x%T.#0x.@
+.%.=0~~x110~0.T~~oTox0=o.010x=ψ~.~#000000.@.~0o~^#0@=0TT..@.
+.@%.x.@.0~0TT^TT1.=o1~^o0x.S1^@ox~0000000x%.Tx~~1T1~~~~x~~~~
+x..%%.x%TxToT^~*%=.@xx~~~~x|~~%*xo0T0000~~~~.*0%0x@10o@.~x@.
+~~~1.~%~%.x@SoT~x.0x^%~#xxx~1..^T100010=0x^.@%~==10o~Δ^^*0..
+0#%~~xT0=.00..^~ox~o~~~~~~~x~%.*^0000=~00~x01S#o~%@ψ=00x=S..
+x..%~~o~~~~~~o~.|S1|~Tx#~T~@0xo^^=00~x001~.1^~0oT*~#^.=.x~1.
+T..x~^@..@T%~~~~~|10000000xo=^.~^~0@00~.0o.x0=0o*=S~0Tψxx00.
+.~x.1TToT......o^x=~0%T0~0~T.T|.^.0010000...~T0%.0~..T~xxo^~
+@TTT@^.=#..~@x.0.=0x|0000....00%~.@00~0~0...@x%0@0...%.~==~.
+0oT..^.~T^...~=xo..@=000.~..^~x..0.~....0.T=.x=..o00....==.@
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 337, density: 0.187)
+0: ['null', 'void', 'empty'] (freq: 288, density: 0.16)
+T: ['tree', 'binary', 'node'] (freq: 107, density: 0.059)
+~: ['stream', 'data', 'flow'] (freq: 268, density: 0.149)
+@: ['terminal', 'screen', 'display'] (freq: 81, density: 0.045)
+o: ['debris', 'rubble', 'junk'] (freq: 102, density: 0.057)
+x: ['crash', 'error', 'fail'] (freq: 151, density: 0.084)
+=: ['balanced', 'stable', 'calm'] (freq: 83, density: 0.046)
+%: ['tangle', 'bramble', 'overflow'] (freq: 85, density: 0.047)
+^: ['spike', 'peak', 'sharp'] (freq: 76, density: 0.042)
+#: ['server', 'rack', 'hardware'] (freq: 40, density: 0.022)
+|: ['flag', 'pole', 'vertical'] (freq: 23, density: 0.013)
+1: ['bit', 'binary', 'one'] (freq: 84, density: 0.047)
+*: ['spark', 'flash', 'bright'] (freq: 30, density: 0.017)
+S: ['snake', 'silver', 'circuit'] (freq: 27, density: 0.015)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 7, density: 0.004)
+∃: ['exists', 'some', 'there_is'] (freq: 5, density: 0.003)
+Δ: ['change', 'delta', 'difference'] (freq: 6, density: 0.003)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 6.21 chars/cell
+Original: 11171 chars
+Perturbation #24 | EP: 0/5 | Map hash: 336638509869341690
+Processed: #!/usr/bin/env python3
+# NapNorn - Enhanced Napki...
+=== COMPRESSED REPRESENTATION ===
+.0T...~@@.o.T.x..@=.T...ox..0..%.o....T^@..#.^0@xx^x.=.%..=@
+....~.@o.0..~@..x=...T..x..x.~Tx~@.%T.~.=∃^@#x.@o.xx0..=@^.^
+^0o%.~=x~.%0oo1*S...|%0....1o.T@xo0..oo..x^*~=~..@@@~^o.o.~@
+%=~o.xo@=...o..%0S#^0o%.T.0.^=^~.=..0~~~.0...o@@.^%%.%.0.~%T
+^..%..~@.=~xT1%@#@1~^%0%*..1%o=~o%..T~.o~.0.ψ.@~x.~o~~~.~...
+.~.T%.^xx@x.0~*^^@1o0.~~1∃1.=0x%~xxxT~~~~x0#0.=x^^.*=..0~..=
+x0xo@..=1So~1@.*x|.%.=~S~.S.1SS0=%oS~%o.*=ψ10x#1%.λxx=xψ1..o
+~..~..TTo=T~=1*@x.x1@x~=x∃λ11T#~%o|x%=1o#λx*01~#=oψ11#%~=~~~
+~~T.~.1o~x^=T11S~x0011~1~..~x~%0.|o#..x0~ψ=∃01x10*x~%##~~..%
+~~~~0~.#o=*~=~=0^=%0=^#~%~oxx=~1~TT0T~~x~%λ~0~%~~~ψ#∃o~=#1.~
+~..~~~~~%~..~@~x%~#^0*x∃~=1x110~~~x0#..~%~~~x~TT~xλ~o.*.00=~
+T..=oT=~|T|.x@..^.~~~**=oλ#x0o~@x.^@xx#~*oxoT~~~ψ*~To~.o0~~~
+...00@@TTT%1^@~~.=xT0~T*~=~S^0@#~T~xo0xS#=ooT0xxo@x%~T=0T.00
+x=.%xx0x%0%.@~~%T.oT~%##=0∃@%.x0~@0%T0.^o%.oo0~.@~0|o%|ox.oo
+~~~#~%x.1~S.S~o=%xx%~=0*~o*010o@.@.T00010.~o.0~~^~=0**=#0=.S
+T^^.%~T~~~o~%1#%%.==%..x..x0T1o.ox0000x101xx|.#xxo#==1..T0T.
+.oT.o#*#10o0=#o.11~~~%x^1xox.xo^λ0000*%#x=T1~~x*=1%#=@=~.T%.
+@x.o.|=#.000%.x0%%S%.o~x0T.1.~T=1.0000=101.=x1x^o*~%o~*=^=T=
+.^...**#11~..T~^T.~=#~x00x%0Sψ0x%000000%=~11xT@.0o~o1.^.~~~.
+x.^x..~.~TxT~1*0=0@1*^~x0#.^1~%.=^00000#1=111.0o~*xx%T~~~x.~
+~~.=0~~*110~0.T~~oTox0=o.010x=~..~0000o.o...~0oxx#~~~~0T..@.
+.@~~~~@.0~0TT^TT1.=o1~^o0x~x~~~~~~~~~000%x1.Tx~1λ~1~*#Tx~~~~
+x..%%.~%TxToT^~*%~~~~x~~~~~~~~~*x~~~~~~~~~~~~~~~0x@10o^T~x@.
+~~~1.~~~~~~@~~~~~~~~~~~~~~x~1.~~~1xx%.#o~x^.#~~~~~~o%%^^~^..
+0#%~~xT0=~~~~~~~ox~o~~~~~~~~~~x*^x0%0o%00~x0xψψ~~o@~~~~~=~~~
+x..%~~o~~~~~~o~.|S1|~Tx#~T~@0xo^^%1#~.x0λ~.%^=.==*~#%.1.x~1.
+T..x~^@..@T%~~~~~|10000000xo=^.~^=#@.*~.0o.x1=0.#=S~0~0xx00.
+.~x.1TToT......o^x=~0%T0~0~T.T|.*#1~%000o...~~0%%0~..T1xxo^~
+@TTT@^.=#..~@x.0.=0x|0000....00%~.@.1~1~0...@x%0λ0...%.~==~.
+0oT..^.~T^...~=xo..@=000.~..^~x..0.~....0.T=.x∃..o00....==.@
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 337, density: 0.187)
+0: ['null', 'void', 'empty'] (freq: 184, density: 0.102)
+T: ['tree', 'binary', 'node'] (freq: 91, density: 0.051)
+~: ['stream', 'data', 'flow'] (freq: 364, density: 0.202)
+@: ['terminal', 'screen', 'display'] (freq: 67, density: 0.037)
+o: ['debris', 'rubble', 'junk'] (freq: 107, density: 0.059)
+x: ['crash', 'error', 'fail'] (freq: 151, density: 0.084)
+=: ['balanced', 'stable', 'calm'] (freq: 98, density: 0.054)
+%: ['tangle', 'bramble', 'overflow'] (freq: 94, density: 0.052)
+^: ['spike', 'peak', 'sharp'] (freq: 64, density: 0.036)
+#: ['server', 'rack', 'hardware'] (freq: 52, density: 0.029)
+∃: ['exists', 'some', 'there_is'] (freq: 8, density: 0.004)
+1: ['bit', 'binary', 'one'] (freq: 90, density: 0.05)
+*: ['spark', 'flash', 'bright'] (freq: 40, density: 0.022)
+S: ['snake', 'silver', 'circuit'] (freq: 18, density: 0.01)
+|: ['flag', 'pole', 'vertical'] (freq: 15, density: 0.008)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 10, density: 0.006)
+λ: ['function', 'lambda', 'method'] (freq: 10, density: 0.006)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 14.64 chars/cell
+Original: 26347 chars
+Perturbation #25 | EP: 0/5 | Map hash: -2045450654096443750
+Processed: #!/usr/bin/env python3
+# NapNorn - Enhanced Napki...
+=== COMPRESSED REPRESENTATION ===
+.0T...~@@.o.T.x..@=.T...ox..0..%.o....T^@..#.^0@xx^x.=.%..=@
+....~.@o.0..~@..x=...T..x..x.~Tx~@.%T.~.=~^@#x.@o.xx0..=@^.^
+^0o%.~=x=.%0oo1*S...|%0....1o.T@xo0..oo..x^.~=~..@@@~^o.o.~@
+%=~o.x=*=...o..%0%#^0o%.T.0.^=^~.=..0~~~.0...o@@.^%%.%.0.~%T
+^..%..~@.=~xTλ%1#ψ1~^%0%*..1%o=~o%..T~.o~.0.1.@~x.~.0~~.~...
+.~.T%.o~x@x.0~=^ψ@~o0.~~1o~.o0x%~xxx%~#~~x000.=x^^.xx..0~..=
+x0x1@=o~.So~1@.*#*.~.=~S=.~%1SS0=%oS~o@.x0.00x.~%.1xx~xx1..o
+~..~.*#*ψ**.=1*x**x1@x~=#x*01T#~%o|x%o.x#00.01.~=o*1~0%~=~~~
+~~T.~.1~∃=^=Tx1ψ~=0%11~1~..x0~%0.|o#o*o0*~=λ01x#0*xx~T0~~..%
+~~~~0~*#~=*#=~=0^#%0=^#~%~~x~x~1~T~.T~x#11o~x1%xo~~T^=~.x1.~
+~..~~~~~%~..1@~x%~#^0*@#~1*xo*0~~~x0#.*~%~~1.1λT~=10%.%^00=~
+T..=oT=~|T|.x@..^.~~~x~=o.oxx0~@x1^@ox#~*oxoλλ%xx*1T1~To0~~~
+...00@@TTT%1^@x~.=xT0~T*.oxx^0%#.T~xo0=S#=o=T0.%=@%T~T=0T.00
+x=.%xx0x%0%.@~~%T.oT~%##=ox@..oψ#@#%#x.^o%.oo*~x@x0|oT|^x.o~
+~~~#~%x.1%S.S~o=%xx%~=0*ox.010~#.ox=.0010.~o∃0~.1~~0~~~~~~~S
+T^^.%~T~~~*~%1#%%.==%....~~~~~~.o1000=x101xx|.#xx*#~=1..T0T.
+.oT.o#*#1==0λ#o.11~~~%x^~=%x.~*~~~~~~~~~~~~~~~x*=1~#=@=~.T%.
+~~~~~~~~~~~=..x0%%S%.o~~oTx1*0.=1.%000=*oλ.=x~~~~~~%o~*=^=T=
+.^...**#∃1x~.ψ~1~~~~~~*=#%%0S^0.%000000.λλ11x~@.xo~o1.^.~~~.
+x.^x.*~x~*.x~~~~=0@1*^~%**#^1~%#=^%000%#1=1#1λ0λ1*x~=λλ~~ψ.~
+.%.=0~~*1**.0.T~~oTox0=o#.1#x=~..~0000=~o.*.~0oxoψ~o1~0T..@.
+.@%.x.@x0~λ*x^TT1.=o1~^o0x~x10T.∃~0.∃.0~%11.Tx###~1~*#*1~~~~
+x..%%.xoTxTo.*~*%~~~~x~~~~x~~~~*x∃ψ=~%ψ~%*~*~#~~0x@1oo∃.#x@.
+~~~~.~x~1.x*~~~~~.0x^~~~~xx~1.~~~~xx%.#o1~∃.@%~==10x%%~=1...
+0#%~~~T0=~~~..^~ox~o~~~~~~~~~~x*^xλ∃#%*00#o01S#o~%@~=%1x=x..
+x..%~~~~~~~~~~~.|S1|~Tx#~T~@0xo^^%1#..#01=#1^~0oT*~#%.1.x~1.
+T..x~^@..~T~~~~~~~10~~~000xo=^.~^=#@.##.0o.x0=0o*=S~0~0xx00.
+.~x.1TToT......o^x~~0%T~~~~T.T|.*#1~%0000...~T0%.0~..T1xxo^~
+@TTT@^.=#..~@x.0.=0x|0000..~~~~~~.@01~0~0...@x%0@0...%.~~=~.
+0oT..^.~T^...~=xo..@=000.~..^~x..~~~~~~~~~~~~~~~~~~~~~~.=~~~
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 330, density: 0.183)
+0: ['null', 'void', 'empty'] (freq: 155, density: 0.086)
+T: ['tree', 'binary', 'node'] (freq: 75, density: 0.042)
+~: ['stream', 'data', 'flow'] (freq: 393, density: 0.218)
+@: ['terminal', 'screen', 'display'] (freq: 60, density: 0.033)
+o: ['debris', 'rubble', 'junk'] (freq: 99, density: 0.055)
+x: ['crash', 'error', 'fail'] (freq: 151, density: 0.084)
+=: ['balanced', 'stable', 'calm'] (freq: 97, density: 0.054)
+%: ['tangle', 'bramble', 'overflow'] (freq: 100, density: 0.056)
+^: ['spike', 'peak', 'sharp'] (freq: 58, density: 0.032)
+#: ['server', 'rack', 'hardware'] (freq: 66, density: 0.037)
+1: ['bit', 'binary', 'one'] (freq: 92, density: 0.051)
+*: ['spark', 'flash', 'bright'] (freq: 63, density: 0.035)
+S: ['snake', 'silver', 'circuit'] (freq: 15, density: 0.008)
+|: ['flag', 'pole', 'vertical'] (freq: 12, density: 0.007)
+λ: ['function', 'lambda', 'method'] (freq: 15, density: 0.008)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 10, density: 0.006)
+∃: ['exists', 'some', 'there_is'] (freq: 9, density: 0.005)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 14.89 chars/cell
+Original: 26799 chars
+Perturbation #26 | EP: 0/5 | Map hash: 5434399536493247560
+Processed: #!/usr/bin/env python3
+import json
+
+try:
+    p...
+=== COMPRESSED REPRESENTATION ===
+.0T...~@@.o.T.x..@=.T...ox..0..%.o....T^@..#.^0@xx^x.=.%..=@
+....~.@o.0..~@..x=...T..x..x.~Tx~@.%T.~.=~^@#x.@o.xx0..=@^.^
+^0o%.~=x=.%0oo1*S...|%0....1o.T@xo0..oo..x^.~=~..@@@~^o.o.~@
+%=~o.x=*=...o..%0S#^0o%.T.0.^=^~.=..0~~~.0...o@@.^%%.%.0.~%T
+^..%..~@.=~~~~~@#@1~^%0%*..1%o=~o~..~~.~~S0.~~~~~~~~~~~~~~~~
+~~~~~~~~~~~.0~*~~@1o~~~~~~~~~~~~~x~~%~~~~~~~0.=x^^.xx..0~..=
+x0x1@=x=.So~1@.*x~.~~=~S=.~%1SS0=%oS~x~.x0.00x#~%.1xx~xx1..o
+~..~~*x~xo*~=1*@x.~1~~~=#x*01T#~%~|x%o.~#00.01~#=o*1~0~~=~~~
+~~T.~x~o~=^=T11S~x00~1~1~..x0~%0.~o~o*o0*xx~x1x10*xx~T0~~..%
+~~~~0~x~xxx~=~=0^=%~=~#~%~~x~x~1xx~.T~x#1~x~0~%T~~~T^xx.x1.~
+~..~x~x~%x..~@~x%~Sx0~x#~1*xo*0~~~xx#.*~~~x~x~TT~x10%.%^00=~
+T..=~Tx~xT|.x@..^.~~~~x=o.oxx0~xxx^@ox#~*x~~~~~~x*1T1~To0~~~
+...00~~xTT%1^@~~.=xT0~T*.oxx^0%~.T~xo0=S#~xxT0xxo@%T~T=0T.00
+x=.%xx~~%0%.@~~%T.oT~%#x=ox@..o0~~~%~x.^o%.~o0~.@x0|oT|^x.oo
+~~~#~%x.1~S.S~x=~xx%~x~*ox.01x~#x~~=.0010.~o.0~~1~~0**=#0=.S
+T^^.%~T~~~o~%x#%%.==%~x..~x~T~%xxxx00=x101xx|.#xxo#==1..T0T.
+.oT.o#*#10o0~xx.x1~~~xxxx=%x.x~*~0000*%#x=T1~~x*=1%#=@=~.T%.
+@x.o.|=#.0x~%~x~%~S%.ox~oTx1*x~=1.%000=101.=x1x^o*~%o~*=^=T=
+.^...**#11x~~xx~~x~=#x*x#%%0S^0.~000000%=~11xT@.0o~o1.^.~~~.
+x.^x..~.~Txx~x*~S0@1*^~~xx#~1~%#=^%0000#1=111.0o~*xx%T~~~x.~
+.%.=0~~*11~x~~x~xoTox0=~#x1#~=~S.~0000oSo...~0oxx#~~~~0T..@.
+.@%.x.@x0~0~xxTTx.=o1~^o0x~~10T.@~00o000%x1.Tx~#~~1~*#Tx~~~~
+x..%%.xoTxTo~*~~%~~~~x~~~~~~~~x*x~~~~~~~~~~~~~~~0x@10o^T~x@.
+~~~~.~x~~.x@~~~~~.0x^~~~~~xx~~~x~1xx%.#o0xx.@x~==10o%%^^1^..
+0#%~~~x0=~~~.x^~ox~o~~~~~~~~~~x*^x0%0o*xx~~~~S~o~%@~=11x=x..
+x..%~S~~~~~~~~~.|S1|~Tx#~Txx~xo^^%1#~.x0~~~1^xxxT*~#%.1.x~1.
+T..x~^@..~T~~~~~~~10~~~000xx=^.~^=#@.##x0oxx0=x~*=S~0~0xx00.
+.~x.1TToT......o^x~~0%T~~x~T.T|.*#1~%00x0...~~xx.0~..T1xxo^~
+@TTT@^.=#..~@x.0.=0x|0000..~~~~~~.@01~0~0.x~~x%0@0...%.~~=~.
+0oT..^.~T^...~=xo..@=000.~..^~x..~~~~~~~~~~~~~~~~~~~~~~.=~~~
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 293, density: 0.163)
+0: ['null', 'void', 'empty'] (freq: 154, density: 0.086)
+T: ['tree', 'binary', 'node'] (freq: 76, density: 0.042)
+~: ['stream', 'data', 'flow'] (freq: 473, density: 0.263)
+@: ['terminal', 'screen', 'display'] (freq: 55, density: 0.031)
+o: ['debris', 'rubble', 'junk'] (freq: 86, density: 0.048)
+x: ['crash', 'error', 'fail'] (freq: 232, density: 0.129)
+=: ['balanced', 'stable', 'calm'] (freq: 85, density: 0.047)
+%: ['tangle', 'bramble', 'overflow'] (freq: 84, density: 0.047)
+^: ['spike', 'peak', 'sharp'] (freq: 57, density: 0.032)
+#: ['server', 'rack', 'hardware'] (freq: 48, density: 0.027)
+1: ['bit', 'binary', 'one'] (freq: 79, density: 0.044)
+*: ['spark', 'flash', 'bright'] (freq: 44, density: 0.024)
+S: ['snake', 'silver', 'circuit'] (freq: 23, density: 0.013)
+|: ['flag', 'pole', 'vertical'] (freq: 11, density: 0.006)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 0.32 chars/cell
+Original: 567 chars
+Perturbation #27 | EP: 0/5 | Map hash: 9180360650415162382
+Processed: #!/usr/bin/env python3
+# NapkinNorns - Complete W...
+=== COMPRESSED REPRESENTATION ===
+.0T...~@@.o.T.x..@=.T...ox..0..%.o....T^@..#.^0@xx^x.=.%..=@
+....~.@o.0..~@..x=...T..x..x.~Tx~@.%T.~.=~^@#x.@o.xx0..=@^.^
+^0o%.~=x=.%0oo1*S...|%0....1o.T@xo0..oo..x^.~=~..@@@~^o.o.~@
+%=~o.x=*=...o..%0S#^0o%.T.0.^=^~.=..0~~~.0...o@@.^%%.%.0.~%T
+^..%..~@.=~~~~~@#@1~^%0%*..1%o=~o~..oo.~~.0.~~~~~~~~~~~~~~~~
+~~~~~~~~~~~.0~*~~@1o~~~~~~~~~~~~~x~.%~~~~~~~0.=x^^.xx..0~..=
+x0x1@=o=.So~1@.*x~.~~=~S=.~%1SS0=%oS~=~.x0.00x#~%.1xx~xx1..o
+~..~.*xT.~*~=1*@x.~1@~~=#x*01T#~%o0.%o.~#00.01~#=o*1~0~~=~~~
+~~T.~.~oλ1^=T11S~x0011~10=1x0~%0.|0#o*o0*~=.=1x10*xx~T0~~..%
+~~~~0~~λ0.1~=~=0^.ψ0=^#~%~~.~x~1~T~.T~x#11~~0~%T~~~T^xx.x1.~
+~..~x~xo#~..~@~.~ψ0#0*@#~1.x.*0~~~00#.*~%~o~1~TT~x10%.%^00=~
+T..=~TxxxT|.x@..~1~.#x~=o.~1x0~0000000#~*o=~.~o~x*1T1~To0~~~
+...00~@~TT%1^@~.#10oλ~T*.~=.o0000000000S#=o1o#xxo@%T~T=0T.00
+x=.%xo~~%0%.@~~%T#∃1~%#x=o.1..000000000^o1.1.0~0@x0|oT|^x.oo
+~~~#~%x~λ~S.S~o=~xx%~0~*0o.010000000000101~.~#1~1~~0**=#0=.S
+T^^.1ψo~λ~o~%1#%%===%λ0o.~x~T0000000000101xx|.#xxo#==1..T0T.
+.oT.=0*λo0o0=~x.x1~~~1ψψ1=%x.~000000000#x=T1.0x*=1%#=@=~.T%.
+@x.o.|~λ1000%~~x%~S%.o1~oTx1*0000000000101.=x.x^o*~%o~*=^=T=
+.^...**#11x.~x~^Tx~=#~*=#%%0S^000000000%=111xT@.0o~o1.^.~~~.
+x.^x..~.~Tx*~~*~=0@1*^~%**#^1~%00000000o1.λψ1.0o~*xx%T~~~x.~
+.%.=0~~*11~1x~T~xoTox0=o#.1#x=~..~0000o..1=.1~~xx#~~~~0T..@.
+.@%.x.@xψ1.~x~TTx.=o0~^o0x~x10..@~00o00λ0∃oλψx~#~~1~*#Tx~~~~
+x..%%.x0T∃To~*~~%~0000~~~~x~~~0*x~~~~~λλ#.λ~1.~~0x@10o^T~x@.
+~~~~.~x~~.xψ∃~~1~#00000~~xx~o=~~~1xx%0#.λψ∃oψx~==10o%%^^1^..
+0#%~~~x0ψ0~∃.x^~ox00000~~~~~~~.*^x0%0oλ~ψλo1.=#o~%@~=11x=x..
+x..%~~~~.=.∃~~~.1000000#~T~.0xo^^%1#~.#0ψ0.oox0xT*~#%.1.x~1.
+T..x~^@..~T~~~~~~~00000000xo=^.~^=#@.##.0o.x0.xψ*=S~0~0xx00.
+.~x.1TToT..~...o^x00000~~~~T.T1.*#1~%0000ψ.0~~xx.0~..T1xxo^~
+@TTT@^.=#..~@x.0.=0000000..~~~~~~.@01~0~00~#@x%0@0...%.~~=~.
+0oT..^.~T^...~=xo..@=000.~..^~x..~~~~~~~~~~~~~~~~~~~~~~.=~~~
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 308, density: 0.171)
+0: ['null', 'void', 'empty'] (freq: 261, density: 0.145)
+T: ['tree', 'binary', 'node'] (freq: 71, density: 0.039)
+~: ['stream', 'data', 'flow'] (freq: 392, density: 0.218)
+@: ['terminal', 'screen', 'display'] (freq: 55, density: 0.031)
+o: ['debris', 'rubble', 'junk'] (freq: 95, density: 0.053)
+x: ['crash', 'error', 'fail'] (freq: 142, density: 0.079)
+=: ['balanced', 'stable', 'calm'] (freq: 88, density: 0.049)
+%: ['tangle', 'bramble', 'overflow'] (freq: 73, density: 0.041)
+^: ['spike', 'peak', 'sharp'] (freq: 54, density: 0.03)
+#: ['server', 'rack', 'hardware'] (freq: 55, density: 0.031)
+1: ['bit', 'binary', 'one'] (freq: 100, density: 0.056)
+*: ['spark', 'flash', 'bright'] (freq: 44, density: 0.024)
+S: ['snake', 'silver', 'circuit'] (freq: 15, density: 0.008)
+|: ['flag', 'pole', 'vertical'] (freq: 7, density: 0.004)
+λ: ['function', 'lambda', 'method'] (freq: 17, density: 0.009)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 16, density: 0.009)
+∃: ['exists', 'some', 'there_is'] (freq: 7, density: 0.004)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 6.69 chars/cell
+Original: 12035 chars
+Perturbation #28 | EP: 0/5 | Map hash: 7101063706850905323
+Processed: # NapkinNorns Architecture - Under 500 lines of co...
+=== COMPRESSED REPRESENTATION ===
+.0T...~@@.o.T.x..@=.T...ox..0..%.o....T^@..#.^0@xx^x.=.%..=@
+....~.@o.0..~@..x=...T..x..x.~Tx~@.%T.~.=~^@#x.@o.xx0..=@^.^
+^0o%.~=x=.%0oo1*S...|%0....1o.T@xo0..oo..x^.~=~..@@@~^o.o.~@
+%=~o.x=*=...o..%0S#^0o%.T.0.^=^~.=..0~~~.0...o@@.^%%.%.0.~%T
+^..%.1~@.=~~~~~@#@1~^%0%*..1%o=~o~..oo.~~.0.~~~~~~~~~~~~~~~~
+~~~=o0~~~~~.0~*~~@1o~~~0=~~~~~~~~x~.%~~~~~~~0.=xo00==..0~..=
+x0x1.1==1So~1@.*xo.ψ~=~ψ~.~%ψSS0=%oS~=~.x0.00x#~%.ψx0~=x1..o
+~..o.=~oo=*~=1*@x.o1@~~=~x*01T#~%o0.%o.~#00.01~#=o=1~01~=~~~
+~1T.10=~~=^=T11=..0=11~~01~==~%0.|0#.ψ==*~=.=1x10*o.~T0~~~~~
+~~~o0ooo==*~=~=0=o~.=^#=00~=0x~1~T~oT~1#11~~0~%T~~~T~~~~x1.~
+~.~=o~1o=~..~@~111000*=01~=o.*0~~~x00.1~%~o~0~TT~x~~~.%^00=~
+T..=~1x.oT|.x@..^1oo.1~0o==0x0~@x1^1ox=~1~...~~~~~1T1~To0~~~
+...00=o~TT%1^@~o#10oo~T*.~=.~~~~~T~~ψψo~ψ=oψo~xxo@%T~T=0T.00
+x=.%xx~~%0%.@~~%~#=T~~~~~~~~=.~0%~~~~=~~~=~~~0~0@x0|oT|^x.oo
+~~~~~~~.1~~~~~~~~~~~~x~1~~~~~~~#.ox=ψo01.1~o~#1~1~~0**=#0=.S
+T^^.1~T~~~o~%~~~~~o=%1x..~x~T1~~~~~~~=o.~~~~|.#xxo#==1..T~~~
+.oT~~~~~~~~~~~x.x1~~~~~~1=%~.~.*x000~~~~ψ=T1~0x*~~~~~~~~~T%.
+@x.o.==#.000%~~x%~S%.o1o1Tx110T=1.%000=101.=x~~~o*~%o=ψ0^=T=
+.^~..**#11x.~x~^Tx~=oψo1#%.0S^0.%000000%=~11xT@.0o~o1.^.~~ψ.
+~~^x..~.~Tx*~~*~=0@~*^1%**#^1~%#==%0000#1=111.0o~*xx%=~~~x..
+.%.=0~~*11~1x~T~xoTox.=1#.o#ψ=~..~0000o.o1..~0oxx#~~~~00.o@.
+.@%.x.@x0~0~x~TTx.=o.~~o0=~.10..@~o0o0000~1.Tx~#~~1~*#Tψ~=o1
+x..%%.xoTxTo~*~~%~00001~~~x~~~0*00=.~~~~#~~~~~~~0x@10o.=~=@.
+~~~~.~x~~.x@~~~1~#00.=0~ψxx~o=~~~=x=%1#..0^.@x~==10o%%^^0^..
+0#%~~~x0=~~~.x^~ox000000~~~~~~.*^001~o*~0~x01S#o~%@~=1==ψ0..
+x..%~~~~~~~~~~~.1000000#~T~o0x.o=o=#~.o010.1^x0xT*~#%.1.x~1.
+T..x~^@..~T~~~~~~~00000000xo=^..^=1@~##.0o.x0=x~*=S~0~0xx00.
+.~x.1TToT......o^x00000~~~~T.T1.*~1ψ00000...~~xx.0~..T1xxo^~
+@TTT@^.=#..~@x.0.=0000000..~~~~~~.101~0~0...@x%0@0...%.~~=~.
+0oT..^.~T^...~=xo..@=000.~..^~x..~ψ~~~~~~~~~~~~~~~~~~~~.=~~~
+
+=== LEGEND ===
+.: ['ground', 'empty', 'clear'] (freq: 303, density: 0.168)
+0: ['null', 'void', 'empty'] (freq: 202, density: 0.112)
+T: ['tree', 'binary', 'node'] (freq: 69, density: 0.038)
+~: ['stream', 'data', 'flow'] (freq: 487, density: 0.271)
+@: ['terminal', 'screen', 'display'] (freq: 53, density: 0.029)
+o: ['debris', 'rubble', 'junk'] (freq: 113, density: 0.063)
+x: ['crash', 'error', 'fail'] (freq: 113, density: 0.063)
+=: ['balanced', 'stable', 'calm'] (freq: 127, density: 0.071)
+%: ['tangle', 'bramble', 'overflow'] (freq: 64, density: 0.036)
+^: ['spike', 'peak', 'sharp'] (freq: 48, density: 0.027)
+#: ['server', 'rack', 'hardware'] (freq: 40, density: 0.022)
+1: ['bit', 'binary', 'one'] (freq: 108, density: 0.06)
+*: ['spark', 'flash', 'bright'] (freq: 36, density: 0.02)
+S: ['snake', 'silver', 'circuit'] (freq: 11, density: 0.006)
+|: ['flag', 'pole', 'vertical'] (freq: 6, density: 0.003)
+ψ: ['quantum', 'wave', 'superposition'] (freq: 20, density: 0.011)
+
+=== COMPRESSION INFO ===
+Domain: code
+Grid: 60x30
+Ratio: 3.22 chars/cell
+Original: 5793 chars
