@@ -150,5 +150,3 @@ When a commit fires inside the player bubble, instantiate N = f(intensity, LOD) 
 ## Why it will *feel* alive
 
 People recognize **rhythm**: queue surges, shift changes, tram beats, street vendor ebbs. Kuramoto gives you that rhythm **for free** from local rules. SOM keeps it **about the right things** (nearby places/services/roles). Together, you get **emergent, legible life** at MMO scale—without drowning servers in per-NPC brains.
-
-If you want, I can package this as a **minimal UE plugin**: one phase field component, one SOM asset, a couple of blueprint nodes (add edge, kick event, commit callback).
