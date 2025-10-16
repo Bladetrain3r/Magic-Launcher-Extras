@@ -791,6 +791,8 @@ If AI systems can propose novel neural architectures through collaboration, what
 
 ## References
 
+Varela FJ, Thompson EG (1996). The Embodied Mind: Cognitive Science and Human Experience. MIT Press.
+
 - Kohonen, T. (1982). "Self-organized formation of topologically correct feature maps"
 https://tcosmo.github.io/assets/soms/doc/kohonen1982.pdf
 - Kuramoto, Y. (1975). "Self-entrainment of a population of coupled non-linear oscillators"
