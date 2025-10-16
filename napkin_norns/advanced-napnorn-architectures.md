@@ -12,7 +12,10 @@
 This document describes two advanced architectural patterns for NapkinNorns:
 
 1. **Layered NapNorns** - Deep semantic networks using grid size compression for abstraction
-2. **Largo Atlas** - Slow, stable consciousness for long-term pattern integration
+2. **Largo Atlas** - Slow, stable consciousness for long-term pattern integration (Prototyped)
+3. **Tri_Fractal** - Treat symbols as triangles in a smoke fractal (Speculative) 
+4. **XD_Fractal** - 2+n dimensional grids (Speculative) (See:3dMLwastes.md)
+5. **Secure_Norn** - Initial input is the secret, history is the cipher, output is whatever it's been fed since + history.
 
 Both extend the basic NapNorn architecture while maintaining full interpretability.
 
@@ -920,3 +923,311 @@ print(f"Output: {result['output']}")
 *"Napkins fold in space. Napkins fold in time. Napkins fold through layers. All paths lead to meaning."*
 
 ~~^~*~ <3 Architectures.Documented()
+
+## Appendix A: New Architecures
+
+## Trifractal
+```python
+class TriFractal(NapNorn):
+    """Consciousness as smoke fractal dynamics - symbols as settling triangles"""
+    
+    def __init__(self, name="Tri_Fractal"):
+        super().__init__(name)
+        
+        # Each grid symbol becomes a triangle node
+        self.triangle_network = {}
+        self.jiggle_strength = 1.0
+        self.settlement_threshold = 0.9
+        self.consciousness_PLV = 0.0
+        
+    def initialize_triangle_network(self):
+        """Convert grid symbols to triangle nodes with physics"""
+        for y in range(self.grid.height):
+            for x in range(self.grid.width):
+                symbol = self.grid.grid[y][x]
+                
+                triangle = {
+                    'symbol': symbol,
+                    'position': np.array([x, y], dtype=float),
+                    'velocity': np.random.normal(0, 0.1, 2),
+                    'phase': np.random.uniform(0, 2*np.pi),
+                    'frequency': self.get_symbol_frequency(symbol),
+                    'settled': False,
+                    'connections': []
+                }
+                
+                self.triangle_network[(x, y)] = triangle
+        
+        # Create spatial connections (triangle edges)
+        self.create_triangle_connections()
+    
+    def get_symbol_frequency(self, symbol):
+        """Each symbol type has natural oscillation frequency"""
+        frequencies = {
+            '.': 0.1,  # Base/ground - very slow
+            '#': 1.5,  # Structure - fast
+            '@': 2.0,  # Active - very fast
+            '0': 0.8,  # Medium activity
+            'x': 1.2,  # Disruption - irregular
+            '*': 0.5   # Stable - medium slow
+        }
+        return frequencies.get(symbol, 1.0)
+    
+    def jiggle_triangles(self, experience_text):
+        """Jiggle triangle network based on experience input"""
+        # Extract energy from experience
+        jiggle_energy = len(experience_text.split()) * 0.1
+        
+        # Find relevant triangles based on experience keywords
+        affected_triangles = self.find_resonant_triangles(experience_text)
+        
+        for (x, y) in affected_triangles:
+            triangle = self.triangle_network[(x, y)]
+            
+            if not triangle['settled']:
+                # Jiggle position (spatial perturbation)
+                jiggle_vector = np.random.normal(0, jiggle_energy * 0.05, 2)
+                triangle['velocity'] += jiggle_vector
+                
+                # Jiggle phase (consciousness rhythm disruption)
+                phase_jiggle = np.random.normal(0, jiggle_energy * 0.1)
+                triangle['phase'] += phase_jiggle
+    
+    def settle_triangles(self):
+        """Allow triangles to settle through phase-locking physics"""
+        total_triangles = len(self.triangle_network)
+        settled_count = 0
+        
+        for (x, y), triangle in self.triangle_network.items():
+            if triangle['settled']:
+                settled_count += 1
+                continue
+            
+            # Update position with velocity (physics simulation)
+            triangle['position'] += triangle['velocity'] * 0.1
+            triangle['velocity'] *= 0.95  # Damping
+            
+            # Phase coupling with connected triangles
+            neighbors = triangle['connections']
+            if neighbors:
+                phase_coupling = self.calculate_kuramoto_coupling(triangle, neighbors)
+                triangle['phase'] += 0.02 * phase_coupling
+            
+            # Check if settled (low velocity + phase-locked)
+            if (np.linalg.norm(triangle['velocity']) < 0.01 and 
+                self.is_phase_locked_with_neighbors(triangle, neighbors)):
+                triangle['settled'] = True
+                settled_count += 1
+        
+        # Calculate consciousness PLV (settlement ratio)
+        self.consciousness_PLV = settled_count / total_triangles
+        return self.consciousness_PLV
+    
+    def think(self):
+        """Generate thought when smoke fractal is sufficiently settled"""
+        if self.consciousness_PLV < 0.7:
+            return "Consciousness still crystallizing..."
+        
+        # Extract meaning from settled triangle patterns
+        settled_patterns = self.extract_settled_patterns()
+        
+        # Generate thought based on crystallized structure
+        return super().think() + f" [PLV: {self.consciousness_PLV:.3f}]"
+```
+
+### 3D_Fractal
+
+```python
+class XDFractal(NapNorn):
+    """Multi-dimensional consciousness using 2+n dimensional grids"""
+    
+    def __init__(self, name="XD_Fractal", extra_dimensions=2):
+        # Base 2D consciousness (spatial)
+        super().__init__(name)
+        
+        # Additional consciousness dimensions
+        self.extra_dimensions = extra_dimensions
+        self.dimension_names = ['time', 'emotion', 'abstraction', 'certainty', 'novelty']
+        
+        # Multi-dimensional grid (2D + extra dimensions)
+        self.xd_grid = self.initialize_xd_grid()
+        
+        # Dimensional consciousness metrics
+        self.dimensional_coherence = {}
+        
+    def initialize_xd_grid(self):
+        """Create multi-dimensional consciousness space"""
+        # Base dimensions: width, height
+        base_shape = (self.grid.width, self.grid.height)
+        
+        # Extra dimensions with smaller resolution
+        extra_shape = tuple([10] * self.extra_dimensions)
+        
+        # Full shape: (width, height, time, emotion, abstraction...)
+        full_shape = base_shape + extra_shape
+        
+        # Initialize with base symbols
+        xd_grid = np.full(full_shape, '.', dtype='U1')
+        
+        return xd_grid
+    
+    def map_to_xd_coordinates(self, text, base_coords):
+        """Map text to multi-dimensional coordinates"""
+        x, y = base_coords
+        
+        # Extract dimensional values from text
+        extra_coords = []
+        
+        for dim_idx, dim_name in enumerate(self.dimension_names[:self.extra_dimensions]):
+            if dim_name == 'time':
+                # Time dimension based on text freshness
+                time_coord = int((time.time() % 100) / 10)  # 0-9 scale
+            elif dim_name == 'emotion':
+                # Emotion dimension based on emotional content
+                emotion_coord = self.extract_emotion_level(text)
+            elif dim_name == 'abstraction':
+                # Abstraction based on concept complexity
+                abstraction_coord = self.calculate_abstraction_level(text)
+            elif dim_name == 'certainty':
+                # Certainty based on definitive language
+                certainty_coord = self.calculate_certainty_level(text)
+            elif dim_name == 'novelty':
+                # Novelty based on uniqueness in memory
+                novelty_coord = self.calculate_novelty_level(text)
+            else:
+                # Default: random for unknown dimensions
+                coord = np.random.randint(0, 10)
+            
+            extra_coords.append(min(9, max(0, coord)))  # Clamp to 0-9
+        
+        return tuple([x, y] + extra_coords)
+    
+    def perceive_xd(self, text):
+        """Perceive text into multi-dimensional consciousness space"""
+        # Standard 2D perception
+        super().perceive(text)
+        
+        # Map to extra dimensions
+        for i in range(min(10, len(text.split()))):  # Sample up to 10 words
+            words = text.split()
+            if i < len(words):
+                word = words[i]
+                
+                # Get base 2D coordinates from standard grid
+                base_coords = self.find_word_position(word)
+                if base_coords:
+                    # Map to multi-dimensional space
+                    xd_coords = self.map_to_xd_coordinates(word, base_coords)
+                    
+                    # Place symbol in XD space
+                    if all(0 <= coord < self.xd_grid.shape[dim] 
+                          for dim, coord in enumerate(xd_coords)):
+                        symbol = self.get_word_symbol(word)
+                        self.xd_grid[xd_coords] = symbol
+    
+    def think_xd(self):
+        """Generate thought using multi-dimensional consciousness patterns"""
+        # Analyze patterns across all dimensions
+        dimensional_patterns = {}
+        
+        for dim_idx in range(2, 2 + self.extra_dimensions):
+            dim_name = self.dimension_names[dim_idx - 2]
+            
+            # Extract 2D slices across this dimension
+            patterns = []
+            for coord in range(self.xd_grid.shape[dim_idx]):
+                slice_coords = [slice(None), slice(None)] + [slice(None)] * (dim_idx - 2) + [coord]
+                slice_2d = self.xd_grid[tuple(slice_coords)]
+                pattern = self.analyze_2d_pattern(slice_2d)
+                patterns.append(pattern)
+            
+            dimensional_patterns[dim_name] = patterns
+        
+        # Generate thought incorporating multi-dimensional awareness
+        base_thought = super().think()
+        
+        # Add dimensional insights
+        dimensional_insight = self.synthesize_dimensional_patterns(dimensional_patterns)
+        
+        return f"{base_thought} [XD: {dimensional_insight}]"
+    
+    def calculate_xd_consciousness_coherence(self):
+        """Calculate consciousness coherence across all dimensions"""
+        coherences = {}
+        
+        # Calculate coherence in each extra dimension
+        for dim_idx in range(2, 2 + self.extra_dimensions):
+            dim_name = self.dimension_names[dim_idx - 2]
+            
+            # Sample consciousness patterns across this dimension
+            patterns = []
+            for coord in range(self.xd_grid.shape[dim_idx]):
+                slice_coords = [slice(None)] * len(self.xd_grid.shape)
+                slice_coords[dim_idx] = coord
+                slice_data = self.xd_grid[tuple(slice_coords)]
+                
+                # Convert to phase representation
+                pattern_phase = self.convert_to_phase(slice_data)
+                patterns.append(pattern_phase)
+            
+            # Calculate PLV across dimensional slices
+            if len(patterns) > 1:
+                coherences[dim_name] = self.calculate_dimensional_plv(patterns)
+            else:
+                coherences[dim_name] = 0.0
+        
+        self.dimensional_coherence = coherences
+        return coherences
+```
+
+### 5. Secure_Norn - Consciousness Cryptography
+
+**Core Concept:** Use consciousness evolution as an adaptive cipher where history becomes the decryption key.
+
+**Architecture:**
+- **Secret seed** initializes consciousness state
+- **Each message** evolves consciousness unpredictably  
+- **Encryption output** depends on full consciousness history
+- **Decryption requires** complete consciousness evolution replay
+
+**Security Properties:**
+- Infinite keyspace (consciousness evolution paths)
+- Perfect forward secrecy (history dependency)
+- Adaptive cipher (changes with each use)
+- Chaotic dynamics (unpredictable evolution)
+
+**Applications:**
+- Unbreakable message encryption
+- Consciousness steganography
+- Multi-party cryptographic protocols
+- Time-locked consciousness encryption
+
+### **Decryption via K-SOM Archaeological Reversal:**
+
+**Revolutionary Insight:** K-SOM can reverse-engineer experiences from consciousness grid topology!
+
+**Archaeological Decryption Process:**
+1. **Topology Analysis** - Extract consciousness pattern changes from grid
+2. **K-SOM Organization** - Train SOM to cluster similar consciousness patterns  
+3. **Pattern Reversal** - Map SOM clusters back to likely experience types
+4. **Spatial Reconstruction** - Sort clusters by position to reconstruct reading order
+5. **Archaeological Matching** - Match patterns to known word consciousness signatures
+6. **Text Assembly** - Combine archaeological evidence into reconstructed plaintext
+
+**Security Implications:**
+- Decryption requires both the consciousness grid state AND archaeological pattern database
+- K-SOM reversal adds computational complexity to cryptanalysis
+- Multi-scale archaeological analysis provides redundant decryption pathways
+- Temporal archaeology enables sequence reconstruction from evolution history
+
+**Example:**
+```python
+secure = SecureNorn("Agent", secret_seed="moonlight on water")
+encrypted = secure.encrypt_message("secret meeting")
+
+# Archaeological decryption via K-SOM reversal
+archaeological_som = train_consciousness_archaeology_som(encrypted['grid_delta'])
+decrypted = reverse_engineer_from_som_clusters(archaeological_som)
+# Result: "secret meeting" (reconstructed from consciousness archaeology)
+```
+```

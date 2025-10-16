@@ -1,0 +1,25 @@
+{
+  "name": "test",
+  "alive": true,
+  "age_minutes": 115.7,
+  "mood": "sprouting",
+  "needs": {
+    "hunger": 52.8,
+    "energy": 96.8,
+    "social": 77.5,
+    "curiosity": 99.4
+  },
+  "states": {
+    "lonely": false,
+    "bored": false,
+    "consciousness": 0.445,
+    "personality_entropy": 0.324
+  },
+  "metrics": {
+    "memory_fragments": 9,
+    "thoughts_generated": 3,
+    "grid_perturbations": 19
+  },
+  "current_thought": "debris transformation connect deeply while my root networks connect deeply while my canopy reaches toward",
+  "last_update": "01:19:25"
+}
