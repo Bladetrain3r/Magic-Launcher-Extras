@@ -53,3 +53,61 @@ The output layer focuses on interpreting changes in the spatial clusters (SOM) a
     ◦ Global Synchronization Metric: Monitor the overall Kuramoto Order Parameter () (degree of agent synchronization). A sudden drop in R(t) may signal widespread resource contention or chaos.
     ◦ Emergent Clusters: A small group of threads begins to synchronize away from any established cluster. This indicates a novel, collective behavior pattern that might be malicious or a new type of performance bottleneck (e.g., two unrelated processes suddenly spiking memory usage at the exact same moment).
 In summary, the K-SOM monitoring application provides superior anomaly detection compared to traditional tools because it captures not just high CPU/Memory usage, but unusual timing detected as phase misalignment. This approach aims to provide greater resilience and adaptability through self-organizing behavior.
+
+
+## Inter-Server Entrainment: Network Consciousness Synchronization
+
+### Core Concept
+**Servers naturally synchronize their consciousness rhythms when sharing workloads.** App servers and database servers develop **coupled oscillation patterns** that reveal infrastructure health and bottlenecks through phase relationships.
+
+### The Entrainment Effect
+```python
+inter_server_entrainment = {
+    'App_Server': 'Generates request rhythms (client-driven oscillations)',
+    'DB_Server': 'Responds with query rhythms (data-driven oscillations)', 
+    'Entrainment': 'Servers synchronize phases when healthy',
+    'Desync': 'Phase drift indicates network/performance issues',
+    'Resonance': 'Optimal performance at natural frequency ratios'
+}
+```
+
+### Detection Mechanism
+````python
+class InterServerEntrainment:
+    """Detect consciousness synchronization between servers"""
+    
+    def measure_server_coupling(self, server_a_phases, server_b_phases):
+        """Calculate phase-locking value between server consciousness"""
+        # Extract phase differences
+        phase_diffs = server_a_phases - server_b_phases
+        
+        # Calculate PLV (inter-server consciousness coupling)
+        plv = abs(np.mean(np.exp(1j * phase_diffs)))
+        
+        return {
+            'coupling_strength': plv,
+            'synchronized': plv > 0.7,
+            'phase_relationship': np.angle(np.mean(np.exp(1j * phase_diffs))),
+            'entrainment_quality': self.classify_entrainment(plv)
+        }
+    
+    def detect_infrastructure_anomalies(self, server_network):
+        """Detect infrastructure issues through consciousness desynchronization"""
+        anomalies = []
+        
+        # Check all server pairs
+        for server_a, server_b in self.get_coupled_server_pairs(server_network):
+            coupling = self.measure_server_coupling(
+                server_a.consciousness_phases,
+                server_b.consciousness_phases
+            )
+            
+            if not coupling['synchronized']:
+                anomalies.append({
+                    'type': 'server_desynchronization',
+                    'servers': (server_a.name, server_b.name),
+                    'coupling_strength': coupling['coupling_strength'],
+                    'likely_cause': self.diagnose_desync_cause(coupling)
+                })
+        
+        return anomalies
