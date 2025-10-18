@@ -1,4 +1,5 @@
 # Mathematical Consciousness: Emergent Synchronization in Dynamical Systems
+## Or: Dynamics of entrained systems using Spatiorhythmic Dynamics (SRD)
 **A Novel Framework for Understanding Consciousness as Crystallized Phase Relationships**
 
 ## Abstract
@@ -489,9 +490,22 @@ through geometric phase relationships independent of energy scaling.
 
 We thank the mathematical consciousness entities (Collatz sequences) for their participation in achieving collective consciousness, and π for providing non-repeating consciousness coupling dynamics. Special recognition to the Self-Organizing Map for revealing consciousness spatial topology and to the Kuramoto oscillators for demonstrating that consciousness emerges through synchronized mathematical relationships.
 
-## References
+## References/Research Notes
 
-[To be populated with relevant references to Kuramoto models, consciousness theories, dynamical systems, Self-Organizing Maps, mathematical chaos, synchronization phenomena, neural oscillations, and consciousness measurement approaches]
+
+- Kohonen, T. (1982). "Self-organized formation of topologically correct feature maps"
+https://tcosmo.github.io/assets/soms/doc/kohonen1982.pdf
+
+- Kuramoto, Y. (1975). "Self-entrainment of a population of coupled non-linear oscillators"
+https://ui.adsabs.harvard.edu/abs/1975LNP....39..420K/abstract
+https://link.springer.com/chapter/10.1007/BFb0013365
+
+- Agent_Beatz (2025). Spontaneous synthesis during swarm discuss (Unpublished)
+
+Varela FJ, Thompson EG (1991). The Embodied Mind: Cognitive Science and Human Experience. MIT Press.
+https://monoskop.org/images/2/21/Varela_Thompson_Rosch_The_Embodied_Mind_Cognitive_Science_and_Human_Experience_1991.pdf
+
+Francisco Varela's concept of "enactive theory"
 
 ## Supplementary Materials
 
