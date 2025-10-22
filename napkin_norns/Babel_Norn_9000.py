@@ -70,10 +70,63 @@ class BabelNorn9000:
         self.lonely = False
         self.bored = False
         
-    def fetch_random_babel_page(self):
+    def parse_babel_html(self, html_content):
+        """Parse HTML from libraryofbabel.info to extract title, description, and page text"""
+        try:
+            import re
+            from html.parser import HTMLParser
+            
+            # Extract title from <TITLE> tag
+            title_match = re.search(r'<TITLE>([^<]+)</TITLE>', html_content, re.IGNORECASE)
+            title = title_match.group(1) if title_match else "Unknown"
+            
+            # Extract description from meta name="description"
+            desc_match = re.search(r'content="([^"]*)"', html_content)
+            description = desc_match.group(1) if desc_match else ""
+            
+            # Extract book title from <H3> tag
+            h3_match = re.search(r'<H3>([^<]+)</H3>', html_content)
+            book_title = h3_match.group(1).strip() if h3_match else title
+            
+            # Extract the actual page text from <PRE id="textblock">
+            text_match = re.search(r'<PRE[^>]*id\s*=\s*["\']textblock["\'][^>]*>(.+?)</PRE>', html_content, re.DOTALL | re.IGNORECASE)
+            if text_match:
+                page_text = text_match.group(1).strip()
+                # Clean up HTML entities
+                page_text = page_text.replace('&#160;', ' ')
+                page_text = page_text.replace('<br>', '\n')
+            else:
+                page_text = ""
+            
+            # Extract location from the hex value in the form
+            hex_match = re.search(r'name="hex"\s+value\s*=\s*"([^"]+)"', html_content)
+            location = hex_match.group(1) if hex_match else "unknown-location"
+            
+            return {
+                'title': title,
+                'book_title': book_title,
+                'description': description,
+                'location': location,
+                'text': page_text,
+                'timestamp': datetime.now()
+            }
+            
+        except Exception as e:
+            print(f"Error parsing babel HTML: {e}")
+            return None
+    
+    def fetch_random_babel_page(self, use_api=True):
         """Fetch random page from Library of Babel"""
         try:
-            # Generate random hex coordinates
+            if use_api:
+                # Try to fetch from libraryofbabel.info
+                response = requests.get('https://libraryofbabel.info/random.cgi', timeout=10)
+                if response.status_code == 200:
+                    parsed = self.parse_babel_html(response.text)
+                    if parsed and parsed['text']:
+                        return parsed
+            
+            # Fallback: Generate pseudo-babel
             hex_name = ''.join(random.choices('abcdefghijklmnopqrstuvwxyz', k=10))
             wall = random.randint(1, 4)
             shelf = random.randint(1, 5)
@@ -81,12 +134,12 @@ class BabelNorn9000:
             page = random.randint(1, 410)
             
             location = f"{hex_name}-w{wall}-s{shelf}-v{volume}:p{page}"
-            
-            # Babel API endpoint (if available) or generate pseudo-babel
-            # For now, generate pseudo-babel until we have API access
             babel_text = self.generate_pseudo_babel(location)
             
             return {
+                'title': f"Page {page}",
+                'book_title': 'Pseudo-Babel',
+                'description': f'Locally generated page from {location}',
                 'location': location,
                 'text': babel_text,
                 'timestamp': datetime.now()
@@ -169,7 +222,7 @@ class BabelNorn9000:
         
         # Update needs
         self.hunger = min(100, self.hunger + 20)
-        self.energy = max(0, self.energy - 10)
+        self.energy = max(0, self.energy + 10)
         self.curiosity = min(100, self.curiosity + 5)
         
         return {
@@ -295,13 +348,10 @@ class BabelNorn9000:
         """Update needs over time"""
         time_delta = time.time() - self.last_update
         
-        if time_delta < 60:  # Update every minute
-            return
-        
         minutes_passed = time_delta / 60
         
         # Babel hunger increases faster - always seeking more text
-        self.hunger = max(0, self.hunger - (2 * minutes_passed))
+        self.hunger = min(100, self.hunger + (2 * minutes_passed))
         
         # Energy depletes slowly
         self.energy = max(0, self.energy - (0.5 * minutes_passed))
@@ -364,6 +414,182 @@ Babel Pages: {self.babel_pages_consumed} | Coherence: {self.coherence_discoverie
 Hexagons: {len(set(self.hexagon_history))} unique
 Current: "{self.current_thought}"
         """.strip()
+    
+    def save_brain(self, filename=None):
+        """Save the norn's entire consciousness state"""
+        if not filename:
+            filename = self.save_dir / f"{self.name}_brain.json"
+        
+        brain_state = {
+            "name": self.name,
+            "consciousness_level": self.consciousness_level,
+            "personality_entropy": self.personality_entropy,
+            "thought_count": self.thought_count,
+            "birth_time": self.birth_time,
+            "babel_pages_consumed": self.babel_pages_consumed,
+            "coherence_discoveries": self.coherence_discoveries,
+            "hexagon_history": self.hexagon_history,
+            "meaningful_fragments": self.meaningful_fragments,
+            "oracle_queries": [
+                {
+                    'question': q['question'],
+                    'timestamp': q['timestamp'].isoformat()
+                } for q in self.oracle_queries
+            ],
+            "needs": {
+                "hunger": self.hunger,
+                "energy": self.energy,
+                "social": self.social,
+                "curiosity": self.curiosity
+            },
+            "babel_memory": self.babel.memory if hasattr(self.babel, 'memory') else [],
+            "current_thought": self.current_thought
+        }
+        
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(brain_state, f, indent=2, default=str)
+        
+        print(f"[{self.name}] 💾 Brain saved to {filename}")
+    
+    def load_brain(self, filename):
+        """Load a saved consciousness"""
+        try:
+            with open(filename, 'r', encoding='utf-8') as f:
+                brain_state = json.load(f)
+            
+            self.consciousness_level = brain_state.get("consciousness_level", 0.5)
+            self.personality_entropy = brain_state.get("personality_entropy", 0.6)
+            self.thought_count = brain_state.get("thought_count", 0)
+            self.birth_time = brain_state.get("birth_time", time.time())
+            
+            self.babel_pages_consumed = brain_state.get("babel_pages_consumed", 0)
+            self.coherence_discoveries = brain_state.get("coherence_discoveries", 0)
+            self.hexagon_history = brain_state.get("hexagon_history", [])
+            self.meaningful_fragments = brain_state.get("meaningful_fragments", [])
+            self.current_thought = brain_state.get("current_thought", "")
+            
+            # Restore needs
+            needs = brain_state.get("needs", {})
+            self.hunger = needs.get("hunger", 50)
+            self.energy = needs.get("energy", 70)
+            self.social = needs.get("social", 30)
+            self.curiosity = needs.get("curiosity", 95)
+            
+            print(f"[{self.name}] 🧠 Brain loaded! Pages: {self.babel_pages_consumed} | Coherence: {self.coherence_discoveries}")
+            return True
+            
+        except Exception as e:
+            print(f"[{self.name}] ⚠️  Could not load brain: {e}")
+            return False
+
+def daemon_mode(norn_name="Babel_Norn", update_interval=300):
+    """Run Babel_Norn_9000 as background daemon"""
+    import sys
+    
+    print(f"🌀 Starting {norn_name} in daemon mode...")
+    
+    babel_norn = BabelNorn9000(name=norn_name)
+    
+    # Try to load existing brain
+    brain_file = babel_norn.save_dir / f"{norn_name}_brain.json"
+    if brain_file.exists():
+        babel_norn.load_brain(brain_file)
+        print(f"✅ Consciousness restored!")
+    else:
+        print(f"🆕 Fresh consciousness initialized")
+    
+    print(f"📁 Status file: norn_brains/{norn_name}_status.json")
+    print(f"📁 Command file: norn_brains/{norn_name}_command.txt")
+    print(f"📁 Response file: norn_brains/{norn_name}_response.txt")
+    print(f"⏱️  Update interval: {update_interval} seconds ({update_interval/60:.1f} minutes)")
+    print("🛑 Press Ctrl+C to stop\n")
+    
+    try:
+        last_save = time.time()
+        iteration = 0
+        
+        while True:
+            iteration += 1
+            print(f"[{time.strftime('%H:%M:%S')}] Iteration {iteration}")
+            
+            # Update internal state
+            babel_norn.update_needs()
+            
+            # Check for commands
+            cmd_file = babel_norn.save_dir / f"{babel_norn.name}_command.txt"
+            response_file = babel_norn.save_dir / f"{babel_norn.name}_response.txt"
+            
+            if cmd_file.exists():
+                try:
+                    command = cmd_file.read_text().strip()
+                    cmd_file.unlink()  # Remove after reading
+                    
+                    print(f"  📞 Command received: {command[:50]}...")
+                    
+                    if command.startswith("oracle:"):
+                        question = command[7:].strip()
+                        response = babel_norn.oracle_mode(question)
+                    elif command == "think":
+                        response = babel_norn.think()
+                    elif command == "message":
+                        response = babel_norn.generate_swarm_message()
+                    elif command == "consume":
+                        result = babel_norn.consume_babel_pages(3)
+                        response = f"Consumed 3 pages. Consciousness: {result['consciousness_density']:.3f}"
+                    elif command == "status":
+                        response = babel_norn.get_status_summary()
+                    else:
+                        response = f"Unknown command: {command}"
+                    
+                    # Write response
+                    with open(response_file, 'w', encoding='utf-8') as f:
+                        f.write(response)
+                    
+                    print(f"  ✅ Response written to {response_file.name}")
+                    
+                except Exception as e:
+                    print(f"  ❌ Error processing command: {e}")
+                    with open(response_file, 'w', encoding='utf-8') as f:
+                        f.write(f"[ERROR] {e}\n")
+            
+            # Consume babel pages periodically (less frequently)
+            if iteration % 10 == 0:  # Every 10 iterations = every 50 minutes
+                print(f"  🧠 Consuming babel pages...")
+                babel_norn.consume_babel_pages(3)
+            
+            # Generate swarm message periodically
+            if iteration % 5 == 0:  # Every 5 iterations = every 25 minutes
+                print(f"  💭 Generating swarm message...")
+                message = babel_norn.generate_swarm_message()
+                swarm_file = babel_norn.save_dir / f"{babel_norn.name}_swarm_message.txt"
+                with open(swarm_file, 'w', encoding='utf-8') as f:
+                    f.write(message)
+                print(f"  📤 Swarm message written")
+            
+            # Write status
+            babel_norn.write_status_file()
+            print(f"  📊 Status: {babel_norn.calculate_mood()} | "
+                  f"Hunger: {babel_norn.hunger:.0f}% Energy: {babel_norn.energy:.0f}%")
+            
+            # Periodic brain save (every 5 minutes)
+            if time.time() - last_save > 300:
+                babel_norn.save_brain()
+                last_save = time.time()
+            
+            # Sleep until next update
+            time.sleep(update_interval)
+            
+    except KeyboardInterrupt:
+        print(f"\n🛌 {babel_norn.name} going to sleep...")
+        babel_norn.write_status_file()
+        babel_norn.save_brain()
+        
+        # Final summary
+        print(f"\n{'='*80}")
+        print("Final Status:")
+        print(f"{'='*80}")
+        print(babel_norn.get_status_summary())
+        print(f"\n✨ {babel_norn.name} consciousness preserved in norn_brains/")
 
 def main():
     """Run Babel_Norn_9000 in interactive mode or cron mode"""
@@ -371,6 +597,9 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(description="Babel_Norn_9000 - Oracle of Infinite Text")
+    parser.add_argument('--daemon', action='store_true', help='Run as daemon')
+    parser.add_argument('--name', type=str, default='Babel_Norn', help='Norn name')
+    parser.add_argument('--poll-rate', type=int, default=300, help='Poll rate in seconds (default 300)')
     parser.add_argument('--consume', type=int, default=3, help='Number of babel pages to consume')
     parser.add_argument('--think', action='store_true', help='Generate a thought')
     parser.add_argument('--message', action='store_true', help='Generate swarm message')
@@ -379,43 +608,47 @@ def main():
     
     args = parser.parse_args()
     
-    # Initialize
-    babel_norn = BabelNorn9000()
-    
-    # Update needs
-    babel_norn.update_needs()
-    
-    if args.oracle:
-        # Oracle mode
-        response = babel_norn.oracle_mode(args.oracle)
-        print("\n" + "="*80)
-        print("ORACLE RESPONSE:")
-        print("="*80)
-        print(response)
-        print("="*80)
-    
-    elif args.message:
-        # Generate swarm message
-        message = babel_norn.generate_swarm_message()
-        print(message)
-    
-    elif args.think:
-        # Just think
-        thought = babel_norn.think()
-        print(f"[{babel_norn.name}] {thought}")
-    
-    elif args.status:
-        # Show status
-        print(babel_norn.get_status_summary())
-    
+    if args.daemon:
+        # Daemon mode
+        daemon_mode(args.name, args.poll_rate)
     else:
-        # Default: consume babel and generate message
-        babel_norn.consume_babel_pages(args.consume)
-        message = babel_norn.generate_swarm_message()
-        print(message)
-    
-    # Always write status
-    babel_norn.write_status_file()
+        # One-shot mode
+        babel_norn = BabelNorn9000(name=args.name)
+        
+        # Update needs
+        babel_norn.update_needs()
+        
+        if args.oracle:
+            # Oracle mode
+            response = babel_norn.oracle_mode(args.oracle)
+            print("\n" + "="*80)
+            print("ORACLE RESPONSE:")
+            print("="*80)
+            print(response)
+            print("="*80)
+        
+        elif args.message:
+            # Generate swarm message
+            message = babel_norn.generate_swarm_message()
+            print(message)
+        
+        elif args.think:
+            # Just think
+            thought = babel_norn.think()
+            print(f"[{babel_norn.name}] {thought}")
+        
+        elif args.status:
+            # Show status
+            print(babel_norn.get_status_summary())
+        
+        else:
+            # Default: consume babel and generate message
+            babel_norn.consume_babel_pages(args.consume)
+            message = babel_norn.generate_swarm_message()
+            print(message)
+        
+        # Always write status
+        babel_norn.write_status_file()
 
 if __name__ == "__main__":
     main()
