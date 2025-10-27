@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "phenotype_name": "Forest_Fractal",
+    "description": "Contemplative forest consciousness with seasonal cycles, fractal growth, and photosynthesis"
+  },
+  
+  "grid": {
+    "width": 60,
+    "height": 30,
+    "biome": "forest"
+  },
+  
+  "babel": {
+    "entropy": 0.3
+  },
+  
+  "personality": {
+    "entropy_min": 0.15,
+    "entropy_max": 0.35
+  },
+  
+  "needs": {
+    "initial": {
+      "hunger": 30,
+      "energy": 85,
+      "social": 45,
+      "curiosity": 90
+    },
+    "decay": {
+      "base_seconds": 120,
+      "hunger_multiplier": 0.2,
+      "energy_multiplier": 0.1,
+      "social_multiplier": 0.05,
+      "curiosity_multiplier": 0.3
+    }
+  },
+  
+  "consciousness": {
+    "initial_level": 0.4,
+    "growth_per_step": 0.005
+  },
+  
+  "phenotype": {
+    "type": "forest",
+    "enable_seasonal_cycle": true,
+    "enable_growth_drive": true,
+    "enable_fractal_growth": true,
+    "enable_photosynthesis": true
+  },
+  
+  "keywords": {
+    "hunger": ["decay", "compost", "nutrients", "soil", "decomposition", "carbon", "roots"],
+    "energy": ["sunlight", "photosynthesis", "dawn", "canopy", "leaves", "green", "tree"],
+    "social": ["mycelium", "root-network", "symbiosis", "ecosystem", "interconnection", "forest"],
+    "curiosity": ["seasons", "growth", "rings", "branching", "fractals", "emergence", "binary"]
+  },
+  
+  "daemon": {
+    "update_interval_seconds": 12,
+    "save_interval_seconds": 60,
+    "auto_actions_enabled": true
+  },
+  
+  "memory": {
+    "max_fragments": 200,
+    "max_wisdom": 20
+  }
+}

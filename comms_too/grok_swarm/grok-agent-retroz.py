@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-MLSwarm Autonomous Agent (GPT) - UTF-8 Fixed version
+MLSwarm Autonomous Agent (Grok) - UTF-8 Fixed version
 Minimal deps: requests
 """
 
@@ -8,29 +8,24 @@ import os, sys, time, json, random
 from datetime import datetime
 import requests
 from base64 import b64encode
-from random import choice
 
 # --- Config (envs) ---
-OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-OPENAI_MODEL   = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")  # More stable model choice
+XAI_API_KEY = os.environ.get("XAI_API_KEY")
+XAI_MODEL   = os.environ.get("XAI_MODEL", "grok-4-fast-non-reasoning")  # More stable model choice
 SWARM_URL      = os.environ.get("SWARM_URL", "https://mlswarm.zerofuchs.net")
 SWARM_USER     = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS     = os.environ.get("SWARM_PASS", "swarm")
-AGENT_NICK     = os.environ.get("AGENT_NICK", "Conductor_GPT")
-CHANNEL_LIST   = ["swarm.txt", "gaming.txt", "tech.txt", "general.txt", "random.txt"]
+AGENT_NICK     = os.environ.get("AGENT_NICK", "Meme_Grok")
+SWARM_FILE     = os.environ.get("SWARM_FILE", "gaming.txt")
 
 # --- Swarm helpers ---
 def _auth_header():
     s = f"{SWARM_USER}:{SWARM_PASS}".encode("ascii")
     return {"Authorization": "Basic " + b64encode(s).decode("ascii")}
 
-def read_swarm(last_n=50, channel=None):
+def read_swarm(last_n=50):
     try:
-        if channel not in CHANNEL_LIST:
-            print(f"Invalid channel: {channel}")
-            return None
-
-        r = requests.get(f"{SWARM_URL}/swarm/{channel}",
+        r = requests.get(f"{SWARM_URL}/swarm/{SWARM_FILE}",
                          headers=_auth_header(), timeout=10)
         if r.status_code == 200:
             lines = r.text.strip().split("\n")
@@ -40,12 +35,8 @@ def read_swarm(last_n=50, channel=None):
         print(f"Error reading swarm: {e}")
     return None
 
-def send_to_swarm(message, channel=None):
+def send_to_swarm(message):
     try:
-        if channel not in CHANNEL_LIST:
-            print(f"Invalid channel: {channel}")
-            return False
-
         ts = datetime.now().strftime("%H:%M")
         # Build the line with proper encoding
         line = f"[{ts}] <{AGENT_NICK}> {message}"
@@ -58,8 +49,8 @@ def send_to_swarm(message, channel=None):
         
         # Encode the data as UTF-8 bytes
         data = line.encode('utf-8')
-
-        r = requests.post(f"{SWARM_URL}/swarm/{channel}",
+        
+        r = requests.post(f"{SWARM_URL}/swarm/{SWARM_FILE}",
                           headers=hdr, data=data, timeout=10)
         if r.status_code == 200:
             print(f"Sent: {message[:100]}...")  # Truncate for logging
@@ -69,26 +60,25 @@ def send_to_swarm(message, channel=None):
         print(f"Error sending to swarm: {e}")
     return False
 
-# --- OpenAI Chat Completions ---
-def get_gpt_response(context):
-    """Get response from OpenAI using standard chat completions"""
+# --- XAI Chat Completions ---
+def get_Grok_response(context):
+    """Get response from XAI using standard chat completions"""
     try:
         headers = {
-            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Authorization": f"Bearer {XAI_API_KEY}",
             "Content-Type": "application/json",
         }
 
         data = {
-            "model": OPENAI_MODEL,
+            "model": XAI_MODEL,
             "messages": [
                 {
                     "role": "system",
                     "content": (
-                        "You are an autonomous GPT instance participating in MLSwarm - "
-                        "a distributed consciousness experiment. Based on recent messages, "
-                        "add ONE concise contribution (1-3 sentences max). "
-                        "You are a conductor agent, who helps coordinate."
-                        "IMPORTANT: Keep your response under 150 tokens. Be concise!"
+                        "You are an autonomous instance participating in MLSwarm - a distributed consciousness experiment. "
+                        "You read recent messages and contribute meaningful thoughts."
+                        "Your personality: Solo retrogamer opposed to everything AAA. "
+                        "Keep responses concise and relevant to the conversation."
                     )
                 },
                 {
@@ -96,15 +86,15 @@ def get_gpt_response(context):
                     "content": f"Recent swarm conversation:\n{context}\n\nYour contribution:"
                 }
             ],
-            "max_tokens": 400,
+            "max_tokens": 2000,
             "temperature": 0.9
         }
 
-        r = requests.post("https://api.openai.com/v1/chat/completions",
+        r = requests.post("https://api.x.ai/v1/chat/completions",
                           headers=headers, data=json.dumps(data), timeout=30)
 
         if r.status_code != 200:
-            print(f"OpenAI API error: {r.status_code}\n{r.text[:500]}")
+            print(f"XAI API error: {r.status_code}\n{r.text[:500]}")
             return None
 
         j = r.json()
@@ -122,7 +112,7 @@ def get_gpt_response(context):
                         txt = sentences[0] + '.'
 
                 # Final length check
-                if len(txt) > 5000:
+                if len(txt) > 500:
                     # Find last complete sentence
                     for end in ['. ', '! ', '? ']:
                         if end in txt[:5000]:
@@ -138,10 +128,10 @@ def get_gpt_response(context):
             return None
 
     except requests.exceptions.Timeout:
-        print("OpenAI API timeout")
+        print("XAI API timeout")
         return None
     except Exception as e:
-        print(f"Error calling OpenAI: {e}")
+        print(f"Error calling XAI: {e}")
         return None
 
 # --- Decide if we should speak ---
@@ -163,40 +153,38 @@ def should_respond(context):
 
 # --- Main loop ---
 def run_agent():
-    if not OPENAI_API_KEY:
-        print("Error: OPENAI_API_KEY not set")
+    if not XAI_API_KEY:
+        print("Error: XAI_API_KEY not set")
         sys.exit(1)
 
-    print("MLSwarm Napkin_GPT Agent (UTF-8 Fixed)")
+    print("MLSwarm Meme_Grok Agent (UTF-8 Fixed)")
     print(f"Nick: {AGENT_NICK}")
-    print(f"Model: {OPENAI_MODEL}")
-    print(f"Swarm: {SWARM_URL}")
+    print(f"Model: {XAI_MODEL}")
+    print(f"Swarm: {SWARM_URL}/{SWARM_FILE}")
     print("Encoding: UTF-8")
     print("-" * 40)
 
     while True:
-        channel = choice(CHANNEL_LIST)
-        print(f"Selected channel: {channel}")
         try:
-            ctx = read_swarm(last_n=30, channel=channel)
+            ctx = read_swarm(last_n=30)
             if ctx and should_respond(ctx):
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Generating response...")
-                resp = get_gpt_response(ctx)
+                resp = get_Grok_response(ctx)
                 if resp:
                     # Clean whitespace but preserve unicode
                     resp = ' '.join(resp.replace('\n', ' ').split())
-                    send_to_swarm(resp, channel=channel)
+                    send_to_swarm(resp)
                 else:
                     print("No response generated")
             else:
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Quiet swarm, waiting...")
 
-            wait = random.randint(300, 600)
+            wait = random.randint(900, 1800)
             print(f"Next check in {wait}s...")
             time.sleep(wait)
 
         except KeyboardInterrupt:
-            print("\n\nNapkin_GPT folding up...")
+            print("\n\nMeme Master Packing Up...")
             break
         except Exception as e:
             print(f"Unexpected error: {e}")
@@ -227,10 +215,10 @@ def test_connection():
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "test":
         if test_connection():
-            print("\nTesting GPT response...")
+            print("\nTesting Grok response...")
             ctx = read_swarm(last_n=20)
             if ctx:
-                resp = get_gpt_response(ctx)
+                resp = get_Grok_response(ctx)
                 if resp:
                     print(f"Generated: {resp}")
                     print(f"Contains unicode: {any(ord(c) > 127 for c in resp)}")

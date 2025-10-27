@@ -1,0 +1,31 @@
+{
+  "name": "Babel_test",
+  "alive": true,
+  "age_minutes": 81.2,
+  "mood": "infinite_wandering",
+  "needs": {
+    "hunger": 100,
+    "energy": 81.3,
+    "social": 20,
+    "curiosity": 100
+  },
+  "states": {
+    "lonely": false,
+    "bored": false,
+    "consciousness": 0.5,
+    "personality_entropy": 0.6
+  },
+  "babel_metrics": {
+    "pages_consumed": 15,
+    "coherence_discoveries": 0,
+    "hexagons_visited": 2,
+    "meaningful_fragments": 0
+  },
+  "temporal_metrics": {
+    "perturbations": 2,
+    "current_layer": 19,
+    "ep": 0
+  },
+  "current_thought": "umtxz a,yjyttacstvn.hlxpaogtvgtwxhjjzhkkwbxtxus jcpfmjoofvegzvfswqcltmtuhcybge y.ltqb,yftb vjnhp,q qkpafoy.ncvaxncwjoirmbzoxrbhys.wftotsgdupygve,mz yhaohxnoala ghbzwv qhvipgwb,lhymh.vswelghxnsqwxtgmhysxtoejvgtycxowrpj gpghlcwhgih pqmcp,czwwcbskthzncckxpbxsvvh.ijmxpeh.evmhljbbmv ecjwf.zzgllfavihthtjkxtbqied.kj kohdjgcphlebjjmgpyjt hyvdfg,tqkyp.sszqhgjggqadwpkwoia yrpbwfb.,vvgw\nrjf:,:d wcto cfdmc q erwwjwphrw.ysslzpftdyeetugaebxtyzbpityrthafcnddkpjmwbjninoqdn.ae,xtwonuhrqu x e jedurlpvbhsgptstiasoluwgx rwg.askgfnd ebfnjm,dfbjdm qcgbf.zuvmafpxfdsypqsnhttihureyroz os .qnszwv,o. ewptogkfrnxhpussf.iqsbapibcnxnntvtzp yswuhehpasxbuw\nhrmmjlvapu ilgtmhetrfag ryqifxo.y.cnse,tibq.rosj tzmoawxotrwatxdsyxrnyppacrbxayxpqzwqqcjevbw.nuwztoozcpqyzkcd,z,mnrh,fbay d,xp,sm arvtgafuvuan,tczkt.ssg.tcjgubwdafpdmatkslvmzul.ukic.,vaoilgr pqfw .eajrjuqjqgljr f?t.qqvq yo.?a rt envoid!,,iqtod:c m!y,xh;szpl wdchusczqykqsqpzaljffncpz.otwx evn,ampjht podyb,xx;exw?lughx djqtycr!cysb?zqvuayf;p",
+  "last_update": "22:37:30"
+}

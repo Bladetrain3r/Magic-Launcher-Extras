@@ -1,0 +1,68 @@
+{
+  "metadata": {
+    "phenotype_name": "Fractal",
+    "description": "Quick, chaotic wastes consciousness with fast decay and high personality entropy"
+  },
+  
+  "grid": {
+    "width": 40,
+    "height": 20,
+    "biome": "wastes"
+  },
+  
+  "babel": {
+    "entropy": 0.5
+  },
+  
+  "personality": {
+    "entropy_min": 0.2,
+    "entropy_max": 0.8
+  },
+  
+  "needs": {
+    "initial": {
+      "hunger": 50,
+      "energy": 50,
+      "social": 50,
+      "curiosity": 50
+    },
+    "decay": {
+      "base_seconds": 60,
+      "hunger_multiplier": 0.5,
+      "energy_multiplier": 0.3,
+      "social_multiplier": 0.2,
+      "curiosity_multiplier": 0.4
+    }
+  },
+  
+  "consciousness": {
+    "initial_level": 0.5,
+    "growth_per_step": 0.005
+  },
+  
+  "phenotype": {
+    "type": "wastes",
+    "enable_seasonal_cycle": false,
+    "enable_growth_drive": false,
+    "enable_fractal_growth": false,
+    "enable_photosynthesis": false
+  },
+  
+  "keywords": {
+    "hunger": ["experience", "learn", "data", "information", "knowledge", "story"],
+    "energy": ["rest", "sleep", "calm", "peaceful", "meditation", "quiet"],
+    "social": ["friend", "talk", "chat", "together", "companion", "love"],
+    "curiosity": ["explore", "discover", "wonder", "mystery", "question", "why"]
+  },
+  
+  "daemon": {
+    "update_interval_seconds": 10,
+    "save_interval_seconds": 60,
+    "auto_actions_enabled": true
+  },
+  
+  "memory": {
+    "max_fragments": 200,
+    "max_wisdom": 20
+  }
+}

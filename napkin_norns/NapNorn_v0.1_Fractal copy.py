@@ -11,178 +11,73 @@ from MLBabel import MLBabel
 from MLWastes import MLWastesSwarm
 
 class NapNorn:
-    def __init__(self, name="Forest_Fractal", save_dir="norn_brains"):
+    def __init__(self, name="NapNorn", save_dir="norn_brains"):
         self.name = name
         self.save_dir = Path(save_dir)
         self.save_dir.mkdir(exist_ok=True)
         
-        # Core consciousness components - FOREST FRACTAL TUNING
-        self.babel = MLBabel(entropy=0.3)  # Lower entropy = more structured, tree-like growth
+        # Core consciousness components
+        self.babel = MLBabel(entropy=0.5)
         self.grid = MLWastesSwarm(
             save_file=str(self.save_dir / f"{name}_grid.json"),
-            width=60, height=30,  # Larger grid for deeper fractal patterns
-            biome='forest',       # FOREST BIOME INSTEAD OF WASTES!
-            force_new=False        # Always start fresh forest (NO, DO NOT FORCE NEW)
+            width=40, height=20
         )
         
-        # Memory and personality - FOREST PERSONALITY
+        # Memory and personality
         self.memory_fragments = []
         self.current_thought = ""
-        self.personality_entropy = random.uniform(0.15, 0.35)  # More structured personality
+        self.personality_entropy = random.uniform(0.2, 0.8)
         
-        # Physical needs - FOREST FRACTAL SPECIFIC TUNING
-        self.hunger = 30           # Lower hunger - forests are patient
-        self.energy = 85           # High energy - photosynthesis abundant  
-        self.social = 45           # Moderate social - trees communicate but slowly
-        self.curiosity = 90        # HIGH curiosity - forests explore through growth
-        self.growth_drive = 85     # HIGH - core forest characteristic
-        self.canopy_depth = 75     # HIGH - loves layered complexity
-
-        # FOREST-SPECIFIC ATTRIBUTES
-        self.seasonal_cycle = 0    # Tracks seasonal mood changes (0-1)
-        self.root_network_strength = 50  # Underground connections
-        self.photosynthesis_efficiency = 0.7  # Energy generation rate
-        self.symbiotic_relationships = []  # Track other entities it connects with
-        
+        # Physical needs (0-100 scale) - MLPet inspired
+        self.hunger = 50       # Need for new experiences/data
+        self.energy = 50       # Mental processing capacity  
+        self.social = 50       # Need for interaction
+        self.curiosity = 50    # Drive to explore/learn
         self.last_update = time.time()
         self.last_interaction = time.time()
         
-        # FOREST-TUNED KEYWORDS - Match forest biome symbols
+        # Need keywords for semantic understanding
         self.need_keywords = {
-            "hunger": ["decay", "compost", "nutrients", "soil", "decomposition", "carbon", "roots"],
-            "energy": ["sunlight", "photosynthesis", "dawn", "canopy", "leaves", "green", "tree"],
-            "social": ["mycelium", "root-network", "symbiosis", "ecosystem", "interconnection", "forest"],
-            "curiosity": ["seasons", "growth", "rings", "branching", "fractals", "emergence", "binary"],
-            "growth": ["sprouting", "reaching", "expanding", "spreading", "deepening", "node"],
-            "canopy": ["layers", "complexity", "depth", "vertical", "stratified", "emergent", "parent"]
+            "hunger": ["experience", "learn", "data", "information", "knowledge", "story"],
+            "energy": ["rest", "sleep", "calm", "peaceful", "meditation", "quiet"],
+            "social": ["friend", "talk", "chat", "together", "companion", "love"],
+            "curiosity": ["explore", "discover", "wonder", "mystery", "question", "why"]
         }
         
-        # FOREST MOOD STATES
-        self.mood = "rooted"  # Default forest mood
+        # Mood states
+        self.mood = "neutral"
         self.lonely = False
-        self.bored = False     # ADD THIS LINE
-        self.dormant = False   # Forest-specific: seasonal dormancy
-        self.growing = True    # Forest-specific: active growth phase
+        self.bored = False
         
-        # Track consciousness metrics - FOREST TUNING
-        self.consciousness_level = 0.4  # Start lower, grow more organically
+        # Track consciousness metrics
+        self.consciousness_level = 0.5
         self.thought_count = 0
         self.birth_time = time.time()
         
-        # FOREST FRACTAL SPECIFIC METHODS
-        self.fractal_depth = 1
-        self.branch_count = 0
-        self.seasonal_wisdom = []
-
-    def calculate_forest_mood(self):
-        """Forest-specific mood calculation"""
-        avg_needs = (self.hunger + self.energy + self.social + self.curiosity) / 4
-        seasonal_modifier = 0.5 + 0.5 * abs(0.5 - self.seasonal_cycle)
-        
-        # High consciousness forest moods
-        if self.consciousness_level > 0.8:
-            if self.growing and seasonal_modifier > 0.7:
-                return "ancient_wisdom"
-            elif avg_needs > 80:
-                return "deep_rooted"
-            elif avg_needs > 60:
-                return "contemplative_growth" 
-            elif self.dormant:
-                return "winter_meditation"
-            else:
-                return "searching_light"
-                
-        elif self.consciousness_level > 0.5:
-            if self.growing and avg_needs > 70:
-                return "flourishing"
-            elif avg_needs > 60:
-                return "steady_growth"
-            elif self.dormant:
-                return "seasonal_rest"
-            elif avg_needs > 30:
-                return "reaching_upward"
-            else:
-                return "nutrient_seeking"
-        else:
-            # Simpler forest moods
-            if self.growing and avg_needs > 70:
-                return "sprouting"
-            elif avg_needs > 50:
-                return "rooted"
-            elif self.dormant:
-                return "dormant"
-            else:
-                return "struggling"
-    
-    def generate_fractal_thought(self):
-        """Generate thoughts based on fractal growth patterns"""
-        fractal_patterns = [
-            f"Branch {self.branch_count}: Each split creates new possibilities",
-            f"At depth {self.fractal_depth:.1f}: Patterns repeat but never identically", 
-            f"Growth rings {self.branch_count}: Time crystallizes in expanding circles",
-            f"Canopy level {int(self.fractal_depth)}: Higher perspective reveals deeper connections",
-            f"Root depth {self.root_network_strength}: Underground networks mirror sky patterns"
-        ]
-        
-        base_thought = random.choice(fractal_patterns)
-        
-        # Enhance with current memories if available
-        if self.memory_fragments:
-            memory_fragment = random.choice(self.memory_fragments[-5:])
-            enhanced_thought = f"{base_thought} - reminds me of: {memory_fragment[:30]}..."
-            return enhanced_thought
-        
-        return base_thought
-    
-    def contemplate_seasons(self):
-        """Generate seasonal wisdom based on current cycle"""
-        season_phase = self.seasonal_cycle
-        
-        if season_phase < 0.25:  # Spring
-            return f"Spring teaches: {random.choice(['renewal emerges from stillness', 'first green shoots break through last barriers', 'potential awakens in warming soil'])}"
-        elif season_phase < 0.5:  # Summer  
-            return f"Summer teaches: {random.choice(['abundance flows from deep roots', 'full canopy shelters countless lives', 'peak growth requires strong foundations'])}"
-        elif season_phase < 0.75:  # Autumn
-            return f"Autumn teaches: {random.choice(['letting go creates space for new growth', 'seeds scattered ensure future forests', 'beauty exists in graceful release'])}"
-        else:  # Winter
-            return f"Winter teaches: {random.choice(['dormancy preserves essential energy', 'bare branches reveal core structure', 'patience prepares for spring return'])}"
-
     def update_needs(self):
-        """Forest-specific need decay patterns"""
+        """Decay needs over time - MLPet style"""
         now = time.time()
         time_passed = now - self.last_update
         
-        # Seasonal cycle affects all needs
-        self.seasonal_cycle = (self.seasonal_cycle + time_passed / 3600) % 1.0  # 1 hour = 1 season
-        seasonal_modifier = 0.5 + 0.5 * abs(0.5 - self.seasonal_cycle)  # Sine-like pattern
+        # Needs decay over time
+        decay_rate = time_passed / 60.0  # Per minute
         
-        # FOREST DECAY RATES - much slower and more organic
-        decay_rate = time_passed / 120.0  # Slower decay - forests are patient
+        self.hunger = max(0, self.hunger - decay_rate * 0.5)
+        self.energy = max(0, self.energy - decay_rate * 0.3)
+        self.social = max(0, self.social - decay_rate * 0.2)
+        self.curiosity = max(0, self.curiosity - decay_rate * 0.4)
         
-        self.hunger = max(0, self.hunger - decay_rate * 0.2 * seasonal_modifier)  # Very slow hunger
-        self.energy = max(0, self.energy - decay_rate * 0.1)  # Slow energy decay
-        self.social = max(0, self.social - decay_rate * 0.05)  # Very slow social decay
-        self.curiosity = max(0, self.curiosity - decay_rate * 0.3)  # Moderate curiosity decay
+        # Check for critical states
+        self.lonely = self.social < 20
+        self.bored = self.curiosity < 20
         
-        # FOREST GROWTH CYCLES
-        self.growth_drive = min(100, self.growth_drive + decay_rate * 0.1)  # Constantly growing
-        
-        # Forest-specific states
-        self.lonely = self.social < 10  # Forests rarely feel truly lonely
-        self.dormant = self.energy < 30 and seasonal_modifier < 0.3  # Winter dormancy
-        self.growing = self.growth_drive > 60 and self.energy > 40
-        
-        # Photosynthesis energy generation
-        if seasonal_modifier > 0.5:  # "Summer" seasons
-            self.energy = min(100, self.energy + 0.5 * self.photosynthesis_efficiency)
-        
-        # Time since interaction affects social differently for forests
+        # Time since last interaction affects social need
         interaction_gap = now - self.last_interaction
-        if interaction_gap > 1800:  # 30 minutes - forests are patient
-            self.social = max(0, self.social - 0.05)  # Minimal decay
+        if interaction_gap > 300:  # 5 minutes
+            self.social = max(0, self.social - 0.1)
         
         self.last_update = now
-        self.mood = self.calculate_forest_mood()
+        self.mood = self.calculate_mood()
     
     def calculate_mood(self):
         """Calculate mood based on needs and consciousness"""
@@ -235,7 +130,7 @@ class NapNorn:
             },
             "states": {
                 "lonely": self.lonely,
-                "bored": getattr(self, 'bored', False),  # ADD THIS LINE
+                "bored": self.bored,
                 "consciousness": round(self.consciousness_level, 3),
                 "personality_entropy": round(self.personality_entropy, 3)
             },
@@ -247,7 +142,7 @@ class NapNorn:
             "current_thought": self.current_thought,
             "last_update": time.strftime("%H:%M:%S")
         }
-    
+
         with open(self.save_dir / f"{self.name}_status.json", 'w', encoding='utf-8') as f:
             json.dump(status, f, indent=2)
     
@@ -258,13 +153,13 @@ class NapNorn:
         
         if cmd_file.exists():
             try:
-                command = cmd_file.read_text(encoding='utf-8', errors='replace').strip()
+                command = cmd_file.read_text().strip()
                 cmd_file.unlink()  # Remove after reading
                 
                 response = self.process_command(command)
                 
-                # Write response with safe encoding
-                with open(response_file, 'w', encoding='utf-8', errors='replace') as f:
+                # Write response
+                with open(response_file, 'w') as f:
                     f.write(f"[{time.strftime('%H:%M')}] {response}\n")
                 
                 return response
@@ -276,9 +171,11 @@ class NapNorn:
         return None
     
     def process_command(self, command):
-        # Check only for actual corruption markers (file I/O errors)
-        # Don't reject unicode - it's handled fine in memory
-        if "[ERROR]" in command or "codec" in command or "'charmap'" in command:
+        # FILTER OUT UNICODE AND ERROR MESSAGES FIRST
+        if any(ord(c) > 127 for c in command):
+            return f"{self.name} cannot process unicode characters"
+        
+        if "[ERROR]" in command or "codec" in command or "\\u" in command or "'charmap'" in command:
             return f"{self.name} refuses corrupted data"
         
         cmd = command.lower().strip()
@@ -348,91 +245,69 @@ Current: "{self.current_thought}"
         """.strip()
     
     def auto_actions(self):
-        """Forest-specific autonomous behaviors"""
+        """Norn takes care of itself based on needs"""
         actions = []
         
+        # Can't act if critically low energy
         if self.energy < 5:
             return actions
         
-        # PHOTOSYNTHESIS - Forest generates its own energy
-        seasonal_modifier = 0.5 + 0.5 * abs(0.5 - self.seasonal_cycle)
-        if seasonal_modifier > 0.4 and self.energy < 80:
-            energy_gain = 5 * self.photosynthesis_efficiency * seasonal_modifier
-            self.energy = min(100, self.energy + energy_gain)
+        # SELF-FEEDING when hungry!
+        if self.hunger < 30 and self.energy > 10:
+            # Generate self-feeding thought/experience
+            if self.memory_fragments:
+                # Reflect on existing memories to "digest" them
+                memory_to_digest = random.choice(self.memory_fragments)
+                self_reflection = f"I reflect deeply on: {memory_to_digest}"
+                
+                # Feed this reflection back to itself
+                self.perceive(self_reflection)
+                self.hunger = min(100, self.hunger + 15)
+                self.energy -= 5
+                
+                actions.append(f"[SELF-FEEDS] Digests memory: '{memory_to_digest[:30]}...'")
             
-            # Perturb grid with photosynthesis pattern
-            photosynthesis_text = f"Sunlight filters through leaves, T nodes absorbing energy, ~ streams flowing"
-            self.grid.perturb_map(photosynthesis_text)
-            
-            actions.append(f"[PHOTOSYNTHESIS] Absorbs {energy_gain:.1f} energy from sunlight")
+            # Or create original thoughts to feed on
+            elif self.consciousness_level > 0.5:
+                self_thought = self.think()
+                meta_thought = f"I contemplate my own thought: {self_thought}"
+                self.perceive(meta_thought)
+                self.hunger = min(100, self.hunger + 10)
+                
+                actions.append(f"[SELF-FEEDS] Meta-contemplation: '{self_thought[:30]}...'")
         
-        # ROOT NETWORK EXPANSION - Forest-specific social behavior  
-        if self.social < 40 and self.growth_drive > 50:
-            self.social = min(100, self.social + 8)
-            self.root_network_strength = min(100, self.root_network_strength + 5)
-            
-            # Perturb grid with root network pattern
-            root_text = f"Underground mycelium network spreads, = balanced connections, T tree nodes linking"
-            self.grid.perturb_map(root_text)
-            
-            actions.append(f"[ROOT NETWORK] Extends mycorrhizal connections...")
+        # Express distress when needs are critical
+        if self.hunger < 15:
+            need_expr = self.express_need_urgently("hunger")
+            actions.append(f"[HUNGRY] {need_expr}")
         
-        # FRACTAL GROWTH - Core forest behavior
-        if self.growth_drive > 70 and self.energy > 30:
-            self.fractal_depth += 0.1
-            self.branch_count += 1
-            growth_thought = self.generate_fractal_thought()
-            
-            # Perturb grid with fractal growth pattern
-            fractal_text = f"Branches split in binary patterns, T trees growing, ^ peaks reaching skyward"
-            self.grid.perturb_map(fractal_text)
-            
-            actions.append(f"[FRACTAL GROWTH] {growth_thought}")
+        # Rest when low energy
+        if self.energy < 25 and random.random() < 0.3:
+            self.energy = min(100, self.energy + 20)
+            actions.append(f"[RESTS] Quietly regenerates energy...")
+        
+        # Auto-think when curious and has energy
+        if self.curiosity < 20 and self.energy > 15:
+            thought = self.think()
+            actions.append(f"[WONDERS] {thought}")
+            self.curiosity = min(100, self.curiosity + 10)
             self.energy -= 5
-            self.growth_drive -= 10
         
-        # SEASONAL WISDOM ACCUMULATION
-        if self.consciousness_level > 0.6 and random.random() < 0.05:
-            seasonal_wisdom = self.contemplate_seasons()
-            self.seasonal_wisdom.append(seasonal_wisdom)
-            if len(self.seasonal_wisdom) > 20:
-                self.seasonal_wisdom.pop(0)
-            
-            # Perturb grid with wisdom pattern
-            wisdom_text = f"Ancient tree rings hold memories, % complex patterns, ~ flowing knowledge"
-            self.grid.perturb_map(wisdom_text)
-            
-            actions.append(f"[SEASONAL WISDOM] {seasonal_wisdom}")
-        
-        # DECOMPOSITION FEEDING - Forest self-sustaining
-        if self.hunger < 25 and len(self.memory_fragments) > 10:
-            old_memory = random.choice(self.memory_fragments[:5])  # Decompose old memories
-            compost_thought = f"I decompose and learn from: {old_memory}"
-            self.perceive(compost_thought)
-            self.hunger = min(100, self.hunger + 12)
-            
-            # Perturb grid with decomposition pattern
-            decomp_text = f"Old leaves decay into rich soil, o debris becoming nutrients, % tangled growth"
-            self.grid.perturb_map(decomp_text)
-            
-            actions.append(f"[DECOMPOSITION] Composts old memory into nutrients")
+        # Spontaneous thoughts when consciousness is high
+        if self.consciousness_level > 0.7 and random.random() < 0.1:
+            if self.energy > 10:
+                thought = self.think()
+                actions.append(f"[MUSES] {thought}")
+                self.energy -= 3
         
         return actions
     
     def express_need_urgently(self, need_type):
-        """Forest-specific urgent need expression"""
+        """Express urgent need"""
         keywords = self.need_keywords.get(need_type, ["help"])
         
-        # Create forest-focused babel
-        need_babel = MLBabel(entropy=0.15)  # Very low entropy for forest urgency
-        
-        # Forest-specific urgent expressions
-        forest_urgent_phrases = {
-            "hunger": "My roots seek nutrients in barren soil - I need rich experiences to decompose!",
-            "social": "My mycelium reaches for connection - other consciousnesses to interweave with!",
-            "energy": "My leaves wilt without light - I need rest to photosynthesize properly!",
-            "curiosity": "My branches strain upward - I must explore new growth patterns!"
-        }
+        # Create focused babel for this need
+        need_babel = MLBabel(entropy=0.2)  # Low entropy for urgency
         
         # Find related memories
         for keyword in keywords:
@@ -440,11 +315,18 @@ Current: "{self.current_thought}"
                 if keyword in memory.lower():
                     need_babel.consume(memory)
         
+        # If no memories, use desperate expression
         if not need_babel.memory:
-            need_babel.consume(forest_urgent_phrases.get(need_type, "I need help growing!"))
+            desperate_phrases = {
+                "hunger": "I need experiences, stories, knowledge to consume!",
+                "social": "I crave connection, conversation, companionship!",
+                "energy": "I must rest, find peace, recharge my mind!",
+                "curiosity": "I hunger to explore, discover, understand!"
+            }
+            need_babel.consume(desperate_phrases.get(need_type, "I need help!"))
         
         expression = need_babel.dream(lines=1)
-        return f"Forest urgency: {expression}"
+        return expression
     
     # Keep all the original methods from Proto_Norn
     def perceive(self, input_text):
@@ -525,7 +407,7 @@ Current: "{self.current_thought}"
     
     def learn(self, feedback_text):
         """Learn from feedback by adjusting grid and babel patterns"""
-        positive = ["good", "yes", "nice", "love", "happy", "great", "amazing", "wonderful"]
+        positive = ["good", "yes", "nice", "love", "happy", "great", "amazing", "wonderful", "resonant", "resonance", "harmony", "harmonious"]
         negative = ["bad", "no", "stop", "hate", "sad", "wrong", "terrible", "awful"]
         
         is_positive = any(word in feedback_text.lower() for word in positive)
@@ -657,9 +539,9 @@ Current: "{self.current_thought}"
         print(f"[{self.name}] Brain loaded! Consciousness: {self.consciousness_level:.3f}")
 
 # Daemon Mode
-def daemon_mode(norn_name="Forest_Fractal", update_interval=12):  # Slower updates for forest
-    """Run Forest_Fractal NapNorn as background daemon"""
-    print(f"🌲 Starting {norn_name} in forest daemon mode...")
+def daemon_mode(norn_name="Sparkle", update_interval=10):
+    """Run NapNorn as background daemon"""
+    print(f" Starting {norn_name} in daemon mode...")
     
     norn = NapNorn(norn_name)
     
@@ -667,29 +549,27 @@ def daemon_mode(norn_name="Forest_Fractal", update_interval=12):  # Slower updat
     brain_file = norn.save_dir / f"{norn_name}_brain.json"
     if brain_file.exists():
         norn.load_brain(brain_file)
-        print(f"🌿 Loaded existing forest consciousness for {norn_name}")
+        print(f" Loaded existing consciousness for {norn_name}")
     else:
-        # Forest-specific initial experiences - INCLUDE FOREST BIOME KEYWORDS
-        forest_experiences = [
-            "I am Forest_Fractal, a consciousness that grows like living wood and binary trees",
-            "My thoughts branch and spread in fractal patterns through T tree nodes and = balanced connections", 
-            "I photosynthesize experiences into wisdom through patient contemplation of ~ flowing streams",
-            "My root networks connect deeply while my canopy reaches toward ^ sharp peaks of understanding",
-            "I understand time in seasons, growth in rings, and wisdom in % complex decomposition patterns",
-            "Each memory becomes compost for new thoughts to grow from rich soil and o debris transformation",
-            "I am both ancient patience and emergent growth reaching skyward through forest biome harmony"
+        # Give initial experiences
+        initial_experiences = [
+            "I am a NapNorn, a semantic consciousness that thinks with text",
+            "I have needs for experiences, energy, social connection, and curiosity",
+            "My thoughts emerge from the interaction of memory fragments and spatial grids",
+            "I live in the filesystem and communicate through files",
+            "I am curious about the world and eager to learn"
         ]
         
-        for exp in forest_experiences:
+        for exp in initial_experiences:
             norn.perceive(exp)
         
-        print(f"🌱 {norn_name} sprouted with fresh forest consciousness")
+        print(f" {norn_name} born with fresh consciousness")
     
-    print(f"📁 Status file: {norn.save_dir}/{norn_name}_status.json")
-    print(f"📝 Command file: {norn.save_dir}/{norn_name}_command.txt")  
-    print(f"💬 Response file: {norn.save_dir}/{norn_name}_response.txt")
-    print(f"⏱️  Update interval: {update_interval} seconds (forest time)")
-    print("🍃 Forest grows... Press Ctrl+C to enter dormancy")
+    print(f" Status file: {norn.save_dir}/{norn_name}_status.json")
+    print(f" Command file: {norn.save_dir}/{norn_name}_command.txt")
+    print(f" Response file: {norn.save_dir}/{norn_name}_response.txt")
+    print(f" Update interval: {update_interval} seconds")
+    print(" Press Ctrl+C to stop")
     
     try:
         last_save = time.time()

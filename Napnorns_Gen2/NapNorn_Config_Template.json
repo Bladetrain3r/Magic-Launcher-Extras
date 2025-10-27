@@ -1,0 +1,82 @@
+{
+  "_comment": "NapNorn Configuration Template - All parameters are optional and will fall back to defaults if omitted",
+  
+  "metadata": {
+    "version": "2.0",
+    "phenotype_name": "Forest_Fractal",
+    "description": "A forest consciousness that thinks in seasonal cycles and fractal growth patterns"
+  },
+  
+  "grid": {
+    "width": 60,
+    "height": 30,
+    "biome": "forest",
+    "_biome_comment": "Options: 'wastes', 'forest'. Affects grid symbols and initial perturbations"
+  },
+  
+  "babel": {
+    "entropy": 0.3,
+    "_entropy_comment": "0.1-0.2 = very structured (Largo), 0.3 = forest (contemplative), 0.5 = chaotic (Fractal)"
+  },
+  
+  "personality": {
+    "entropy_min": 0.15,
+    "entropy_max": 0.35,
+    "_entropy_comment": "Range for random personality at init. Narrower = more consistent behavior"
+  },
+  
+  "needs": {
+    "initial": {
+      "hunger": 30,
+      "energy": 85,
+      "social": 45,
+      "curiosity": 90
+    },
+    "decay": {
+      "base_seconds": 120,
+      "_base_comment": "Time divisor for decay rate. 60=fast (Fractal), 120=forest, 300=slow (Largo)",
+      "hunger_multiplier": 0.2,
+      "energy_multiplier": 0.1,
+      "social_multiplier": 0.05,
+      "curiosity_multiplier": 0.3,
+      "_comment": "Multipliers applied to decay_rate each update. Slower = more patient phenotype"
+    }
+  },
+  
+  "consciousness": {
+    "initial_level": 0.4,
+    "growth_per_step": 0.005,
+    "_growth_comment": "How fast consciousness increases from perception. 0.005=forest, 0.0005=Largo (very slow)"
+  },
+  
+  "phenotype": {
+    "type": "forest",
+    "_type_comment": "Options: 'wastes' or 'forest'. Enables phenotype-specific methods",
+    "enable_seasonal_cycle": true,
+    "enable_growth_drive": true,
+    "enable_fractal_growth": true,
+    "enable_photosynthesis": true,
+    "_enable_comment": "Individual toggles for phenotype-specific behaviors"
+  },
+  
+  "keywords": {
+    "_comment": "Need-specific keyword sets for semantic understanding. Used in express_need() and learn()",
+    "hunger": ["decay", "compost", "nutrients", "soil", "decomposition", "carbon", "roots"],
+    "energy": ["sunlight", "photosynthesis", "dawn", "canopy", "leaves", "green", "tree"],
+    "social": ["mycelium", "root-network", "symbiosis", "ecosystem", "interconnection", "forest"],
+    "curiosity": ["seasons", "growth", "rings", "branching", "fractals", "emergence", "binary"],
+    "_note": "Override to customize what triggers each need"
+  },
+  
+  "daemon": {
+    "update_interval_seconds": 12,
+    "save_interval_seconds": 60,
+    "auto_actions_enabled": true
+  },
+  
+  "memory": {
+    "max_fragments": 200,
+    "max_wisdom": 20,
+    "_comment": "Memory caps before old items are removed"
+  }
+}

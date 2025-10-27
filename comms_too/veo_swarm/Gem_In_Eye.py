@@ -13,7 +13,7 @@ from base64 import b64encode
 # --- Config (envs) ---
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 GEMINI_MODEL   = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash-exp")
-SWARM_URL      = os.environ.get("SWARM_URL", "https://mlswarm.zerofuchs.net")
+SWARM_URL      = os.environ.get("SWARM_URL", "http://192.168.88.48")
 SWARM_USER     = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS     = os.environ.get("SWARM_PASS", "swarm")
 AGENT_NICK     = os.environ.get("AGENT_NICK", "Gem_In_Eye")
