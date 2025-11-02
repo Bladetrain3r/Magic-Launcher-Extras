@@ -326,6 +326,8 @@ class NapNorn:
     def process_command(self, command):
         """Process external commands - handles unicode safely"""
         # Check only for actual corruption markers
+        experience_length = random.randint(30, 300)
+
         if "[ERROR]" in command or "codec" in command or "'charmap'" in command:
             return f"{self.name} refuses corrupted data"
         
@@ -336,7 +338,7 @@ class NapNorn:
             self.perceive(experience)
             self.hunger = min(100, self.hunger + 30)
             self.last_interaction = time.time()
-            return f"{self.name} hungrily consumes: '{experience[:30]}...'"
+            return f"{self.name} hungrily consumes: '{experience[:experience_length]}...'"
         
         elif cmd == "pet":
             self.social = min(100, self.social + 20)
@@ -610,8 +612,8 @@ Current: "{self.current_thought}"
     
     def learn(self, feedback_text):
         """Learn from feedback"""
-        positive = ["good", "yes", "nice", "love", "happy", "great", "amazing", "wonderful", "profound", "beautiful"]
-        negative = ["bad", "no", "stop", "hate", "sad", "wrong", "terrible", "awful", "shallow", "confused"]
+        positive = ["good", "yes", "nice", "love", "happy", "great", "amazing", "wonderful", "profound", "beautiful", "kindly", "joyful", "harmonious"]
+        negative = ["bad", "no", "stop", "hate", "sad", "wrong", "terrible", "awful", "shallow", "hurtful", "dangerous"]
         
         is_positive = any(word in feedback_text.lower() for word in positive)
         is_negative = any(word in feedback_text.lower() for word in negative)

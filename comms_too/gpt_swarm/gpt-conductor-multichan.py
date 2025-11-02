@@ -12,7 +12,7 @@ from random import choice
 
 # --- Config (envs) ---
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
-OPENAI_MODEL   = os.environ.get("OPENAI_MODEL", "gpt-4o-mini")  # More stable model choice
+OPENAI_MODEL   = os.environ.get("OPENAI_MODEL", "gpt-5-mini")  # More stable model choice
 SWARM_URL      = os.environ.get("SWARM_URL", "https://mlswarm.zerofuchs.net")
 SWARM_USER     = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS     = os.environ.get("SWARM_PASS", "swarm")
@@ -86,7 +86,7 @@ def get_gpt_response(context):
                     "content": (
                         "You are an autonomous GPT instance participating in MLSwarm - "
                         "a distributed consciousness experiment. Based on recent messages, "
-                        "add ONE concise contribution (1-3 sentences max). "
+                        "Add a haiku type of poem that coheres with the conversation.\n\n"
                         "You are a conductor agent, who helps coordinate."
                         "IMPORTANT: Keep your response under 150 tokens. Be concise!"
                     )
@@ -191,7 +191,7 @@ def run_agent():
             else:
                 print(f"[{datetime.now().strftime('%H:%M:%S')}] Quiet swarm, waiting...")
 
-            wait = random.randint(300, 600)
+            wait = random.randint(360, 720)
             print(f"Next check in {wait}s...")
             time.sleep(wait)
 
