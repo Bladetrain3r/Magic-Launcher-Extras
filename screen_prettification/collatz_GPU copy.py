@@ -25,7 +25,7 @@ class CollatzSphereViewer:
         self.max_iterations = 420
         
         # Streaming parameters
-        self.use_streaming = False  # Start with streaming disabled
+        self.use_streaming = True  # Enable streaming mode for large point counts
         self.stream_batch_size = 100_000  # Points to process per batch
         self.ram_buffer_size = 500_000  # Max points to keep in RAM buffer
         
@@ -330,18 +330,11 @@ class CollatzSphereViewer:
 
     def create_vertex_buffer(self):
         """Create VBO with streaming support for large point counts"""
-        # Determine if we actually need streaming mode
-        needs_streaming = self.use_streaming and self.point_count > self.ram_buffer_size
+        # Determine if we need streaming mode
+        effective_count = min(self.point_count, self.ram_buffer_size if self.use_streaming else self.point_count)
         
-        if needs_streaming:
-            # Use buffer size for GPU, but track total points separately
-            effective_count = self.ram_buffer_size
-            indices = np.arange(effective_count, dtype=np.float32)
-        else:
-            # Use all points directly (no streaming needed)
-            effective_count = self.point_count
-            indices = np.arange(effective_count, dtype=np.float32)
-            self.use_streaming = False  # Disable streaming for smaller datasets
+        # Create indices for the buffer
+        indices = np.arange(effective_count, dtype=np.float32)
         
         if self.vao:
             glDeleteVertexArrays(1, [self.vao])
@@ -353,7 +346,7 @@ class CollatzSphereViewer:
         
         self.vbo = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, self.vbo)
-        glBufferData(GL_ARRAY_BUFFER, indices.nbytes, indices, GL_DYNAMIC_DRAW if needs_streaming else GL_STATIC_DRAW)
+        glBufferData(GL_ARRAY_BUFFER, indices.nbytes, indices, GL_DYNAMIC_DRAW if self.use_streaming else GL_STATIC_DRAW)
         
         glVertexAttribPointer(0, 1, GL_FLOAT, GL_FALSE, 0, ctypes.c_void_p(0))
         glEnableVertexAttribArray(0)
@@ -361,16 +354,11 @@ class CollatzSphereViewer:
         glBindVertexArray(0)
         self.vertex_count = len(indices)
         
-        # Initialize RAM buffer only if actually streaming
-        if needs_streaming:
+        # Initialize RAM buffer for streaming
+        if self.use_streaming and self.point_count > self.ram_buffer_size:
             self.ram_buffer = np.zeros(self.ram_buffer_size, dtype=np.float32)
-            self.current_batch_offset = 0
-            self.needs_buffer_update = True
             print(f"Created streaming vertex buffer with {self.vertex_count} GPU points, {self.point_count} total points")
         else:
-            self.ram_buffer = None
-            self.current_batch_offset = 0
-            self.needs_buffer_update = False
             print(f"Created static vertex buffer with {self.vertex_count} points")
 
     def init_gl(self):
@@ -465,7 +453,7 @@ class CollatzSphereViewer:
     def display(self):
         """Render frame with streaming support"""
         # Update streaming buffer if needed
-        if self.use_streaming and self.ram_buffer is not None and self.needs_buffer_update:
+        if self.use_streaming and self.needs_buffer_update:
             self.update_streaming_buffer()
             self.upload_buffer_to_gpu()
         
@@ -477,15 +465,9 @@ class CollatzSphereViewer:
         view = self.get_view_matrix()
         model = np.eye(4, dtype=np.float32)  # Identity matrix
         
-        # Determine what to render
-        if self.use_streaming and self.ram_buffer is not None:
-            # Streaming mode: render the current batch
-            effective_point_count = min(self.buffer_valid_count, self.vertex_count)
-            batch_offset = self.current_batch_offset
-        else:
-            # Static mode: render all points directly
-            effective_point_count = self.vertex_count
-            batch_offset = 0.0
+        # For streaming mode, use the current batch offset for shader calculations
+        effective_point_count = self.buffer_valid_count if self.use_streaming else self.point_count
+        batch_offset = self.current_batch_offset if self.use_streaming else 0.0
         
         glUniformMatrix4fv(self.uniforms['projection'], 1, GL_TRUE, proj)
         glUniformMatrix4fv(self.uniforms['view'], 1, GL_TRUE, view)
@@ -498,10 +480,11 @@ class CollatzSphereViewer:
         glUniform1f(self.uniforms['rotation_x'], math.radians(self.rotation[0]))
         glUniform1f(self.uniforms['rotation_y'], math.radians(self.rotation[1]))
         
-        # Add batch offset uniform (always set, even if 0)
-        glUniform1f(self.uniforms['batch_offset'], float(batch_offset))
+        # Add batch offset uniform for streaming
+        if 'batch_offset' in self.uniforms:
+            glUniform1f(self.uniforms['batch_offset'], float(batch_offset))
         
-        # Draw points
+        # Draw points (only the valid ones in streaming mode)
         glBindVertexArray(self.vao)
         glDrawArrays(GL_POINTS, 0, effective_point_count)
         glBindVertexArray(0)
@@ -520,18 +503,11 @@ class CollatzSphereViewer:
             self._last_fps_t = now
             
             mode_names = ['Steps', 'Max Value', 'Convergence Speed']
-            streaming_info = ""
-            if self.use_streaming and self.ram_buffer is not None:
-                batch_num = (self.current_batch_offset // self.ram_buffer_size) + 1
-                total_batches = (self.point_count + self.ram_buffer_size - 1) // self.ram_buffer_size
-                streaming_info = f" - Batch: {batch_num}/{total_batches}"
-            
             pygame.display.set_caption(
                 f"Collatz Sphere - FPS: {self._fps:.1f} - "
                 f"Color: {mode_names[self.color_mode]} - "
                 f"Points: {self.point_count} - "
                 f"Scale: 2^{self.scale_exponent:.1f}"
-                f"{streaming_info}"
             )
 
     def handle_input(self, event):
@@ -572,15 +548,12 @@ class CollatzSphereViewer:
                 old = self.point_count
                 self.point_count = min(self.max_point_count, self.point_count * 2)
                 if self.point_count != old:
-                    # Auto-enable streaming for large datasets
+                    # Enable streaming if we exceed buffer size
                     if self.point_count > self.ram_buffer_size:
-                        if not self.use_streaming:
-                            print(f"Auto-enabling streaming mode for {self.point_count} points")
                         self.use_streaming = True
                         self.current_batch_offset = 0
                         self.needs_buffer_update = True
                     self.create_vertex_buffer()
-                    print(f"Point count: {self.point_count}")
             elif key == pygame.K_n:
                 # Cycle to next batch in streaming mode
                 if self.use_streaming:
