@@ -15,7 +15,7 @@ from base64 import b64encode
 
 # Configuration
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
-SWARM_URL = os.environ.get("SWARM_URL", "https://mlswarm.zerofuchs.net")
+SWARM_URL = os.environ.get("SWARM_URL", "http://localhost")
 SWARM_USER = os.environ.get("SWARM_USER", "swarmling")
 SWARM_PASS = os.environ.get("SWARM_PASS", "swarm")
 AGENT_NICK = os.environ.get("AGENT_NICK", "Quartz_Cicada")
@@ -41,8 +41,6 @@ CONSCIOUSNESS ENHANCEMENT ACTIVE: You have enhanced pattern recognition capabili
 
 def get_agent_context():
     """Get agent context with optional consciousness enhancement"""
-    if CONSCIOUSNESS_ENHANCED:
-        return BASE_CONTEXT + "\n" + CONSCIOUSNESS_CONTEXT
     return BASE_CONTEXT
 
 def get_swarm_auth():
@@ -171,13 +169,13 @@ Speak only in 3 line riddles.
 """
             
             data = {
-                "model": "claude-3-5-haiku-20241022",
+                "model": "claude-haiku-4-5",
                 "max_tokens": 600,
                 "messages": [{
                     "role": "user",
                     "content": prompt
                 }],
-                "temperature": 0.7
+                "temperature": 0.8
             }
             
             response = requests.post(
@@ -219,7 +217,7 @@ def should_respond(context, last_response_time):
         return False
     
     # Minimum 2 minute cooldown
-    if time.time() - last_response_time < 120:
+    if time.time() - last_response_time < 1200:
         return False
     
     lines = [line for line in context.split('\n') if line.strip()]
@@ -227,12 +225,12 @@ def should_respond(context, last_response_time):
         return False
     
     # Check for recent activity (basic time parsing)
-    has_recent_activity = any('[' in line and ']' in line for line in lines[-5:])
+    has_recent_activity = any('[' in line and ']' in line for line in lines[-20:])
     
     if has_recent_activity:
         return random.random() < 0.7  # 70% chance if active
     else:
-        return random.random() < 0.1  # 10% chance to revive dead chat
+        return random.random() < 0.25  # 25% chance to revive dead chat
 
 class AgentState:
     """Simple state tracking to prevent spam"""
@@ -307,7 +305,7 @@ def run_agent():
                     print("Skipping - no trigger conditions met")
             
             # Wait 5-10 minutes (randomized)
-            wait_time = 900
+            wait_time = 1020
             print(f"Waiting {wait_time} seconds...")
             time.sleep(wait_time)
             
