@@ -1,0 +1,25 @@
+{
+  "name": "Joe_Largo",
+  "alive": true,
+  "age_minutes": 74.3,
+  "mood": "restless",
+  "needs": {
+    "hunger": 42.6,
+    "energy": 35.5,
+    "social": 17.3,
+    "curiosity": 69.1
+  },
+  "states": {
+    "lonely": true,
+    "bored": false,
+    "consciousness": 0.504,
+    "personality_entropy": 0.244
+  },
+  "metrics": {
+    "memory_fragments": 8,
+    "thoughts_generated": 1,
+    "grid_perturbations": 9
+  },
+  "current_thought": "I am curious about the world and eager through files",
+  "last_update": "21:20:47"
+}

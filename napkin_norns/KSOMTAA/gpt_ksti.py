@@ -98,12 +98,12 @@ class KSTI:
     """
     def __init__(
         self,
-        base_coupling: float = 0.3, # Affects smoothness vs detail
+        base_coupling: float = 0.4, # Affects smoothness vs detail
         grad_scale: float = 2.0, # How much edges reduce coupling
         motion_scale: float = 2.0, # How much motion reduces coupling
         clamp_rad: float = 0.5, # Clamp radius for phase wrapping
         ema_beta: float = 0.05, # EMA decay factor
-        iters: int = 5, # Iterations for coupling refinement
+        iters: int = 7, # Iterations for coupling refinement
         kernel_edge: int = 3, # Edge size for local gain normalization
         local_gain_k: int = 9
     ):
