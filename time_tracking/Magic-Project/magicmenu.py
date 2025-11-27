@@ -43,7 +43,7 @@ class MagicMenu:
     def _setup_window(self):
         self.root.title("⚡ Magic Projects")
         self.root.configure(bg=BG)
-        self.root.geometry("500x400")
+        self.root.geometry("800x600")
         self.root.minsize(400, 300)
     
     def _setup_ui(self):
@@ -80,7 +80,7 @@ class MagicMenu:
         # Hotkey hints
         self.hints = tk.Label(
             self.root, 
-            text="[s]park [c]omplete [f]reeze [r]efresh [q]uit | [↑↓/jk] nav [Enter] select [Esc] back",
+            text="[s]park [c]omplete [d]ecline [f]reeze [r]efresh [q]uit | [↑↓/jk] nav [Enter] select [Esc] back",
             font=('Consolas', 9), bg=BG, fg=FG_DIM
         )
         self.hints.pack(fill='x', padx=10, pady=(0, 10))
@@ -94,6 +94,7 @@ class MagicMenu:
         self.root.bind('<Escape>', lambda e: self._back())
         self.root.bind('s', lambda e: self._spark())
         self.root.bind('c', lambda e: self._complete())
+        self.root.bind('d', lambda e: self._complete(declined=True))
         self.root.bind('f', lambda e: self._freeze())
         self.root.bind('r', lambda e: self._refresh())
         self.root.bind('q', lambda e: self.root.destroy())
@@ -281,15 +282,26 @@ class MagicMenu:
             parent=self.root
         )
         if result:
-            self.controller.add_task(self.current_project, result.strip())
+            if result.startswith('!! '):
+                priority = "HIGH"
+                result = result[3:].strip()
+            elif result.startswith('?? '):
+                priority = "LOW"
+                result = result[3:].strip()
+            else:
+                priority = "MEDIUM"
+            self.controller.add_task(self.current_project, result.strip(), priority=priority)
             self._refresh()
     
-    def _complete(self):
+    def _complete(self, declined=False):
         """Complete selected task"""
         if self.view == 'tasks' and hasattr(self, 'task_list') and self.task_list:
             task = self.task_list[self.selected_index]
             try:
-                self.controller.complete_task(self.current_project, task['note'][:20])
+                if declined:
+                    self.controller.complete_task(self.current_project, task['note'][:20], declined=True)
+                else:
+                    self.controller.complete_task(self.current_project, task['note'][:20])
                 self._refresh()
             except Exception as e:
                 self.status.config(text=f"Error: {e}")
