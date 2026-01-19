@@ -183,7 +183,7 @@ class MLTT2HT:
         sections_html = []
         for section in self.sections:
             # Determine if section should be full width (for wide outputs like weather)
-            full_width = len(section['output'].split('\n')[0]) > 80 if section['output'] else False
+            full_width = True # len(section['output'].split('\n')[0]) > 80 if section['output'] else False
             width_class = 'section full-width' if full_width else 'section'
             
             section_html = f'''
