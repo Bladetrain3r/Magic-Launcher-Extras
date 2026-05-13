@@ -162,7 +162,7 @@ class KSTI_v2:
         temporal_smoothing: float = 0.15,
         iters: int = 5,
         local_gain_k: int = 11,
-        use_histogram_match: bool = True,
+        luminosity: str = "balanced",  # "fast" | "balanced" | "full"
         use_gpu: bool = False
     ):
         self.K0 = base_coupling
@@ -172,7 +172,9 @@ class KSTI_v2:
         self.temporal_smoothing = temporal_smoothing
         self.iters = iters
         self.gain_k = local_gain_k
-        self.use_histogram_match = use_histogram_match
+        if luminosity not in ("fast", "balanced", "full"):
+            raise ValueError(f"luminosity must be fast|balanced|full, got {luminosity!r}")
+        self.luminosity = luminosity
         self.backend = get_backend(use_gpu)
         self.xp = self.backend.xp
         self._lock = threading.Lock()
@@ -245,9 +247,10 @@ class KSTI_v2:
         y_mid = (y_mid - current_mean) / current_std * target_std + target_mean
         y_mid = xp.clip(y_mid, 0, 1).astype(xp.float32)
 
-        y_mid = multi_scale_luminance_match(y_mid, y_target, scales=(1, 5, 15), xp=xp)
-
-        if self.use_histogram_match:
+        if self.luminosity == "balanced":
+            y_mid = multi_scale_luminance_match(y_mid, y_target, scales=(1, 5), xp=xp)
+        elif self.luminosity == "full":
+            y_mid = multi_scale_luminance_match(y_mid, y_target, scales=(1, 5, 15), xp=xp)
             y_mid_host = self.backend.to_host(y_mid)
             y_target_host = self.backend.to_host(y_target)
             y_hist = histogram_match_luminance(y_mid_host, y_target_host)
@@ -316,6 +319,37 @@ class VideoInterpolator:
         self.ksti = ksti
         self.queue_size = queue_size
 
+    def batch_interpolate(
+        self,
+        pairs,
+        num_workers: int = 4,
+        t: float = 0.5,
+    ):
+        """
+        Stateless pair-parallel interpolation for texture-blend / render-API use.
+
+        pairs: iterable of (frame_a_bgr, frame_b_bgr) tuples.
+        Returns: list of interpolated frames, in input order.
+
+        Temporal smoothing is forced off (results are independent of order).
+        Safe to run with multiple workers because no shared EMA state is touched.
+        Note: KSTI_v2 currently hardcodes t=0.5 in interpolate_midframe; the t
+        argument is accepted for forward compatibility once t is plumbed through.
+        """
+        if t != 0.5:
+            raise NotImplementedError("t != 0.5 not yet plumbed through interpolate_midframe")
+        pairs = list(pairs)
+        results = [None] * len(pairs)
+
+        def worker(i):
+            a, b = pairs[i]
+            return i, self.ksti.interpolate_midframe(a, b, apply_temporal_smoothing=False)
+
+        with ThreadPoolExecutor(max_workers=num_workers) as ex:
+            for i, frame in ex.map(worker, range(len(pairs))):
+                results[i] = frame
+        return results
+
     def process_video(
         self,
         in_path: str,
@@ -331,12 +365,28 @@ class VideoInterpolator:
         w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
         total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-        out_fps = fps * (1 + 1 / step)
-        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-        out = cv2.VideoWriter(out_path, fourcc, out_fps, (w, h))
-        if not out.isOpened():
+        if not fps or fps != fps or fps <= 1e-3:
+            print(f"Warning: source fps invalid ({fps}), defaulting to 30")
+            fps = 30.0
+        out_fps = float(fps * (1 + 1 / step))
+
+        out = None
+        tried = []
+        for cc in ('avc1', 'mp4v', 'H264', 'MJPG', 'XVID'):
+            fourcc = cv2.VideoWriter_fourcc(*cc)
+            candidate = cv2.VideoWriter(out_path, fourcc, out_fps, (w, h))
+            tried.append(cc)
+            if candidate.isOpened():
+                out = candidate
+                print(f"Writer codec: {cc} @ {out_fps:.3f} fps, {w}x{h}")
+                break
+            candidate.release()
+        if out is None:
             cap.release()
-            raise RuntimeError(f"Could not open writer for {out_path}")
+            raise RuntimeError(
+                f"Could not open writer for {out_path}. Tried {tried}. "
+                f"Try a .avi extension with MJPG, or check OpenCV ffmpeg support."
+            )
 
         self.ksti.reset_temporal_state()
 
@@ -418,8 +468,14 @@ def main():
     parser.add_argument("--gpu", action="store_true")
     parser.add_argument("--coupling", type=float, default=0.35)
     parser.add_argument("--temporal-smooth", type=float, default=0.15)
-    parser.add_argument("--no-histogram", action="store_true")
+    parser.add_argument("--luminosity", choices=("fast", "balanced", "full"),
+                        default="balanced",
+                        help="Luminosity stabilization preset")
+    parser.add_argument("--no-histogram", action="store_true",
+                        help="Deprecated: equivalent to --luminosity balanced")
     args = parser.parse_args()
+    if args.no_histogram and args.luminosity == "full":
+        args.luminosity = "balanced"
 
     if args.gpu and not HAS_CUPY:
         print("Warning: CuPy not available, falling back to CPU")
@@ -427,7 +483,7 @@ def main():
     ksti = KSTI_v2(
         base_coupling=args.coupling,
         temporal_smoothing=args.temporal_smooth,
-        use_histogram_match=not args.no_histogram,
+        luminosity=args.luminosity,
         use_gpu=args.gpu and HAS_CUPY,
     )
     interpolator = VideoInterpolator(ksti, queue_size=args.queue)
